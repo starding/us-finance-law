@@ -57,11 +57,11 @@ def figure(rows):
   const R={data},Y0=1905,Y1=2030,x=y=>((y-Y0)/(Y1-Y0)*100).toFixed(2)+'%';
   const g=document.getElementById('rmp'),d=document.getElementById('rmp-d');
   let h='';const all=[];
-  R.forEach(r=>{{h+=`<div class="rmp-row"><a href="${{r.f}}.html"><span>${{r.no}}</span>${{r.title}}</a><div class="rmp-track">`;
+  R.forEach(r=>{{h+=`<div class="rmp-row"><a data-f="${{r.f}}"><span>${{r.no}}</span>${{r.title}}</a><div class="rmp-track">`;
     r.cards.forEach((c,i)=>{{all.push([r,c]);h+=`<button type="button" class="rmp-dot${{c.kind==='重跑'?' rr':''}}" style="left:${{x(c.year)}}" data-k="${{all.length-1}}" title="${{c.name}}（${{c.year}}）"></button>`;}});
     h+='</div></div>';}});
   h+='<div class="rmp-ax"><div></div><div>'+[1910,1930,1950,1970,1990,2010,2026].map(y=>`<span style="left:${{x(y)}}">${{y}}</span>`).join('')+'</div></div>';
-  g.innerHTML=h;const bs=[...g.querySelectorAll('.rmp-dot')];
+  g.innerHTML=h;g.querySelectorAll('a[data-f]').forEach(a=>a.setAttribute('href',a.dataset.f+'.'+'html'));const bs=[...g.querySelectorAll('.rmp-dot')];
   function set(k){{bs.forEach(b=>b.classList.toggle('on',+b.dataset.k===k));const [r,c]=all[k];
     d.innerHTML=`<b>${{c.name}}</b>${{c.text}}<br><em>第 ${{r.no}} 章 · 回应：${{c.ask}} · 出台：${{c.by}}</em>`;}}
   bs.forEach(b=>b.addEventListener('click',()=>set(+b.dataset.k)));if(all.length)set(0);
