@@ -52,12 +52,22 @@ def figure(rules):
     data = json.dumps(dict(E=ERAS, V=ev, L=LAYERS, R=rules, C=chno()), ensure_ascii=False)
     return f'''<figure>
   <div class="card">
-    <div class="figbar"><div><p class="figtitle">历史时间轴地图：事件与规则</p><p class="figsub">{len(ev)} 个事件、{len(rules)} 条规则。七个时期等宽，时期内按年份排列；实心点为 2023–2026 年有变化的规则。点选事件看它引出的规则，点选规则看要求与现状。</p></div></div>
-    <div class="hmp" id="hmp"></div>
+    <div class="figbar"><div><p class="figtitle">历史时间轴地图：事件与规则</p><p class="figsub">{len(ev)} 个事件、{len(rules)} 条规则。七个时期按规则数量分配宽度，时期内按年份排列，可横向滚动；绿色为 2023–2026 年有变化的规则。点选事件看它引出的规则，点选规则看要求与现状。</p></div></div>
+    <div class="hmp lyx-wrap" id="hmp"></div>
     <div class="hmp-d" id="hmp-d" aria-live="polite"></div>
   </div>
 </figure>
 <style>
+
+.lyx-wrap{{overflow-x:auto}}
+.lyx-in{{position:relative;width:calc(2200px + 130px)}}
+.lyx-era{{display:grid;grid-template-columns:repeat(7,1fr);margin-left:130px}}
+.lyx-era div{{border-left:1px solid var(--line);padding:4px 6px}}.lyx-era b{{display:block;font-size:12px}}.lyx-era small{{font-size:11px;color:var(--faint)}}
+.lyx-row{{display:grid;grid-template-columns:130px 1fr;border-top:1px solid var(--line)}}
+.lyx-row>span{{font-size:12px;color:var(--muted);padding:8px 6px 0 0}}
+.lyx-tr{{position:relative}}.lyx-tr i{{position:absolute;top:0;bottom:0;border-left:1px solid var(--line);opacity:.6}}
+.lyx-c{{position:absolute;font:inherit;font-size:11.5px;white-space:nowrap;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:6px;padding:2px 7px;line-height:1.5}}
+.lyx-c.chg{{background:var(--accent-soft);border-color:var(--accent)}}.lyx-c.dim{{opacity:.15}}.lyx-c.on{{outline:2px solid var(--ink)}}.lyx-c.hl{{outline:2px solid var(--accent)}}
 body[data-page="h-map"] .wrap{{max-width:min(1280px,94vw)}}
 .hmp{{overflow-x:auto}}
 .hmp-in{{position:relative;min-width:980px;font-size:11.5px}}
@@ -73,11 +83,12 @@ body[data-page="h-map"] .wrap{{max-width:min(1280px,94vw)}}
 .hmp-dot.chg{{background:var(--accent);border-color:var(--accent)}}
 .hmp-dot.hl{{box-shadow:0 0 0 4px var(--accent-soft);border-color:var(--accent)}}
 .hmp-dot.on{{box-shadow:0 0 0 4px var(--ink)}}
-.hmp-ev{{position:absolute;transform:translateX(-50%);font:inherit;font-size:11px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:6px;padding:2px 6px;white-space:nowrap}}
+.hmp-ev{{position:absolute;font:inherit;font-size:11px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:6px;padding:2px 6px;white-space:nowrap}}
 .hmp-ev.on{{background:var(--accent);border-color:var(--accent);color:#fff}}
 .hmp-ax{{display:grid;margin-left:96px;border-top:1px solid var(--line)}}
 .hmp-ax div{{position:relative;height:20px;border-left:1px solid var(--line)}}
 .hmp-ax em{{position:absolute;top:3px;left:3px;font-style:normal;font-size:11px;color:var(--faint)}}
+.hmp-es{{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:2px}}
 .hmp-d{{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;min-height:6em}}
 .hmp-d b{{font-size:14.5px}}.hmp-d em{{font-style:normal;color:var(--muted);font-size:12.5px;display:block;margin-top:4px}}
 .hmp-d ul{{margin:6px 0 0;padding-left:18px}}.hmp-d a{{color:var(--accent);margin-right:12px}}
@@ -85,25 +96,27 @@ body[data-page="h-map"] .wrap{{max-width:min(1280px,94vw)}}
 <script>
 (function(){{
   const D={data},E=D.E,V=D.V,L=D.L,R=D.R,box=document.getElementById('hmp'),det=document.getElementById('hmp-d');
-  const n=E.length,pos=y=>{{let k=E.findIndex(e=>y>=e[0]&&y<=e[1]);if(k<0)k=y<E[0][0]?0:n-1;const e=E[k],f=(Math.min(Math.max(y,e[0]),e[1])-e[0]+0.5)/(e[1]-e[0]+1);return (k+f)/n*100;}};
+
+  const ERA=D.E,NE=ERA.length,W=2200;
+  const EW=ERA.map(e=>Math.max(1,Math.sqrt(D.R.filter(r=>r.year>=e[0]&&r.year<=e[1]).length))),ES=EW.reduce((a,b)=>a+b,0),EC=EW.map((w,k)=>EW.slice(0,k).reduce((a,b)=>a+b,0)/ES);
+  const pos=y=>{{let k=ERA.findIndex(e=>y>=e[0]&&y<=e[1]);if(k<0)k=y<ERA[0][0]?0:NE-1;const e=ERA[k],f=(Math.min(Math.max(y,e[0]),e[1])-e[0]+0.5)/(e[1]-e[0]+1);return EC[k]+f*EW[k]/ES;}};
+  const short=n=>{{let s=n.length>16&&n.indexOf('（')>3?n.slice(0,n.indexOf('（')):n;return s.length>18?s.slice(0,17)+'…':s;}};
+  function lane(items,cls){{const ends=[];let h='';items.sort((a,b)=>a[0].year-b[0].year).forEach(([r,i])=>{{const t=short(r.name),w=t.length*12.2+16,x=pos(r.year)*W;let k=0;while(ends[k]!==undefined&&x<ends[k]+4)k++;ends[k]=x+w;
+      h+='<button type="button" class="'+cls+(r.changed?' chg':'')+'" data-i="'+i+'" style="left:'+x.toFixed(0)+'px;top:'+(6+k*25)+'px" title="'+r.name+'（'+r.year+'）">'+t+'</button>';}});
+    return [h,10+ends.length*25];}}
+  const eraHead=()=>'<div class="lyx-era" style="width:'+W+'px;grid-template-columns:'+EW.map(w=>w+'fr').join(' ')+'">'+ERA.map(e=>'<div><b>'+e[2]+'</b><small>'+e[0]+'–'+e[1]+'</small></div>').join('')+'</div>';
+  const eraGrid=()=>ERA.map((e,k)=>'<i style="left:'+(EC[k]*W)+'px"></i>').join('');
   const lnk=(f,t)=>'<a data-f="'+f+'">'+t+'</a>',lnn=Object.fromEntries(L);
-  const cols='repeat('+n+',1fr)';
-  let h='<div class="hmp-in"><div class="hmp-era" style="grid-template-columns:'+cols+'">'+E.map(e=>'<div><b>'+e[2]+'</b><small>'+e[0]+'–'+e[1]+'</small><span>'+e[3]+'</span></div>').join('')+'</div>';
-  const grid='<i style="left:0"></i>'+E.map((e,k)=>'<i style="left:'+((k+1)/n*100)+'%"></i>').join('');
-  // 事件行：错开两层避免重叠
+  let h='<div class="lyx-in">'+ERA.map(()=>'').join('')+'<div class="lyx-era" style="width:'+W+'px;grid-template-columns:'+EW.map(w=>w+'fr').join(' ')+'">'+ERA.map(e=>'<div><b>'+e[2]+'</b><small>'+e[0]+'–'+e[1]+'</small><span class="hmp-es">'+e[3]+'</span></div>').join('')+'</div>';
   const ends=[];let evh='';
-  V.forEach((v,i)=>{{const x=pos(v.y),w=((String(v.y).length+1)*6.5+v.n.length*11.5+14)/9.8;let lv=0;while(ends[lv]!==undefined&&x-w/2<ends[lv]+0.6)lv++;ends[lv]=x+w/2;
-    evh+='<button type="button" class="hmp-ev" data-e="'+i+'" style="left:'+x+'%;top:'+(6+lv*26)+'px">'+v.y+' '+v.n+'</button>';}});
-  h+='<div class="hmp-row ev"><span>事件</span><div class="hmp-tr" style="height:'+(12+ends.length*26)+'px">'+grid+evh;
-  h+='</div></div>';
-  L.forEach(l=>{{const rs=R.map((r,i)=>[r,i]).filter(([r])=>r.layer===l[0]).sort((a,b)=>a[0].year-b[0].year);if(!rs.length)return;
-    const rowsEnd=[];let html='';rs.forEach(([r,i])=>{{const x=pos(r.year);let k=0;while(rowsEnd[k]!==undefined&&x-rowsEnd[k]<1.3)k++;rowsEnd[k]=x;
-      html+='<button type="button" class="hmp-dot'+(r.changed?' chg':'')+'" data-i="'+i+'" style="left:'+x+'%;top:'+(8+k*14)+'px" title="'+r.name+'（'+r.year+'）"></button>';}});
-    h+='<div class="hmp-row"><span>'+l[1]+'</span><div class="hmp-tr" style="height:'+(22+rowsEnd.length*14)+'px">'+grid+html+'</div></div>';}});
-  h+='<div class="hmp-ax" style="grid-template-columns:'+cols+'">'+E.map(e=>'<div><em>'+e[0]+'</em></div>').join('')+'</div></div>';
-  box.innerHTML=h;
+  V.forEach((v,i)=>{{const t=v.y+' '+v.n,w=t.length*11+18,x=pos(v.y)*W;let k=0;while(ends[k]!==undefined&&x<ends[k]+6)k++;ends[k]=x+w;
+    evh+='<button type="button" class="hmp-ev" data-e="'+i+'" style="left:'+x.toFixed(0)+'px;top:'+(6+k*26)+'px">'+t+'</button>';}});
+  h+='<div class="lyx-row ev"><span><b>事件</b></span><div class="lyx-tr" style="height:'+(12+ends.length*26)+'px">'+eraGrid()+evh+'</div></div>';
+  L.forEach(l=>{{const it=R.map((r,i)=>[r,i]).filter(([r])=>r.layer===l[0]);if(!it.length)return;const [lh,ht]=lane(it,'lyx-c');
+    h+='<div class="lyx-row"><span>'+l[1]+'</span><div class="lyx-tr" style="height:'+ht+'px">'+eraGrid()+lh+'</div></div>';}});
+  box.innerHTML=h+'</div>';
   const fix=el=>el.querySelectorAll('a[data-f]').forEach(a=>a.setAttribute('href',a.dataset.f+'.'+'html'));
-  const dots=[...box.querySelectorAll('.hmp-dot')],evs=[...box.querySelectorAll('.hmp-ev')];
+  const dots=[...box.querySelectorAll('.lyx-c')],evs=[...box.querySelectorAll('.hmp-ev')];
   function clear(){{dots.forEach(d=>d.classList.remove('on','hl'));evs.forEach(e=>e.classList.remove('on'));}}
   function showR(i){{clear();const r=R[i];box.querySelector('[data-i="'+i+'"]').classList.add('on');
     det.innerHTML='<b>'+r.name+'</b>（'+r.year+' 年 · '+lnn[r.layer]+'）<br>'+r.req+'<em>现状：'+r.status+'</em>'+(r.g?lnk(r.g,'生成式：第 '+(D.C[r.g]||'')+' 章 →'):'')+(r.d?lnk(r.d,'分解式：阶段 '+(+r.d.slice(1))+' →'):'');fix(det);}}

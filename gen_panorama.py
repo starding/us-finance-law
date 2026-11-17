@@ -3,6 +3,7 @@
 # 可筛选「2023–2026 年有变化」；点选一条规则查看要求、现状与对应章节。
 # 字段：id, name, stage(d01–d09), layer(law/sec/finra/fed/fincen/court/state), year, req, status, changed(bool), g(生成式章节，可空), d(分解式页面)
 import json, pathlib, re
+from gen_history import ERAS
 
 ROOT = pathlib.Path(__file__).parent
 STAGES = [("d01", "设立"), ("d02", "获客与沟通"), ("d03", "开户"), ("d04", "入金与托管"), ("d05", "推荐"),
@@ -56,7 +57,7 @@ def load():
     return rules
 
 def figure(rules):
-    data = json.dumps(dict(O=OBJECTS, L=LAYERS, R=rules, C=chno(), S=STAGES, P=PAGE_NAME), ensure_ascii=False)
+    data = json.dumps(dict(O=OBJECTS, L=LAYERS, R=rules, C=chno(), S=STAGES, P=PAGE_NAME, E=ERAS), ensure_ascii=False)
     n, c = len(rules), sum(1 for r in rules if r.get("changed"))
     return f"""<figure>
   <div class="card">
@@ -69,6 +70,16 @@ def figure(rules):
   </div>
 </figure>
 <style>
+
+.lyx-wrap{{overflow-x:auto}}
+.lyx-in{{position:relative;width:calc(2200px + 130px)}}
+.lyx-era{{display:grid;grid-template-columns:repeat(7,1fr);margin-left:130px}}
+.lyx-era div{{border-left:1px solid var(--line);padding:4px 6px}}.lyx-era b{{display:block;font-size:12px}}.lyx-era small{{font-size:11px;color:var(--faint)}}
+.lyx-row{{display:grid;grid-template-columns:130px 1fr;border-top:1px solid var(--line)}}
+.lyx-row>span{{font-size:12px;color:var(--muted);padding:8px 6px 0 0}}
+.lyx-tr{{position:relative}}.lyx-tr i{{position:absolute;top:0;bottom:0;border-left:1px solid var(--line);opacity:.6}}
+.lyx-c{{position:absolute;font:inherit;font-size:11.5px;white-space:nowrap;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:6px;padding:2px 7px;line-height:1.5}}
+.lyx-c.chg{{background:var(--accent-soft);border-color:var(--accent)}}.lyx-c.dim{{opacity:.15}}.lyx-c.on{{outline:2px solid var(--ink)}}.lyx-c.hl{{outline:2px solid var(--accent)}}
 body[data-page="d-preface"] .wrap{{max-width:min(1360px,95vw)}}
 .pnm-ctl{{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px;font-size:13px}}
 .pnm-seg button{{font:inherit;font-size:12.5px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;cursor:pointer}}
@@ -102,6 +113,16 @@ body[data-page="d-preface"] .wrap{{max-width:min(1360px,95vw)}}
   const D={data},O=D.O,L=D.L,R=D.R,C=D.C,box=document.getElementById('pnm'),det=document.getElementById('pnm-d'),crumb=document.getElementById('pnm-b');
   const on=Object.fromEntries(O.map(o=>[o[0],o[1]])),ln=Object.fromEntries(L),sn=D.P;
   let view='o',obj=null,only=false,cur=-1;
+  const ERA=D.E,NE=ERA.length,W=2200;
+  const EW=ERA.map(e=>Math.max(1,Math.sqrt(D.R.filter(r=>r.year>=e[0]&&r.year<=e[1]).length))),ES=EW.reduce((a,b)=>a+b,0),EC=EW.map((w,k)=>EW.slice(0,k).reduce((a,b)=>a+b,0)/ES);
+  const pos=y=>{{let k=ERA.findIndex(e=>y>=e[0]&&y<=e[1]);if(k<0)k=y<ERA[0][0]?0:NE-1;const e=ERA[k],f=(Math.min(Math.max(y,e[0]),e[1])-e[0]+0.5)/(e[1]-e[0]+1);return EC[k]+f*EW[k]/ES;}};
+  const short=n=>{{let s=n.length>16&&n.indexOf('（')>3?n.slice(0,n.indexOf('（')):n;return s.length>18?s.slice(0,17)+'…':s;}};
+  function lane(items,cls){{const ends=[];let h='';items.sort((a,b)=>a[0].year-b[0].year).forEach(([r,i])=>{{const t=short(r.name),w=t.length*12.2+16,x=pos(r.year)*W;let k=0;while(ends[k]!==undefined&&x<ends[k]+4)k++;ends[k]=x+w;
+      h+='<button type="button" class="'+cls+(r.changed?' chg':'')+'" data-i="'+i+'" style="left:'+x.toFixed(0)+'px;top:'+(6+k*25)+'px" title="'+r.name+'（'+r.year+'）">'+t+'</button>';}});
+    return [h,10+ends.length*25];}}
+  const eraHead=()=>'<div class="lyx-era" style="width:'+W+'px;grid-template-columns:'+EW.map(w=>w+'fr').join(' ')+'">'+ERA.map(e=>'<div><b>'+e[2]+'</b><small>'+e[0]+'–'+e[1]+'</small></div>').join('')+'</div>';
+  const eraGrid=()=>ERA.map((e,k)=>'<i style="left:'+(EC[k]*W)+'px"></i>').join('');
+
   const lnk=(f,t)=>'<a data-f="'+f+'">'+t+'</a>';
   const fix=el=>el.querySelectorAll('a[data-f]').forEach(a=>a.setAttribute('href',a.dataset.f+'.'+'html'));
   const chip=(r,i)=>'<button type="button" class="pnm-r'+(r.changed?' chg':'')+(only&&!r.changed?' dim':'')+'" data-i="'+i+'">'+r.name+'</button>';
@@ -114,11 +135,10 @@ body[data-page="d-preface"] .wrap{{max-width:min(1360px,95vw)}}
       rs.slice(0,lim).forEach(([r,i])=>h+=chip(r,i));if(rs.length>lim)h+='<button type="button" class="pnm-more" data-o="'+c[0]+'">＋'+(rs.length-lim)+' 条</button>';h+='</div>';}});}});
     return h+'</div>';}}
   function draw(){{
-    if(view==='y'){{crumb.innerHTML='';const Y0=1905,Y1=2030,x=y=>((y-Y0)/(Y1-Y0)*100).toFixed(2)+'%';let h='';
-      O.forEach(o=>{{const rs=R.map((r,i)=>[r,i]).filter(([r])=>r.obj===o[0]).sort((a,b)=>a[0].year-b[0].year);if(!rs.length)return;const ends=[];let dots='';
-        rs.forEach(([r,i])=>{{const p=(r.year-Y0)/(Y1-Y0)*100;let k=0;while(ends[k]!==undefined&&p-ends[k]<1.1)k++;ends[k]=p;dots+='<button type="button" class="pnm-dot'+(r.changed?' chg':'')+(only&&!r.changed?' dim':'')+'" style="left:'+x(r.year)+';top:'+(9+k*14)+'px" data-i="'+i+'" title="'+r.name+'（'+r.year+'）"></button>';}});
-        h+='<div class="pnm-yr"><span>'+o[1]+'</span><div class="pnm-yt" style="height:'+(24+ends.length*14)+'px">'+dots+'</div></div>';}});
-      h+='<div class="pnm-ax"><div></div><div>'+[1910,1930,1950,1970,1990,2010,2026].map(y=>'<i style="left:'+x(y)+'">'+y+'</i>').join('')+'</div></div>';box.innerHTML=h;}}
+    if(view==='y'){{crumb.innerHTML='规则名按最早出台的年份排列；规则越多的时期越宽，可横向滚动';let h='<div class="lyx-in">'+eraHead();
+      O.forEach(o=>{{const it=R.map((r,i)=>[r,i]).filter(([r])=>r.obj===o[0]);if(!it.length)return;const [lh,ht]=lane(it,'lyx-c');
+        h+='<div class="lyx-row"><span>'+o[1]+'</span><div class="lyx-tr" style="height:'+ht+'px">'+eraGrid()+lh+'</div></div>';}});
+      box.innerHTML=h+'</div>';if(only)box.querySelectorAll('.lyx-c:not(.chg)').forEach(e=>e.classList.add('dim'));}}
     else if(!obj){{crumb.innerHTML='点对象名，展开到它的核心环节';
       box.innerHTML=grid(O.map(o=>[o[0],o[1]]),r=>r.obj,c=>'<div class="pnm-h"><button type="button" data-o="'+c[0]+'">'+c[1]+' ›</button><small>'+R.filter(r=>r.obj===c[0]).length+' 条</small></div>',5);}}
     else{{const o=O.find(x=>x[0]===obj);crumb.innerHTML='<button type="button" data-back>← 全部监管对象</button>　'+o[1]+'的核心环节';
@@ -130,6 +150,7 @@ body[data-page="d-preface"] .wrap{{max-width:min(1360px,95vw)}}
     if(cur>=0)show(cur);}}
   document.querySelectorAll('#pnm-v button').forEach(b=>b.addEventListener('click',()=>{{view=b.dataset.v;document.querySelectorAll('#pnm-v button').forEach(x=>x.classList.toggle('on',x===b));draw();}}));
   document.getElementById('pnm-c').addEventListener('change',e=>{{only=e.target.checked;draw();}});
+  if(location.hash==='#years'){{view='y';document.querySelectorAll('#pnm-v button').forEach(x=>x.classList.toggle('on',x.dataset.v==='y'));}}
   draw();const k=R.findIndex(r=>r.changed);if(R.length)show(k>=0?k:0);
 }})();
 </script>

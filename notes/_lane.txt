@@ -1,0 +1,9 @@
+
+  const ERA=D.E,NE=ERA.length,W=1560;
+  const pos=y=>{{let k=ERA.findIndex(e=>y>=e[0]&&y<=e[1]);if(k<0)k=y<ERA[0][0]?0:NE-1;const e=ERA[k],f=(Math.min(Math.max(y,e[0]),e[1])-e[0]+0.5)/(e[1]-e[0]+1);return (k+f)/NE;}};
+  const short=n=>{{let s=n.length>16&&n.indexOf('（')>3?n.slice(0,n.indexOf('（')):n;return s.length>18?s.slice(0,17)+'…':s;}};
+  function lane(items,cls){{const ends=[];let h='';items.sort((a,b)=>a[0].year-b[0].year).forEach(([r,i])=>{{const t=short(r.name),w=t.length*12.2+16,x=pos(r.year)*W;let k=0;while(ends[k]!==undefined&&x<ends[k]+4)k++;ends[k]=x+w;
+      h+='<button type="button" class="'+cls+(r.changed?' chg':'')+'" data-i="'+i+'" style="left:'+x.toFixed(0)+'px;top:'+(6+k*25)+'px" title="'+r.name+'（'+r.year+'）">'+t+'</button>';}});
+    return [h,10+ends.length*25];}}
+  const eraHead=()=>'<div class="lyx-era" style="width:'+W+'px">'+ERA.map(e=>'<div><b>'+e[2]+'</b><small>'+e[0]+'–'+e[1]+'</small></div>').join('')+'</div>';
+  const eraGrid=()=>ERA.map((e,k)=>'<i style="left:'+(k/NE*W)+'px"></i>').join('');
