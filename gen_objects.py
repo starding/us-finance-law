@@ -17,7 +17,7 @@ LN = dict(gp.LAYERS)
 def page(o, k, rules):
     key, name, links = o
     rs = [r for r in rules if r["obj"] == key]
-    out = [f"---\nfile: {gp.OBJ_PAGE[key]}\nkind: chapter\nno: 对象\ntitle: {name}\nsubtitle: 核心环节与规则\npart: 分解式\nasof: 2026-11\ndesc: 《美国金融业法律研究》分解式：{name}这一监管对象的核心环节，以及每个环节适用的规则、制定主体与截至 2026 年 11 月的状态\n---\n",
+    out = [f"---\nfile: {gp.OBJ_PAGE[key]}\nkind: chapter\nno: 监管对象 {k + 1}\ntitle: {name}\nsubtitle: 核心环节与规则\npart: 分解式\nasof: 2026-11\ndesc: 《美国金融业法律研究》分解式：{name}这一监管对象的核心环节，以及每个环节适用的规则、制定主体与截至 2026 年 11 月的状态\n---\n",
            "最近更新：2026-11-17\n\n| 版本 | 日期 | 内容 |\n|---|---|---|\n| v0.1 | 2026-11-17 | 由合规全景地图的数据生成 |\n\n<!-- body -->\n",
            f"> {INTRO[key]}\n",
            f"本页共 {len(rs)} 条规则，其中 {sum(1 for r in rs if r.get('changed'))} 条在 2023–2026 年有变化。规则的来由见「详见」一列链接的生成式章节；全部规则的分布见[合规全景地图](d-preface.html)。\n"]

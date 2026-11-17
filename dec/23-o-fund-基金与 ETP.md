@@ -1,7 +1,7 @@
 ---
 file: o-fund
 kind: chapter
-no: 对象
+no: 监管对象 4
 title: 基金与 ETP
 subtitle: 核心环节与规则
 part: 分解式

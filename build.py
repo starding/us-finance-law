@@ -282,7 +282,7 @@ def sidebar(current, heads=()):
         if part == "sec" or not f:
             continue
         if part is None:
-            lab, cls = f'<span class="n">{no}</span>{html.escape(title)}', "side-app" if no in ("结语", "Epilogue") else ""
+            lab, cls = f'<span class="n{" w" if len(no) > 1 else ""}">{no}</span>{html.escape(title)}', "side-app" if no in ("结语", "Epilogue") else ""
         elif part == "part":
             lab, cls = f'<span class="pn">{no}</span>{html.escape(title)}', "side-part"
         elif part == "app":

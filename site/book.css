@@ -196,3 +196,6 @@ html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
 
 /* 分解式义务清单：「详见」列不折行 */
 table td:last-child a{white-space:nowrap}
+
+/* 两字以上的前缀（导读、篇末）留出间距 */
+.side .n.w{min-width:0;margin-right:10px}

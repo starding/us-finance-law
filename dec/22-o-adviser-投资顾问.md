@@ -1,7 +1,7 @@
 ---
 file: o-adviser
 kind: chapter
-no: 对象
+no: 监管对象 3
 title: 投资顾问
 subtitle: 核心环节与规则
 part: 分解式

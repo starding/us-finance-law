@@ -207,6 +207,9 @@ html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
 
 /* 分解式义务清单：「详见」列不折行 */
 table td:last-child a{white-space:nowrap}
+
+/* 两字以上的前缀（导读、篇末）留出间距 */
+.side .n.w{min-width:0;margin-right:10px}
 </style>
 </head>
 <body data-page="o-venue">
@@ -215,9 +218,9 @@ table td:last-child a{white-space:nowrap}
 <div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
 <div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html" class="on" aria-current="true">分解式</a><a href="preface.html">生成式</a></div>
 <a class="side-about" href="index.html#about">关于本书</a>
-<a class="" href="d-preface.html"><span class="n">导读</span>合规全景地图</a>
-<a class="" href="d10.html"><span class="n">·</span>发行人：上市公司的持续义务</a>
-<a class="side-part" href="d-part.html"><span class="pn">经纪自营商</span>沿着业务的时间轴</a>
+<a class="" href="d-preface.html"><span class="n w">导读</span>合规全景地图</a>
+<a class="side-part" href="d10.html"><span class="pn">监管对象 1</span>发行人：上市公司的持续义务</a>
+<a class="side-part" href="d-part.html"><span class="pn">监管对象 2</span>经纪自营商：沿着业务的时间轴</a>
 <a class="" href="d01.html"><span class="n">1</span>设立：成为一家经纪自营商</a>
 <a class="" href="d02.html"><span class="n">2</span>获客与沟通</a>
 <a class="" href="d03.html"><span class="n">3</span>开户</a>
@@ -227,12 +230,12 @@ table td:last-child a{white-space:nowrap}
 <a class="" href="d07.html"><span class="n">7</span>成交之后：结算、确认与报告</a>
 <a class="" href="d08.html"><span class="n">8</span>持续监控与监督</a>
 <a class="" href="d09.html"><span class="n">9</span>退出与事件处置</a>
-<a class="" href="o-adviser.html"><span class="n">·</span>投资顾问</a>
-<a class="" href="o-fund.html"><span class="n">·</span>基金与 ETP</a>
-<a class=" cur" href="o-venue.html" aria-current="page"><span class="n">·</span>交易场所</a>
-<a class="" href="o-infra.html"><span class="n">·</span>清算、结算与报告</a>
-<a class="" href="o-investor.html"><span class="n">·</span>投资者与市场行为</a>
-<a class="" href="o-all.html"><span class="n">·</span>执法与救济</a>
+<a class="side-part" href="o-adviser.html"><span class="pn">监管对象 3</span>投资顾问</a>
+<a class="side-part" href="o-fund.html"><span class="pn">监管对象 4</span>基金与 ETP</a>
+<a class="side-part cur" href="o-venue.html" aria-current="page"><span class="pn">监管对象 5</span>交易场所</a>
+<a class="side-part" href="o-infra.html"><span class="pn">监管对象 6</span>清算、结算与报告</a>
+<a class="side-part" href="o-investor.html"><span class="pn">监管对象 7</span>投资者与市场行为</a>
+<a class="side-part" href="o-all.html"><span class="pn">监管对象 8</span>执法与救济</a>
 <a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
 </nav>
 <button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
@@ -240,7 +243,7 @@ table td:last-child a{white-space:nowrap}
 <div class="wrap">
 <header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>分解式</span></header>
 
-<div class="chapno">对象</div><h1>交易场所<small>核心环节与规则</small></h1>
+<div class="chapno">监管对象 5</div><h1>交易场所<small>核心环节与规则</small></h1>
 <div class="stamp">资料截至 2026-11</div>
 <blockquote><p>交易所与另类交易系统把买卖双方的报价集中起来撮合成交。交易所须向 SEC 注册并承担自律职能；行情由统一的证券信息处理器汇总为全国最优买卖报价；价格带、熔断与报价单位等交易规则由交易场所与 SEC 共同制定。</p></blockquote>
 <p>本页共 10 条规则，其中 7 条在 2023–2026 年有变化。规则的来由见「详见」一列链接的生成式章节；全部规则的分布见<a href="d-preface.html">合规全景地图</a>。</p>
@@ -250,7 +253,7 @@ table td:last-child a{white-space:nowrap}
 <div class="tablewrap"><table><thead><tr><th>规则</th><th>要求</th><th>制定主体</th><th>现状（截至 2026 年 11 月）</th><th>详见</th></tr></thead><tbody><tr><td>统一行情计划（CTA/CQ、UTP、CT 计划）（有变化）</td><td>各交易所与 FINRA 须把报价和成交交给处理器，由其计算并发布 NBBO 与最新成交</td><td>SEC 规则</td><td>CT 计划 2024 年 11 月获批，2027 年 4 月 1 日起统一管理三项计划；处理器夜间延长运行 2026 年 6 月 26 日获批，预计 2026 年 12 月 6 日开始</td><td><a href="s15.html">第 7 章</a></td></tr><tr><td>全国市场体系与证券信息处理器（第 11A 条）</td><td>SEC 须促进建立全国市场体系；汇总发布报价与成交的证券信息处理器须向 SEC 注册</td><td>国会成文法</td><td>有效；1975 年 6 月 4 日由《证券法修正案》加入</td><td><a href="s15.html">第 7 章</a></td></tr><tr><td>市场数据基础设施规则（竞争性汇总商、零股信息）（有变化）</td><td>扩充统一行情内容（零股报价、部分深度、集合竞价），以竞争性汇总商取代独家处理器</td><td>SEC 规则</td><td>2020 年 12 月 9 日通过；整手定义 2025 年 11 月 3 日实施；NBBO 之内的零股报价推迟到 2028 年 5 月；竞争性汇总商尚未启动</td><td><a href="s15.html">第 7 章</a></td></tr><tr><td>整手定义（规则 600(b)(93)）（有变化）</td><td>按股价给每只 NMS 股票分配整手大小，高价股的整手股数减少</td><td>SEC 规则</td><td>2025 年 11 月 3 日实施；半美分报价单位与接入费修订推迟到 2027 年 11 月</td><td><a href="s06.html">第 8 章</a></td></tr></tbody></table></div>
 <h2 id="sec-3">三、交易规则</h2>
 <div class="tablewrap"><table><thead><tr><th>规则</th><th>要求</th><th>制定主体</th><th>现状（截至 2026 年 11 月）</th><th>详见</th></tr></thead><tbody><tr><td>全市场熔断</td><td>标普 500 较前一日收盘下跌 7%、13% 时暂停 15 分钟，下跌 20% 时当日停止交易</td><td>交易所与清算机构规则</td><td>现行设计 2012 年批准、2013 年起施行；1988 年首次设立</td><td>—</td></tr><tr><td>全国市场体系条例（NMS）（有变化）</td><td>订单保护（规则 611）、接入费上限（610）、最小报价单位（612）</td><td>SEC 规则</td><td>2024 年报价单位修订推迟到 2027 年；2026 年 6 月提议撤销规则 611</td><td><a href="s06.html">第 8 章</a></td></tr><tr><td>个股涨跌停计划（LULD）（有变化）</td><td>成交不得超出按前 5 分钟均价计算的价格带；15 秒内不能回到带内则暂停 5 分钟</td><td>交易所与清算机构规则</td><td>2013 年起施行，2019 年 4 月 11 日转为永久；2026 年 8 月 5 日批准夜盘 ±20% 静态价格带</td><td>—</td></tr><tr><td>23×5 夜盘交易与延长时段披露（FINRA 2265）（有变化）</td><td>交易所在周日晚 8 点至周五晚 8 点每天交易 23 小时；券商须披露延长时段交易的六项风险</td><td>SEC 规则</td><td>SEC 2024 年 11 月起陆续有条件批准五家交易所；预计 2026 年 12 月 6 日开始，以行情处理器就绪为前提</td><td>—</td></tr></tbody></table></div>
-<footer class="nav"><a href="o-fund.html">← 对象　基金与 ETP</a><a href="o-infra.html">对象　清算、结算与报告 →</a></footer>
+<footer class="nav"><a href="o-fund.html">← 监管对象 4　基金与 ETP</a><a href="o-infra.html">监管对象 6　清算、结算与报告 →</a></footer>
 </div>
 <script>
 (function(){

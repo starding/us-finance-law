@@ -1,7 +1,7 @@
 ---
 file: o-infra
 kind: chapter
-no: 对象
+no: 监管对象 6
 title: 清算、结算与报告
 subtitle: 核心环节与规则
 part: 分解式

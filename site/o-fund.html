@@ -207,6 +207,9 @@ html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
 
 /* 分解式义务清单：「详见」列不折行 */
 table td:last-child a{white-space:nowrap}
+
+/* 两字以上的前缀（导读、篇末）留出间距 */
+.side .n.w{min-width:0;margin-right:10px}
 </style>
 </head>
 <body data-page="o-fund">
@@ -215,9 +218,9 @@ table td:last-child a{white-space:nowrap}
 <div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
 <div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html" class="on" aria-current="true">分解式</a><a href="preface.html">生成式</a></div>
 <a class="side-about" href="index.html#about">关于本书</a>
-<a class="" href="d-preface.html"><span class="n">导读</span>合规全景地图</a>
-<a class="" href="d10.html"><span class="n">·</span>发行人：上市公司的持续义务</a>
-<a class="side-part" href="d-part.html"><span class="pn">经纪自营商</span>沿着业务的时间轴</a>
+<a class="" href="d-preface.html"><span class="n w">导读</span>合规全景地图</a>
+<a class="side-part" href="d10.html"><span class="pn">监管对象 1</span>发行人：上市公司的持续义务</a>
+<a class="side-part" href="d-part.html"><span class="pn">监管对象 2</span>经纪自营商：沿着业务的时间轴</a>
 <a class="" href="d01.html"><span class="n">1</span>设立：成为一家经纪自营商</a>
 <a class="" href="d02.html"><span class="n">2</span>获客与沟通</a>
 <a class="" href="d03.html"><span class="n">3</span>开户</a>
@@ -227,12 +230,12 @@ table td:last-child a{white-space:nowrap}
 <a class="" href="d07.html"><span class="n">7</span>成交之后：结算、确认与报告</a>
 <a class="" href="d08.html"><span class="n">8</span>持续监控与监督</a>
 <a class="" href="d09.html"><span class="n">9</span>退出与事件处置</a>
-<a class="" href="o-adviser.html"><span class="n">·</span>投资顾问</a>
-<a class=" cur" href="o-fund.html" aria-current="page"><span class="n">·</span>基金与 ETP</a>
-<a class="" href="o-venue.html"><span class="n">·</span>交易场所</a>
-<a class="" href="o-infra.html"><span class="n">·</span>清算、结算与报告</a>
-<a class="" href="o-investor.html"><span class="n">·</span>投资者与市场行为</a>
-<a class="" href="o-all.html"><span class="n">·</span>执法与救济</a>
+<a class="side-part" href="o-adviser.html"><span class="pn">监管对象 3</span>投资顾问</a>
+<a class="side-part cur" href="o-fund.html" aria-current="page"><span class="pn">监管对象 4</span>基金与 ETP</a>
+<a class="side-part" href="o-venue.html"><span class="pn">监管对象 5</span>交易场所</a>
+<a class="side-part" href="o-infra.html"><span class="pn">监管对象 6</span>清算、结算与报告</a>
+<a class="side-part" href="o-investor.html"><span class="pn">监管对象 7</span>投资者与市场行为</a>
+<a class="side-part" href="o-all.html"><span class="pn">监管对象 8</span>执法与救济</a>
 <a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
 </nav>
 <button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
@@ -240,7 +243,7 @@ table td:last-child a{white-space:nowrap}
 <div class="wrap">
 <header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>分解式</span></header>
 
-<div class="chapno">对象</div><h1>基金与 ETP<small>核心环节与规则</small></h1>
+<div class="chapno">监管对象 4</div><h1>基金与 ETP<small>核心环节与规则</small></h1>
 <div class="stamp">资料截至 2026-11</div>
 <blockquote><p>共同基金、ETF 与其他交易所交易产品把许多投资者的钱集中起来投资，受 1940 年《投资公司法》的结构性约束：独立董事、杠杆限制、每日估值与赎回；券商销售这些产品时，还要遵守披露与适当性要求。</p></blockquote>
 <p>本页共 6 条规则，其中 3 条在 2023–2026 年有变化。规则的来由见「详见」一列链接的生成式章节；全部规则的分布见<a href="d-preface.html">合规全景地图</a>。</p>
@@ -250,7 +253,7 @@ table td:last-child a{white-space:nowrap}
 <div class="tablewrap"><table><thead><tr><th>规则</th><th>要求</th><th>制定主体</th><th>现状（截至 2026 年 11 月）</th><th>详见</th></tr></thead><tbody><tr><td>杠杆与反向 ETF 的销售提示（FINRA 09-31）</td><td>每日重置的杠杆与反向 ETF 通常不适合计划持有超过一个交易时段的零售投资者；推荐须适当，并有相应的监督程序</td><td>FINRA 规则</td><td>有效（监管通知，2009 年 6 月 11 日）；2012 年 5 月 1 日 FINRA 据此处罚四家经纪商合计 910 万美元</td><td><a href="s18.html">第 11 章</a></td></tr><tr><td>现货加密资产 ETP 的上市（有变化）</td><td>商品信托份额只按《证券法》注册、不是投资公司，经交易所上市规则批准后上市</td><td>SEC 规则</td><td>2024 年 1 月 10 日批准首批 11 只现货比特币 ETP（34-99306）；2024 年 5 月 23 日批准现货以太币；2025 年 9 月 17 日批准商品信托份额通用上市标准</td><td><a href="s18.html">第 11 章</a></td></tr></tbody></table></div>
 <h2 id="sec-3">三、衍生品与杠杆</h2>
 <div class="tablewrap"><table><thead><tr><th>规则</th><th>要求</th><th>制定主体</th><th>现状（截至 2026 年 11 月）</th><th>详见</th></tr></thead><tbody><tr><td>基金使用衍生品（规则 18f-4）（有变化）</td><td>使用衍生品的基金须设衍生品风险经理与风险管理计划，风险价值不超过参考组合的 200%（或净资产的 20%）；敞口不超过 10% 的有限使用者适用简化要求</td><td>SEC 规则</td><td>2020 年 10 月 28 日通过，2022 年 8 月 19 日起合规；2025 年 12 月 2 日 SEC 投资管理部致函发行人，认为三倍单只股票 ETF 与本规则不符</td><td><a href="s18.html">第 11 章</a></td></tr></tbody></table></div>
-<footer class="nav"><a href="o-adviser.html">← 对象　投资顾问</a><a href="o-venue.html">对象　交易场所 →</a></footer>
+<footer class="nav"><a href="o-adviser.html">← 监管对象 3　投资顾问</a><a href="o-venue.html">监管对象 5　交易场所 →</a></footer>
 </div>
 <script>
 (function(){

@@ -207,6 +207,9 @@ html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
 
 /* 分解式义务清单：「详见」列不折行 */
 table td:last-child a{white-space:nowrap}
+
+/* 两字以上的前缀（导读、篇末）留出间距 */
+.side .n.w{min-width:0;margin-right:10px}
 </style>
 </head>
 <body data-page="d01">
@@ -215,9 +218,9 @@ table td:last-child a{white-space:nowrap}
 <div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
 <div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html" class="on" aria-current="true">分解式</a><a href="preface.html">生成式</a></div>
 <a class="side-about" href="index.html#about">关于本书</a>
-<a class="" href="d-preface.html"><span class="n">导读</span>合规全景地图</a>
-<a class="" href="d10.html"><span class="n">·</span>发行人：上市公司的持续义务</a>
-<a class="side-part" href="d-part.html"><span class="pn">经纪自营商</span>沿着业务的时间轴</a>
+<a class="" href="d-preface.html"><span class="n w">导读</span>合规全景地图</a>
+<a class="side-part" href="d10.html"><span class="pn">监管对象 1</span>发行人：上市公司的持续义务</a>
+<a class="side-part" href="d-part.html"><span class="pn">监管对象 2</span>经纪自营商：沿着业务的时间轴</a>
 <a class=" cur" href="d01.html" aria-current="page"><span class="n">1</span>设立：成为一家经纪自营商</a>
 <a class="" href="d02.html"><span class="n">2</span>获客与沟通</a>
 <a class="" href="d03.html"><span class="n">3</span>开户</a>
@@ -227,12 +230,12 @@ table td:last-child a{white-space:nowrap}
 <a class="" href="d07.html"><span class="n">7</span>成交之后：结算、确认与报告</a>
 <a class="" href="d08.html"><span class="n">8</span>持续监控与监督</a>
 <a class="" href="d09.html"><span class="n">9</span>退出与事件处置</a>
-<a class="" href="o-adviser.html"><span class="n">·</span>投资顾问</a>
-<a class="" href="o-fund.html"><span class="n">·</span>基金与 ETP</a>
-<a class="" href="o-venue.html"><span class="n">·</span>交易场所</a>
-<a class="" href="o-infra.html"><span class="n">·</span>清算、结算与报告</a>
-<a class="" href="o-investor.html"><span class="n">·</span>投资者与市场行为</a>
-<a class="" href="o-all.html"><span class="n">·</span>执法与救济</a>
+<a class="side-part" href="o-adviser.html"><span class="pn">监管对象 3</span>投资顾问</a>
+<a class="side-part" href="o-fund.html"><span class="pn">监管对象 4</span>基金与 ETP</a>
+<a class="side-part" href="o-venue.html"><span class="pn">监管对象 5</span>交易场所</a>
+<a class="side-part" href="o-infra.html"><span class="pn">监管对象 6</span>清算、结算与报告</a>
+<a class="side-part" href="o-investor.html"><span class="pn">监管对象 7</span>投资者与市场行为</a>
+<a class="side-part" href="o-all.html"><span class="pn">监管对象 8</span>执法与救济</a>
 <a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
 </nav>
 <button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
@@ -321,7 +324,7 @@ table td:last-child a{white-space:nowrap}
 <ol><li><strong>设计交易算法的人要持证。</strong>规则 1220(b)(4) 要求主要负责设计或重大修改算法交易策略的人、以及负责日常监督这类策略的人，注册为证券交易员（须通过 SIE 与 Series 57）。券商让模型生成或调整交易策略时，先确认谁是「主要负责设计」的人，以及他是否已注册。</li><li><strong>业务计划要写到 AI。</strong>新会员申请的业务计划要说明公司做什么、怎么监督；已有会员把 AI 推荐、AI 交易等功能加进业务，可能构成规则 1017 所说的业务重大变化，须事先申请批准。产品立项时应请合规判断是否需要提交持续会员申请。</li><li><strong>AI 不是注册人员。</strong>向客户推荐证券或代表公司回答证券问题的，规则上要有持证的人负责；AI 生成的内容由公司及其注册负责人承担责任（<a href="s11.html">第 14 章</a>）。人员配置上，要为 AI 输出指定持证的审核人与监督人，而不是把它当作一位不需要资格的员工。</li><li><strong>员工自建的 AI 工具属于外部活动。</strong>员工在公司之外开发或经营投资类 AI 工具，按现行规则 3270 须事先书面通知公司；规则 3290 生效后，这类与投资相关的活动仍在监管范围内。</li></ol>
 <h2 id="sec-5">参考文献</h2>
 <ul class="refs"><li>Securities Exchange Act of 1934, 15 U.S.C. § 78o(a), (b)(1), (b)(8), (i)；17 C.F.R. § 240.15b1-1；17 C.F.R. § 240.15c3-1(a)(2)；17 C.F.R. § 240.17f-2.</li><li>National Securities Markets Improvement Act of 1996, Pub. L. 104-290.</li><li>Securities Investor Protection Act of 1970, 15 U.S.C. § 78aaa et seq.</li><li>FINRA Rules 1013, 1014, 1017（Membership Application Program）；NASD Notice to Members 97-55 (1997).</li><li>FINRA Rules 1210, 1220, 1240；FINRA By-Laws, Article V.</li><li>FINRA. (2021). <i>Regulatory Notice 21-41: FINRA Amends Continuing Education Requirements</i>.</li><li>FINRA. (2025). <i>Regulatory Notices 25-04, 25-06, 25-07</i>（FINRA Forward 规则现代化征求意见）.</li><li>FINRA. (2026). <i>Regulatory Notice 26-09: Enhanced Form NMA</i>（2026 年 3 月 23 日）.</li><li>FINRA. (2026). <i>SEC Approves Streamlined Outside Activities Rule</i>（Rule 3290，2026 年 9 月 15 日批准）.</li><li>FINRA. (2026). <i>Report From FINRA Board of Governors' September Meeting</i>（2026 年 9 月 29–30 日）.</li><li>NASAA. <i>Series 63 Exam Study Guide</i>.</li></ul>
-<footer class="nav"><a href="d-part.html">← 经纪自营商　沿着业务的时间轴</a><a href="d02.html">阶段 2　获客与沟通 →</a></footer>
+<footer class="nav"><a href="d-part.html">← 监管对象 2　经纪自营商：沿着业务的时间轴</a><a href="d02.html">阶段 2　获客与沟通 →</a></footer>
 </div>
 <script>
 (function(){

@@ -207,6 +207,9 @@ html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
 
 /* 分解式义务清单：「详见」列不折行 */
 table td:last-child a{white-space:nowrap}
+
+/* 两字以上的前缀（导读、篇末）留出间距 */
+.side .n.w{min-width:0;margin-right:10px}
 </style>
 </head>
 <body data-page="d09">
@@ -215,9 +218,9 @@ table td:last-child a{white-space:nowrap}
 <div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
 <div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html" class="on" aria-current="true">分解式</a><a href="preface.html">生成式</a></div>
 <a class="side-about" href="index.html#about">关于本书</a>
-<a class="" href="d-preface.html"><span class="n">导读</span>合规全景地图</a>
-<a class="" href="d10.html"><span class="n">·</span>发行人：上市公司的持续义务</a>
-<a class="side-part" href="d-part.html"><span class="pn">经纪自营商</span>沿着业务的时间轴</a>
+<a class="" href="d-preface.html"><span class="n w">导读</span>合规全景地图</a>
+<a class="side-part" href="d10.html"><span class="pn">监管对象 1</span>发行人：上市公司的持续义务</a>
+<a class="side-part" href="d-part.html"><span class="pn">监管对象 2</span>经纪自营商：沿着业务的时间轴</a>
 <a class="" href="d01.html"><span class="n">1</span>设立：成为一家经纪自营商</a>
 <a class="" href="d02.html"><span class="n">2</span>获客与沟通</a>
 <a class="" href="d03.html"><span class="n">3</span>开户</a>
@@ -227,12 +230,12 @@ table td:last-child a{white-space:nowrap}
 <a class="" href="d07.html"><span class="n">7</span>成交之后：结算、确认与报告</a>
 <a class="" href="d08.html"><span class="n">8</span>持续监控与监督</a>
 <a class=" cur" href="d09.html" aria-current="page"><span class="n">9</span>退出与事件处置</a>
-<a class="" href="o-adviser.html"><span class="n">·</span>投资顾问</a>
-<a class="" href="o-fund.html"><span class="n">·</span>基金与 ETP</a>
-<a class="" href="o-venue.html"><span class="n">·</span>交易场所</a>
-<a class="" href="o-infra.html"><span class="n">·</span>清算、结算与报告</a>
-<a class="" href="o-investor.html"><span class="n">·</span>投资者与市场行为</a>
-<a class="" href="o-all.html"><span class="n">·</span>执法与救济</a>
+<a class="side-part" href="o-adviser.html"><span class="pn">监管对象 3</span>投资顾问</a>
+<a class="side-part" href="o-fund.html"><span class="pn">监管对象 4</span>基金与 ETP</a>
+<a class="side-part" href="o-venue.html"><span class="pn">监管对象 5</span>交易场所</a>
+<a class="side-part" href="o-infra.html"><span class="pn">监管对象 6</span>清算、结算与报告</a>
+<a class="side-part" href="o-investor.html"><span class="pn">监管对象 7</span>投资者与市场行为</a>
+<a class="side-part" href="o-all.html"><span class="pn">监管对象 8</span>执法与救济</a>
 <a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
 </nav>
 <button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
@@ -291,7 +294,7 @@ table td:last-child a{white-space:nowrap}
 <ol><li><strong>转户挽留不能变成转户阻碍。</strong>AI 客服可以在客户发起转出时介绍留下的理由，但持有方验证转户的时限是 1 个营业日，异议只能基于规则允许的理由。让 AI 拖延回复、反复要求客户确认，可能构成对转户的不当阻碍。</li><li><strong>用 AI 识别欺诈转户，同时给客户留出口。</strong>新开户即转户、近期改过邮箱或手机号、登录设备与地点异常，都是 FINRA 列举的迹象。模型发现可疑时，应当触发人工复核与对客户已登记联系方式的通知；拟议的规则 2166 一旦生效，延迟的依据与通知同样要能记录在案。</li><li><strong>泄露通知要准确，不能由 AI 自由发挥。</strong>S-P 条例规定了通知的内容（发生了什么、涉及哪些信息、客户可以采取的措施与联系方式）。AI 客服回答泄露相关问题时，应当以正式通知为准，不推测范围，不承诺「没有影响」。若 AI 服务商本身是数据处理方，它的入侵也要在 72 小时内通知券商，合同里要写明。</li><li><strong>休眠账户的唤醒提醒有法律意义。</strong>各州对什么算「有活动」规定不同，有的看邮件是否退回，有的只看客户是否有交易或主动联系。AI 生成的唤醒推送若得到客户的回复、登录或确认，要可靠记录，作为客户仍在联系的证据；单向推送本身不能当作客户有活动，也不能据此认定账户不会被上交。</li></ol>
 <h2 id="sec-5">参考文献</h2>
 <ul class="refs"><li>Shearson/American Express Inc. v. McMahon, 482 U.S. 220 (1987).</li><li>FINRA. (2022). <i>FINRA Alerts Firms to Recent Trend in Fraudulent Transfers of Accounts Through ACATS</i> (Regulatory Notice 22-21).</li><li>FINRA. (2023, March 28). Regulatory Notice 23-06 (indicators of ACATS fraud and firm practices).</li><li>FINRA. (2023). <i>FINRA Adopts Amendments to Modify the Process Relating to the Expungement of Customer Dispute Information</i> (Regulatory Notice 23-12).</li><li>FINRA. (2025, October 21). Information Notice (removal of the ACATS Settle Prep Day under NSCC Rule 50).</li><li>FINRA. (2026, March 2). Regulatory Notice 26-06 (request for comment on modernizing the arbitration forum).</li><li>FINRA Rules 11870, 12200, 12206, 12800.</li><li>Securities and Exchange Commission. (2012). <i>Order Approving Proposed Rule Change to Increase the Simplified Arbitration Threshold</i> (Release No. 34-66913).</li><li>Securities and Exchange Commission. (2013). <i>Lost Securityholders and Unresponsive Payees</i> (78 FR 4784).</li><li>Securities and Exchange Commission. (2024). <i>Regulation S-P: Privacy of Consumer Financial Information and Safeguarding Customer Information</i> (Release No. 34-100155).</li><li>Securities and Exchange Commission. (2026, September 1). <i>Proposed Transfer Agent Rule Modernization</i> (Release No. 34-106246, fact sheet).</li><li>Cooley LLP. (2026, August 24). <i>Senators Press FINRA on ACATS Fraud: What Broker-Dealers Should Do Now</i>.</li><li>17 CFR 240.17Ad-17; Securities Investor Protection Act of 1970, 15 U.S.C. § 78aaa et seq.</li></ul>
-<footer class="nav"><a href="d08.html">← 阶段 8　持续监控与监督</a><a href="o-adviser.html">对象　投资顾问 →</a></footer>
+<footer class="nav"><a href="d08.html">← 阶段 8　持续监控与监督</a><a href="o-adviser.html">监管对象 3　投资顾问 →</a></footer>
 </div>
 <script>
 (function(){

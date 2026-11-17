@@ -1,7 +1,7 @@
 ---
 file: o-investor
 kind: chapter
-no: 对象
+no: 监管对象 7
 title: 投资者与市场行为
 subtitle: 核心环节与规则
 part: 分解式

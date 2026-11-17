@@ -207,6 +207,9 @@ html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
 
 /* 分解式义务清单：「详见」列不折行 */
 table td:last-child a{white-space:nowrap}
+
+/* 两字以上的前缀（导读、篇末）留出间距 */
+.side .n.w{min-width:0;margin-right:10px}
 </style>
 </head>
 <body data-page="d10">
@@ -215,9 +218,9 @@ table td:last-child a{white-space:nowrap}
 <div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
 <div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html" class="on" aria-current="true">分解式</a><a href="preface.html">生成式</a></div>
 <a class="side-about" href="index.html#about">关于本书</a>
-<a class="" href="d-preface.html"><span class="n">导读</span>合规全景地图</a>
-<a class=" cur" href="d10.html" aria-current="page"><span class="n">·</span>发行人：上市公司的持续义务</a>
-<a class="side-part" href="d-part.html"><span class="pn">经纪自营商</span>沿着业务的时间轴</a>
+<a class="" href="d-preface.html"><span class="n w">导读</span>合规全景地图</a>
+<a class="side-part cur" href="d10.html" aria-current="page"><span class="pn">监管对象 1</span>发行人：上市公司的持续义务</a>
+<a class="side-part" href="d-part.html"><span class="pn">监管对象 2</span>经纪自营商：沿着业务的时间轴</a>
 <a class="" href="d01.html"><span class="n">1</span>设立：成为一家经纪自营商</a>
 <a class="" href="d02.html"><span class="n">2</span>获客与沟通</a>
 <a class="" href="d03.html"><span class="n">3</span>开户</a>
@@ -227,12 +230,12 @@ table td:last-child a{white-space:nowrap}
 <a class="" href="d07.html"><span class="n">7</span>成交之后：结算、确认与报告</a>
 <a class="" href="d08.html"><span class="n">8</span>持续监控与监督</a>
 <a class="" href="d09.html"><span class="n">9</span>退出与事件处置</a>
-<a class="" href="o-adviser.html"><span class="n">·</span>投资顾问</a>
-<a class="" href="o-fund.html"><span class="n">·</span>基金与 ETP</a>
-<a class="" href="o-venue.html"><span class="n">·</span>交易场所</a>
-<a class="" href="o-infra.html"><span class="n">·</span>清算、结算与报告</a>
-<a class="" href="o-investor.html"><span class="n">·</span>投资者与市场行为</a>
-<a class="" href="o-all.html"><span class="n">·</span>执法与救济</a>
+<a class="side-part" href="o-adviser.html"><span class="pn">监管对象 3</span>投资顾问</a>
+<a class="side-part" href="o-fund.html"><span class="pn">监管对象 4</span>基金与 ETP</a>
+<a class="side-part" href="o-venue.html"><span class="pn">监管对象 5</span>交易场所</a>
+<a class="side-part" href="o-infra.html"><span class="pn">监管对象 6</span>清算、结算与报告</a>
+<a class="side-part" href="o-investor.html"><span class="pn">监管对象 7</span>投资者与市场行为</a>
+<a class="side-part" href="o-all.html"><span class="pn">监管对象 8</span>执法与救济</a>
 <a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
 </nav>
 <button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
@@ -240,7 +243,7 @@ table td:last-child a{white-space:nowrap}
 <div class="wrap">
 <header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>分解式</span></header>
 
-<div class="chapno">另一条线</div><h1>发行人：上市公司的持续义务<small>从上市到日常，一家公司一年要向市场报告什么</small></h1>
+<div class="chapno">监管对象 1</div><h1>发行人：上市公司的持续义务<small>从上市到日常，一家公司一年要向市场报告什么</small></h1>
 <div class="stamp">资料截至 2026-11</div>
 <blockquote><p>前九个阶段沿着券商服务一位客户的时间轴展开；这一页换一条线，看另一端的上市公司。一家公司在交易所上市以后，每年要提交年报、三份季报和一份委托书，重大事件发生后 4 个工作日内报告，董事与高管每买卖一次本公司股票都要在 2 个营业日内报告，持股超过 5% 的股东与收购方也要现身。券商 App 里的公告、财报、内部人交易、持股变动与股东大会投票，都来自这些义务。合规要回答的问题是：每一项义务的触发条件、期限与依据是什么，2023–2026 年哪些变了，哪些还只是提案。</p></blockquote>
 <h2 id="sec-1">一、这一阶段的业务步骤</h2>
@@ -338,7 +341,7 @@ table td:last-child a{white-space:nowrap}
 <ol><li><strong>AI 摘要财报与公告，要带上文件类型与状态。</strong>说明是 10-K 还是 8-K、哪一项、经审计与否、「提交」还是「提供」，并链接原文；业绩新闻稿的数字与 10-Q 不一致时，以后者为准。</li><li><strong>内部人与持股数据不等于交易信号。</strong>AI 解读 Form 4 时应区分交易代码（公开市场买卖、缴税代扣、期权行权）与是否按 10b5-1 计划执行；解读 13D、13G 时区分意图。这类解读在向零售客户推送时属于对公众沟通，受 FINRA 规则 2210 约束（见<a href="d02.html">阶段 2</a>）。</li><li><strong>区分有效规则、暂缓规则与提案。</strong>用户问「公司是否必须披露碳排放」「股东还能不能提议案」时，答案取决于日期；资料库要记录每条规则的状态与日期，AI 回答应注明截至何时。</li><li><strong>公司行动有期限。</strong>股东大会投票截止、要约收购期限（20 个或 10 个工作日）都会传导到券商；AI 助手提醒客户时，应使用券商内部更早的截止时间，而不是发行人公布的最终期限。</li></ol>
 <h2 id="sec-5">参考文献</h2>
 <ul class="refs"><li>Sarbanes-Oxley Act of 2002, Pub. L. 107-204（第 302、403、404、906 条）.</li><li>Securities Exchange Act of 1934, 15 U.S.C. § 78a et seq.（第 12、13、14、16 条）</li><li>Securities and Exchange Commission. Form 8-K General Instructions（表格有效期至 2027 年 11 月 30 日的版本）.</li><li>Securities and Exchange Commission. (2002). <i>Ownership Reports and Trading by Officers, Directors and Principal Security Holders</i> (Release No. 34-46421).</li><li>Securities and Exchange Commission. (2022). <i>Listing Standards for Recovery of Erroneously Awarded Compensation</i> (Release No. 33-11126).</li><li>Securities and Exchange Commission. (2023). <i>Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure</i> (Release No. 33-11216).</li><li>Securities and Exchange Commission. (2023). <i>Modernization of Beneficial Ownership Reporting</i> (Release No. 33-11253).</li><li>Securities and Exchange Commission. (2026). <i>Rescission of Climate-Related Disclosure Rules</i>（Release No. 33-11421，2026 年 5 月 29 日）.</li><li>Securities and Exchange Commission. (2026). Press Release 2026-89: SEC proposes rescission of shareholder proposal rule（2026 年 9 月 16 日）.</li><li>Securities and Exchange Commission, Office of Mergers and Acquisitions. (2026). <i>Exemptive Order for Tender Offers for Equity Securities</i>（2026 年 4 月 16 日）.</li><li>17 CFR 229（S-K 条例）；17 CFR 210（S-X 条例）；17 CFR 240.13d-1、13d-2、14a-8、14a-19、14e-1、14e-2、10D-1.</li></ul>
-<footer class="nav"><a href="d-preface.html">← 导读　合规全景地图</a><a href="d-part.html">经纪自营商　沿着业务的时间轴 →</a></footer>
+<footer class="nav"><a href="d-preface.html">← 导读　合规全景地图</a><a href="d-part.html">监管对象 2　经纪自营商：沿着业务的时间轴 →</a></footer>
 </div>
 <script>
 (function(){
