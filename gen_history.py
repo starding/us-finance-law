@@ -1,0 +1,115 @@
+# 用法：python3 gen_history.py → 读取 notes/map-*.json 的规则与本文件中的事件，生成 figs/hmap-history.html：
+# 历史时间轴地图。横轴为分段的年份（每个时期等宽，时期内按年份线性），最上一行为引发立法的事件，其下按规则来源分行；
+# 点选事件查看它引出的规则，点选规则查看要求、现状与对应章节。
+import json, pathlib
+
+ROOT = pathlib.Path(__file__).parent
+
+ERAS = [  # (起, 止, 名称, 一句话)
+    (1905, 1932, "州法时代", "各州以蓝天法逐个审查发行，跨州推销管不到"),
+    (1933, 1940, "新政立法", "崩盘之后七年，联邦证券法的主干成形"),
+    (1941, 1969, "判例与自律", "法院与 SEC 划定边界，NASD 自律监管成熟"),
+    (1970, 1989, "危机与重建", "经纪商倒闭催生 SIPC 与客户资产保护，固定佣金取消"),
+    (1990, 2007, "电子化与丑闻", "电子交易、市场碎片化与公司丑闻，规则在框架内修补"),
+    (2008, 2019, "金融危机之后", "危机、闪电崩盘与零售投资者保护"),
+    (2020, 2026, "零售化、加密与 AI", "零佣金与线上券商、加密资产与 AI，规则加速调整"),
+]
+
+EVENTS = [  # (年份, 名称, 说明, 引出的规则 id)
+    (1911, "第一部蓝天法", "州银行专员多利推动通过，此后除内华达州外各州相继立法", ["blue-sky"]),
+    (1929, "股市崩盘", "1929 年 10 月道琼斯指数暴跌，此后三年大萧条；低保证金交易放大了下跌", ["sec-33", "reg-t", "sea-15a"]),
+    (1932, "佩科拉听证", "参议院银行委员会调查（1932–1934），揭示发行中的误导与利益冲突", ["sec-33", "manipulation"]),
+    (1968, "文书危机", "1968–1970 年成交量激增，经纪商后台处理不及，多家经纪商倒闭或被合并", ["sipa", "customer-protection", "net-capital"]),
+    (1975, "取消固定佣金", "1975 年 5 月 1 日起经纪佣金可以协商；同年《证券法修正案》要求建立全国市场体系", ["reg-nms"]),
+    (1987, "黑色星期一", "1987 年 10 月 19 日道琼斯指数单日下跌 22.6%，此后引入全市场熔断", ["mwcb"]),
+    (2001, "安然与 9·11", "安然 2001 年 12 月申请破产；9·11 之后通过《爱国者法》，强化反洗钱与客户身份识别", ["cip", "aml-program"]),
+    (2008, "金融危机", "2008 年 9 月雷曼兄弟破产；12 月麦道夫骗局曝光，SIPC 主持清算", ["sipc-liq"]),
+    (2010, "闪电崩盘", "2010 年 5 月 6 日美股在数分钟内暴跌又反弹，此后推出涨跌停价格带与市场准入风险控制", ["luld", "market-access"]),
+    (2021, "GameStop", "2021 年 1 月散户集中买入与券商限制交易，引发对订单流付费与执行质量的关注", ["rule-605"]),
+    (2022, "FTX 倒闭", "2022 年 11 月加密交易平台 FTX 申请破产，加剧对加密资产托管与分类的讨论", ["howey"]),
+]
+
+LAYERS = [("law", "国会成文法"), ("court", "判例"), ("sec", "SEC 规则"), ("fed", "美联储规则"),
+          ("finra", "FINRA 规则"), ("fincen", "FinCEN · OFAC"), ("state", "州法")]
+
+def load():
+    rules, seen = [], set()
+    for p in sorted((ROOT / "notes").glob("map-*.json")):
+        for r in json.loads(p.read_text()):
+            if r["id"] not in seen:
+                seen.add(r["id"]); rules.append(r)
+    return rules
+
+def figure(rules):
+    ids = {r["id"] for r in rules}
+    ev = [dict(y=y, n=n, t=t, leads=[i for i in leads if i in ids]) for y, n, t, leads in EVENTS]
+    data = json.dumps(dict(E=ERAS, V=ev, L=LAYERS, R=rules), ensure_ascii=False)
+    return f'''<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">历史时间轴地图：事件与规则</p><p class="figsub">{len(ev)} 个事件、{len(rules)} 条规则。七个时期等宽，时期内按年份排列；实心点为 2023–2026 年有变化的规则。点选事件看它引出的规则，点选规则看要求与现状。</p></div></div>
+    <div class="hmp" id="hmp"></div>
+    <div class="hmp-d" id="hmp-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+body[data-page="h-map"] .wrap{{max-width:min(1280px,94vw)}}
+.hmp{{overflow-x:auto}}
+.hmp-in{{position:relative;min-width:980px;font-size:11.5px}}
+.hmp-era{{display:grid;margin-left:96px}}
+.hmp-era div{{border-left:1px solid var(--line);padding:4px 6px 6px;line-height:1.3}}
+.hmp-era b{{display:block;font-size:12.5px}}.hmp-era small{{color:var(--faint);font-size:11px}}.hmp-era span{{display:block;color:var(--muted);font-size:11px;margin-top:2px}}
+.hmp-row{{display:grid;grid-template-columns:96px 1fr;border-top:1px solid var(--line)}}
+.hmp-row>span{{font-size:12px;color:var(--muted);padding:8px 6px 0 0}}
+.hmp-row.ev>span{{color:var(--ink);font-weight:600}}
+.hmp-tr{{position:relative}}
+.hmp-tr i{{position:absolute;top:0;bottom:0;border-left:1px solid var(--line);opacity:.6}}
+.hmp-dot{{position:absolute;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;border:2px solid var(--ink);background:var(--card);cursor:pointer;padding:0}}
+.hmp-dot.chg{{background:var(--accent);border-color:var(--accent)}}
+.hmp-dot.hl{{box-shadow:0 0 0 4px var(--accent-soft);border-color:var(--accent)}}
+.hmp-dot.on{{box-shadow:0 0 0 4px var(--ink)}}
+.hmp-ev{{position:absolute;transform:translateX(-50%);font:inherit;font-size:11px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:6px;padding:2px 6px;white-space:nowrap}}
+.hmp-ev.on{{background:var(--accent);border-color:var(--accent);color:#fff}}
+.hmp-ax{{display:grid;margin-left:96px;border-top:1px solid var(--line)}}
+.hmp-ax div{{position:relative;height:20px;border-left:1px solid var(--line)}}
+.hmp-ax em{{position:absolute;top:3px;left:3px;font-style:normal;font-size:11px;color:var(--faint)}}
+.hmp-d{{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;min-height:6em}}
+.hmp-d b{{font-size:14.5px}}.hmp-d em{{font-style:normal;color:var(--muted);font-size:12.5px;display:block;margin-top:4px}}
+.hmp-d ul{{margin:6px 0 0;padding-left:18px}}.hmp-d a{{color:var(--accent);margin-right:12px}}
+</style>
+<script>
+(function(){{
+  const D={data},E=D.E,V=D.V,L=D.L,R=D.R,box=document.getElementById('hmp'),det=document.getElementById('hmp-d');
+  const n=E.length,pos=y=>{{let k=E.findIndex(e=>y>=e[0]&&y<=e[1]);if(k<0)k=y<E[0][0]?0:n-1;const e=E[k],f=(Math.min(Math.max(y,e[0]),e[1])-e[0]+0.5)/(e[1]-e[0]+1);return (k+f)/n*100;}};
+  const lnk=(f,t)=>'<a data-f="'+f+'">'+t+'</a>',lnn=Object.fromEntries(L);
+  const cols='repeat('+n+',1fr)';
+  let h='<div class="hmp-in"><div class="hmp-era" style="grid-template-columns:'+cols+'">'+E.map(e=>'<div><b>'+e[2]+'</b><small>'+e[0]+'–'+e[1]+'</small><span>'+e[3]+'</span></div>').join('')+'</div>';
+  const grid='<i style="left:0"></i>'+E.map((e,k)=>'<i style="left:'+((k+1)/n*100)+'%"></i>').join('');
+  // 事件行：错开两层避免重叠
+  const ends=[];let evh='';
+  V.forEach((v,i)=>{{const x=pos(v.y),w=((String(v.y).length+1)*6.5+v.n.length*11.5+14)/9.8;let lv=0;while(ends[lv]!==undefined&&x-w/2<ends[lv]+0.6)lv++;ends[lv]=x+w/2;
+    evh+='<button type="button" class="hmp-ev" data-e="'+i+'" style="left:'+x+'%;top:'+(6+lv*26)+'px">'+v.y+' '+v.n+'</button>';}});
+  h+='<div class="hmp-row ev"><span>事件</span><div class="hmp-tr" style="height:'+(12+ends.length*26)+'px">'+grid+evh;
+  h+='</div></div>';
+  L.forEach(l=>{{const rs=R.map((r,i)=>[r,i]).filter(([r])=>r.layer===l[0]).sort((a,b)=>a[0].year-b[0].year);if(!rs.length)return;
+    const rowsEnd=[];let html='';rs.forEach(([r,i])=>{{const x=pos(r.year);let k=0;while(rowsEnd[k]!==undefined&&x-rowsEnd[k]<1.3)k++;rowsEnd[k]=x;
+      html+='<button type="button" class="hmp-dot'+(r.changed?' chg':'')+'" data-i="'+i+'" style="left:'+x+'%;top:'+(8+k*14)+'px" title="'+r.name+'（'+r.year+'）"></button>';}});
+    h+='<div class="hmp-row"><span>'+l[1]+'</span><div class="hmp-tr" style="height:'+(22+rowsEnd.length*14)+'px">'+grid+html+'</div></div>';}});
+  h+='<div class="hmp-ax" style="grid-template-columns:'+cols+'">'+E.map(e=>'<div><em>'+e[0]+'</em></div>').join('')+'</div></div>';
+  box.innerHTML=h;
+  const fix=el=>el.querySelectorAll('a[data-f]').forEach(a=>a.setAttribute('href',a.dataset.f+'.'+'html'));
+  const dots=[...box.querySelectorAll('.hmp-dot')],evs=[...box.querySelectorAll('.hmp-ev')];
+  function clear(){{dots.forEach(d=>d.classList.remove('on','hl'));evs.forEach(e=>e.classList.remove('on'));}}
+  function showR(i){{clear();const r=R[i];box.querySelector('[data-i="'+i+'"]').classList.add('on');
+    det.innerHTML='<b>'+r.name+'</b>（'+r.year+' 年 · '+lnn[r.layer]+'）<br>'+r.req+'<em>现状：'+r.status+'</em>'+(r.g?lnk(r.g,'生成式：第 '+(+r.g.slice(1))+' 章 →'):'')+(r.d?lnk(r.d,'分解式：阶段 '+(+r.d.slice(1))+' →'):'');fix(det);}}
+  function showE(i){{clear();const v=V[i];evs[i].classList.add('on');v.leads.forEach(id=>{{const k=R.findIndex(r=>r.id===id);if(k>=0)box.querySelector('[data-i="'+k+'"]').classList.add('hl');}});
+    det.innerHTML='<b>'+v.y+' · '+v.n+'</b><br>'+v.t+(v.leads.length?'<ul>'+v.leads.map(id=>{{const r=R.find(x=>x.id===id);return '<li>'+r.name+'（'+r.year+'）'+(r.g?' '+lnk(r.g,'第 '+(+r.g.slice(1))+' 章'):'')+'</li>';}}).join('')+'</ul>':'');fix(det);}}
+  dots.forEach(d=>d.addEventListener('click',()=>showR(+d.dataset.i)));evs.forEach(e=>e.addEventListener('click',()=>showE(+e.dataset.e)));
+  showE(1);
+}})();
+</script>
+'''
+
+if __name__ == "__main__":
+    rules = load()
+    (ROOT / "figs" / "hmap-history.html").write_text(figure(rules))
+    print("历史地图：", len(EVENTS), "个事件，", len(rules), "条规则")
