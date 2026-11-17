@@ -4,7 +4,7 @@
 书名：《美国金融业法律研究：规则从何而来》。证券篇共 12 章；第 1 章已写好，是样板：
 - 正文：chapters/02-s01-卖的人比买的人知道得多.md
 - 图：figs/s01-*.html
-- 参考上一本书的一章写法：/private/tmp/claude-501/-Users-a9527/1a82fa3e-0dd5-40eb-8298-c68c70e5250f/scratchpad/pfa.C0ck/r/gen/08-证券要能卖出去.md 与它的图 figs/g08-*.html；写作方法见同目录 chapters/A2-本书的写法.md
+- 参考上一本书的一章写法：《产品×金融×AI》仓库的 gen/08-证券要能卖出去.md 与它的图 figs/g08-*.html；写作方法见同目录 chapters/A2-本书的写法.md
 
 ## 写法
 1. 生成式推演：每章只引入一个新问题，按「问题 → 市场的回应 → 法律的回应 → 留下的问题」展开。史实与判例作为出处，不写成编年史。
@@ -28,7 +28,7 @@
 ## 检查
 - 写完运行 `cd ~/Projects/us-finance-law && python3 build.py`，确认无报错。
 - 用无头 Chrome 截图检查自己的章节页，例如：
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --hide-scrollbars --window-size=1300,5000 --virtual-time-budget=4000 --screenshot=/private/tmp/claude-501/-Users-a9527/1a82fa3e-0dd5-40eb-8298-c68c70e5250f/scratchpad/shots10/law-sXX.png "file://$HOME/Projects/us-finance-law/site/sXX.html"
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --hide-scrollbars --window-size=1300,5000 --virtual-time-budget=4000 --screenshot=/tmp/law-sXX.png "file://$HOME/Projects/us-finance-law/site/sXX.html"
   然后用 Read 查看截图，确认图正常渲染、没有错位。
 - 只修改自己负责的文件，不改 build.py、不改别人的章节和图。
 
