@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>违规之后</title>
+<meta name="description" content="《美国金融业法律研究》证券篇第 16 章：前面各章的规则都有人违反。违反之后，SEC 可以到联邦法院请求禁令、罚款与追缴，FINRA 可以罚款、停业与终身禁业，司法部可以提起刑事追诉，投资者可以集体起诉或申请仲裁，知情人可以举报并分得罚款。法院在 2017–2026 年间逐步划定了这些工具的边界：追缴有时效、以净利润为限、要为受害者所用；罚款欺诈要由陪审团来定">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+
+/* 分解式义务清单：「详见」列不折行 */
+table td:last-child a{white-space:nowrap}
+</style>
+</head>
+<body data-page="s17">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html">分解式</a><a href="preface.html" class="on" aria-current="true">生成式</a></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
+<a class="" href="h-map.html"><span class="n">导读</span>历史时间轴地图</a>
+<a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>
+<a class="" href="s01.html"><span class="n">1</span>卖的人比买的人知道得多</a>
+<a class="" href="s02.html"><span class="n">2</span>证券转手之后，谁来说真话</a>
+<a class="" href="s13.html"><span class="n">3</span>公司要持续告诉市场什么</a>
+<a class="" href="s03.html"><span class="n">4</span>什么算证券</a>
+<a class="" href="s04.html"><span class="n">5</span>中间人有自己的利益</a>
+<a class="" href="s05.html"><span class="n">6</span>客户的钱放在经纪商那里</a>
+<a class="" href="s15.html"><span class="n">7</span>价格从哪里来</a>
+<a class="" href="s06.html"><span class="n">8</span>订单送到哪里成交</a>
+<a class="" href="s07.html"><span class="n">9</span>价格被人扭曲</a>
+<a class="" href="s08.html"><span class="n">10</span>借钱买证券</a>
+<a class="" href="s18.html"><span class="n">11</span>货架上不只有股票</a>
+<a class="" href="s09.html"><span class="n">12</span>替人管钱的人</a>
+<a class="" href="s10.html"><span class="n">13</span>开户的人是谁</a>
+<a class="" href="s11.html"><span class="n">14</span>能说什么、不能说什么</a>
+<a class="" href="s16.html"><span class="n">15</span>跨境：外国券商与外国发行人</a>
+<a class=" cur" href="s17.html" aria-current="page"><span class="n">16</span>违规之后</a>
+<a class="" href="s12.html"><span class="n">17</span>重跑：当推荐来自 AI</a>
+<a class="" href="s-map.html"><span class="n">篇末</span>证券篇的规则地图</a>
+<span class="todo side-part"><span class="pn">银行篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">保险篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">衍生品篇</span>（待写）</span>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>证券篇</span></header>
+
+<div class="chapno">第 16 章</div><h1>违规之后<small>执法、诉讼与救济</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>前面各章讲规则为什么出现，本章讲规则被违反之后的事。一条规则的分量，取决于违反它的代价和被发现的概率。美国证券法把追究的责任分给了几方：SEC 提起民事执法，FINRA 处分会员与从业人员，司法部追诉犯罪，投资者自己起诉或申请仲裁，内部知情人可以举报并分得一部分罚款。每一种工具都有它的边界：法院在 2017 年到 2026 年之间，先后限制了追缴的时效与数额，又要求罚款欺诈须由陪审团审理；国会则把集体诉讼的门槛提高，把吹哨人的奖励写进法律。问题是：谁来追究，投资者怎样得到赔偿。</p></blockquote>
+<h2 id="sec-1">一、谁来追究</h2>
+<p>规则被违反后，追究的人有五类，手段与目的各不相同。</p>
+<ul><li><strong>SEC。</strong>依《证券交易法》第 21 条调查，向联邦地区法院提起民事诉讼，或在 SEC 内部提起行政程序。目的是制止违法、剥夺不当得利、惩戒与威慑；收回的钱可以设立公平基金分给受害者，但赔偿不是 SEC 的法定职能。</li><li><strong>FINRA。</strong>依会员协议与自身规则处分会员公司与注册人员，最重的处分是开除会员与对个人终身禁业（<a href="s04.html">第 5 章</a>）。</li><li><strong>司法部。</strong>《证券交易法》第 32(a) 条规定，故意违反该法或规则的，个人最高罚金 500 万美元、监禁 20 年，非自然人最高罚金 2,500 万美元；2002 年《萨班斯－奥克斯利法》第 807 条增设的《美国法典》第 18 编第 1348 条把证券欺诈的最高刑期定为 25 年。SEC 没有刑事追诉权，发现可能构成犯罪的情形，向司法部移送，两者常常平行进行。</li><li><strong>投资者。</strong>依规则 10b-5 的默示诉权提起集团诉讼（<a href="s02.html">第 2 章</a>），或依开户协议中的仲裁条款向 FINRA 申请仲裁（见<a href="d09.html">阶段 9</a>）。</li><li><strong>州。</strong>州证券监管机构与州检察长依州证券法执法（<a href="s01.html">第 1 章</a>）。</li></ul>
+<p>直到 1990 年，SEC 在法院能请求的主要是禁令，罚款只针对内幕交易。1990 年 10 月 15 日签署的《证券执法救济与低价股改革法》授权 SEC 在法院请求民事罚款，并可在行政程序中发布停止令；2010 年《多德－弗兰克法》第 929P(a) 条又允许 SEC 在行政程序中对任何人处以罚款，而不只对注册机构及其人员。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁来追究：五条路径</p><p class="figsub">点选一条路径，看谁发起、在哪里审、能得到什么、钱去哪里。</p></div></div>
+    <div class="y7p" id="y7p"></div>
+    <div class="y7p-d" id="y7p-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.y7p{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.y7p button{font:inherit;font-size:13px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:10px 8px;text-align:left;line-height:1.35}
+.y7p button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.y7p button.on{border-color:var(--accent);background:var(--accent-soft)}
+.y7p-d{margin-top:12px;display:grid;grid-template-columns:88px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.55;background:var(--quote);border-radius:10px;padding:12px 14px}
+.y7p-d dt{color:var(--muted)}.y7p-d dd{margin:0}
+@media (max-width:640px){.y7p{grid-template-columns:1fr 1fr}.y7p-d{grid-template-columns:72px 1fr}}
+</style>
+<script>
+(function(){
+  const P=[['SEC 民事执法','联邦法院 / 行政程序',{'发起':'SEC 执法部调查，委员会批准起诉；2025 年 3 月起正式调查令须委员会批准','在哪里审':'有争议的欺诈罚款案在联邦法院，由陪审团审理（贾尔克西案，2024）；和解与后续从业禁止可在行政程序','能得到':'禁令、民事罚款、追缴及利息、董事与高管任职禁止、停止令','钱去哪里':'罚款进国库；追缴可设公平基金分给受害者；10%–30% 可奖励吹哨人（从投资者保护基金支付）'}],
+    ['FINRA 纪律处分','听证小组 → NAC → SEC',{'发起':'FINRA 执法部门，基于检查、投诉、交易监控与举报','在哪里审':'听证小组；可上诉至全国裁决委员会，再申请 SEC 复审与联邦上诉法院','能得到':'谴责、罚款、停职、开除会员、终身禁业、返还客户','钱去哪里':'罚款归 FINRA，按规定用途使用；返还款直接给客户'}],
+    ['司法部刑事追诉','联邦刑事法院',{'发起':'检察官，常由 SEC 移送；与 SEC 民事案件平行进行','在哪里审':'联邦地区法院，陪审团，须排除合理怀疑','能得到':'第 32(a) 条：个人最高 500 万美元、20 年；非自然人最高 2,500 万美元。18 U.S.C. § 1348：最高 25 年','钱去哪里':'罚金、没收；法院可判令向受害者赔偿'}],
+    ['投资者集团诉讼','联邦法院',{'发起':'投资者，通常由经济利益最大的机构担任首席原告（PSLRA）','在哪里审':'联邦地区法院；上市证券的 50 人以上集团诉讼不得改依州法（SLUSA）','能得到':'损害赔偿，多以和解结案','钱去哪里':'扣除律师费后按交易记录分给申报的投资者'}],
+    ['FINRA 仲裁','仲裁庭',{'发起':'客户依开户协议中的仲裁条款或主动要求','在哪里审':'FINRA 仲裁；事件发生超过 6 年不能提交；5 万美元以下简易程序（阶段 9）','能得到':'损害赔偿裁决','钱去哪里':'直接付给客户'}]];
+  const g=document.getElementById('y7p'),d=document.getElementById('y7p-d');
+  g.innerHTML=P.map(p=>`<button type="button">${p[0]}<em>${p[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));d.innerHTML=Object.entries(P[i][2]).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-2">二、SEC 的工具：禁令、罚款与追缴</h2>
+<p>SEC 在法院可以请求四类救济：禁止今后再违反的禁令；民事罚款，按违法情节分三档，并以不法所得为另一上限；禁止担任上市公司董事与高管；追缴，即交出因违法获得的收益及利息。罚款进入国库，追缴的钱可以分给受害者。追缴并不写在 1990 年之前的法律里，是法院以「衡平救济」为依据逐步认可的，因此它的边界也由法院来划。</p>
+<p>第一条边界是时效。《美国法典》第 28 编第 2462 条规定，「民事罚款、罚金或没收」须在五年内提起。2017 年 6 月 5 日，联邦最高法院在科克什诉 SEC 案中一致认定，SEC 的追缴在这一意义上属于罚款，适用五年时效。科克什被要求交出 1995 年到 2009 年间挪用的 3,490 万美元，其中 2,990 万美元来自五年时效之外。</p>
+<p>第二条边界是数额与用途。2020 年 6 月 22 日，联邦最高法院在刘诉 SEC 案中以 8 比 1 认定，追缴作为衡平救济是允许的，但不得超过违法者的净利润，即应扣除正当的经营费用，并且须「为受害者」判给。</p>
+<p>国会随即回应。2021 年 1 月 1 日生效的 2021 财年国防授权法第 6501 条修改了《证券交易法》第 21(d) 条：明文授权 SEC 请求追缴；追缴的时效一般为五年，对须证明欺诈故意的违法延长到十年；禁令等其他衡平救济的时效为十年；适用于修订时尚未了结的案件。</p>
+<p>刘案留下的问题之一，是「为受害者」是否要求投资者实际遭受了金钱损失。2026 年 6 月 4 日，联邦最高法院在斯里佩奇诉 SEC 案中一致认定不需要：被告操纵了 20 多只低价股，法院认为投资者受法律保护的利益受到侵害即可，SEC 不必证明他们亏了钱。判决没有回答国会新增的第 21(d)(7) 条追缴是否同样受刘案的衡平限制，也没有回答钱无法分给投资者、只能上缴国库时能否追缴，内幕交易案件是最常见的例子。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">追缴的边界</p><p class="pr-c"><span><em>领域</em>证券法 › 执法 › 救济</span><span><em>类型</em>联邦判例与成文法</span></p><p class="pr-s">违法者须交出违法所得的净利润，追缴的钱应当用于受害者；须在法定时效内提起，一般为五年，涉及欺诈故意的为十年。</p><dl><div><dt>在法律体系中的位置</dt><dd>科克什诉 SEC 案（2017）认定追缴适用第 2462 条五年时效；刘诉 SEC 案（2020）限定为净利润并须为受害者判给；2021 财年国防授权法第 6501 条修订《证券交易法》第 21(d) 条，明文授权追缴并设五年与十年时效；斯里佩奇诉 SEC 案（2026）认定不以投资者实际金钱损失为前提</dd></div><div><dt>回应的问题</dt><dd>追缴由法院以衡平救济补出，没有法定的时效与数额上限，可能变成没有边界的惩罚</dd></div><div><dt>适用范围</dt><dd>违法所得可以计算；有可以识别的受害者，或至少有受法律保护的利益受到侵害</dd></div><div><dt>出台</dt><dd>联邦最高法院，2017、2020、2026；美国国会，2021</dd></div><div><dt>留下的问题</dt><dd>追缴与罚款由法院判，SEC 自己的行政程序还能否处以罚款</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">追缴还能追多远</p><p class="figsub">上方点选判例与立法看边界如何形成；下方选择违法类型、拖动距今年数，看现行第 21(d)(8) 条下能否追缴（示意，不含时效中止等情形）。</p></div></div>
+    <div class="y7d-tl" id="y7d-tl"></div>
+    <p class="y7d-t" id="y7d-t" aria-live="polite"></p>
+    <div class="y7d-c">
+      <div class="y7d-k" id="y7d-k"></div>
+      <label>最后一次违法距起诉：<b id="y7d-yv"></b><input type="range" id="y7d-y" min="1" max="14" value="7"></label>
+      <div class="y7d-bar"><div id="y7d-f"></div><span class="y7d-m5">5 年</span><span class="y7d-m10">10 年</span></div>
+      <p id="y7d-r"></p>
+    </div>
+  </div>
+</figure>
+<style>
+.y7d-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.y7d-tl button{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px;text-align:left}
+.y7d-tl button b{display:block;font-size:13px}
+.y7d-tl button.on{border-color:var(--accent);background:var(--accent-soft)}
+.y7d-t{font-size:13.5px;line-height:1.6;min-height:3.2em;margin:10px 0 14px}
+.y7d-c{border-top:1px solid var(--line);padding-top:12px;font-size:13.5px}
+.y7d-k{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.y7d-k button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 10px}
+.y7d-k button.on{border-color:var(--accent);background:var(--accent-soft)}
+.y7d-c input{display:block;width:100%;accent-color:var(--accent);margin-top:6px}
+.y7d-bar{position:relative;height:16px;background:var(--quote);border-radius:8px;margin:14px 0 20px}
+#y7d-f{position:absolute;left:0;top:0;bottom:0;border-radius:8px;background:var(--accent)}
+.y7d-bar span{position:absolute;top:18px;font-size:11.5px;color:var(--faint);transform:translateX(-50%)}
+.y7d-m5{left:35.7%}.y7d-m10{left:71.4%}
+.y7d-bar::before,.y7d-bar::after{content:"";position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.y7d-bar::before{left:35.7%}.y7d-bar::after{left:71.4%}
+#y7d-r{margin:0;min-height:2.8em;line-height:1.5}
+@media (max-width:640px){.y7d-tl{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const E=[['2017','科克什案','联邦最高法院一致认定，追缴属于第 2462 条意义上的罚款，适用五年时效；科克什 3,490 万美元追缴中有 2,990 万美元来自时效之外。'],
+    ['2020','刘案','8 比 1：追缴作为衡平救济不得超过净利润（扣除正当费用），并须为受害者判给。'],
+    ['2021','国防授权法第 6501 条','明文授权 SEC 请求追缴；一般五年，须证明欺诈故意的十年；禁令等衡平救济十年。2021 年 1 月 1 日生效，适用于未了结案件。'],
+    ['2026','斯里佩奇案','9 比 0：追缴不以投资者实际金钱损失为前提；第 21(d)(7) 条是否受刘案限制仍未回答。']];
+  const tl=document.getElementById('y7d-tl'),t=document.getElementById('y7d-t');
+  tl.innerHTML=E.map(e=>`<button type="button"><b>${e[0]}</b>${e[1]}</button>`).join('');
+  const bs=[...tl.children];const st=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));t.textContent=E[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>st(i)));st(2);
+  const K=['不须证明欺诈故意（例如记录保存违规）','须证明欺诈故意（例如规则 10b-5）'];
+  const k=document.getElementById('y7d-k'),y=document.getElementById('y7d-y'),yv=document.getElementById('y7d-yv'),f=document.getElementById('y7d-f'),r=document.getElementById('y7d-r');
+  let c=1;k.innerHTML=K.map(x=>`<button type="button">${x}</button>`).join('');
+  const draw=()=>{[...k.children].forEach((b,j)=>b.classList.toggle('on',j===c));const n=+y.value;yv.textContent=n+' 年';f.style.width=(n/14*100)+'%';
+    const lim=c?10:5;r.textContent=n<=lim?`可以请求追缴：在 ${lim} 年时效之内。禁令等衡平救济的时效为 10 年。`:`追缴已过 ${lim} 年时效。${n<=10?'禁令等衡平救济仍在 10 年时效内。':'禁令等衡平救济也已超过 10 年。'}`;};
+  [...k.children].forEach((b,j)=>b.addEventListener('click',()=>{c=j;draw();}));y.addEventListener('input',draw);draw();
+})();
+</script>
+
+<h2 id="sec-3">三、在哪里审：行政程序与陪审团</h2>
+<p>SEC 可以把案件交给联邦法院，也可以交给自己的行政法官。行政程序更快，SEC 的胜诉率也更高；Winston &amp; Strawn 律师事务所的统计显示，2010 年到 2015 年间 SEC 在有争议的行政程序中胜诉约九成，在联邦法院约七成。被告长期质疑这种安排：由同一个机构起诉并审判。</p>
+<p>乔治·贾尔克西管理两只对冲基金，SEC 2013 年在行政程序中指控他误导投资者，2020 年作出最终裁决：处以 30 万美元民事罚款，责令其顾问公司追缴约 68.5 万美元，并禁止他从业。2024 年 6 月 27 日，联邦最高法院在 SEC 诉贾尔克西案中以 6 比 3 维持第五巡回上诉法院的判决：SEC 对证券欺诈请求民事罚款时，被告依宪法第七修正案有权由陪审团审理。罗伯茨首席大法官执笔的意见认为，SEC 的反欺诈条款源自普通法上的欺诈，民事罚款是典型的普通法救济，不属于可以交给行政机关裁决的「公共权利」。法院没有回答行政法官的免职保护与授权是否合宪。</p>
+<p>此后的做法是：有争议、要罚款的欺诈案件，SEC 改在联邦法院起诉；以和解结案的案件，仍可以在行政程序中由当事人同意处以罚款；在法院取得禁令或刑事定罪之后，再在行政程序中禁止当事人从业的「后续程序」继续使用。2026 年 1 月，哥伦比亚特区联邦地区法院在斯特罗姆诉 SEC 案中拒绝叫停这类后续程序，认为贾尔克西案只涉及民事罚款。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">罚款须经陪审团（贾尔克西案）</p><p class="pr-c"><span><em>领域</em>证券法 › 执法 › 程序</span><span><em>类型</em>联邦判例</span></p><p class="pr-s">SEC 对证券欺诈请求民事罚款时，被告有权要求陪审团审理，SEC 不能在内部行政程序中裁决这类罚款。</p><dl><div><dt>在法律体系中的位置</dt><dd>SEC 诉贾尔克西案，603 U.S. 109（2024 年 6 月 27 日，6 比 3），依宪法第七修正案；限制了《多德－弗兰克法》第 929P(a) 条授予的行政罚款权在欺诈案件中的适用；以和解结案与后续从业禁止程序不受影响</dd></div><div><dt>回应的问题</dt><dd>同一机构起诉又审判，被告失去陪审团审理的保障</dd></div><div><dt>适用范围</dt><dd>请求的是民事罚款这类普通法救济，且违法行为与普通法上的欺诈相近</dd></div><div><dt>出台</dt><dd>联邦最高法院，2024；罗伯茨首席大法官执笔</dd></div><div><dt>留下的问题</dt><dd>不涉及欺诈、或纯属监管性的违规，是否同样需要陪审团</dd></div></dl></aside>
+<h2 id="sec-4">四、行业自己处分：FINRA 的纪律处分</h2>
+<p>FINRA 依规则 8310 可以对会员与注册人员处以谴责、罚款、停职、开除会员、终身禁业，并要求返还客户损失；程序见规则 9000 系列：调查后由执法部门起诉，听证小组审理，可以上诉到全国裁决委员会，再向 SEC 申请复审，最后到联邦上诉法院。多数案件以「接受、放弃与同意书」和解结案。按 FINRA 公布的统计，2023 年到 2025 年，FINRA 每年新提起纪律处分 610、730、625 起；终身禁业的个人 178、182、187 人；罚款与追缴 1.032 亿、7,560 万、9,960 万美元；责令返还客户 750 万、2,400 万、1,710 万美元。</p>
+<p>处分记录进入 BrokerCheck，任何人可以查询。终身禁业还会触发法定取消资格：被禁业的人不能再在任何 FINRA 会员公司任职。这使 FINRA 处分对个人的影响常常大于罚款。</p>
+<p>FINRA 是私人组织，它的处分权也受到宪法挑战。2024 年 11 月 22 日，哥伦比亚特区巡回上诉法院在阿尔派恩证券公司诉 FINRA 案中裁定，FINRA 在 SEC 完成复审之前不得以加速程序开除会员，理由是政府权力不能完全交给私人行使。联邦最高法院 2025 年 6 月 2 日拒绝受理此案；同日，FINRA 向 SEC 提交规则修改，使开除会员等处分在 SEC 复审期间暂缓生效。</p>
+<h2 id="sec-5">五、内部人报信：吹哨人计划</h2>
+<p>很多违法只有内部人知道。2010 年《多德－弗兰克法》第 922 条在《证券交易法》中增加第 21F 条：自愿向 SEC 提供原创信息、促成罚没金额超过 100 万美元的执法行动的个人，可以获得所收罚没款项 10% 到 30% 的奖励；奖金来自 SEC 的投资者保护基金，不从受害者分配中扣除。同一条禁止雇主因员工举报而报复。SEC 的规则 21F-17 进一步规定，任何人不得采取行动阻止他人与 SEC 联系，包括执行或威胁执行保密协议。</p>
+<p>2018 年 2 月 21 日，联邦最高法院在数字地产信托公司诉萨默斯案中一致认定，第 21F 条的反报复保护只给向 SEC 举报的人，只在公司内部举报的员工不受这一条保护。2020 年 9 月 23 日，SEC 以 3 比 2 修订规则，要求举报以书面方式向 SEC 提出，增设对屡次无理申请的处理程序；2022 年 8 月 26 日再次修订，允许在其他机构的奖励计划不那么合适时仍由 SEC 奖励，并明确 SEC 考虑奖励金额时只能据此提高、不能降低比例。</p>
+<p>规则 21F-17 的执法直接触及券商与客户的协议。2024 年 1 月 16 日，摩根大通证券同意支付 1,800 万美元罚款：2020 年 3 月至 2023 年 7 月，它要求获得 1,000 美元以上补偿或和解款的零售客户签署保密协议，协议允许客户回应 SEC 的询问，却不允许客户主动联系 SEC。</p>
+<p>奖励的规模起伏很大。2023 财年 SEC 发放约 6 亿美元，其中 2023 年 5 月一笔近 2.79 亿美元，是计划设立以来最大的一笔；2024 财年 2.55 亿美元；2025 财年约 6,000 万美元，分给 48 人，同年驳回的申请明显增多。2025 财年 SEC 收到约 2.7 万条吹哨人举报。截至 2026 年 11 月，未查到 SEC 在 2022 年之后再次修订吹哨人规则；国会 2025 年 3 月提出的《SEC 吹哨人改革法》（S.1149）仍未通过。</p>
+<h2 id="sec-6">六、投资者自己起诉：集团诉讼的门槛</h2>
+<p>SEC 收回的钱有限，受害投资者的主要赔偿途径是依规则 10b-5 提起集团诉讼（诉权与依赖推定的来由见<a href="s02.html">第 2 章</a>）。到 1990 年代初，国会认为这类诉讼常被滥用：股价一跌就有律师代表「职业原告」起诉，被告为避免高昂的证据开示费用而和解，不论案件是否有理。</p>
+<p>1995 年 12 月 22 日，国会推翻克林顿总统的否决，通过《私人证券诉讼改革法》（PSLRA）。它在《证券交易法》中增加第 21D 条：原告须在起诉状中具体列出事实，足以使人「强烈推断」被告有欺诈故意；在驳回起诉的动议未决期间，一切证据开示暂停；法院推定在诉讼中经济利益最大的投资者为首席原告，通常是机构投资者，以取代律师挑选的原告；对附有警示性说明的前瞻性陈述设立安全港；损害赔偿以更正信息公布后 90 天的平均价格为基准设上限。2007 年，联邦最高法院在特拉布斯公司诉马科尔案中解释，「强烈推断」要求欺诈故意的推断至少与相反推断同样有说服力。</p>
+<p>原告律师随即把案件转到州法院，依州法起诉。1998 年 11 月 3 日签署的《证券诉讼统一标准法》（SLUSA）规定，代表 50 人以上请求损害赔偿、涉及在全国性交易所上市证券的集团诉讼，不得依州法提起；这类诉讼由此集中到联邦法院、适用 PSLRA 的门槛。2018 年，联邦最高法院在西安公司诉比弗县雇员退休基金案中认定，依 1933 年《证券法》提起的集团诉讼仍可以在州法院审理。</p>
+<p>门槛提高后，集团诉讼并没有消失。按 Cornerstone Research 的统计，2025 年全美新提起证券集团诉讼 207 起，少于 2024 年的 226 起；以公司披露前后市值下跌计算的「披露日损失」达到 6,940 亿美元，为有记录以来最高；与人工智能有关的诉讼 16 起，是当年最多的主题。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">私人证券诉讼的门槛（PSLRA 与 SLUSA）</p><p class="pr-c"><span><em>领域</em>证券法 › 执法 › 私人诉讼</span><span><em>类型</em>联邦成文法</span></p><p class="pr-s">投资者依联邦证券法提起欺诈集团诉讼，须具体陈述足以强烈推断欺诈故意的事实；驳回动议未决前暂停证据开示；由经济利益最大的投资者担任首席原告；涉及上市证券的 50 人以上集团诉讼不得改依州法提起。</p><dl><div><dt>在法律体系中的位置</dt><dd>《私人证券诉讼改革法》，Pub. L. 104-67，1995 年 12 月 22 日国会推翻总统否决后生效，增设《证券交易法》第 21D 条；《证券诉讼统一标准法》，Pub. L. 105-353，1998 年 11 月 3 日签署；特拉布斯公司诉马科尔案（2007）解释「强烈推断」</dd></div><div><dt>回应的问题</dt><dd>股价一跌即起诉、以证据开示费用逼迫和解的诉讼，增加所有上市公司的成本</dd></div><div><dt>适用范围</dt><dd>投资者仍保有规则 10b-5 下的默示诉权与欺诈市场推定</dd></div><div><dt>出台</dt><dd>美国国会，1995、1998</dd></div><div><dt>留下的问题</dt><dd>门槛过高时，真正受骗的投资者可能连证据都看不到就被驳回</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一起证券集团诉讼要过的关</p><p class="figsub">点选每一关，看 1995 年 PSLRA 与 1998 年 SLUSA 在这里加了什么；切换可对比改革之前。</p></div></div>
+    <div class="y7l-sw" id="y7l-sw"></div>
+    <div class="y7l" id="y7l"></div>
+    <div class="y7l-d" id="y7l-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.y7l-sw{display:flex;gap:6px;margin-bottom:10px}
+.y7l-sw button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px}
+.y7l-sw button.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.y7l{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.y7l button{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:8px;padding:10px 6px;text-align:center;line-height:1.3}
+.y7l button.on{border-color:var(--accent);background:var(--accent-soft)}
+.y7l button.nw{font-weight:600}
+.y7l-d{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;min-height:4.6em}
+.y7l-d b{display:block}
+@media (max-width:640px){.y7l{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script>
+(function(){
+  const S=[['在哪里起诉','原告可以依州法在州法院起诉，避开联邦门槛。','SLUSA（1998）：代表 50 人以上、涉及上市证券的集团诉讼不得依州法提起，须在联邦法院依联邦法起诉；依 1933 年《证券法》的诉讼仍可在州法院（西安案，2018）。'],
+    ['谁当首席原告','往往是最先起诉、由律师找来的个人投资者。','法院推定在诉讼中经济利益最大的投资者为首席原告，通常是机构投资者；由它选择律师。'],
+    ['起诉状写多细','一般的起诉要求：说明欺诈的情形。','须具体列出事实，足以「强烈推断」被告有欺诈故意；特拉布斯案（2007）：这一推断至少与相反推断同样有说服力。'],
+    ['证据开示','起诉后即可要求被告交出文件与证词，费用高昂，被告常为此和解。','驳回起诉的动议未决期间，一切证据开示暂停。'],
+    ['前瞻性陈述','对盈利预测等陈述，被告须证明其合理。','附有有意义的警示性说明的前瞻性陈述，适用安全港。'],
+    ['损害赔偿','按买入价与真相公布后价格的差额计算。','以更正信息公布后 90 天的平均价格为基准设上限。']];
+  const sw=document.getElementById('y7l-sw'),g=document.getElementById('y7l'),d=document.getElementById('y7l-d');
+  sw.innerHTML='<button type="button">改革之前</button><button type="button">1995 / 1998 年之后</button>';
+  let a=1,i=2;g.innerHTML=S.map(s=>`<button type="button">${s[0]}</button>`).join('');
+  const draw=()=>{[...sw.children].forEach((b,j)=>b.classList.toggle('on',j===a));[...g.children].forEach((b,j)=>{b.classList.toggle('on',j===i);b.classList.toggle('nw',a===1);});d.innerHTML=`<b>${S[i][0]}</b>${S[i][a+1]}`;};
+  [...sw.children].forEach((b,j)=>b.addEventListener('click',()=>{a=j;draw();}));[...g.children].forEach((b,j)=>b.addEventListener('click',()=>{i=j;draw();}));draw();
+})();
+</script>
+
+<p><strong>今天的对应。</strong>零售投资者参与集团诉讼，通常不需要自己起诉：和解后，管理人按交易记录通知符合条件的投资者申报。券商是这些通知与对账资料的中转者；客户在券商处的交易记录，决定了他能否分得和解款。</p>
+<h2 id="sec-7">七、2025–2026 年的执法转向</h2>
+<p>2025 年 1 月政府更替后，SEC 的执法方向明显调整。2025 年 3 月 10 日，SEC 收回执法部主任自 2009 年起被授予的签发正式调查令的权力，正式调查令带有传票权，此后须由委员会批准。2025 年 9 月 5 日，执法部成立跨境工作组（<a href="s16.html">第 15 章</a>）。2026 年 2 月，执法部修订了 2017 年以来未改的执法手册：收到「韦尔斯通知」的当事人一般有四周时间提交答辩，提交后四周内可以与高层会面；发出通知须经执法部主任批准；恢复允许和解要约与相关豁免申请同时审议；非紧急情况下，向刑事机关移送须先报执法部主任。执法部主任也几经更替：玛格丽特·瑞安 2025 年 9 月 2 日上任，2026 年 3 月 16 日辞职；戴维·伍德科克 2026 年 5 月 4 日起任主任，上任后表示将恢复零售欺诈工作组。</p>
+<p>2026 年 4 月 7 日公布的 2025 财年（截至 2025 年 9 月 30 日）结果显示：执法行动 456 起，2024 财年为 583 起；其中独立案件 303 起，约三分之二指控了个人；判令的金额达 179 亿美元，其中追缴及利息 108 亿美元、民事罚款 72 亿美元，但大部分来自斯坦福国际银行庞氏骗局的判决，剔除这类金额后为追缴及利息 14 亿美元、罚款 13 亿美元；返还受损投资者约 2.62 亿美元；收到举报、投诉与移送 53,753 件，为历年最多。SEC 称今后的重点是欺诈、市场操纵、内幕交易、发行人披露违规与投资顾问违反受托义务，并把前任委员会 2022 财年以来的 95 起「离线通讯」案件、23 亿美元罚款称为资源错配；2025 年 2 月起 SEC 撤回了 7 起加密资产案件。King &amp; Spalding 律师事务所统计，2026 财年上半年 SEC 只提起 60 起独立案件，其中八成指控了个人，没有一起离线通讯案件。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">SEC 执法的数字，2022–2025 财年</p><p class="figsub">切换指标看各财年的数值（财年截至 9 月 30 日）。数据来自 SEC 各年执法结果新闻稿与吹哨人年报；2025 财年金额大部分来自斯坦福国际银行案判决。</p></div></div>
+    <div class="y7n-sw" id="y7n-sw"></div>
+    <div class="y7n" id="y7n"></div>
+    <p class="y7n-m" id="y7n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.y7n-sw{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.y7n-sw button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px}
+.y7n-sw button.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.y7n{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;height:190px;border-bottom:1px solid var(--line)}
+.y7n div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:12.5px}
+.y7n i{display:block;width:60%;background:var(--accent);border-radius:6px 6px 0 0;transition:height .25s}
+.y7n i.na{background:none;border:1px dashed var(--faint)}
+.y7n b{font-size:13px;margin-bottom:4px}
+.y7n-x{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:12px;color:var(--muted);text-align:center;margin-top:4px}
+.y7n-m{font-size:13.5px;line-height:1.6;margin:10px 0 0;min-height:2.8em}
+</style>
+<script>
+(function(){
+  const Y=['2022','2023','2024','2025'];
+  const M=[['执法行动（起）',[760,784,583,456],v=>v,'2025 财年 456 起中，独立案件 303 起，约三分之二指控了个人；一半以上在 2025 年 1 月 20 日之前提起。'],
+    ['判令金额（亿美元）',[64.39,49.49,82,179],v=>v.toFixed(v<100?1:0),'2025 财年 179 亿美元中约 149 亿来自斯坦福国际银行案；剔除后追缴及利息 14 亿、罚款 13 亿美元。'],
+    ['吹哨人奖励（亿美元）',[null,6,2.55,0.6],v=>v===null?'—':v.toFixed(v<1?1:2),'2023 财年约 6 亿美元（含一笔近 2.79 亿）；2025 财年约 6,000 万美元，分给 48 人。2022 财年数字本书未核实，留空。']];
+  const sw=document.getElementById('y7n-sw'),g=document.getElementById('y7n'),m=document.getElementById('y7n-m');
+  sw.innerHTML=M.map(x=>`<button type="button">${x[0]}</button>`).join('');
+  g.insertAdjacentHTML('afterend','<div class="y7n-x">'+Y.map(y=>`<span>${y} 财年</span>`).join('')+'</div>');
+  const draw=k=>{[...sw.children].forEach((b,j)=>b.classList.toggle('on',j===k));const v=M[k][1],mx=Math.max(...v.filter(x=>x!==null));
+    g.innerHTML=v.map(x=>`<div><b>${M[k][2](x)}</b><i class="${x===null?'na':''}" style="height:${x===null?20:Math.max(4,x/mx*150)}px"></i></div>`).join('');m.textContent=M[k][3];};
+  [...sw.children].forEach((b,j)=>b.addEventListener('click',()=>draw(j)));draw(0);
+})();
+</script>
+
+<h2 id="sec-8">八、这一步留下的问题</h2>
+<p>追究的工具都有了边界，但新的问题随之出现：</p>
+<ol><li><strong>AI 出错时谁负责。</strong>推荐、开户与交易监控越来越多由模型完成；模型给出误导性的回答或漏掉可疑交易，责任落在公司、监督人还是开发者，执法与诉讼都要回答这个问题。</li><li><strong>AI 本身成为被夸大的卖点。</strong>公司在披露与营销中夸大 AI 能力，已经成为 SEC 执法与集团诉讼的新主题；这类陈述的真假怎样核实。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">追究的工具之外的两个问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="y7x" id="y7x"></div>
+    <p class="y7x-m" id="y7x-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.y7x{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.y7x button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.y7x button b{display:block;font-size:14px}.y7x button em{font-style:normal;font-size:12px;color:var(--faint)}
+.y7x button.on{border-color:var(--accent)}
+.y7x-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.y7x{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['AI 出错时谁负责','→ 第 17 章','推荐、开户与交易监控由模型完成；误导性回答或漏报可疑交易，责任落在公司、监督人还是开发者。'],
+    ['AI 成为被夸大的卖点','→ 第 17 章、第 14 章','在披露与营销中夸大 AI 能力，已成为执法与集团诉讼的新主题；这类陈述怎样核实。']];
+  const g=document.getElementById('y7x'),m=document.getElementById('y7x-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-9">九、对产品的含义</h2>
+<p>本章的规则对金融产品有三条含义。第一，证据决定结果：SEC 的韦尔斯答辩、FINRA 的处分、集团诉讼的驳回动议，都围绕公司能拿出什么记录；AI 推荐、AI 客服与自动审批要保存输入、输出与依据，不能只留最终结果。第二，客户协议与员工协议不能妨碍向监管者举报：摩根大通证券案中，问题出在零售客户和解协议里的保密条款，产品中的服务条款、和解与补偿流程、AI 客服的标准回复，都要允许客户与员工主动联系 SEC。第三，执法重点会变，规则不会因此失效：2025–2026 年 SEC 案件数下降、罚款结构变化，但时效延长到十年、追缴不以投资者亏损为前提、吹哨人与州监管者仍在；为某一年的执法强度设计合规，等于把风险推给下一任委员会。</p>
+<h2 id="sec-10">参考文献</h2>
+<ul class="refs"><li>Alpine Securities Corp. v. FINRA, 121 F.4th 1314 (D.C. Cir. 2024)；cert. denied, No. 24-904 (June 2, 2025).</li><li>Cornerstone Research. (2026). <i>Securities Class Action Filings—2025 Year in Review</i>.</li><li>Cyan, Inc. v. Beaver County Employees Retirement Fund, 583 U.S. 416 (2018).</li><li>Digital Realty Trust, Inc. v. Somers, 583 U.S. 149 (2018).</li><li>FINRA. <i>Key Statistics</i>（纪律处分统计，2023–2025）；FINRA Rules 8310, 9000 Series.</li><li>Kokesh v. SEC, 581 U.S. 455 (2017).</li><li>Liu v. SEC, 591 U.S. 71 (2020).</li><li>Private Securities Litigation Reform Act of 1995, Pub. L. 104-67；15 U.S.C. § 78u-4.</li><li>Securities Enforcement Remedies and Penny Stock Reform Act of 1990, Pub. L. 101-429.</li><li>Securities Litigation Uniform Standards Act of 1998, Pub. L. 105-353；15 U.S.C. § 78bb(f).</li><li>Securities Exchange Act of 1934, 15 U.S.C. § 78u(d)（第 21(d) 条）, § 78u-6（第 21F 条）, § 78ff（第 32(a) 条）；18 U.S.C. § 1348；28 U.S.C. § 2462.</li><li>SEC v. Jarkesy, 603 U.S. 109 (2024).</li><li>Sripetch v. SEC, No. 25-466 (U.S. June 4, 2026).</li><li>Securities and Exchange Commission. (2020). <i>Whistleblower Program Rules</i>（2020 年 9 月 23 日修订）；(2022). <i>Whistleblower Program Rules</i>（Release No. 34-95620，2022 年 8 月 26 日）.</li><li>Securities and Exchange Commission. (2023, May 5). <i>SEC Issues Largest-Ever Whistleblower Award</i> (Press Release 2023-89).</li><li>Securities and Exchange Commission. (2024, January 16). <i>J.P. Morgan to Pay $18 Million for Violating Whistleblower Protection Rule</i> (Press Release 2024-7).</li><li>Securities and Exchange Commission. (2024, November 22). <i>SEC Announces Enforcement Results for Fiscal Year 2024</i> (Press Release 2024-186).</li><li>Securities and Exchange Commission. (2025). <i>Delegation of Authority to Director of Division of Enforcement</i>（Release No. 34-102552，2025 年 3 月 10 日）.</li><li>Securities and Exchange Commission. (2025). <i>Annual Report to Congress: Whistleblower Program, Fiscal Year 2025</i>.</li><li>Securities and Exchange Commission, Division of Enforcement. (2026, February). <i>Enforcement Manual</i>.</li><li>Securities and Exchange Commission. (2026, April 7). <i>SEC Announces Enforcement Results for Fiscal Year 2025</i> (Press Release 2026-34).</li><li>Securities and Exchange Commission. (2026, April 8). <i>SEC Appoints David Woodcock as Director of the Division of Enforcement</i>.</li><li>Tellabs, Inc. v. Makor Issues &amp; Rights, Ltd., 551 U.S. 308 (2007).</li><li>William M. (Mac) Thornberry National Defense Authorization Act for Fiscal Year 2021, Pub. L. 116-283, § 6501.</li></ul>
+<footer class="nav"><a href="s16.html">← 第 15 章　跨境：外国券商与外国发行人</a><a href="s12.html">第 17 章　重跑：当推荐来自 AI →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

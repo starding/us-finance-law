@@ -5,7 +5,8 @@ import build
 
 TOC = [
     ("d-preface", "导读", "合规全景地图", None),
-    ("d-part", "分解式", "沿着业务的时间轴", "part"),
+    ("d10", "对象", "发行人：上市公司的持续义务", 1),
+    ("d-part", "经纪自营商", "沿着业务的时间轴", "part"),
     ("d01", "阶段 1", "设立：成为一家经纪自营商", 1),
     ("d02", "阶段 2", "获客与沟通", 1),
     ("d03", "阶段 3", "开户", 1),
@@ -15,6 +16,12 @@ TOC = [
     ("d07", "阶段 7", "成交之后：结算、确认与报告", 1),
     ("d08", "阶段 8", "持续监控与监督", 1),
     ("d09", "阶段 9", "退出与事件处置", 1),
+    ("o-adviser", "对象", "投资顾问", 1),
+    ("o-fund", "对象", "基金与 ETP", 1),
+    ("o-venue", "对象", "交易场所", 1),
+    ("o-infra", "对象", "清算、结算与报告", 1),
+    ("o-investor", "对象", "投资者与市场行为", 1),
+    ("o-all", "对象", "执法与救济", 1),
     ("method", "附录", "本书的写法", "app"),
 ]
 
@@ -27,8 +34,9 @@ def main():
     build.VIEW = "d"
     for old in build.OUT.glob("d-*.html"):
         old.unlink()
-    for old in build.OUT.glob("d0*.html"):
-        old.unlink()
+    for pat in ("d0*.html", "d1*.html", "o-*.html"):
+        for old in build.OUT.glob(pat):
+            old.unlink()
     built = [build.build_page(p) for p in pages]
     build.TOC, build.DONE, build.WRITTEN, build.VIEW = keep
     print(f"[{build.LANG}] 分解式已生成：", ", ".join(built))

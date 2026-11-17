@@ -1,0 +1,34 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">SEC 执法的数字，2022–2025 财年</p><p class="figsub">切换指标看各财年的数值（财年截至 9 月 30 日）。数据来自 SEC 各年执法结果新闻稿与吹哨人年报；2025 财年金额大部分来自斯坦福国际银行案判决。</p></div></div>
+    <div class="y7n-sw" id="y7n-sw"></div>
+    <div class="y7n" id="y7n"></div>
+    <p class="y7n-m" id="y7n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.y7n-sw{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.y7n-sw button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px}
+.y7n-sw button.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.y7n{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;height:190px;border-bottom:1px solid var(--line)}
+.y7n div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:12.5px}
+.y7n i{display:block;width:60%;background:var(--accent);border-radius:6px 6px 0 0;transition:height .25s}
+.y7n i.na{background:none;border:1px dashed var(--faint)}
+.y7n b{font-size:13px;margin-bottom:4px}
+.y7n-x{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:12px;color:var(--muted);text-align:center;margin-top:4px}
+.y7n-m{font-size:13.5px;line-height:1.6;margin:10px 0 0;min-height:2.8em}
+</style>
+<script>
+(function(){
+  const Y=['2022','2023','2024','2025'];
+  const M=[['执法行动（起）',[760,784,583,456],v=>v,'2025 财年 456 起中，独立案件 303 起，约三分之二指控了个人；一半以上在 2025 年 1 月 20 日之前提起。'],
+    ['判令金额（亿美元）',[64.39,49.49,82,179],v=>v.toFixed(v<100?1:0),'2025 财年 179 亿美元中约 149 亿来自斯坦福国际银行案；剔除后追缴及利息 14 亿、罚款 13 亿美元。'],
+    ['吹哨人奖励（亿美元）',[null,6,2.55,0.6],v=>v===null?'—':v.toFixed(v<1?1:2),'2023 财年约 6 亿美元（含一笔近 2.79 亿）；2025 财年约 6,000 万美元，分给 48 人。2022 财年数字本书未核实，留空。']];
+  const sw=document.getElementById('y7n-sw'),g=document.getElementById('y7n'),m=document.getElementById('y7n-m');
+  sw.innerHTML=M.map(x=>`<button type="button">${x[0]}</button>`).join('');
+  g.insertAdjacentHTML('afterend','<div class="y7n-x">'+Y.map(y=>`<span>${y} 财年</span>`).join('')+'</div>');
+  const draw=k=>{[...sw.children].forEach((b,j)=>b.classList.toggle('on',j===k));const v=M[k][1],mx=Math.max(...v.filter(x=>x!==null));
+    g.innerHTML=v.map(x=>`<div><b>${M[k][2](x)}</b><i class="${x===null?'na':''}" style="height:${x===null?20:Math.max(4,x/mx*150)}px"></i></div>`).join('');m.textContent=M[k][3];};
+  [...sw.children].forEach((b,j)=>b.addEventListener('click',()=>draw(j)));draw(0);
+})();
+</script>

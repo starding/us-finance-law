@@ -1,0 +1,51 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">追缴还能追多远</p><p class="figsub">上方点选判例与立法看边界如何形成；下方选择违法类型、拖动距今年数，看现行第 21(d)(8) 条下能否追缴（示意，不含时效中止等情形）。</p></div></div>
+    <div class="y7d-tl" id="y7d-tl"></div>
+    <p class="y7d-t" id="y7d-t" aria-live="polite"></p>
+    <div class="y7d-c">
+      <div class="y7d-k" id="y7d-k"></div>
+      <label>最后一次违法距起诉：<b id="y7d-yv"></b><input type="range" id="y7d-y" min="1" max="14" value="7"></label>
+      <div class="y7d-bar"><div id="y7d-f"></div><span class="y7d-m5">5 年</span><span class="y7d-m10">10 年</span></div>
+      <p id="y7d-r"></p>
+    </div>
+  </div>
+</figure>
+<style>
+.y7d-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.y7d-tl button{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px;text-align:left}
+.y7d-tl button b{display:block;font-size:13px}
+.y7d-tl button.on{border-color:var(--accent);background:var(--accent-soft)}
+.y7d-t{font-size:13.5px;line-height:1.6;min-height:3.2em;margin:10px 0 14px}
+.y7d-c{border-top:1px solid var(--line);padding-top:12px;font-size:13.5px}
+.y7d-k{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.y7d-k button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 10px}
+.y7d-k button.on{border-color:var(--accent);background:var(--accent-soft)}
+.y7d-c input{display:block;width:100%;accent-color:var(--accent);margin-top:6px}
+.y7d-bar{position:relative;height:16px;background:var(--quote);border-radius:8px;margin:14px 0 20px}
+#y7d-f{position:absolute;left:0;top:0;bottom:0;border-radius:8px;background:var(--accent)}
+.y7d-bar span{position:absolute;top:18px;font-size:11.5px;color:var(--faint);transform:translateX(-50%)}
+.y7d-m5{left:35.7%}.y7d-m10{left:71.4%}
+.y7d-bar::before,.y7d-bar::after{content:"";position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.y7d-bar::before{left:35.7%}.y7d-bar::after{left:71.4%}
+#y7d-r{margin:0;min-height:2.8em;line-height:1.5}
+@media (max-width:640px){.y7d-tl{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const E=[['2017','科克什案','联邦最高法院一致认定，追缴属于第 2462 条意义上的罚款，适用五年时效；科克什 3,490 万美元追缴中有 2,990 万美元来自时效之外。'],
+    ['2020','刘案','8 比 1：追缴作为衡平救济不得超过净利润（扣除正当费用），并须为受害者判给。'],
+    ['2021','国防授权法第 6501 条','明文授权 SEC 请求追缴；一般五年，须证明欺诈故意的十年；禁令等衡平救济十年。2021 年 1 月 1 日生效，适用于未了结案件。'],
+    ['2026','斯里佩奇案','9 比 0：追缴不以投资者实际金钱损失为前提；第 21(d)(7) 条是否受刘案限制仍未回答。']];
+  const tl=document.getElementById('y7d-tl'),t=document.getElementById('y7d-t');
+  tl.innerHTML=E.map(e=>`<button type="button"><b>${e[0]}</b>${e[1]}</button>`).join('');
+  const bs=[...tl.children];const st=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));t.textContent=E[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>st(i)));st(2);
+  const K=['不须证明欺诈故意（例如记录保存违规）','须证明欺诈故意（例如规则 10b-5）'];
+  const k=document.getElementById('y7d-k'),y=document.getElementById('y7d-y'),yv=document.getElementById('y7d-yv'),f=document.getElementById('y7d-f'),r=document.getElementById('y7d-r');
+  let c=1;k.innerHTML=K.map(x=>`<button type="button">${x}</button>`).join('');
+  const draw=()=>{[...k.children].forEach((b,j)=>b.classList.toggle('on',j===c));const n=+y.value;yv.textContent=n+' 年';f.style.width=(n/14*100)+'%';
+    const lim=c?10:5;r.textContent=n<=lim?`可以请求追缴：在 ${lim} 年时效之内。禁令等衡平救济的时效为 10 年。`:`追缴已过 ${lim} 年时效。${n<=10?'禁令等衡平救济仍在 10 年时效内。':'禁令等衡平救济也已超过 10 年。'}`;};
+  [...k.children].forEach((b,j)=>b.addEventListener('click',()=>{c=j;draw();}));y.addEventListener('input',draw);draw();
+})();
+</script>

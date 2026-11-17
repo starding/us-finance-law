@@ -1,0 +1,43 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">场内价格怎样回到净值</p><p class="figsub">一只 ETF 的净值为每份 100 美元。拖动滑块设定场内价格的偏离，切换持仓的流动性，看授权参与人怎么做。示意。</p></div></div>
+    <div class="x18a-ctl">
+      <label>场内价格相对净值 <b id="x18a-pv">+1.0%</b><input type="range" id="x18a-p" min="-3" max="3" step="0.1" value="1"></label>
+      <div class="x18a-liq" id="x18a-liq"><button type="button" data-v="1">持仓流动性好（如大盘股）</button><button type="button" data-v="0">持仓难以交易（如部分债券）</button></div>
+    </div>
+    <div class="x18a-flow" id="x18a-flow"></div>
+    <p class="x18a-m" id="x18a-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.x18a-ctl{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13.5px;align-items:end}.x18a-ctl input{width:100%;accent-color:var(--accent)}
+.x18a-liq{display:flex;flex-wrap:wrap;gap:6px}
+.x18a-liq button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 11px;border-radius:999px;cursor:pointer}
+.x18a-liq button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.x18a-flow{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;align-items:center;gap:6px;margin-top:16px}
+.x18a-flow div{background:var(--quote);border-radius:9px;padding:10px 12px;font-size:12.5px;color:var(--muted);line-height:1.5;min-height:5.2em}
+.x18a-flow div b{display:block;font-size:14px;color:var(--ink);font-weight:600;margin-bottom:2px}
+.x18a-flow div.on{background:var(--accent-soft)}
+.x18a-flow span{text-align:center;color:var(--faint)}
+.x18a-m{font-size:14px;margin:12px 0 0;min-height:2.6em;line-height:1.6}
+@media (max-width:640px){.x18a-ctl{grid-template-columns:1fr}.x18a-flow{grid-template-columns:1fr}.x18a-flow span{transform:rotate(90deg)}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),p=$('x18a-p'),lq=[...$('x18a-liq').children];let liq=1;
+  function run(){
+    const d=+p.value,pr=(100*(1+d/100)).toFixed(2),cost=liq?0.1:1.5,act=Math.abs(d)>cost;
+    $('x18a-pv').textContent=(d>0?'+':'')+d.toFixed(1)+'%';
+    lq.forEach(b=>b.classList.toggle('on',+b.dataset.v===liq));
+    let a,b,c;
+    if(d>0){a=`<b>溢价 ${d.toFixed(1)}%</b>场内 ${pr} 美元，高于净值 100 美元`;b=act?'<b>买篮子、申购份额</b>授权参与人买入成分证券，交给基金换成新份额，在场内卖出':'<b>不值得套利</b>买入篮子的成本高于溢价';}
+    else if(d<0){a=`<b>折价 ${(-d).toFixed(1)}%</b>场内 ${pr} 美元，低于净值 100 美元`;b=act?'<b>买份额、赎回篮子</b>授权参与人在场内买入份额，交给基金换回成分证券后卖出':'<b>不值得套利</b>卖出篮子的成本高于折价';}
+    else{a='<b>没有偏离</b>场内价格等于净值';b='<b>无需操作</b>';}
+    const left=act?(d>0?cost:-cost):d;
+    c=`<b>${act?'偏离收窄':'偏离保留'}</b>${act?'卖压或买盘把场内价格推回，残余偏离约 '+Math.abs(left).toFixed(1)+'%':'场内价格停在 '+pr+' 美元'}`;
+    $('x18a-flow').innerHTML=`<div class="on">${a}</div><span>→</span><div class="${act?'on':''}">${b}</div><span>→</span><div>${c}</div>`;
+    $('x18a-m').textContent=liq?'持仓流动性好时，套利成本低（示意取 0.1%），很小的偏离就会被套平；规则 6c-11 要求每日公布持仓，授权参与人才能算出篮子值多少。':'持仓难以交易时，买卖篮子的成本高（示意取 1.5%），偏离在这个幅度以内不会被套平；规则 6c-11 因此要求在网站上披露历史溢价、折价与买卖价差。';
+  }
+  p.addEventListener('input',run);lq.forEach(b=>b.addEventListener('click',()=>{liq=+b.dataset.v;run();}));run();
+})();
+</script>

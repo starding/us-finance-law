@@ -1,0 +1,36 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">是不是外国私人发行人</p><p class="figsub">拖动美国居民持股比例，勾选与美国的联系，看规则 3b-4 的判定与随之而来的披露方式。每年在第二财季最后一个营业日判定。</p></div></div>
+    <label class="x6f-sl">美国居民持有的有表决权证券：<b id="x6f-pv"></b><input type="range" id="x6f-p" min="0" max="100" step="1" value="62"></label>
+    <div class="x6f-ck" id="x6f-ck"></div>
+    <div class="x6f-res" id="x6f-res" aria-live="polite"></div>
+    <div class="x6f-tb" id="x6f-tb"></div>
+  </div>
+</figure>
+<style>
+.x6f-sl{display:block;font-size:13.5px;margin-bottom:10px}
+.x6f-sl input{display:block;width:100%;margin-top:6px;accent-color:var(--accent)}
+.x6f-ck{display:grid;gap:4px;font-size:13px;margin-bottom:10px}
+.x6f-ck label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.x6f-res{border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.6;background:var(--accent-soft);margin-bottom:10px}
+.x6f-res b{display:block}
+.x6f-tb{display:grid;grid-template-columns:1fr 1fr 1fr;font-size:12.5px;border-top:1px solid var(--line)}
+.x6f-tb div{padding:6px 8px;border-bottom:1px solid var(--line);line-height:1.4}
+.x6f-tb .h{color:var(--muted);font-weight:600}
+.x6f-tb .on{background:var(--quote);font-weight:600}
+@media (max-width:640px){.x6f-tb{font-size:11.5px}}
+</style>
+<script>
+(function(){
+  const K=['多数高管或董事是美国公民或居民','50% 以上资产在美国','业务主要在美国管理'];
+  const T=[['年报','20-F，财年结束后 4 个月','10-K，60 / 75 / 90 天'],['季报','无，以 6-K 提供本国公开的信息','10-Q'],['重大事件','6-K','8-K，4 个工作日'],['委托书规则','免于适用','适用'],['第 16(a) 条持股报告','董事与高管 2026-03-18 起适用','适用'],['短线交易归入 16(b)','免于适用','适用'],['FD 条例','不适用','适用'],['会计准则','IFRS（IASB 版）免调节','美国会计准则']];
+  const p=document.getElementById('x6f-p'),pv=document.getElementById('x6f-pv'),ck=document.getElementById('x6f-ck'),r=document.getElementById('x6f-res'),tb=document.getElementById('x6f-tb');
+  ck.innerHTML=K.map((k,i)=>`<label><input type="checkbox" data-i="${i}"${i===0?' checked':''}> ${k}</label>`).join('');
+  const draw=()=>{const v=+p.value;pv.textContent=v+'%';const hit=[...ck.querySelectorAll('input')].filter(x=>x.checked).length;
+    const fpi=v<=50||hit===0;
+    r.innerHTML=fpi?`<b>外国私人发行人</b>${v<=50?'美国居民持股不超过 50%，不再看其他联系。':'持股超过 50%，但三项联系都不成立。'}`:`<b>按美国国内发行人对待</b>持股超过 50%，且至少有一项与美国的联系成立；从下一财年第一天起失去外国私人发行人身份。`;
+    ck.style.opacity=v<=50?.45:1;
+    tb.innerHTML='<div class="h">事项</div><div class="h">外国私人发行人</div><div class="h">国内发行人</div>'+T.map(t=>`<div>${t[0]}</div><div class="${fpi?'on':''}">${t[1]}</div><div class="${fpi?'':'on'}">${t[2]}</div>`).join('');};
+  p.addEventListener('input',draw);ck.addEventListener('change',draw);draw();
+})();
+</script>

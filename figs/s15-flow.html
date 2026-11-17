@@ -1,0 +1,54 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一条报价的两条路</p><p class="figsub">交易所把同一份报价同时发往处理器和自己的私有数据源。点选一个环节，看它是谁、依据哪条规则；切换「看速度」，比较两条路的先后。速度为示意。</p></div></div>
+    <div class="q7f-tg"><button type="button" id="q7f-sp">看速度</button></div>
+    <div class="q7f-g" id="q7f-g"></div>
+    <div class="q7f-d" id="q7f-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q7f-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px;margin-bottom:12px}
+.q7f-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.q7f-g{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:10px;align-items:stretch}
+.q7f-col{display:grid;gap:8px;align-content:start}
+.q7f-col>p{margin:0;font-size:12px;color:var(--faint)}
+.q7f-n{font:inherit;font-size:13.5px;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:9px 10px;position:relative}
+.q7f-n em{display:block;font-style:normal;font-size:12px;color:var(--muted)}
+.q7f-n.on{border-color:var(--accent);background:var(--accent-soft)}
+.q7f-n .q7f-t{position:absolute;right:8px;top:8px;font-size:11.5px;color:var(--accent);opacity:0;transition:opacity .3s}
+.q7f-g.sp .q7f-n .q7f-t{opacity:1}
+.q7f-d{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.65;min-height:5.5em}
+.q7f-d b{display:block;font-size:14px;margin-bottom:2px}
+.q7f-d span{color:var(--muted);font-size:12.5px}
+@media (max-width:640px){.q7f-g{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const C=[
+    ['报价从哪里来',[
+      ['ex','17 家交易所','各自的最优买卖报价与成交','',
+       '全国性证券交易所须向 SEC 注册（《证券交易法》第 5、6 条），是自律组织；修改规则与收费要依第 19(b) 条报备。每家交易所都要把报价和成交交给处理器。'],
+      ['ats','33 个 ATS 与场外做市商','多数不显示报价，成交事后报告','',
+       'ATS 条例（1998）：注册为经纪自营商即可运营；显示订单且某只股票成交量在 6 个月中有 4 个月达到 5% 的，须把最优报价纳入公开行情。场外成交通过 FINRA 的交易报告设施进入统一行情。']]],
+    ['两条路',[
+      ['sip','证券信息处理器（SIP）','汇总 → NBBO 与最新成交','慢一步',
+       'CTA/CQ 计划（处理器 SIAC）与 UTP 计划（处理器纳斯达克）。处理器要等各家数据到齐再计算 NBBO，汇总行情天然晚于在机房内自行汇总的私有数据。2027 年 4 月 1 日起三项计划由 CT 计划统一管理。'],
+      ['prop','交易所私有数据源','本所各档挂单、零股报价','快、全',
+       '规则 603(a)：交易所不得让自己的客户比处理器更早拿到核心数据，但不必故意放慢私有数据源。2012 年纽交所因私有数据源早于统一行情发送数据被罚 500 万美元。SEC 估计接入全部交易所的经纪商每年为行情与连接支付约 570 万美元。']]],
+    ['谁在用',[
+      ['app','零售券商 App','一档报价、最新成交','',
+       '规则 603(c)：在客户能下单的地方显示报价，须同时给出 NBBO 与最新成交的统一显示。延迟 15 分钟以上的数据须醒目标注。'],
+      ['hft','做市商与路由系统','机房内自行汇总','',
+       '订阅全部交易所的私有数据源并放置服务器在交易所机房，延迟以微秒计。SEC 2026 年 6 月：从莫瓦的交易所机房到锡考克斯，光速传输约 113 微秒。']]]
+  ];
+  const T={ex:'0',ats:'—',sip:'示意：数百微秒以上',prop:'示意：数十微秒',app:'再加网络与刷新',hft:'最先看到'};
+  const g=document.getElementById('q7f-g'),d=document.getElementById('q7f-d'),sp=document.getElementById('q7f-sp');
+  g.innerHTML=C.map(c=>'<div class="q7f-col"><p>'+c[0]+'</p>'+c[1].map(n=>'<button type="button" class="q7f-n" data-k="'+n[0]+'"><span class="q7f-t">'+T[n[0]]+'</span>'+n[1]+'<em>'+n[2]+'</em></button>').join('')+'</div>').join('');
+  const all={};C.forEach(c=>c[1].forEach(n=>all[n[0]]=n));
+  const bs=[...g.querySelectorAll('.q7f-n')];
+  function set(k){bs.forEach(b=>b.classList.toggle('on',b.dataset.k===k));const n=all[k];d.innerHTML='<b>'+n[1]+'</b><span>'+n[2]+(n[3]?' · '+n[3]:'')+'</span><br>'+n[4];}
+  bs.forEach(b=>b.addEventListener('click',()=>set(b.dataset.k)));
+  sp.addEventListener('click',()=>{const on=!g.classList.contains('sp');g.classList.toggle('sp',on);sp.classList.toggle('on',on);sp.textContent=on?'看速度：开':'看速度';});
+  set('sip');
+})();
+</script>

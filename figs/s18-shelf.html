@@ -1,0 +1,34 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">同一个货架，不同的规则</p><p class="figsub">每行一类产品，每列一项保护。点选一行看依据。资料截至 2026 年 11 月。</p></div></div>
+    <div class="x18s-t" id="x18s-t" role="table"></div>
+    <p class="x18s-m" id="x18s-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.x18s-h,.x18s-r{display:grid;grid-template-columns:130px repeat(4,1fr);gap:8px;padding:8px 6px;font-size:13px;line-height:1.45;border-bottom:1px solid var(--line);align-items:center}
+.x18s-h{color:var(--faint);font-size:12px}
+.x18s-r{cursor:pointer}.x18s-r:hover{background:var(--quote)}.x18s-r.on{background:var(--accent-soft)}
+.x18s-r b{font-weight:600}
+.x18s-c{font-size:12px;border-radius:999px;padding:2px 8px;width:fit-content}
+.x18s-c.y{background:var(--accent);color:var(--bg)}.x18s-c.p{background:var(--accent-soft);color:var(--ink);border:1px solid var(--accent)}.x18s-c.n{color:var(--faint);border:1px solid var(--line)}
+.x18s-m{font-size:14px;margin:12px 0 0;min-height:4.2em;line-height:1.6;background:var(--quote);border-radius:10px;padding:10px 12px}
+@media (max-width:640px){.x18s-h{display:none}.x18s-r{grid-template-columns:1fr 1fr}.x18s-r>span:first-child{grid-column:1/-1}}
+</style>
+<script>
+(function(){
+  const H=['《投资公司法》的结构规则','杠杆或衍生品限额','交易前须专门审批','价格信息'];
+  const R=[['共同基金',['y','有'],['y','18f-4'],['n','无'],['y','每日净值'],'独立董事、300% 资产覆盖率、7 天内赎回与远期定价（规则 22c-1）都适用；使用衍生品的，受规则 18f-4 约束。'],
+    ['普通 ETF',['y','有'],['y','18f-4'],['n','无'],['y','场内实时、每日公布持仓'],'在《投资公司法》之上另适用规则 6c-11（2019）：每日公布持仓，网站披露溢价、折价与买卖价差。'],
+    ['杠杆与反向 ETF',['y','有'],['p','一般不超过两倍'],['n','无，券商自设确认'],['y','场内实时'],'2020 年起可依规则 6c-11 运作，但须符合规则 18f-4；2025 年 12 月 2 日，SEC 投资管理部认为三倍单只股票 ETF 与规则 18f-4 不符。拟议的销售规则（15l-2、211(h)-1）2020 年未被采纳。'],
+    ['现货加密资产 ETP',['n','不适用'],['n','不适用'],['n','无，券商自设确认'],['y','场内实时'],'商品信托，只按《证券法》注册，不是投资公司；上市依交易所规则，2024 年 1 月 10 日首批现货比特币 ETP 获批，2025 年 9 月 17 日起有通用上市标准。'],
+    ['上市期权',['n','不适用'],['p','保证金规则'],['y','规则 2360(b)(16)'],['y','场内实时'],'OCC 统一发行与担保；交付期权披露文件（规则 9b-1、2360(b)(11)）；保证金见第 10 章的规则 4210。'],
+    ['公司债',['n','不适用'],['n','不适用'],['n','无'],['p','成交后 15 分钟内报告（TRACE）'],'场外一对一成交；FINRA 规则 6700 系列要求报告，公开发行公司债的成交即时公布。1 分钟报告 2024 年获批，2025 年 12 月 4 日 FINRA 宣布不再推进。'],
+    ['市政债',['n','不适用'],['n','不适用'],['n','无'],['p','EMMA 公布成交与持续披露'],'发行人依《证券法》第 3(a)(2) 条免于注册；MSRB 约束交易商，规则 15c2-12 通过承销商约束发行人的持续披露。']];
+  const t=document.getElementById('x18s-t'),m=document.getElementById('x18s-m');
+  t.innerHTML='<div class="x18s-h"><span>产品</span>'+H.map(h=>`<span>${h}</span>`).join('')+'</div>'+R.map(r=>`<div class="x18s-r" role="row"><span><b>${r[0]}</b></span>${[1,2,3,4].map(k=>`<span class="x18s-c ${r[k][0]}">${r[k][1]}</span>`).join('')}</div>`).join('');
+  const rs=[...t.querySelectorAll('.x18s-r')];
+  const set=i=>{rs.forEach((e,j)=>e.classList.toggle('on',i===j));m.textContent=R[i][0]+'：'+R[i][5];};
+  rs.forEach((e,i)=>e.addEventListener('click',()=>set(i)));set(3);
+})();
+</script>

@@ -1,0 +1,29 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁来追究：五条路径</p><p class="figsub">点选一条路径，看谁发起、在哪里审、能得到什么、钱去哪里。</p></div></div>
+    <div class="y7p" id="y7p"></div>
+    <div class="y7p-d" id="y7p-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.y7p{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.y7p button{font:inherit;font-size:13px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:10px 8px;text-align:left;line-height:1.35}
+.y7p button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.y7p button.on{border-color:var(--accent);background:var(--accent-soft)}
+.y7p-d{margin-top:12px;display:grid;grid-template-columns:88px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.55;background:var(--quote);border-radius:10px;padding:12px 14px}
+.y7p-d dt{color:var(--muted)}.y7p-d dd{margin:0}
+@media (max-width:640px){.y7p{grid-template-columns:1fr 1fr}.y7p-d{grid-template-columns:72px 1fr}}
+</style>
+<script>
+(function(){
+  const P=[['SEC 民事执法','联邦法院 / 行政程序',{'发起':'SEC 执法部调查，委员会批准起诉；2025 年 3 月起正式调查令须委员会批准','在哪里审':'有争议的欺诈罚款案在联邦法院，由陪审团审理（贾尔克西案，2024）；和解与后续从业禁止可在行政程序','能得到':'禁令、民事罚款、追缴及利息、董事与高管任职禁止、停止令','钱去哪里':'罚款进国库；追缴可设公平基金分给受害者；10%–30% 可奖励吹哨人（从投资者保护基金支付）'}],
+    ['FINRA 纪律处分','听证小组 → NAC → SEC',{'发起':'FINRA 执法部门，基于检查、投诉、交易监控与举报','在哪里审':'听证小组；可上诉至全国裁决委员会，再申请 SEC 复审与联邦上诉法院','能得到':'谴责、罚款、停职、开除会员、终身禁业、返还客户','钱去哪里':'罚款归 FINRA，按规定用途使用；返还款直接给客户'}],
+    ['司法部刑事追诉','联邦刑事法院',{'发起':'检察官，常由 SEC 移送；与 SEC 民事案件平行进行','在哪里审':'联邦地区法院，陪审团，须排除合理怀疑','能得到':'第 32(a) 条：个人最高 500 万美元、20 年；非自然人最高 2,500 万美元。18 U.S.C. § 1348：最高 25 年','钱去哪里':'罚金、没收；法院可判令向受害者赔偿'}],
+    ['投资者集团诉讼','联邦法院',{'发起':'投资者，通常由经济利益最大的机构担任首席原告（PSLRA）','在哪里审':'联邦地区法院；上市证券的 50 人以上集团诉讼不得改依州法（SLUSA）','能得到':'损害赔偿，多以和解结案','钱去哪里':'扣除律师费后按交易记录分给申报的投资者'}],
+    ['FINRA 仲裁','仲裁庭',{'发起':'客户依开户协议中的仲裁条款或主动要求','在哪里审':'FINRA 仲裁；事件发生超过 6 年不能提交；5 万美元以下简易程序（阶段 9）','能得到':'损害赔偿裁决','钱去哪里':'直接付给客户'}]];
+  const g=document.getElementById('y7p'),d=document.getElementById('y7p-d');
+  g.innerHTML=P.map(p=>`<button type="button">${p[0]}<em>${p[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));d.innerHTML=Object.entries(P[i][2]).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

@@ -1,0 +1,35 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一起证券集团诉讼要过的关</p><p class="figsub">点选每一关，看 1995 年 PSLRA 与 1998 年 SLUSA 在这里加了什么；切换可对比改革之前。</p></div></div>
+    <div class="y7l-sw" id="y7l-sw"></div>
+    <div class="y7l" id="y7l"></div>
+    <div class="y7l-d" id="y7l-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.y7l-sw{display:flex;gap:6px;margin-bottom:10px}
+.y7l-sw button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px}
+.y7l-sw button.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.y7l{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.y7l button{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:8px;padding:10px 6px;text-align:center;line-height:1.3}
+.y7l button.on{border-color:var(--accent);background:var(--accent-soft)}
+.y7l button.nw{font-weight:600}
+.y7l-d{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;min-height:4.6em}
+.y7l-d b{display:block}
+@media (max-width:640px){.y7l{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script>
+(function(){
+  const S=[['在哪里起诉','原告可以依州法在州法院起诉，避开联邦门槛。','SLUSA（1998）：代表 50 人以上、涉及上市证券的集团诉讼不得依州法提起，须在联邦法院依联邦法起诉；依 1933 年《证券法》的诉讼仍可在州法院（西安案，2018）。'],
+    ['谁当首席原告','往往是最先起诉、由律师找来的个人投资者。','法院推定在诉讼中经济利益最大的投资者为首席原告，通常是机构投资者；由它选择律师。'],
+    ['起诉状写多细','一般的起诉要求：说明欺诈的情形。','须具体列出事实，足以「强烈推断」被告有欺诈故意；特拉布斯案（2007）：这一推断至少与相反推断同样有说服力。'],
+    ['证据开示','起诉后即可要求被告交出文件与证词，费用高昂，被告常为此和解。','驳回起诉的动议未决期间，一切证据开示暂停。'],
+    ['前瞻性陈述','对盈利预测等陈述，被告须证明其合理。','附有有意义的警示性说明的前瞻性陈述，适用安全港。'],
+    ['损害赔偿','按买入价与真相公布后价格的差额计算。','以更正信息公布后 90 天的平均价格为基准设上限。']];
+  const sw=document.getElementById('y7l-sw'),g=document.getElementById('y7l'),d=document.getElementById('y7l-d');
+  sw.innerHTML='<button type="button">改革之前</button><button type="button">1995 / 1998 年之后</button>';
+  let a=1,i=2;g.innerHTML=S.map(s=>`<button type="button">${s[0]}</button>`).join('');
+  const draw=()=>{[...sw.children].forEach((b,j)=>b.classList.toggle('on',j===a));[...g.children].forEach((b,j)=>{b.classList.toggle('on',j===i);b.classList.toggle('nw',a===1);});d.innerHTML=`<b>${S[i][0]}</b>${S[i][a+1]}`;};
+  [...sw.children].forEach((b,j)=>b.addEventListener('click',()=>{a=j;draw();}));[...g.children].forEach((b,j)=>b.addEventListener('click',()=>{i=j;draw();}));draw();
+})();
+</script>

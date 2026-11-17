@@ -31,7 +31,7 @@
   s.innerHTML=D.map((x,i)=>`<li><button type="button"><b>${i+1}</b><span>${x[0]}</span></button></li>`).join('');
   const bs=[...s.querySelectorAll('button')];
   function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));const x=D[i];
-    d.innerHTML='<p>'+x[1]+'</p>'+x[2].map(r=>'<div class="f8-r"><strong>'+r[0]+(r[4]?'<i>2023–2026 有变化</i>':'')+'</strong><span>'+r[1]+'</span><em>'+r[2]+'</em>'+(r[3]?'<a href="'+r[3]+'.html">详见'+(r[3][0]==='s'?'第 '+(+r[3].slice(1))+' 章':'阶段 '+(+r[3].slice(1)))+' →</a>':'')+'</div>').join('');}
+    d.innerHTML='<p>'+x[1]+'</p>'+x[2].map(r=>'<div class="f8-r"><strong>'+r[0]+(r[4]?'<i>2023–2026 有变化</i>':'')+'</strong><span>'+r[1]+'</span><em>'+r[2]+'</em>'+(r[3]?'<a href="'+r[3]+'.html">详见'+(r[3][0]==='s'?'第 '+({s01:1,s02:2,s13:3,s03:4,s04:5,s05:6,s15:7,s06:8,s07:9,s08:10,s18:11,s09:12,s10:13,s11:14,s16:15,s17:16,s12:17}[r[3]]||'')+' 章':'阶段 '+(+r[3].slice(1)))+' →</a>':'')+'</div>').join('');}
   bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
 })();
 </script>

@@ -1,0 +1,37 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">外国券商能否不注册</p><p class="figsub">选择客户类型与接触方式，看规则 15a-6 的结论。门槛与条件依规则原文；示例为常见情形的简化。</p></div></div>
+    <div class="x6a-row"><span>客户</span><div class="x6a-g" id="x6a-c"></div></div>
+    <div class="x6a-row"><span>接触方式</span><div class="x6a-g" id="x6a-m"></div></div>
+    <div class="x6a-out" id="x6a-out" aria-live="polite"><p class="x6a-v" id="x6a-v"></p><p id="x6a-x"></p></div>
+  </div>
+</figure>
+<style>
+.x6a-row{display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:start;margin-bottom:8px;font-size:13px}
+.x6a-row>span{color:var(--muted);padding-top:6px}
+.x6a-g{display:flex;flex-wrap:wrap;gap:6px}
+.x6a-g button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 10px}
+.x6a-g button.on{border-color:var(--accent);background:var(--accent-soft)}
+.x6a-out{margin-top:10px;border-radius:10px;padding:12px 14px;background:var(--quote);font-size:13.5px;line-height:1.6}
+.x6a-out p{margin:0}.x6a-v{font-weight:600;margin-bottom:4px!important}
+.x6a-out.no{border-left:4px solid var(--ink)}.x6a-out.ok{border-left:4px solid var(--accent)}
+</style>
+<script>
+(function(){
+  const C=['美国散户','美国机构投资者','大型美国机构（超过 1 亿美元）','长期驻外的美国人'];
+  const M=['客户主动找上门','外国券商主动推介','只提供研究报告','经美国注册券商中介'];
+  const f=(c,m)=>{
+    if(m===0) return [1,'可以不注册 · (a)(1)','未经招揽的交易。外国券商不得事先通过广告、邮件或不设防范的网站推销，否则不算未经招揽。'];
+    if(c===3) return m===1?[1,'可以不注册 · (a)(4)','对长期居住在境外的美国公民、在美国境外进行的交易可以豁免，前提是不针对可识别的美国人群体推销。']:[1,'可以不注册 · (a)(4)','在美国境外为其交易，不针对美国人群体推销。'];
+    if(c===0) return m===3?[0,'须注册','(a)(3) 的中介安排只适用于机构投资者；向美国散户招揽，外国券商须在 SEC 注册并加入 FINRA。']:[0,'须注册','向美国散户招揽或提供研究以促成交易，都不在豁免之内。'];
+    if(m===2) return c===2?[1,'可以不注册 · (a)(2)','研究报告不推荐使用该券商的服务，券商不借此跟进招揽；由此产生的交易如有陪同券商，须经它执行。']:[0,'须经美国券商中介','研究报告只能直接提供给大型美国机构投资者；对一般机构，须经 (a)(3) 的中介安排。'];
+    if(m===1) return [0,'须注册或改用中介','直接向美国机构推介、由外国券商自己执行，不在豁免之内；可改为经美国注册券商中介。'];
+    return [1,'可以不注册 · (a)(3)','美国注册券商执行交易、发确认书、安排融资、保存记录、保管资金与证券；外国券商人员来美须由其陪同，并同意在美国接受送达。'];
+  };
+  const cg=document.getElementById('x6a-c'),mg=document.getElementById('x6a-m'),o=document.getElementById('x6a-out'),v=document.getElementById('x6a-v'),x=document.getElementById('x6a-x');
+  let c=0,m=1;
+  cg.innerHTML=C.map(t=>`<button type="button">${t}</button>`).join('');mg.innerHTML=M.map(t=>`<button type="button">${t}</button>`).join('');
+  const draw=()=>{[...cg.children].forEach((b,i)=>b.classList.toggle('on',i===c));[...mg.children].forEach((b,i)=>b.classList.toggle('on',i===m));const r=f(c,m);o.className='x6a-out '+(r[0]?'ok':'no');v.textContent=r[1];x.textContent=r[2];};
+  [...cg.children].forEach((b,i)=>b.addEventListener('click',()=>{c=i;draw();}));[...mg.children].forEach((b,i)=>b.addEventListener('click',()=>{m=i;draw();}));draw();
+})();
+</script>

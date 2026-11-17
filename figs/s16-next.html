@@ -1,0 +1,25 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">跨境规则之外的两个问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="x6n" id="x6n"></div>
+    <p class="x6n-m" id="x6n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.x6n{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.x6n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.x6n button b{display:block;font-size:14px}.x6n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.x6n button.on{border-color:var(--accent)}
+.x6n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.x6n{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['违规之后谁来追究','→ 第 16 章','SEC、FINRA、司法部与投资者各有什么手段；罚款与追缴的钱能否回到投资者手里；被告在境外时怎么办。'],
+    ['AI 跨境回答问题','→ 第 17 章','同一个 AI 助手回答不同地区的用户，是否构成招揽与推荐，各受哪一国规则约束。']];
+  const g=document.getElementById('x6n'),m=document.getElementById('x6n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

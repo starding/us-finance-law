@@ -1,0 +1,43 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">审计检查的六年</p><p class="figsub">从瑞幸到撤销认定。点选一个节点查看发生了什么；下方的计数器演示连续未被检查的年数与禁止交易的触发（示意）。</p></div></div>
+    <div class="x6h-tl" id="x6h-tl"></div>
+    <div class="x6h-d" id="x6h-d" aria-live="polite"></div>
+    <div class="x6h-ct"><span>连续被识别的年数（示意）</span><div id="x6h-y"></div><p id="x6h-m"></p></div>
+  </div>
+</figure>
+<style>
+.x6h-tl{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:4px}
+.x6h-tl button{font:inherit;font-size:12px;cursor:pointer;border:none;border-top:3px solid var(--line);background:none;color:var(--ink);text-align:left;padding:6px 4px 4px}
+.x6h-tl button b{display:block;font-size:12.5px}
+.x6h-tl button.on{border-top-color:var(--accent)}
+.x6h-d{margin:8px 0 14px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;min-height:4.4em}
+.x6h-ct{font-size:13px}
+.x6h-ct>span{color:var(--muted)}
+#x6h-y{display:flex;gap:6px;margin:6px 0}
+#x6h-y button{font:inherit;cursor:pointer;width:46px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+#x6h-y button.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+#x6h-m{margin:0;min-height:2.8em;line-height:1.5}
+</style>
+<script>
+(function(){
+  const E=[['2020-04','瑞幸披露','瑞幸咖啡披露虚增销售。SEC 后来指控其 2019 年 4 月至 2020 年 1 月虚构 3 亿多美元零售销售，2020 年 12 月 16 日和解，罚款 1.8 亿美元。'],
+    ['2020-12-18','HFCAA 签署','PCAOB 无法检查某地事务所时，SEC 识别使用这些事务所的发行人；连续三年被识别即禁止在美国交易。'],
+    ['2021-12','认定与实施','PCAOB 认定无法全面检查中国内地与香港的事务所；SEC 通过实施规则（第 34-93701 号）。'],
+    ['2022','170 多家被识别','SEC 在 2022 年确定性地识别了 170 多家发行人。'],
+    ['2022-08-26','签署协议','PCAOB 与中国证监会、财政部签署协议：PCAOB 自选检查对象、查阅完整底稿、询问人员。'],
+    ['2022-12-15','撤销认定','PCAOB 宣布首次取得完整检查与调查权限，撤销 2021 年的认定；12 月 29 日国会把三年改为两年。'],
+    ['2023-05-10','首批报告','毕马威华振 4 个抽查项目中 4 个、香港罗兵咸永道 4 个中 3 个存在审计证据不足的严重缺陷。'],
+    ['2023-11-30','处罚','PCAOB 对三家中国内地与香港事务所处以合计约 790 万美元罚款。'],
+    ['2026-11','现状','未查到新的无法检查认定；SEC 的临时识别名单为空。PCAOB 每年至少复核一次，受阻即考虑重新认定。']];
+  const tl=document.getElementById('x6h-tl'),d=document.getElementById('x6h-d');
+  tl.innerHTML=E.map(e=>`<button type="button"><b>${e[0]}</b>${e[1]}</button>`).join('');
+  const bs=[...tl.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));d.textContent=E[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(5);
+  const y=document.getElementById('x6h-y'),m=document.getElementById('x6h-m');
+  y.innerHTML=[0,1,2,3].map(n=>`<button type="button">${n}</button>`).join('');
+  const yb=[...y.children];
+  const sy=n=>{yb.forEach((b,j)=>b.classList.toggle('on',j===n));m.textContent=n===0?'未被识别：正常交易。':n===1?'被识别一年：须提交不受当地政府控制的证明并作额外披露。':n===2?'现行法（两年）：SEC 发出初始交易禁令；原法（三年）下还差一年。':'原法（三年）也会触发禁令；初始禁令后，发行人证明已聘用可检查的事务所，禁令可以解除。';};
+  yb.forEach((b,i)=>b.addEventListener('click',()=>sy(i)));sy(2);
+})();
+</script>

@@ -4,6 +4,12 @@ import html, json, pathlib, re
 
 ROOT = pathlib.Path(__file__).parent
 
+
+def chno():
+    """章节 id → 显示的章号，取自 build.py 的目录"""
+    import build
+    return {f: int(re.search(r"\d+", no)[0]) for f, no, t, p in build.TOC if f.startswith("s") and re.search(r"\d+", no)}
+
 def collect():
     rows = []
     for p in sorted((ROOT / "chapters").glob("*.md")):
@@ -23,15 +29,15 @@ def collect():
                 continue
             cards.append(dict(name=name.strip(), text=ls[0], year=min(years), years=sorted(set(years)),
                               by=fields.get("提出", ""), kind=kind, ask=fields.get("约束", "")))
-        rows.append(dict(f=f, no=int(f[1:]), title=title, cards=cards))
-    return rows
+        rows.append(dict(f=f, no=chno().get(f, 0), title=title, cards=cards))
+    return sorted(rows, key=lambda r: r["no"])
 
 def figure(rows):
     data = json.dumps(rows, ensure_ascii=False)
     n = sum(len(r["cards"]) for r in rows)
     return f'''<figure>
   <div class="card">
-    <div class="figbar"><div><p class="figtitle">证券篇的规则地图</p><p class="figsub">每行一个问题，每个点是一张规则卡，横轴为最早出台的年份；空心点为第 12 章重新检验的规则。共 {n} 张卡片。点选一个点查看摘要。</p></div></div>
+    <div class="figbar"><div><p class="figtitle">证券篇的规则地图</p><p class="figsub">每行一个问题，每个点是一张规则卡，横轴为最早出台的年份；空心点为第 17 章重新检验的规则。共 {n} 张卡片。点选一个点查看摘要。</p></div></div>
     <div class="rmp" id="rmp"></div>
     <div class="rmp-d" id="rmp-d" aria-live="polite"></div>
   </div>

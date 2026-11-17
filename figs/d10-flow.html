@@ -1,0 +1,83 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">上市公司的七类持续义务</p><p class="figsub">以财年截至 12 月 31 日的美国国内公司为例。点选一类，看触发条件、期限、依据与截至 2026 年 11 月的状态。</p></div></div>
+    <div class="q10-tl" id="q10-tl"></div>
+    <div class="q10" id="q10">
+      <ol class="q10-s" id="q10-s"></ol>
+      <div class="q10-d" id="q10-d" aria-live="polite"></div>
+    </div>
+  </div>
+</figure>
+<style>
+.q10-tl{position:relative;height:62px;margin:4px 6px 14px;border-bottom:2px solid var(--line)}
+.q10-tl span{position:absolute;bottom:-18px;font-size:11px;color:var(--faint);transform:translateX(-50%)}
+.q10-tl b{position:absolute;bottom:4px;transform:translateX(-50%);font-size:11px;font-weight:600;border-radius:6px;padding:1px 5px;white-space:nowrap;background:var(--quote);color:var(--muted);border:1px solid var(--line)}
+.q10-tl b.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.q10-tl b.hi{bottom:30px}
+.q10-tl i{position:absolute;bottom:4px;font-size:11px;font-style:normal;color:var(--muted);left:0;right:0;text-align:center;top:2px}
+.q10{display:grid;grid-template-columns:minmax(200px,36%) 1fr;gap:16px;align-items:start;margin-top:26px}
+.q10-s{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.q10-s button{font:inherit;font-size:13.5px;width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px}
+.q10-s button b{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--card);color:var(--muted);font-size:12px;font-weight:600}
+.q10-s button em{font-style:normal;font-size:11.5px;color:var(--faint);display:block}
+.q10-s button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10-s button.on b{background:var(--accent);color:var(--card)}
+.q10-d{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:15em}
+.q10-d>p{margin:0 0 10px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.q10-r{border-top:1px solid var(--line);padding:8px 0;display:grid;gap:2px}
+.q10-r strong{font-size:14px}
+.q10-r span{font-size:12.5px;color:var(--muted)}
+.q10-r em{font-style:normal;font-size:13px}
+.q10-r i{font-style:normal;font-size:11.5px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.q10-r a{color:var(--accent);font-size:12.5px}
+@media (max-width:640px){.q10{grid-template-columns:1fr}.q10-tl b{font-size:10px;padding:1px 3px}}
+</style>
+<script>
+(function(){
+  // [名称, 触发, 说明, 时间轴上的标记[[天, 文字, 是否上移]], 规则[[名称, 依据·机构, 现状, 章节id, 章号, 2023–2026 有变化]]]
+  const D=[
+    ['上市与注册','一次','注册证券、签订上市协议，此后持续报告并满足上市标准。',[],
+      [['证券注册与持续报告','第 12(b)、13(a) 条 · SEC','有效','s02','第 2 章',false],
+       ['上市标准：独立董事、审计委员会','交易所规则、规则 10A-3 · 交易所、SEC','有效；纳斯达克董事会多元化披露规则 2024 年 12 月 11 日被第五巡回法院撤销','s13','第 3 章',false],
+       ['薪酬追回政策','规则 10D-1 · SEC、交易所','上市标准 2023 年 10 月 2 日生效','s13','第 3 章',true]]],
+    ['年度报告','每年','10-K：经审计的财务报表、S-K 各项目、网络安全治理；高管认证与内部控制报告。',[[60,'10-K（大型加速）',1],[90,'10-K（其他）',0]],
+      [['年报 10-K','规则 13a-1 · SEC','60/75/90 天；S-K 条例 2026 年 1 月起全面复审','s02','第 2 章',true],
+       ['网络安全治理（S-K 第 106 项）','SEC','财年截至 2023 年 12 月 15 日及以后的年报起适用','s13','第 3 章',true],
+       ['高管认证与内部控制','SOX 第 302、404、906 条 · SEC、PCAOB','有效；404(b) 不适用于非加速申报人','s13','第 3 章',false],
+       ['气候披露','S-K 第 1500 项 · SEC','从未生效；2026 年 5 月 29 日提议撤销，尚未最终通过','s13','第 3 章',true]]],
+    ['季度报告','每季','10-Q 与业绩发布；业绩电话会向公众开放。',[[130,'10-Q',0],[221,'10-Q',1],[313,'10-Q',0]],
+      [['季报 10-Q','规则 13a-13 · SEC','40/45 天；2026 年 5 月 5 日提议可选半年报，尚未通过','s02','第 2 章',true],
+       ['业绩新闻稿','8-K 第 2.02 项 · SEC','公布后 4 个工作日内提供','s13','第 3 章',false],
+       ['公平披露','FD 条例 · SEC','有效','s02','第 2 章',false]]],
+    ['事件触发','随时','重大事件一般 4 个工作日内提交 8-K。',[],
+      [['当期报告 8-K','规则 13a-11 · SEC','4 个工作日；第 7.01、8.01 项除外','s13','第 3 章',false],
+       ['重大网络安全事件','8-K 第 1.05 项 · SEC','认定重大后 4 个工作日；2023 年 12 月 18 日起适用','s13','第 3 章',true],
+       ['财务报表不可依赖与追回','8-K 第 4.02 项、规则 10D-1 · SEC','有效','s13','第 3 章',true]]],
+    ['内部人交易','每笔','董事、高管与持股超过 10% 的股东报告持股与每笔交易。',[],
+      [['Form 3 / 4 / 5','第 16(a) 条 · SEC','10 日 / 2 个营业日 / 财年后 45 日；外国私人发行人董事与高管 2026 年 3 月 18 日起纳入','s13','第 3 章',true],
+       ['短线利润归入','第 16(b) 条 · 法院','有效','s07','第 9 章',false],
+       ['10b5-1 交易计划冷静期','规则 10b5-1 · SEC','2023 年 2 月 27 日起生效','s07','第 9 章',true]]],
+    ['股东大会','每年','发出委托书、组织表决、公布结果。',[[120,'委托书',1]],
+      [['委托书说明','第 14(a) 条、附表 14A · SEC','10-K 第三部分可引用财年后 120 天内提交的委托书','s13','第 3 章',false],
+       ['股东提案','规则 14a-8 · SEC','2026 年 8 月 14 日起工作人员不再回应排除请求；9 月 16 日提议废除，尚未通过','s13','第 3 章',true],
+       ['通用委托书','规则 14a-19 · SEC','2022 年 8 月 31 日以后的股东大会适用','s13','第 3 章',false],
+       ['表决结果','8-K 第 5.07 项 · SEC','结果确定后 4 个工作日内','s13','第 3 章',false]]],
+    ['大股东与收购','随时','超过 5% 的股东现身；要约收购按期限进行。',[],
+      [['附表 13D / 13G','第 13(d)、13(g) 条 · SEC','13D 5 个工作日（2023 年修订）；13G 新期限 2024 年 9 月 30 日起','s13','第 3 章',true],
+       ['要约收购最短期限','规则 14e-1 · SEC','20 个工作日；2026 年 4 月 16 日起部分全现金要约 10 个工作日','s13','第 3 章',true],
+       ['目标公司表明立场','规则 14e-2 · SEC','10 个工作日内','s13','第 3 章',false]]]
+  ];
+  const tl=document.getElementById('q10-tl'),s=document.getElementById('q10-s'),d=document.getElementById('q10-d');
+  const MO=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  let h=MO.map((m,i)=>`<span style="left:${(i+0.5)/12*100}%">${m}</span>`).join('');
+  D.forEach((x,i)=>x[3].forEach(p=>h+=`<b data-g="${i}" class="${p[2]?'hi':''}" style="left:${Math.min(p[0],350)/365*100}%">${p[1]}</b>`));
+  tl.innerHTML=h;
+  s.innerHTML=D.map((x,i)=>`<li><button type="button"><b>${i+1}</b><span>${x[0]}<em>${x[1]}</em></span></button></li>`).join('');
+  const bs=[...s.querySelectorAll('button')];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));
+    tl.querySelectorAll('b').forEach(b=>b.classList.toggle('on',+b.dataset.g===i));
+    const x=D[i];
+    d.innerHTML='<p>'+x[2]+(x[3].length?'':'（不按日历发生，时间轴上没有固定位置。）')+'</p>'+x[4].map(r=>'<div class="q10-r"><strong>'+r[0]+(r[5]?'<i>2023–2026 有变化</i>':'')+'</strong><span>'+r[1]+'</span><em>'+r[2]+'</em><a href="'+r[3]+'.html">详见'+r[4]+' →</a></div>').join('');}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(1);
+})();
+</script>

@@ -6,7 +6,7 @@
   </div>
 </figure>
 <style>
-.n5{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.n5{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .n5 button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
 .n5 button b{display:block;font-size:14px}.n5 button em{font-style:normal;font-size:12px;color:var(--faint)}
 .n5 button.on{border-color:var(--accent)}
@@ -15,9 +15,10 @@
 </style>
 <script>
 (function(){
-  const Q=[['订单送到哪里成交','→ 第 6 章','资产放在经纪商那里，订单也由经纪商决定送往何处；经纪商从做市商那里收钱，是否影响客户得到的价格。'],
-    ['借钱买证券','→ 第 8 章','储备金公式允许经纪商用客户现金为融资客户放贷；客户能借多少、抵押的证券能被拿去做什么，需要另外的规则。'],
-    ['替人管钱的人','→ 第 9 章','现金归集的处罚针对的是投资顾问账户；替客户做决定的人，承担比经纪商更重的义务。']];
+  const Q=[['价格从哪里来','→ 第 7 章','客户在 App 上看到的报价由谁报出、从哪里汇总；经纪商下单前展示什么行情，有统一的要求。'],
+    ['订单送到哪里成交','→ 第 8 章','资产放在经纪商那里，订单也由经纪商决定送往何处；经纪商从做市商那里收钱，是否影响客户得到的价格。'],
+    ['借钱买证券','→ 第 10 章','储备金公式允许经纪商用客户现金为融资客户放贷；客户能借多少、抵押的证券能被拿去做什么，需要另外的规则。'],
+    ['替人管钱的人','→ 第 12 章','现金归集的处罚针对的是投资顾问账户；替客户做决定的人，承担比经纪商更重的义务。']];
   const g=document.getElementById('n5'),m=document.getElementById('n5-m');
   g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
   const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};

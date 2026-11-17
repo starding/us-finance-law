@@ -1,0 +1,27 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">货架上的产品规则之外的四个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="x18n" id="x18n"></div>
+    <p class="x18n-m" id="x18n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.x18n{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.x18n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.x18n button b{display:block;font-size:14px}.x18n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.x18n button.on{border-color:var(--accent)}
+.x18n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.x18n{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['基金的管理人','→ 第 12 章','基金由投资顾问管理；管理人对基金与持有人负有什么义务，替客户挑选基金的人又负有什么义务。'],
+    ['谁能买','→ 第 13 章','权限开通以了解客户为前提：开户时确认客户是谁、经验与财力如何，决定货架上哪些产品对他开放。'],
+    ['怎么介绍产品','→ 第 14 章','基金业绩、ETF 名称、期权宣传与推送，可以说到什么程度，风险要写在哪里。'],
+    ['由 AI 上架与推荐','→ 第 17 章','模型按画像把杠杆 ETF 或期权策略推到客户面前时，推荐与自主交易的边界在哪里。']];
+  const g=document.getElementById('x18n'),m=document.getElementById('x18n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

@@ -1,0 +1,62 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">App 的下单页该显示什么</p><p class="figsub">切换数据、视图与时段，看下单页要满足哪些显示要求。界面与报价为示意；规则与日期与正文一致。</p></div></div>
+    <div class="q7d-c" id="q7d-c"></div>
+    <div class="q7d-g">
+      <div class="q7d-ph" id="q7d-ph"></div>
+      <ul class="q7d-l" id="q7d-l" aria-live="polite"></ul>
+    </div>
+  </div>
+</figure>
+<style>
+.q7d-c{display:grid;gap:6px;margin-bottom:12px}
+.q7d-c div{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+.q7d-c div>span{width:3em}
+.q7d-c button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:5px 11px}
+.q7d-c button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.q7d-g{display:grid;grid-template-columns:240px 1fr;gap:16px;align-items:start}
+.q7d-ph{border:1px solid var(--line);border-radius:22px;padding:14px 12px;background:var(--card);font-size:13px;font-variant-numeric:tabular-nums;min-height:300px}
+.q7d-ph .q7d-bn{font-size:11.5px;border-radius:6px;padding:4px 8px;margin-bottom:8px;background:var(--quote);color:var(--muted)}
+.q7d-ph .q7d-bn.w{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.q7d-ph h4{margin:0 0 2px;font-size:15px}
+.q7d-ph .q7d-px{font-size:22px;font-weight:600;margin:2px 0 8px}
+.q7d-ph table{width:100%;border-collapse:collapse;font-size:12.5px}
+.q7d-ph td{padding:3px 2px;border-top:1px solid var(--line)}
+.q7d-ph td:last-child{text-align:right}
+.q7d-ph .q7d-btn{margin-top:10px;text-align:center;border-radius:8px;padding:7px;background:var(--accent);color:var(--card);font-weight:600}
+.q7d-ph .q7d-src{font-size:11px;color:var(--faint);margin-top:6px}
+.q7d-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.q7d-l li{background:var(--quote);border-radius:9px;padding:9px 11px;font-size:13px;line-height:1.6}
+.q7d-l li b{display:block;font-size:13.5px}
+.q7d-l li i{font-style:normal;font-size:11.5px;border-radius:999px;padding:0 7px;margin-right:6px;border:1px solid var(--line);color:var(--muted)}
+.q7d-l li.ok i{border-color:var(--accent);color:var(--accent)}
+.q7d-l li.no{background:var(--card);border:1px solid var(--accent)}
+.q7d-l li.no i{background:var(--accent);border-color:var(--accent);color:var(--card)}
+@media (max-width:640px){.q7d-g{grid-template-columns:1fr}.q7d-ph{max-width:280px}}
+</style>
+<script>
+(function(){
+  const S={data:['实时','延迟 15 分钟'],view:['一档','深度'],sess:['常规时段','夜盘（2026-12-06 前）','夜盘（统一行情延长后）']};
+  const st={data:0,view:0,sess:0};
+  const c=document.getElementById('q7d-c'),ph=document.getElementById('q7d-ph'),l=document.getElementById('q7d-l');
+  const K={data:'数据',view:'视图',sess:'时段'};
+  c.innerHTML=Object.keys(S).map(k=>`<div><span>${K[k]}</span>${S[k].map((t,i)=>`<button type="button" data-k="${k}" data-i="${i}">${t}</button>`).join('')}</div>`).join('');
+  const bs=[...c.querySelectorAll('button')];
+  function draw(){
+    bs.forEach(b=>b.classList.toggle('on',st[b.dataset.k]==b.dataset.i));
+    const dl=st.data===1,dp=st.view===1,ng=st.sess===1,na=st.sess===2;
+    const ban=dl?'<div class="q7d-bn w">数据延迟 15 分钟</div>':ng?'<div class="q7d-bn w">夜间报价：来自夜间交易场所，非全国汇总</div>':na?'<div class="q7d-bn">夜盘 · 统一行情</div>':'<div class="q7d-bn">实时 · 统一行情</div>';
+    const nb=ng?'<tr><td>夜间场所买</td><td>10.00</td></tr><tr><td>夜间场所卖</td><td>10.04</td></tr>':'<tr><td>NBBO 买</td><td>10.01 × 300 · 丁</td></tr><tr><td>NBBO 卖</td><td>10.02 × 200 · 乙</td></tr>';
+    const depth=dp?'<tr><td colspan="2" style="color:var(--muted)">某交易所深度（单一场所）</td></tr><tr><td>买 10.00 × 800</td><td>卖 10.03 × 600</td></tr><tr><td>买 9.99 × 1,200</td><td>卖 10.04 × 900</td></tr>':'';
+    ph.innerHTML=ban+'<h4>示例股票</h4><div class="q7d-px">10.02</div><table>'+nb+'<tr><td>最新成交</td><td>10.02 × 100'+(na?' .T':'')+'</td></tr>'+depth+'</table><div class="q7d-btn">买入</div><div class="q7d-src">'+(dp?'深度数据来源须标明交易所':'')+'</div>';
+    const R=[];
+    if(ng) R.push(['no','统一显示无从提供','2026 年 12 月 6 日以前，处理器夜间不运行，没有夜间 NBBO。App 显示的是一个或几个夜间场所的报价，应写明来源，并按 FINRA 规则 2265 披露延长时段交易的风险。']);
+    else R.push([dl?'no':'ok','规则 603(c)：统一显示',dl?'下单页只给延迟数据，客户无法看到实时 NBBO 与最新成交。FINRA 2021 年检查报告把「用 15 分钟延迟数据代替实时数据」列为常见问题。':'下单页给出 NBBO 的价格、数量、所在场所，以及最新成交的价格、数量、场所。手机端与改单页同样需要。']);
+    R.push([dl?'no':'ok','延迟数据的标注',dl?'延迟 15 分钟以上的数据可以免费展示，但须在页面顶部或附近醒目标明「数据延迟 15 分钟」之类字样（UTP 数据政策）。':'实时数据按非专业用户收费，UTP 计划为每人每月 1 美元。']);
+    if(dp) R.push(['ok','深度数据','深度通常来自某一家交易所的私有数据源，只反映这一家的挂单；可以显示，但不能代替 NBBO，来源应当标明。']);
+    if(na) R.push(['ok','夜盘统一行情','2026 年 6 月 26 日获批：处理器周日晚 9 点至周五晚 8 点运行。常规时段以外的成交带「.T」标记，不计入当日最高、最低与收盘价。']);
+    l.innerHTML=R.map(r=>`<li class="${r[0]}"><b><i>${r[0]==='ok'?'满足':'注意'}</i>${r[1]}</b>${r[2]}</li>`).join('');
+  }
+  bs.forEach(b=>b.addEventListener('click',()=>{st[b.dataset.k]=+b.dataset.i;draw();}));draw();
+})();
+</script>

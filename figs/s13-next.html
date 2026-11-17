@@ -1,0 +1,26 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">发行人披露体系之外的三个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="k13n" id="k13n"></div>
+    <p class="k13n-m" id="k13n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.k13n{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k13n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.k13n button b{display:block;font-size:14px}.k13n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.k13n button.on{border-color:var(--accent)}
+.k13n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.k13n{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['什么算证券','→ 第 4 章','定期报告、委托书与持股报告都以发行或注册了「证券」为前提；把产品设计成不叫股票、也不叫债券的样子，能否绕开整套义务。'],
+    ['外国发行人','→ 第 15 章','在美国上市的外国公司按 20-F、6-K 报告，长期不必提交季报；其内部人 2026 年 3 月 18 日起才须按第 16(a) 条报告。'],
+    ['违规之后','→ 第 16 章','清单的分量取决于执行：SEC 的调查与处罚、股东诉讼、交易所退市，各自追究到什么程度。']];
+  const g=document.getElementById('k13n'),m=document.getElementById('k13n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

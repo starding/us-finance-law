@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>价格从哪里来</title>
+<meta name="description" content="《美国金融业法律研究》证券篇第 7 章：投资者在 App 上看到的价格，是交易所和其他交易场所报出来的，再由证券信息处理器汇总成全国最优买卖报价（NBBO）。1975 年国会要求建立全国市场体系，SEC 用统一行情计划把各场所的报价汇到一处，用另类交易系统条例把不叫交易所的撮合系统纳入监管，用统一显示规则要求券商在客户下单的地方给出 NBBO。交易所私有数据源比汇总行情更快、更全，数据收费争议持续二十年；2020 年的市场数据基础设施改革只落地了一部分：整手新定义 2025 年 11 月 3 日实施，竞争性汇总商尚未启动">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+
+/* 分解式义务清单：「详见」列不折行 */
+table td:last-child a{white-space:nowrap}
+</style>
+</head>
+<body data-page="s15">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html">分解式</a><a href="preface.html" class="on" aria-current="true">生成式</a></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
+<a class="" href="h-map.html"><span class="n">导读</span>历史时间轴地图</a>
+<a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>
+<a class="" href="s01.html"><span class="n">1</span>卖的人比买的人知道得多</a>
+<a class="" href="s02.html"><span class="n">2</span>证券转手之后，谁来说真话</a>
+<a class="" href="s13.html"><span class="n">3</span>公司要持续告诉市场什么</a>
+<a class="" href="s03.html"><span class="n">4</span>什么算证券</a>
+<a class="" href="s04.html"><span class="n">5</span>中间人有自己的利益</a>
+<a class="" href="s05.html"><span class="n">6</span>客户的钱放在经纪商那里</a>
+<a class=" cur" href="s15.html" aria-current="page"><span class="n">7</span>价格从哪里来</a>
+<a class="" href="s06.html"><span class="n">8</span>订单送到哪里成交</a>
+<a class="" href="s07.html"><span class="n">9</span>价格被人扭曲</a>
+<a class="" href="s08.html"><span class="n">10</span>借钱买证券</a>
+<a class="" href="s18.html"><span class="n">11</span>货架上不只有股票</a>
+<a class="" href="s09.html"><span class="n">12</span>替人管钱的人</a>
+<a class="" href="s10.html"><span class="n">13</span>开户的人是谁</a>
+<a class="" href="s11.html"><span class="n">14</span>能说什么、不能说什么</a>
+<a class="" href="s16.html"><span class="n">15</span>跨境：外国券商与外国发行人</a>
+<a class="" href="s17.html"><span class="n">16</span>违规之后</a>
+<a class="" href="s12.html"><span class="n">17</span>重跑：当推荐来自 AI</a>
+<a class="" href="s-map.html"><span class="n">篇末</span>证券篇的规则地图</a>
+<span class="todo side-part"><span class="pn">银行篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">保险篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">衍生品篇</span>（待写）</span>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>证券篇</span></header>
+
+<div class="chapno">第 7 章</div><h1>价格从哪里来<small>交易所、另类交易系统、行情与 NBBO</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>客户打开 App，看到一只股票「买一 10.01、卖一 10.02」。这个价格不是券商定的，也不是某一家交易所定的：同一只股票在十几家交易所挂牌报价，另有几十个另类交易系统在撮合，每家的报价都不一样。投资者看到的那一对数字，是有人把各家报价收齐、比较之后算出来的全国最优买卖报价。谁有资格报价、谁来汇总、汇总得多快、谁能先看到更全的数据、看数据要付多少钱，这些问题在 1975 年以后逐一变成了法律问题。本章讲价格怎样产生、怎样汇总、怎样显示；第 8 章再讲订单怎样以这个价格为参照被送去成交。</p></blockquote>
+<h2 id="sec-1">一、谁有资格报价：交易所</h2>
+<p>第 6 章讨论客户的钱放在哪里；客户下单之前，先要看到一个价格。在美国，公开报价的主要来源是全国性证券交易所。1934 年《证券交易法》第 5 条规定，未注册的交易所不得经营；第 6 条规定注册的条件：交易所要有能力让会员遵守法律和本所规则，规则要防止欺诈和操纵、保护投资者、不得在客户与会员之间不公平地区别对待，收费要在使用者之间公平分摊，违规的会员要受到处分。</p>
+<p>这些条件让交易所同时扮演两个角色。它是一门生意，靠交易费、上市费和数据费赚钱；它也是自律组织，替 SEC 监管自己的会员。交易所修改规则和收费，要依《证券交易法》第 19(b) 条向 SEC 报备，接受公众评论。</p>
+<p><strong>今天的对应。</strong>截至 2026 年 6 月，交易美国上市股票的交易所有 17 家，另有 3 家已获批准尚未开业。其中大部分属于纽约证券交易所、纳斯达克、Cboe 三大集团；2026 年 4 月，德克萨斯证券交易所加入统一行情计划。FINRA 设有一个只显示报价的设施，目前没有经纪商用它向统一行情报价。</p>
+<h2 id="sec-2">二、价格各说各话：1975 年的全国市场体系</h2>
+<p>二十世纪六十年代末，同一只纽约证券交易所上市的股票，还在几家地区交易所和场外市场交易。各个场所只发布自己的报价和成交，投资者看到的「行情」取决于他看的是哪一家的报价机。经纪商不知道哪里价格最好，也就谈不上把订单送去最好的市场。</p>
+<p>SEC 先从成交数据入手。1972 年 11 月，SEC 通过规则 17a-15，要求各交易所和全国证券交易商协会（NASD）共同提交一份成交报告汇总计划；1974 年 5 月，统一行情协会（CTA）计划生效，各场所的成交从此进入同一条「统一行情带」。</p>
+<p>1975 年 6 月 4 日，国会通过《证券法修正案》，在《证券交易法》中加入第 11A 条。国会认定，市场应当保证交易的高效执行、经纪商之间与交易场所之间的公平竞争、经纪商和投资者能获得报价与成交信息、经纪商能在最好的市场执行客户订单，并要求 SEC「促进建立全国证券市场体系」。第 11A 条同时规定，以收集、汇总和发布报价与成交信息为业的证券信息处理器（SIP）须向 SEC 注册，SEC 可以制定规则，保证这些信息及时、准确、可靠、公平地发布。</p>
+<p>此后，报价也被汇总起来：统一报价（CQ）计划 1978 年 7 月临时生效，1980 年 1 月获永久批准；纳斯达克上市股票的报价与成交由 1990 年 6 月批准的非上市交易特权（UTP）计划汇总。今天，纽约证券交易所的子公司证券业自动化公司（SIAC）为 CTA/CQ 计划处理行情，纳斯达克为 UTP 计划处理行情。每一家交易所、以及负责场外成交报告的金融业监管局（FINRA），都要把报价和成交送给这两个处理器。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">全国市场体系与统一行情</p><p class="pr-c"><span><em>领域</em>证券法 › 市场结构</span><span><em>类型</em>联邦成文法、SEC 规则与全国市场体系计划</span></p><p class="pr-s">各交易场所的报价和成交须交给按全国市场体系计划运作的证券信息处理器，由它汇总、计算全国最优买卖报价并向公众发布；处理器须向 SEC 注册，按公平、合理的条件提供数据。</p><dl><div><dt>在法律体系中的位置</dt><dd>《证券交易法》第 11A 条（1975 年《证券法修正案》加入）；SEC 规则 17a-15（1972，后编为 11Aa3-1，2005 年编入全国市场体系条例规则 601）；CTA 计划 1974 年生效，CQ 计划 1980 年永久批准，UTP 计划 1990 年批准；三项计划将由 2024 年 11 月批准的 CT 计划统一管理，计划 2027 年 4 月 1 日起运作</dd></div><div><dt>回应的问题</dt><dd>同一证券在多个场所交易，各场所只发布自己的价格，投资者和经纪商看不到全市场</dd></div><div><dt>适用范围</dt><dd>各场所把数据如实、及时地交给处理器；处理器的汇总速度足够快</dd></div><div><dt>出台</dt><dd>SEC，1972（规则 17a-15）；美国国会，1975（第 11A 条）</dd></div><div><dt>留下的问题</dt><dd>交易所既向处理器交数据，又把同样的数据更快、更全地卖给自己的客户；不叫交易所的撮合系统是否也要报价</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一条报价的两条路</p><p class="figsub">交易所把同一份报价同时发往处理器和自己的私有数据源。点选一个环节，看它是谁、依据哪条规则；切换「看速度」，比较两条路的先后。速度为示意。</p></div></div>
+    <div class="q7f-tg"><button type="button" id="q7f-sp">看速度</button></div>
+    <div class="q7f-g" id="q7f-g"></div>
+    <div class="q7f-d" id="q7f-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q7f-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px;margin-bottom:12px}
+.q7f-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.q7f-g{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:10px;align-items:stretch}
+.q7f-col{display:grid;gap:8px;align-content:start}
+.q7f-col>p{margin:0;font-size:12px;color:var(--faint)}
+.q7f-n{font:inherit;font-size:13.5px;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:9px 10px;position:relative}
+.q7f-n em{display:block;font-style:normal;font-size:12px;color:var(--muted)}
+.q7f-n.on{border-color:var(--accent);background:var(--accent-soft)}
+.q7f-n .q7f-t{position:absolute;right:8px;top:8px;font-size:11.5px;color:var(--accent);opacity:0;transition:opacity .3s}
+.q7f-g.sp .q7f-n .q7f-t{opacity:1}
+.q7f-d{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.65;min-height:5.5em}
+.q7f-d b{display:block;font-size:14px;margin-bottom:2px}
+.q7f-d span{color:var(--muted);font-size:12.5px}
+@media (max-width:640px){.q7f-g{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const C=[
+    ['报价从哪里来',[
+      ['ex','17 家交易所','各自的最优买卖报价与成交','',
+       '全国性证券交易所须向 SEC 注册（《证券交易法》第 5、6 条），是自律组织；修改规则与收费要依第 19(b) 条报备。每家交易所都要把报价和成交交给处理器。'],
+      ['ats','33 个 ATS 与场外做市商','多数不显示报价，成交事后报告','',
+       'ATS 条例（1998）：注册为经纪自营商即可运营；显示订单且某只股票成交量在 6 个月中有 4 个月达到 5% 的，须把最优报价纳入公开行情。场外成交通过 FINRA 的交易报告设施进入统一行情。']]],
+    ['两条路',[
+      ['sip','证券信息处理器（SIP）','汇总 → NBBO 与最新成交','慢一步',
+       'CTA/CQ 计划（处理器 SIAC）与 UTP 计划（处理器纳斯达克）。处理器要等各家数据到齐再计算 NBBO，汇总行情天然晚于在机房内自行汇总的私有数据。2027 年 4 月 1 日起三项计划由 CT 计划统一管理。'],
+      ['prop','交易所私有数据源','本所各档挂单、零股报价','快、全',
+       '规则 603(a)：交易所不得让自己的客户比处理器更早拿到核心数据，但不必故意放慢私有数据源。2012 年纽交所因私有数据源早于统一行情发送数据被罚 500 万美元。SEC 估计接入全部交易所的经纪商每年为行情与连接支付约 570 万美元。']]],
+    ['谁在用',[
+      ['app','零售券商 App','一档报价、最新成交','',
+       '规则 603(c)：在客户能下单的地方显示报价，须同时给出 NBBO 与最新成交的统一显示。延迟 15 分钟以上的数据须醒目标注。'],
+      ['hft','做市商与路由系统','机房内自行汇总','',
+       '订阅全部交易所的私有数据源并放置服务器在交易所机房，延迟以微秒计。SEC 2026 年 6 月：从莫瓦的交易所机房到锡考克斯，光速传输约 113 微秒。']]]
+  ];
+  const T={ex:'0',ats:'—',sip:'示意：数百微秒以上',prop:'示意：数十微秒',app:'再加网络与刷新',hft:'最先看到'};
+  const g=document.getElementById('q7f-g'),d=document.getElementById('q7f-d'),sp=document.getElementById('q7f-sp');
+  g.innerHTML=C.map(c=>'<div class="q7f-col"><p>'+c[0]+'</p>'+c[1].map(n=>'<button type="button" class="q7f-n" data-k="'+n[0]+'"><span class="q7f-t">'+T[n[0]]+'</span>'+n[1]+'<em>'+n[2]+'</em></button>').join('')+'</div>').join('');
+  const all={};C.forEach(c=>c[1].forEach(n=>all[n[0]]=n));
+  const bs=[...g.querySelectorAll('.q7f-n')];
+  function set(k){bs.forEach(b=>b.classList.toggle('on',b.dataset.k===k));const n=all[k];d.innerHTML='<b>'+n[1]+'</b><span>'+n[2]+(n[3]?' · '+n[3]:'')+'</span><br>'+n[4];}
+  bs.forEach(b=>b.addEventListener('click',()=>set(b.dataset.k)));
+  sp.addEventListener('click',()=>{const on=!g.classList.contains('sp');g.classList.toggle('sp',on);sp.classList.toggle('on',on);sp.textContent=on?'看速度：开':'看速度';});
+  set('sip');
+})();
+</script>
+
+<h2 id="sec-3">三、不叫交易所的交易场所</h2>
+<p>电子撮合系统在二十世纪八九十年代大量出现。它们和交易所一样把买卖双方的订单撮合在一起，却以经纪商身份运营，不承担交易所的自律职责，报价也不一定进入统一行情。投资者看到的统一报价因此不完整：有的系统里挂着比交易所更好的价格，只有它的用户能看到。</p>
+<p>SEC 在 1998 年 12 月 8 日通过另类交易系统条例（Regulation ATS），给这类系统两个选择：注册为交易所，或者注册为经纪自营商、遵守 ATS 条例而不必成为交易所。选择后者的系统要在开业前至少 20 天提交 ATS 表格。规模大到一定程度，义务随之增加：某只全国市场体系股票在最近 6 个月中有 4 个月的日均成交量达到全市场的 5%，且系统向员工以外的人显示订单，就要把最优报价交给交易所或 FINRA，纳入公开行情；同样达到 5% 的，还要制定书面的公平准入标准，不得无理拒绝用户。</p>
+<p>不向用户显示订单的「暗池」不适用这条要求，它们的挂单不进入公开行情，只有成交在事后报告。2018 年 7 月 18 日，SEC 通过 ATS-N 表格，要求交易全国市场体系股票的 ATS 公开披露系统怎样运作、谁可以使用、经营者与关联方是否在系统里交易；表格放在 SEC 的 EDGAR 系统上，任何人都能读到。2022 年 1 月，SEC 曾提议把「交易所」的定义扩大到撮合非确定报价的「通讯协议系统」，这项提案在 2025 年 6 月 12 日与其他十三项未完成的提案一起被撤回。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">另类交易系统条例</p><p class="pr-c"><span><em>领域</em>证券法 › 市场结构</span><span><em>类型</em>SEC 规则</span></p><p class="pr-s">撮合买卖订单而不愿承担交易所职责的系统，可以注册为经纪自营商并遵守 ATS 条例；规模达到门槛后，须把最优报价纳入公开行情，并公平对待准入申请。</p><dl><div><dt>在法律体系中的位置</dt><dd>Regulation ATS（17 CFR 242.300 及以下），SEC 1998 年 12 月 8 日通过（Release No. 34-40760）；规则 301(b)(3) 与 301(b)(5) 规定 5% 的报价显示与公平准入门槛；2018 年 7 月 18 日增设 ATS-N 表格（Release No. 34-83663）；2022 年扩大「交易所」定义的提案于 2025 年 6 月 12 日撤回</dd></div><div><dt>回应的问题</dt><dd>电子撮合系统在交易所之外形成价格，统一行情看不到这些价格</dd></div><div><dt>适用范围</dt><dd>大多数系统规模小，按经纪商监管即可；达到门槛的系统对价格形成有足够影响</dd></div><div><dt>出台</dt><dd>SEC，1998；2018 年修订</dd></div><div><dt>留下的问题</dt><dd>不显示订单的场所越来越多，公开报价只反映一部分交易意愿；显示出来的报价又由谁来汇总成一个价格</dd></div></dl></aside>
+<p><strong>今天的对应。</strong>截至 2026 年 1 月，交易全国市场体系股票的 ATS 有 33 个。券商在规则 606 报告中披露把订单送到了哪些 ATS；客户如果想知道某个暗池怎样对待零售订单，可以在 EDGAR 上读它的 ATS-N 表格。</p>
+<h2 id="sec-4">四、全国最优买卖报价怎样算出来</h2>
+<p>有了统一行情，还要定义什么是「全国最好的价格」。全国市场体系条例规则 600(b) 给出定义：全国最优买价与卖价（NBBO）是由处理器（2020 年改革完成后为竞争性汇总商）持续计算并发布的某只证券的最高买价与最低卖价；两家以上的场所报出相同价格时，先按数量排序，数量相同再按时间排序。</p>
+<p>算 NBBO 的材料是各交易所的最优报价。规则 603(b) 要求报价数量以股数表示，并向下取整到整手的整数倍。这意味着不足一个整手的报价，即使价格更好，也不会成为 NBBO。过去整手一律是 100 股，一只 500 美元的股票，挂 99 股就是 49,500 美元的买单，却被排除在全国最优报价之外。2020 年 12 月 9 日，SEC 改为按股价分档定义整手：股价不超过 250 美元的为 100 股，250.01 至 1,000 美元为 40 股，1,000.01 至 10,000 美元为 10 股，超过 10,000 美元为 1 股；股价每半年重新计算一次。这一定义 2025 年 11 月 3 日实施。2026 年 4 月 27 日起，处理器还开始发布比 NBBO 更好的最优零股买卖报价，让只看统一行情的人也知道 NBBO 之内还有零股挂单。</p>
+<p>NBBO 是后面许多规则的参照。第 8 章的订单保护规则禁止以劣于其他场所受保护报价的价格成交，最佳执行与价格改善都以 NBBO 为基准，规则 605 的执行质量统计也以下单时的 NBBO 计算。</p>
+<p><strong>今天的对应。</strong>App 上的「买一、卖一」通常就是 NBBO。点开高价股的盘口，2025 年 11 月以后显示的整手数量可能是 40 股或 10 股，而不再是 100 股的倍数。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">NBBO 怎样算出来</p><p class="figsub">五家交易所对同一只股票的报价。切换股价，看整手大小怎样决定哪些报价能进入 NBBO，以及 NBBO 之外的最优零股报价。报价为示意；整手分档按规则 600(b)，2025 年 11 月 3 日实施。</p></div></div>
+    <div class="q7n-tg" id="q7n-tg"></div>
+    <div class="q7n-w"><table class="q7n-t"><thead><tr><th>交易所</th><th>买价 × 股数</th><th>卖价 × 股数</th></tr></thead><tbody id="q7n-b"></tbody></table></div>
+    <div class="q7n-r" id="q7n-r" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q7n-tg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.q7n-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.q7n-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.q7n-w{overflow-x:auto}
+.q7n-t{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.q7n-t th{text-align:left;font-weight:500;color:var(--muted);font-size:12.5px;border-bottom:1px solid var(--line);padding:6px 8px}
+.q7n-t td{padding:6px 8px;border-bottom:1px solid var(--line)}
+.q7n-t td.q7n-x{color:var(--faint);text-decoration:line-through}
+.q7n-t td.q7n-best{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.q7n-t td.q7n-odd{outline:1px dashed var(--accent);outline-offset:-3px}
+.q7n-r{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.65}
+.q7n-r b{font-size:15px}
+</style>
+<script>
+(function(){
+  const P=[[180,100],[480,40],[1500,10]];
+  const V=[['甲',-.02,300,.03,200],['乙',-.01,60,.02,100],['丙',-.01,25,.01,30],['丁',-.02,500,.02,45],['戊',-.03,1000,.04,400]];
+  const tg=document.getElementById('q7n-tg'),tb=document.getElementById('q7n-b'),r=document.getElementById('q7n-r');
+  tg.innerHTML=P.map(p=>`<button type="button">股价约 ${p[0].toLocaleString()} 美元 · 整手 ${p[1]} 股</button>`).join('');
+  const bs=[...tg.children];const f=x=>x.toFixed(2);
+  function best(side,p,lot){ // side 0 bid 1 ask
+    let c=V.map((v,i)=>({i,px:p+(side?v[3]:v[1]),sz:side?v[4]:v[2]})).map(o=>({...o,rs:Math.floor(o.sz/lot)*lot}));
+    const ok=c.filter(o=>o.rs>0);
+    ok.sort((a,b)=>side?(a.px-b.px)||(b.rs-a.rs):(b.px-a.px)||(b.rs-a.rs));
+    const top=ok[0];
+    const odd=c.filter(o=>o.rs===0&&(side?o.px<top.px:o.px>top.px)).sort((a,b)=>side?a.px-b.px:b.px-a.px)[0];
+    return {c,top,odd};
+  }
+  function set(k){
+    bs.forEach((b,j)=>b.classList.toggle('on',j===k));const [p,lot]=P[k];
+    const B=best(0,p,lot),A=best(1,p,lot);
+    tb.innerHTML=V.map((v,i)=>{
+      const cell=(S,side)=>{const o=S.c[i];let cl=o.rs===0?'q7n-x':'';if(S.top.i===i)cl='q7n-best';if(S.odd&&S.odd.i===i)cl+=' q7n-odd';
+        return `<td class="${cl}">${f(o.px)} × ${o.sz}${o.rs&&o.rs!==o.sz?` <span style="color:var(--faint)">→ ${o.rs}</span>`:''}</td>`;};
+      return `<tr><td>交易所${v[0]}</td>${cell(B,0)}${cell(A,1)}</tr>`;}).join('');
+    const tie=s=>{const t=s.c.filter(o=>o.rs>0&&o.px===s.top.px);return t.length>1?`（${t.length} 家同价，按数量排序，交易所${V[s.top.i][0]}在先）`:'';};
+    const odd=[B.odd?`买 ${f(B.odd.px)} × ${B.odd.sz}（交易所${V[B.odd.i][0]}）`:'',A.odd?`卖 ${f(A.odd.px)} × ${A.odd.sz}（交易所${V[A.odd.i][0]}）`:''].filter(Boolean);
+    r.innerHTML=`NBBO：<b>${f(B.top.px)} × ${B.top.rs}　/　${f(A.top.px)} × ${A.top.rs}</b><br>`+
+      (()=>{const t=[tie(B)&&'买方'+tie(B),tie(A)&&'卖方'+tie(A)].filter(Boolean).join('；');return t?t+'。':'';})()+`划线的报价不足 ${lot} 股，向下取整为 0，不能进入 NBBO。<br>`+
+      (odd.length?`比 NBBO 更好的零股报价（虚线框）：${odd.join('；')}。2026 年 4 月 27 日起处理器发布这一「最优零股报价」。`:'没有比 NBBO 更好的零股报价。');
+  }
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-5">五、券商必须给客户看什么</h2>
+<p>处理器算出了 NBBO，券商在 App 上显示什么，仍有选择余地：它可以只显示某一家交易所的报价，也可以显示汇总后的报价；可以给实时数据，也可以给延迟数据。客户在下单页面看到的如果只是一家交易所的价格，他会以为这就是市场价格。</p>
+<p>全国市场体系条例规则 603(c) 回答了这个问题，业内称为统一显示规则：处理器、经纪商或自营商在可以据此作出交易或路由决定的地方显示某只股票的报价或成交，就必须以同等方式提供「统一显示」，即 NBBO 的价格、数量和所在场所，以及最近一笔成交的价格、数量和场所。这条规则由原来的规则 11Ac1-2（「行情商显示规则」）在 2005 年改编而来，范围收窄为只要求 NBBO 与最新成交。</p>
+<p>SEC 工作人员对「可以作出交易决定的地方」作宽泛理解。2015 年，BATS 交易所请求允许券商的销售人员以它的 BATS One 数据产品（只汇总 BATS 旗下几家交易所的报价）作为给客户报价的依据，SEC 工作人员在 7 月 22 日拒绝了这一请求；FINRA 随后在第 15-52 号通知中提醒会员，只依赖不完整的行情向客户报价，不符合规则 603(c)。FINRA 在 2021 年的检查报告中列出了常见问题：下单和改单页面没有统一显示；网页端有、手机端没有；用 15 分钟延迟的数据代替实时 NBBO 与最新成交。</p>
+<p>延迟行情本身是合法的，规则来自统一行情计划的数据政策。以 UTP 计划为例，晚于 15 分钟发布的数据算作延迟数据，券商免费展示；展示延迟数据的页面，必须在页面顶部或附近醒目地标明「数据延迟 15 分钟」之类的字样。实时数据要付费：UTP 计划对非专业用户每人每月收 1 美元，对专业用户收 24 美元，CTA 计划另行收费。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">行情的分发与统一显示</p><p class="pr-c"><span><em>领域</em>证券法 › 市场结构</span><span><em>类型</em>SEC 规则</span></p><p class="pr-s">交易场所和处理器须按公平、合理、不存在不合理歧视的条件分发行情；经纪商在客户可以作出交易决定的地方显示报价或成交时，须同时提供 NBBO 与最新成交的统一显示。</p><dl><div><dt>在法律体系中的位置</dt><dd>全国市场体系条例规则 603(a) 与 603(c)（17 CFR 242.603），2005 年由规则 11Ac1-2 改编；「统一显示」的内容由规则 600(b) 定义；2015 年 SEC 工作人员拒绝以单一集团数据产品替代统一显示的不采取行动请求；FINRA 第 15-52 号通知（2015 年 12 月 9 日）</dd></div><div><dt>回应的问题</dt><dd>经纪商可以只给客户看部分市场的价格，客户会把局部价格当成全市场价格</dd></div><div><dt>适用范围</dt><dd>存在一个可信、及时的 NBBO；客户在下单时能看到它</dd></div><div><dt>出台</dt><dd>SEC，2005（以规则 11Ac1-2 为前身）</dd></div><div><dt>留下的问题</dt><dd>统一显示要求的是 NBBO，可交易所私有数据源比 NBBO 更快、更全；看得到更多数据的人，是否就占了先</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">App 的下单页该显示什么</p><p class="figsub">切换数据、视图与时段，看下单页要满足哪些显示要求。界面与报价为示意；规则与日期与正文一致。</p></div></div>
+    <div class="q7d-c" id="q7d-c"></div>
+    <div class="q7d-g">
+      <div class="q7d-ph" id="q7d-ph"></div>
+      <ul class="q7d-l" id="q7d-l" aria-live="polite"></ul>
+    </div>
+  </div>
+</figure>
+<style>
+.q7d-c{display:grid;gap:6px;margin-bottom:12px}
+.q7d-c div{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+.q7d-c div>span{width:3em}
+.q7d-c button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:5px 11px}
+.q7d-c button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.q7d-g{display:grid;grid-template-columns:240px 1fr;gap:16px;align-items:start}
+.q7d-ph{border:1px solid var(--line);border-radius:22px;padding:14px 12px;background:var(--card);font-size:13px;font-variant-numeric:tabular-nums;min-height:300px}
+.q7d-ph .q7d-bn{font-size:11.5px;border-radius:6px;padding:4px 8px;margin-bottom:8px;background:var(--quote);color:var(--muted)}
+.q7d-ph .q7d-bn.w{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.q7d-ph h4{margin:0 0 2px;font-size:15px}
+.q7d-ph .q7d-px{font-size:22px;font-weight:600;margin:2px 0 8px}
+.q7d-ph table{width:100%;border-collapse:collapse;font-size:12.5px}
+.q7d-ph td{padding:3px 2px;border-top:1px solid var(--line)}
+.q7d-ph td:last-child{text-align:right}
+.q7d-ph .q7d-btn{margin-top:10px;text-align:center;border-radius:8px;padding:7px;background:var(--accent);color:var(--card);font-weight:600}
+.q7d-ph .q7d-src{font-size:11px;color:var(--faint);margin-top:6px}
+.q7d-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.q7d-l li{background:var(--quote);border-radius:9px;padding:9px 11px;font-size:13px;line-height:1.6}
+.q7d-l li b{display:block;font-size:13.5px}
+.q7d-l li i{font-style:normal;font-size:11.5px;border-radius:999px;padding:0 7px;margin-right:6px;border:1px solid var(--line);color:var(--muted)}
+.q7d-l li.ok i{border-color:var(--accent);color:var(--accent)}
+.q7d-l li.no{background:var(--card);border:1px solid var(--accent)}
+.q7d-l li.no i{background:var(--accent);border-color:var(--accent);color:var(--card)}
+@media (max-width:640px){.q7d-g{grid-template-columns:1fr}.q7d-ph{max-width:280px}}
+</style>
+<script>
+(function(){
+  const S={data:['实时','延迟 15 分钟'],view:['一档','深度'],sess:['常规时段','夜盘（2026-12-06 前）','夜盘（统一行情延长后）']};
+  const st={data:0,view:0,sess:0};
+  const c=document.getElementById('q7d-c'),ph=document.getElementById('q7d-ph'),l=document.getElementById('q7d-l');
+  const K={data:'数据',view:'视图',sess:'时段'};
+  c.innerHTML=Object.keys(S).map(k=>`<div><span>${K[k]}</span>${S[k].map((t,i)=>`<button type="button" data-k="${k}" data-i="${i}">${t}</button>`).join('')}</div>`).join('');
+  const bs=[...c.querySelectorAll('button')];
+  function draw(){
+    bs.forEach(b=>b.classList.toggle('on',st[b.dataset.k]==b.dataset.i));
+    const dl=st.data===1,dp=st.view===1,ng=st.sess===1,na=st.sess===2;
+    const ban=dl?'<div class="q7d-bn w">数据延迟 15 分钟</div>':ng?'<div class="q7d-bn w">夜间报价：来自夜间交易场所，非全国汇总</div>':na?'<div class="q7d-bn">夜盘 · 统一行情</div>':'<div class="q7d-bn">实时 · 统一行情</div>';
+    const nb=ng?'<tr><td>夜间场所买</td><td>10.00</td></tr><tr><td>夜间场所卖</td><td>10.04</td></tr>':'<tr><td>NBBO 买</td><td>10.01 × 300 · 丁</td></tr><tr><td>NBBO 卖</td><td>10.02 × 200 · 乙</td></tr>';
+    const depth=dp?'<tr><td colspan="2" style="color:var(--muted)">某交易所深度（单一场所）</td></tr><tr><td>买 10.00 × 800</td><td>卖 10.03 × 600</td></tr><tr><td>买 9.99 × 1,200</td><td>卖 10.04 × 900</td></tr>':'';
+    ph.innerHTML=ban+'<h4>示例股票</h4><div class="q7d-px">10.02</div><table>'+nb+'<tr><td>最新成交</td><td>10.02 × 100'+(na?' .T':'')+'</td></tr>'+depth+'</table><div class="q7d-btn">买入</div><div class="q7d-src">'+(dp?'深度数据来源须标明交易所':'')+'</div>';
+    const R=[];
+    if(ng) R.push(['no','统一显示无从提供','2026 年 12 月 6 日以前，处理器夜间不运行，没有夜间 NBBO。App 显示的是一个或几个夜间场所的报价，应写明来源，并按 FINRA 规则 2265 披露延长时段交易的风险。']);
+    else R.push([dl?'no':'ok','规则 603(c)：统一显示',dl?'下单页只给延迟数据，客户无法看到实时 NBBO 与最新成交。FINRA 2021 年检查报告把「用 15 分钟延迟数据代替实时数据」列为常见问题。':'下单页给出 NBBO 的价格、数量、所在场所，以及最新成交的价格、数量、场所。手机端与改单页同样需要。']);
+    R.push([dl?'no':'ok','延迟数据的标注',dl?'延迟 15 分钟以上的数据可以免费展示，但须在页面顶部或附近醒目标明「数据延迟 15 分钟」之类字样（UTP 数据政策）。':'实时数据按非专业用户收费，UTP 计划为每人每月 1 美元。']);
+    if(dp) R.push(['ok','深度数据','深度通常来自某一家交易所的私有数据源，只反映这一家的挂单；可以显示，但不能代替 NBBO，来源应当标明。']);
+    if(na) R.push(['ok','夜盘统一行情','2026 年 6 月 26 日获批：处理器周日晚 9 点至周五晚 8 点运行。常规时段以外的成交带「.T」标记，不计入当日最高、最低与收盘价。']);
+    l.innerHTML=R.map(r=>`<li class="${r[0]}"><b><i>${r[0]==='ok'?'满足':'注意'}</i>${r[1]}</b>${r[2]}</li>`).join('');
+  }
+  bs.forEach(b=>b.addEventListener('click',()=>{st[b.dataset.k]=+b.dataset.i;draw();}));draw();
+})();
+</script>
+
+<h2 id="sec-6">六、两种速度：私有数据源与汇总行情</h2>
+<p>交易所把同一份报价同时发往两处：一份送给处理器，由它与其他十几家交易所的报价汇总后发布；一份通过交易所自己的数据产品，直接卖给订阅的客户。后者不需要等待汇总，订阅者又往往把服务器放在交易所的机房里，因此更快；它还包含 NBBO 之外的各档挂单（深度数据）和 NBBO 之内的零股报价，内容更全。</p>
+<p>规则 603(a) 要求分发不存在不合理歧视。SEC 在 2005 年的采纳文件中解释：交易所不得让自己的客户比处理器更早拿到核心数据，但也不必为了与处理器同步而故意放慢私有数据源。2012 年 9 月 14 日，SEC 第一次对交易所处以罚款：纽约证券交易所自 2008 年起，通过两个私有数据源向客户发送数据早于发给统一行情，差距从几毫秒到几秒不等，违反规则 603(a)；纽交所同意支付 500 万美元。</p>
+<p>即使交易所同时发出，速度差距仍然存在。SEC 在 2026 年 6 月的提案中写道，延迟已经以个位数微秒计；一条报价从新泽西州莫瓦的交易所机房传到锡考克斯的经纪商，以光速传输也要约 113 微秒。处理器要等各家交易所的数据到齐再计算，汇总行情天然落后于在机房里自行汇总私有数据源的交易商。SEC 估计，一家接入所有交易所的经纪商每年为行情和连接支付约 570 万美元，其中购买全部交易所深度数据约 160 万美元。</p>
+<p><strong>今天的对应。</strong>零售券商在 App 上给客户看的一档报价多来自汇总行情；路由系统和做市商则用私有数据源。App 上的「深度行情」「二档」通常是某一家交易所的私有数据产品，例如纳斯达克的 TotalView，它只反映这一家交易所的挂单，往往单独收费。</p>
+<h2 id="sec-7">七、谁来定数据的价格，谁来管汇总</h2>
+<p>私有数据源的收费由交易所自己定。2006 年，NYSE Arca 提议对其深度数据产品 ArcaBook 收费，SEC 批准后，代表数据用户的团体 NetCoalition 起诉；2010 年 8 月，哥伦比亚特区巡回上诉法院认为 SEC 没有用证据说明竞争足以约束这一收费，撤销了 SEC 的批准。同年的《多德－弗兰克法》改为收费规则报备即生效，2013 年法院据此认定自己对未被暂停的收费报备没有管辖权。证券业与金融市场协会（SIFMA）转而依据第 19(d) 条向 SEC 申诉，SEC 在 2018 年 10 月 16 日认定纳斯达克与 NYSE Arca 未能证明两项 2010 年的深度数据收费合理，予以撤销；2020 年 6 月 5 日法院又撤销了 SEC 的裁决，认为第 19(d) 条不能用来挑战普遍适用的收费规则。十几年的诉讼没有改变数据由交易所定价的格局。</p>
+<p>SEC 于是转向改造汇总行情本身。2020 年 5 月，SEC 命令交易所和 FINRA 合并三项行情计划、设立独立管理人，并让非交易所代表参与表决；2021 年 8 月批准的 CT 计划在 2022 年 7 月 5 日被法院整体撤销，理由是 SEC 无权要求非自律组织代表拥有表决权。SEC 在 2023 年 9 月 1 日修改了命令，新的 CT 计划于 2024 年 11 月获批，2025 年 12 月选定独立管理人 DataCT，新的收费表 2026 年 6 月获批，计划 2027 年 4 月 1 日起取代三项旧计划的管理职能，处理器仍由 SIAC 和纳斯达克担任。</p>
+<p>同一时期，2020 年 12 月 9 日通过的市场数据基础设施规则要扩充汇总行情的内容（零股报价、部分深度数据、集合竞价信息），并以多家相互竞争的「竞争性汇总商」取代独家处理器。2022 年 5 月 24 日，法院驳回了交易所对这套规则的挑战。落实的情况各不相同：整手新定义 2025 年 11 月 3 日实施；NBBO 之内的零股报价原定 2026 年 5 月发布，2026 年 1 月 15 日 SEC 批准推迟到 2028 年 5 月；竞争性汇总商的前提是行情计划提交配套修订，2021 年 11 月提交的修订在 2022 年 9 月 21 日被 SEC 否决，截至 2026 年 6 月新的修订尚未提交，SEC 自己也说无法估计完成日期。</p>
+<p>最后一个变化来自交易时间。2026 年 6 月 26 日，SEC 批准 CTA/CQ 计划延长处理器的运行时间：从周日晚 9 点到周五晚 8 点，周一至周四晚 8 点至 9 点暂停一小时；常规时段以外的成交带「.T」标记，不计入当日最高、最低和收盘价。按计划，延长运行 2026 年 12 月 6 日开始，与夜盘交易同步（见<a href="d06.html">阶段 6</a>）。在此之前，夜间交易的报价不进入统一行情，也就没有夜间的 NBBO。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">2020 年行情改革落到了哪一步</p><p class="figsub">市场数据基础设施规则与行情计划治理改革的各个部分，截至 2026 年 11 月的状态。点选一项查看依据。</p></div></div>
+    <div class="q7m-g" id="q7m-g"></div>
+    <div class="q7m-d" id="q7m-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q7m-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.q7m-g button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:10px 12px;display:grid;gap:3px}
+.q7m-g button b{font-size:13.5px}
+.q7m-g button span{font-size:12px;color:var(--muted)}
+.q7m-g button i{font-style:normal;font-size:11.5px;justify-self:start;border-radius:999px;padding:0 8px;border:1px solid var(--line);color:var(--muted)}
+.q7m-g button i.s2{border-color:var(--accent);background:var(--accent);color:var(--card)}
+.q7m-g button i.s1{border-color:var(--accent);color:var(--accent)}
+.q7m-g button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q7m-d{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.65;min-height:5em}
+.q7m-k{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 10px}
+@media (max-width:640px){.q7m-g{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const X=[
+    ['整手按股价分档','2025-11-03 实施',2,'2020 年 12 月 9 日通过（Release No. 34-90610），2024 年 9 月 18 日的修订把实施提前到 2025 年 11 月 3 日。股价不超过 250 美元为 100 股，250.01–1,000 美元 40 股，1,000.01–10,000 美元 10 股，更高为 1 股；每半年按股价重新分档。'],
+    ['最优零股报价','2026-04-27 发布',2,'2024 年修订要求处理器自 2026 年 5 月起发布比 NBBO 更好的最优零股买卖报价；处理器在 2026 年 4 月 27 日开始发布。'],
+    ['NBBO 之内的零股报价','推迟到 2028-05',1,'原定 2026 年 5 月由处理器发布；2026 年 1 月 15 日 SEC 批准豁免（Release No. 34-104612），推迟到 2028 年 5 月 1 日。'],
+    ['竞争性汇总商与扩充内容','尚未启动',0,'深度数据、集合竞价信息与竞争性汇总商，须等行情计划提交规则 614(e) 要求的配套修订并获 SEC 批准。2021 年 11 月 5 日提交的修订于 2022 年 9 月 21 日被否决；截至 2026 年 6 月新修订尚未提交，SEC 称无法估计完成日期。'],
+    ['CT 计划统一治理','2027-04-01 运作',1,'2020 年 5 月治理命令；2021 年 8 月批准的计划于 2022 年 7 月 5 日被哥伦比亚特区巡回上诉法院撤销；2023 年 9 月 1 日修改命令；新 CT 计划 2024 年 11 月获批，2025 年 12 月选定独立管理人 DataCT，收费表 2026 年 6 月获批，2027 年 4 月 1 日起运作。处理器仍为 SIAC 与纳斯达克。'],
+    ['统一行情延长到夜间','2026-12-06 预计',1,'2026 年 6 月 26 日批准 CTA/CQ 计划修订（Release No. 34-105779）：周日晚 9 点至周五晚 8 点运行，周一至周四晚 8 点至 9 点暂停。以结算、处理器与各上市交易所就绪为前提。']
+  ];
+  const L=['未启动','已定日期','已实施'];
+  const g=document.getElementById('q7m-g'),d=document.getElementById('q7m-d');
+  g.insertAdjacentHTML('beforebegin','<p class="q7m-k">'+L.map((t,i)=>'<span>'+['○','◐','●'][i]+' '+t+'</span>').join('')+'</p>');
+  g.innerHTML=X.map(x=>`<button type="button"><i class="s${x[2]}">${['○','◐','●'][x[2]]} ${L[x[2]]}</i><b>${x[0]}</b><span>${x[1]}</span></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));d.innerHTML='<b>'+X[i][0]+'</b>　'+X[i][3];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-8">八、这一步留下的问题</h2>
+<p>有了交易场所的注册、统一行情和 NBBO，价格从哪里来有了答案，新的问题随之出现：</p>
+<ol><li><strong>订单送到哪里。</strong>NBBO 是全国最好的显示价格，经纪商是否一定把订单送到那里；做市商在 NBBO 之内成交、并为订单付钱，客户得到的价格是否最好。</li><li><strong>显示的价格被人扭曲。</strong>报价可以被虚假挂单、对倒成交和内幕交易扭曲；统一行情把扭曲后的价格同样准确地传给了所有人。</li><li><strong>由 AI 读行情。</strong>AI 助手向客户解释价格、给出买卖建议时，读的是实时 NBBO、延迟行情还是某一家的深度数据，说法要与数据来源一致。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">价格有了来源和统一的参照，新的三个问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="q7x" id="q7x"></div>
+    <p class="q7x-m" id="q7x-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q7x{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.q7x button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.q7x button b{display:block;font-size:14px}.q7x button em{font-style:normal;font-size:12px;color:var(--faint)}
+.q7x button.on{border-color:var(--accent)}
+.q7x-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.q7x{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['订单送到哪里','→ 第 8 章','NBBO 是全国最好的显示价格；经纪商是否把订单送到那里，做市商在 NBBO 之内成交并为订单付钱，客户得到的价格是否最好。'],
+    ['价格被人扭曲','→ 第 9 章','虚假挂单、对倒成交与内幕交易会扭曲报价；统一行情把扭曲后的价格同样准确地传给所有人。'],
+    ['由 AI 读行情','→ 第 17 章','AI 助手解释价格、给出建议时，读的是实时 NBBO、延迟行情还是某一家的深度数据，说法要与数据来源一致。']];
+  const g=document.getElementById('q7x'),m=document.getElementById('q7x-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-9">九、对产品的含义</h2>
+<p>本章的规则对金融产品有三条含义。第一，App 上的价格是一项受监管的陈述：客户能下单的页面必须给出实时的 NBBO 与最新成交，延迟数据要醒目标注，单一交易所的深度数据要说明来源；这些要求同样适用于手机端、改单页面和夜盘时段。第二，零售客户看到的汇总行情比专业交易商的私有数据源慢、也不全，这是制度设计的结果；产品可以说一档报价是全国汇总的最优显示报价，但不宜说成看到了全部挂单，也不宜暗示客户能与做市商比速度。第三，行情规则仍在变化：整手按股价分档、零股报价推迟到 2028 年、CT 计划 2027 年 4 月运作、夜盘统一行情 2026 年 12 月启动；AI 助手在回答「现在的价格是多少」「为什么我的成交价和看到的不一样」时，要先知道自己读的是哪一路数据、有多大延迟。</p>
+<h2 id="sec-10">参考文献</h2>
+<ul class="refs"><li>Financial Industry Regulatory Authority. (2015). <i>Vendor Display Rule: Obligations When Providing Quotation Information to Customers</i> (Regulatory Notice 15-52).</li><li>Financial Industry Regulatory Authority. (2021). <i>2021 Report on FINRA's Examination and Risk Monitoring Program: Vendor Display Rule</i>.</li><li>NetCoalition v. SEC, 615 F.3d 525 (D.C. Cir. 2010).</li><li>NetCoalition v. SEC, 715 F.3d 342 (D.C. Cir. 2013).</li><li>The Nasdaq Stock Market LLC v. SEC, 961 F.3d 421 (D.C. Cir. 2020).</li><li>The Nasdaq Stock Market LLC v. SEC, 34 F.4th 1105 (D.C. Cir. 2022).</li><li>The Nasdaq Stock Market LLC v. SEC, 38 F.4th 1126 (D.C. Cir. 2022).</li><li>Securities Acts Amendments of 1975, Pub. L. No. 94-29, 89 Stat. 97（《证券交易法》第 11A 条，15 U.S.C. § 78k-1）.</li><li>Securities Exchange Act of 1934, §§ 5, 6, 19, 15 U.S.C. §§ 78e, 78f, 78s.</li><li>Securities and Exchange Commission. (1998). <i>Regulation of Exchanges and Alternative Trading Systems</i> (Release No. 34-40760).</li><li>Securities and Exchange Commission. (2005). <i>Regulation NMS</i> (Release No. 34-51808).</li><li>Securities and Exchange Commission. (2012, September 14). <i>SEC Charges New York Stock Exchange for Improper Distribution of Market Data</i> (Press release 2012-189).</li><li>Securities and Exchange Commission. (2018). <i>Regulation of NMS Stock Alternative Trading Systems</i> (Release No. 34-83663).</li><li>Securities and Exchange Commission. (2020). <i>Market Data Infrastructure</i> (Release No. 34-90610).</li><li>Securities and Exchange Commission. (2024). <i>Joint Industry Plan; Notice of Filing of a National Market System Plan Regarding Consolidated Equity Market Data</i> (Release No. 34-99403).</li><li>Securities and Exchange Commission. (2026). <i>Order Approving the Fortieth Substantive Amendment to the CTA Plan and the Thirty-First Substantive Amendment to the CQ Plan</i> (Release No. 34-105779, June 26, 2026).</li><li>Securities and Exchange Commission. (2026). <i>The Trade-Through Rule and Locked and Crossed Markets Provisions of Regulation NMS</i> (Proposed rule, Release No. 34-105655), 91 FR 36656.</li><li>UTP Plan. (2026). <i>UTP Data Policies</i> (published October 2026).</li></ul>
+<footer class="nav"><a href="s05.html">← 第 6 章　客户的钱放在经纪商那里</a><a href="s06.html">第 8 章　订单送到哪里成交 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

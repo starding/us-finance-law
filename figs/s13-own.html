@@ -1,0 +1,50 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">持股多少、身份是什么，要报告什么</p><p class="figsub">拖动持股比例，选择意图与身份，看适用的申报与期限。期限为 2023 年修订后的规则。</p></div></div>
+    <div class="k13o-row"><label for="k13o-r">持有某类股票</label><input type="range" id="k13o-r" min="0" max="30" step="0.5" value="6"><output id="k13o-v">6%</output></div>
+    <div class="k13o-row"><span>意图</span><div class="k13o-b" id="k13o-i"><button type="button" data-v="0">被动投资</button><button type="button" data-v="1">合格机构投资者</button><button type="button" data-v="2">意图影响控制权</button></div></div>
+    <div class="k13o-row"><span>身份</span><div class="k13o-b" id="k13o-o"><button type="button" data-v="0">外部投资者</button><button type="button" data-v="1">董事或高管</button></div></div>
+    <div class="k13o-out" id="k13o-out" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.k13o-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.k13o-row>span,.k13o-row>label{width:90px}
+.k13o-row input{flex:1;min-width:160px;accent-color:var(--accent)}
+.k13o-row output{font-weight:600;color:var(--ink);font-size:15px;width:48px}
+.k13o-b{display:flex;gap:6px;flex-wrap:wrap}
+.k13o-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.k13o-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.k13o-out{display:grid;gap:6px;margin-top:6px}
+.k13o-out div{background:var(--quote);border-radius:9px;padding:9px 12px;font-size:13.5px;line-height:1.5;display:grid;grid-template-columns:120px 1fr;gap:10px}
+.k13o-out div b{font-size:14px}
+.k13o-out div.none{display:block;color:var(--muted)}
+@media (max-width:560px){.k13o-out div{grid-template-columns:1fr;gap:2px}}
+</style>
+<script>
+(function(){
+  const st={i:0,o:0},r=document.getElementById('k13o-r'),v=document.getElementById('k13o-v'),out=document.getElementById('k13o-out');
+  function draw(){
+    const p=+r.value;v.textContent=p+'%';const L=[];
+    if(p>5){
+      if(st.i===2) L.push(['附表 13D','超过 5% 后 5 个工作日内首次申报（2023 年修订前为 10 天）；重大变化 2 个工作日内修订。须披露身份、资金来源、计划与衍生品安排。']);
+      else if(st.i===1) L.push(['附表 13G','季度末持股超过 5% 的，在该季度结束后 45 天内申报（修订前为年度结束后 45 天）；超过 10% 或增减 5% 时，须在当月结束后 5 个工作日内修订。']);
+      else L.push(['附表 13G','超过 5% 后 5 个工作日内申报（修订前为 10 天）；超过 10% 或增减 5% 时，2 个工作日内修订。2025 年 2 月起，向管理层施压要求特定治理措施，可能失去 13G 资格。']);
+    }
+    const insider=st.o===1||p>10;
+    if(insider){
+      L.push(['Form 3','成为内部人（'+(st.o===1?'担任董事或高管':'持股超过 10%')+'）后 10 日内报告初始持股。']);
+      L.push(['Form 4','每笔交易后第 2 个营业日内报告（2002 年 8 月 29 日起；此前为次月 10 日内）；注明是否按 10b5-1 交易计划执行。']);
+      L.push(['第 16(b) 条','六个月内买入又卖出（或反之）的利润归公司（见第 9 章）。']);
+    }
+    if(!L.length) L.push(['', '持股不超过 5%、也不是董事或高管：不需要单独申报。机构投资经理管理的 13(f) 证券达到 1 亿美元的，另按季度提交 13F。']);
+    out.innerHTML=L.map(x=>x[0]?`<div><b>${x[0]}</b><span>${x[1]}</span></div>`:`<div class="none">${x[1]}</div>`).join('');
+    document.querySelectorAll('#k13o-i button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.i));
+    document.querySelectorAll('#k13o-o button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.o));
+  }
+  r.addEventListener('input',draw);
+  document.querySelectorAll('#k13o-i button').forEach(b=>b.addEventListener('click',()=>{st.i=+b.dataset.v;draw();}));
+  document.querySelectorAll('#k13o-o button').forEach(b=>b.addEventListener('click',()=>{st.o=+b.dataset.v;draw();}));
+  draw();
+})();
+</script>

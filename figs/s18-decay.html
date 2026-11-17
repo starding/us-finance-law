@@ -1,0 +1,41 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">每天重置：持有越久，结果越偏离倍数</p><p class="figsub">指数每天交替上涨、下跌同样的幅度。拖动滑块改变每日波动与持有天数，比较指数与各倍数产品的累计结果。示意。</p></div></div>
+    <div class="x18d-ctl">
+      <label>每日波动 <b id="x18d-vv">3%</b><input type="range" id="x18d-v" min="0" max="10" step="0.5" value="3"></label>
+      <label>持有交易日 <b id="x18d-nv">20</b><input type="range" id="x18d-n" min="2" max="60" step="2" value="20"></label>
+    </div>
+    <svg class="x18d-svg" id="x18d-svg" viewBox="0 0 600 220" role="img" aria-label="累计收益路径"></svg>
+    <div class="x18d-nums" id="x18d-nums"></div>
+    <p class="x18d-m" id="x18d-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.x18d-ctl{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13.5px}.x18d-ctl input{width:100%;accent-color:var(--accent)}
+.x18d-svg{width:100%;height:auto;margin:12px 0 6px;display:block}
+.x18d-svg text{font-size:11px;fill:var(--faint)}
+.x18d-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.x18d-nums div{background:var(--quote);border-radius:9px;padding:8px 10px;font-size:12px;color:var(--muted)}.x18d-nums b{display:block;font-size:15px;color:var(--ink);font-weight:600}
+.x18d-nums i{display:inline-block;width:16px;height:0;border-top:2px solid var(--ink);margin-right:5px;vertical-align:3px}
+.x18d-m{font-size:14px;margin:12px 0 0;min-height:2.6em;line-height:1.6}
+@media (max-width:640px){.x18d-ctl{grid-template-columns:1fr}.x18d-nums{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),v=$('x18d-v'),n=$('x18d-n');
+  const S=[['指数',1,'var(--ink)',''],['两倍',2,'var(--accent)',''],['三倍',3,'var(--accent)','6 4'],['反向一倍',-1,'var(--muted)','2 3']];
+  function run(){
+    const vol=+v.value/100,N=+n.value;$('x18d-vv').textContent=v.value+'%';$('x18d-nv').textContent=N;
+    const P=S.map(s=>{let x=1;const a=[1];for(let t=0;t<N;t++){const r=t%2===0?vol:-vol;x*=1+s[1]*r;a.push(x);}return a;});
+    let lo=Math.min(...P.flat(),0.9),hi=Math.max(...P.flat(),1.1);
+    const X=t=>40+t/N*545,Y=y=>200-(y-lo)/(hi-lo)*185;
+    let h=`<line x1="40" x2="585" y1="${Y(1)}" y2="${Y(1)}" stroke="var(--line)"/><text x="4" y="${Y(1)+4}">起点</text><text x="4" y="${Y(hi)+10}">${((hi-1)*100).toFixed(0)}%</text><text x="4" y="${Y(lo)}">${((lo-1)*100).toFixed(0)}%</text><text x="585" y="216" text-anchor="end">第 ${N} 天</text>`;
+    P.forEach((a,i)=>{h+=`<polyline fill="none" stroke="${S[i][2]}" stroke-width="2" ${S[i][3]?'stroke-dasharray="'+S[i][3]+'"':''} points="${a.map((y,t)=>X(t).toFixed(1)+','+Y(y).toFixed(1)).join(' ')}"/>`;});
+    $('x18d-svg').innerHTML=h;
+    const f=a=>((a[a.length-1]-1)*100).toFixed(1)+'%',idx=P[0][N]-1;
+    $('x18d-nums').innerHTML=S.map((s,i)=>`<div><i style="border-top-color:${s[2]};${s[3]?'border-top-style:dashed':''}"></i>${s[0]}<b>${f(P[i])}</b>${i?'按倍数应为 '+(s[1]*idx*100).toFixed(1)+'%':''}</div>`).join('');
+    $('x18d-m').textContent=vol===0?'没有波动时，各产品都停在起点，倍数关系成立。':`指数 ${N} 天累计 ${(idx*100).toFixed(1)}%，三倍产品累计 ${f(P[2])}，而不是 ${(3*idx*100).toFixed(1)}%。波动越大、持有越久，偏离越大；FINRA 第 09-31 号通知据此认为，这类产品通常不适合持有超过一个交易时段的零售投资者。`;
+  }
+  [v,n].forEach(x=>x.addEventListener('input',run));run();
+})();
+</script>

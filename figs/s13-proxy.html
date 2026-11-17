@@ -1,0 +1,42 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一份股东提案走到表决</p><p class="figsub">切换时期，看每一步由谁决定。2026 年 9 月的废除提案截至 2026 年 11 月尚未通过。</p></div></div>
+    <div class="k13p-seg" id="k13p-seg"></div>
+    <ol class="k13p-st" id="k13p-st"></ol>
+    <p class="k13p-n" id="k13p-n" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.k13p-seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.k13p-seg button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.k13p-seg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.k13p-st{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.k13p-st li{background:var(--quote);border-radius:9px;padding:9px 10px;font-size:13px;line-height:1.45;border:1px solid transparent;transition:opacity .3s}
+.k13p-st li b{display:block;font-size:12px;color:var(--faint);margin-bottom:3px}
+.k13p-st li strong{display:block;font-size:13.5px;margin-bottom:4px}
+.k13p-st li.chg{border-color:var(--accent);background:var(--accent-soft)}
+.k13p-st li.off{opacity:.4}
+.k13p-n{font-size:14px;margin:12px 0 0;min-height:3.2em;line-height:1.6}
+@media (max-width:720px){.k13p-st{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const STEP=['股东提交议案','能否提交','公司想排除时','谁来裁决','表决与公布'];
+  // 每个时期：[按钮名, [每一步的说明, 状态: 0 照旧 1 变化 2 不再适用], 说明]
+  const P=[
+    ['2025 年以前',[['持股 2,000 美元满 3 年，或更多股份、更短期限',0],['再次提交须达到上次 5%、15%、25% 的支持率（2020 年修订）',0],['向 SEC 工作人员申请「不采取行动」意见',0],['工作人员出具意见，事实上决定能否排除',0],['列入公司委托书，股东大会表决，4 个工作日内以 8-K 第 5.07 项公布结果',0]],
+     '规则 14a-8 自 1942 年起运行几十年：门槛由 SEC 规定，能否排除由 SEC 工作人员事实上裁决。'],
+    ['2025–2026 委托书季',[['门槛不变；得克萨斯州 2025 年 9 月 1 日起允许公司选择要求持股 100 万美元或 3%',1],['再提交门槛不变',0],['仍须在提交最终委托书前 80 天通知 SEC 与提案人',0],['2025 年 11 月 17 日起工作人员基本不再回应；2026 年 8 月 14 日起完全停止',1],['照旧列入与表决；争议改由法院解决',1]],
+     '2025 年 2 月 12 日的 14M 公告撤回了限制排除的 14L 公告；11 月 17 日起工作人员只回应以州法为依据的请求，2026 年 8 月 14 日起一律不回应。'],
+    ['2026 年 9 月提案若通过',[['联邦层面不再有股东提案规则，由州法与公司章程决定',1],['联邦再提交门槛随之取消',2],['公司不再需要向 SEC 通知或申请',2],['不再有 SEC 的角色；争议按州法在法院解决',1],['股东依州法或章程提出的议案，公司可在委托书中说明并保留酌情投票权，股东可勾选拒绝',1]],
+     '2026 年 9 月 16 日 SEC 提议废除规则 14a-8，同时取消向股东交付年报的要求、把向经纪商查询实益股东的最短期限从 20 个工作日缩短为 5 个；征求意见截至 2026 年 11 月 20 日。']
+  ];
+  const seg=document.getElementById('k13p-seg'),st=document.getElementById('k13p-st'),n=document.getElementById('k13p-n');
+  seg.innerHTML=P.map(p=>`<button type="button">${p[0]}</button>`).join('');
+  const bs=[...seg.children];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));
+    st.innerHTML=P[i][1].map((x,j)=>`<li class="${x[1]===1?'chg':x[1]===2?'off':''}"><b>${j+1}</b><strong>${STEP[j]}</strong>${x[0]}</li>`).join('');
+    n.textContent=P[i][2];}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

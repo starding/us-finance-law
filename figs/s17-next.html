@@ -1,0 +1,25 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">追究的工具之外的两个问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="y7x" id="y7x"></div>
+    <p class="y7x-m" id="y7x-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.y7x{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.y7x button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.y7x button b{display:block;font-size:14px}.y7x button em{font-style:normal;font-size:12px;color:var(--faint)}
+.y7x button.on{border-color:var(--accent)}
+.y7x-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.y7x{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['AI 出错时谁负责','→ 第 17 章','推荐、开户与交易监控由模型完成；误导性回答或漏报可疑交易，责任落在公司、监督人还是开发者。'],
+    ['AI 成为被夸大的卖点','→ 第 17 章、第 14 章','在披露与营销中夸大 AI 能力，已成为执法与集团诉讼的新主题；这类陈述怎样核实。']];
+  const g=document.getElementById('y7x'),m=document.getElementById('y7x-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

@@ -1,0 +1,53 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">NBBO 怎样算出来</p><p class="figsub">五家交易所对同一只股票的报价。切换股价，看整手大小怎样决定哪些报价能进入 NBBO，以及 NBBO 之外的最优零股报价。报价为示意；整手分档按规则 600(b)，2025 年 11 月 3 日实施。</p></div></div>
+    <div class="q7n-tg" id="q7n-tg"></div>
+    <div class="q7n-w"><table class="q7n-t"><thead><tr><th>交易所</th><th>买价 × 股数</th><th>卖价 × 股数</th></tr></thead><tbody id="q7n-b"></tbody></table></div>
+    <div class="q7n-r" id="q7n-r" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q7n-tg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.q7n-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.q7n-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.q7n-w{overflow-x:auto}
+.q7n-t{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.q7n-t th{text-align:left;font-weight:500;color:var(--muted);font-size:12.5px;border-bottom:1px solid var(--line);padding:6px 8px}
+.q7n-t td{padding:6px 8px;border-bottom:1px solid var(--line)}
+.q7n-t td.q7n-x{color:var(--faint);text-decoration:line-through}
+.q7n-t td.q7n-best{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.q7n-t td.q7n-odd{outline:1px dashed var(--accent);outline-offset:-3px}
+.q7n-r{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.65}
+.q7n-r b{font-size:15px}
+</style>
+<script>
+(function(){
+  const P=[[180,100],[480,40],[1500,10]];
+  const V=[['甲',-.02,300,.03,200],['乙',-.01,60,.02,100],['丙',-.01,25,.01,30],['丁',-.02,500,.02,45],['戊',-.03,1000,.04,400]];
+  const tg=document.getElementById('q7n-tg'),tb=document.getElementById('q7n-b'),r=document.getElementById('q7n-r');
+  tg.innerHTML=P.map(p=>`<button type="button">股价约 ${p[0].toLocaleString()} 美元 · 整手 ${p[1]} 股</button>`).join('');
+  const bs=[...tg.children];const f=x=>x.toFixed(2);
+  function best(side,p,lot){ // side 0 bid 1 ask
+    let c=V.map((v,i)=>({i,px:p+(side?v[3]:v[1]),sz:side?v[4]:v[2]})).map(o=>({...o,rs:Math.floor(o.sz/lot)*lot}));
+    const ok=c.filter(o=>o.rs>0);
+    ok.sort((a,b)=>side?(a.px-b.px)||(b.rs-a.rs):(b.px-a.px)||(b.rs-a.rs));
+    const top=ok[0];
+    const odd=c.filter(o=>o.rs===0&&(side?o.px<top.px:o.px>top.px)).sort((a,b)=>side?a.px-b.px:b.px-a.px)[0];
+    return {c,top,odd};
+  }
+  function set(k){
+    bs.forEach((b,j)=>b.classList.toggle('on',j===k));const [p,lot]=P[k];
+    const B=best(0,p,lot),A=best(1,p,lot);
+    tb.innerHTML=V.map((v,i)=>{
+      const cell=(S,side)=>{const o=S.c[i];let cl=o.rs===0?'q7n-x':'';if(S.top.i===i)cl='q7n-best';if(S.odd&&S.odd.i===i)cl+=' q7n-odd';
+        return `<td class="${cl}">${f(o.px)} × ${o.sz}${o.rs&&o.rs!==o.sz?` <span style="color:var(--faint)">→ ${o.rs}</span>`:''}</td>`;};
+      return `<tr><td>交易所${v[0]}</td>${cell(B,0)}${cell(A,1)}</tr>`;}).join('');
+    const tie=s=>{const t=s.c.filter(o=>o.rs>0&&o.px===s.top.px);return t.length>1?`（${t.length} 家同价，按数量排序，交易所${V[s.top.i][0]}在先）`:'';};
+    const odd=[B.odd?`买 ${f(B.odd.px)} × ${B.odd.sz}（交易所${V[B.odd.i][0]}）`:'',A.odd?`卖 ${f(A.odd.px)} × ${A.odd.sz}（交易所${V[A.odd.i][0]}）`:''].filter(Boolean);
+    r.innerHTML=`NBBO：<b>${f(B.top.px)} × ${B.top.rs}　/　${f(A.top.px)} × ${A.top.rs}</b><br>`+
+      (()=>{const t=[tie(B)&&'买方'+tie(B),tie(A)&&'卖方'+tie(A)].filter(Boolean).join('；');return t?t+'。':'';})()+`划线的报价不足 ${lot} 股，向下取整为 0，不能进入 NBBO。<br>`+
+      (odd.length?`比 NBBO 更好的零股报价（虚线框）：${odd.join('；')}。2026 年 4 月 27 日起处理器发布这一「最优零股报价」。`:'没有比 NBBO 更好的零股报价。');
+  }
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

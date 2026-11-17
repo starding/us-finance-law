@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>发行人：上市公司的持续义务</title>
+<meta name="description" content="《美国金融业法律研究》分解式另一条线：前九个阶段是券商服务客户的时间轴，这一页是上市公司自己的时间轴。上市之后，公司按年、按季报告，重大事件 4 个工作日内报告，内部人交易 2 个营业日内报告，股东大会前发出委托书，大股东与收购方按 13D、13G 与要约收购规则现身。2023–2026 年，网络安全披露、13D 新期限与薪酬追回生效，气候规则被提议撤销，规则 14a-8 被提议废除，半年报、申报人类别与薪酬披露进入提案">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+
+/* 分解式义务清单：「详见」列不折行 */
+table td:last-child a{white-space:nowrap}
+</style>
+</head>
+<body data-page="d10">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html" class="on" aria-current="true">分解式</a><a href="preface.html">生成式</a></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="d-preface.html"><span class="n">导读</span>合规全景地图</a>
+<a class=" cur" href="d10.html" aria-current="page"><span class="n">·</span>发行人：上市公司的持续义务</a>
+<a class="side-part" href="d-part.html"><span class="pn">经纪自营商</span>沿着业务的时间轴</a>
+<a class="" href="d01.html"><span class="n">1</span>设立：成为一家经纪自营商</a>
+<a class="" href="d02.html"><span class="n">2</span>获客与沟通</a>
+<a class="" href="d03.html"><span class="n">3</span>开户</a>
+<a class="" href="d04.html"><span class="n">4</span>入金与托管</a>
+<a class="" href="d05.html"><span class="n">5</span>推荐</a>
+<a class="" href="d06.html"><span class="n">6</span>下单与执行</a>
+<a class="" href="d07.html"><span class="n">7</span>成交之后：结算、确认与报告</a>
+<a class="" href="d08.html"><span class="n">8</span>持续监控与监督</a>
+<a class="" href="d09.html"><span class="n">9</span>退出与事件处置</a>
+<a class="" href="o-adviser.html"><span class="n">·</span>投资顾问</a>
+<a class="" href="o-fund.html"><span class="n">·</span>基金与 ETP</a>
+<a class="" href="o-venue.html"><span class="n">·</span>交易场所</a>
+<a class="" href="o-infra.html"><span class="n">·</span>清算、结算与报告</a>
+<a class="" href="o-investor.html"><span class="n">·</span>投资者与市场行为</a>
+<a class="" href="o-all.html"><span class="n">·</span>执法与救济</a>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>分解式</span></header>
+
+<div class="chapno">另一条线</div><h1>发行人：上市公司的持续义务<small>从上市到日常，一家公司一年要向市场报告什么</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>前九个阶段沿着券商服务一位客户的时间轴展开；这一页换一条线，看另一端的上市公司。一家公司在交易所上市以后，每年要提交年报、三份季报和一份委托书，重大事件发生后 4 个工作日内报告，董事与高管每买卖一次本公司股票都要在 2 个营业日内报告，持股超过 5% 的股东与收购方也要现身。券商 App 里的公告、财报、内部人交易、持股变动与股东大会投票，都来自这些义务。合规要回答的问题是：每一项义务的触发条件、期限与依据是什么，2023–2026 年哪些变了，哪些还只是提案。</p></blockquote>
+<h2 id="sec-1">一、这一阶段的业务步骤</h2>
+<p>以财年截至 12 月 31 日的美国国内公司为例，按时间顺序：</p>
+<ol><li><strong>上市与注册。</strong>公司依《证券交易法》第 12(b) 条注册证券、与交易所签订上市协议，此后依第 13(a) 条持续报告，并须满足交易所的上市标准：多数董事独立、审计委员会全部独立（规则 10A-3）、制定薪酬追回政策。</li><li><strong>年度报告。</strong>财年结束后 60、75 或 90 天内（按申报人类别）提交 10-K，含经审计的财务报表、S-K 各项目、网络安全风险管理（第 106 项），首席执行官与首席财务官按《萨班斯－奥克斯利法》第 302、906 条认证，管理层报告内部控制，大型与加速申报人另需审计师鉴证（第 404(b) 条）。</li><li><strong>季度报告。</strong>第一至第三季度结束后 40 或 45 天内提交 10-Q；业绩新闻稿以 8-K 第 2.02 项提供，业绩电话会对公众开放以满足 FD 条例。</li><li><strong>事件触发的报告。</strong>重大协议、并购、高管变动、更换审计师、财务报表不可依赖、重大网络安全事件等，一般在 4 个工作日内提交 8-K；因重大差错重述财务报表的，按追回政策向高管追回多发的激励薪酬。</li><li><strong>内部人交易。</strong>董事、高管与持股超过 10% 的股东成为内部人后 10 日内提交 Form 3，每笔交易后第 2 个营业日内提交 Form 4，可延后的交易在财年结束后 45 日内以 Form 5 补报；按 10b5-1 计划交易须经过冷静期（见<a href="s07.html">第 9 章</a>）。</li><li><strong>股东大会。</strong>会前发出委托书说明（附表 14A），载明董事候选人、高管薪酬与审计师；至少每三年进行一次薪酬咨询投票；符合规则 14a-8 的股东议案列入委托书；有争议的董事选举使用通用委托书；表决结果 4 个工作日内以 8-K 第 5.07 项公布。零售股东经由券商收到材料、传回投票指示。</li><li><strong>大股东与收购。</strong>持股超过 5% 的人提交 13D（5 个工作日）或 13G；收购方发出要约收购的，要约至少开放 20 个工作日，符合条件的协商一致全现金要约自 2026 年 4 月 16 日起可缩短为 10 个工作日；目标公司在 10 个工作日内表明立场；签约、完成与控制权变更分别以 8-K 第 1.01、2.01、5.01 项报告。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">上市公司的七类持续义务</p><p class="figsub">以财年截至 12 月 31 日的美国国内公司为例。点选一类，看触发条件、期限、依据与截至 2026 年 11 月的状态。</p></div></div>
+    <div class="q10-tl" id="q10-tl"></div>
+    <div class="q10" id="q10">
+      <ol class="q10-s" id="q10-s"></ol>
+      <div class="q10-d" id="q10-d" aria-live="polite"></div>
+    </div>
+  </div>
+</figure>
+<style>
+.q10-tl{position:relative;height:62px;margin:4px 6px 14px;border-bottom:2px solid var(--line)}
+.q10-tl span{position:absolute;bottom:-18px;font-size:11px;color:var(--faint);transform:translateX(-50%)}
+.q10-tl b{position:absolute;bottom:4px;transform:translateX(-50%);font-size:11px;font-weight:600;border-radius:6px;padding:1px 5px;white-space:nowrap;background:var(--quote);color:var(--muted);border:1px solid var(--line)}
+.q10-tl b.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.q10-tl b.hi{bottom:30px}
+.q10-tl i{position:absolute;bottom:4px;font-size:11px;font-style:normal;color:var(--muted);left:0;right:0;text-align:center;top:2px}
+.q10{display:grid;grid-template-columns:minmax(200px,36%) 1fr;gap:16px;align-items:start;margin-top:26px}
+.q10-s{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.q10-s button{font:inherit;font-size:13.5px;width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px}
+.q10-s button b{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--card);color:var(--muted);font-size:12px;font-weight:600}
+.q10-s button em{font-style:normal;font-size:11.5px;color:var(--faint);display:block}
+.q10-s button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10-s button.on b{background:var(--accent);color:var(--card)}
+.q10-d{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:15em}
+.q10-d>p{margin:0 0 10px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.q10-r{border-top:1px solid var(--line);padding:8px 0;display:grid;gap:2px}
+.q10-r strong{font-size:14px}
+.q10-r span{font-size:12.5px;color:var(--muted)}
+.q10-r em{font-style:normal;font-size:13px}
+.q10-r i{font-style:normal;font-size:11.5px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.q10-r a{color:var(--accent);font-size:12.5px}
+@media (max-width:640px){.q10{grid-template-columns:1fr}.q10-tl b{font-size:10px;padding:1px 3px}}
+</style>
+<script>
+(function(){
+  // [名称, 触发, 说明, 时间轴上的标记[[天, 文字, 是否上移]], 规则[[名称, 依据·机构, 现状, 章节id, 章号, 2023–2026 有变化]]]
+  const D=[
+    ['上市与注册','一次','注册证券、签订上市协议，此后持续报告并满足上市标准。',[],
+      [['证券注册与持续报告','第 12(b)、13(a) 条 · SEC','有效','s02','第 2 章',false],
+       ['上市标准：独立董事、审计委员会','交易所规则、规则 10A-3 · 交易所、SEC','有效；纳斯达克董事会多元化披露规则 2024 年 12 月 11 日被第五巡回法院撤销','s13','第 3 章',false],
+       ['薪酬追回政策','规则 10D-1 · SEC、交易所','上市标准 2023 年 10 月 2 日生效','s13','第 3 章',true]]],
+    ['年度报告','每年','10-K：经审计的财务报表、S-K 各项目、网络安全治理；高管认证与内部控制报告。',[[60,'10-K（大型加速）',1],[90,'10-K（其他）',0]],
+      [['年报 10-K','规则 13a-1 · SEC','60/75/90 天；S-K 条例 2026 年 1 月起全面复审','s02','第 2 章',true],
+       ['网络安全治理（S-K 第 106 项）','SEC','财年截至 2023 年 12 月 15 日及以后的年报起适用','s13','第 3 章',true],
+       ['高管认证与内部控制','SOX 第 302、404、906 条 · SEC、PCAOB','有效；404(b) 不适用于非加速申报人','s13','第 3 章',false],
+       ['气候披露','S-K 第 1500 项 · SEC','从未生效；2026 年 5 月 29 日提议撤销，尚未最终通过','s13','第 3 章',true]]],
+    ['季度报告','每季','10-Q 与业绩发布；业绩电话会向公众开放。',[[130,'10-Q',0],[221,'10-Q',1],[313,'10-Q',0]],
+      [['季报 10-Q','规则 13a-13 · SEC','40/45 天；2026 年 5 月 5 日提议可选半年报，尚未通过','s02','第 2 章',true],
+       ['业绩新闻稿','8-K 第 2.02 项 · SEC','公布后 4 个工作日内提供','s13','第 3 章',false],
+       ['公平披露','FD 条例 · SEC','有效','s02','第 2 章',false]]],
+    ['事件触发','随时','重大事件一般 4 个工作日内提交 8-K。',[],
+      [['当期报告 8-K','规则 13a-11 · SEC','4 个工作日；第 7.01、8.01 项除外','s13','第 3 章',false],
+       ['重大网络安全事件','8-K 第 1.05 项 · SEC','认定重大后 4 个工作日；2023 年 12 月 18 日起适用','s13','第 3 章',true],
+       ['财务报表不可依赖与追回','8-K 第 4.02 项、规则 10D-1 · SEC','有效','s13','第 3 章',true]]],
+    ['内部人交易','每笔','董事、高管与持股超过 10% 的股东报告持股与每笔交易。',[],
+      [['Form 3 / 4 / 5','第 16(a) 条 · SEC','10 日 / 2 个营业日 / 财年后 45 日；外国私人发行人董事与高管 2026 年 3 月 18 日起纳入','s13','第 3 章',true],
+       ['短线利润归入','第 16(b) 条 · 法院','有效','s07','第 9 章',false],
+       ['10b5-1 交易计划冷静期','规则 10b5-1 · SEC','2023 年 2 月 27 日起生效','s07','第 9 章',true]]],
+    ['股东大会','每年','发出委托书、组织表决、公布结果。',[[120,'委托书',1]],
+      [['委托书说明','第 14(a) 条、附表 14A · SEC','10-K 第三部分可引用财年后 120 天内提交的委托书','s13','第 3 章',false],
+       ['股东提案','规则 14a-8 · SEC','2026 年 8 月 14 日起工作人员不再回应排除请求；9 月 16 日提议废除，尚未通过','s13','第 3 章',true],
+       ['通用委托书','规则 14a-19 · SEC','2022 年 8 月 31 日以后的股东大会适用','s13','第 3 章',false],
+       ['表决结果','8-K 第 5.07 项 · SEC','结果确定后 4 个工作日内','s13','第 3 章',false]]],
+    ['大股东与收购','随时','超过 5% 的股东现身；要约收购按期限进行。',[],
+      [['附表 13D / 13G','第 13(d)、13(g) 条 · SEC','13D 5 个工作日（2023 年修订）；13G 新期限 2024 年 9 月 30 日起','s13','第 3 章',true],
+       ['要约收购最短期限','规则 14e-1 · SEC','20 个工作日；2026 年 4 月 16 日起部分全现金要约 10 个工作日','s13','第 3 章',true],
+       ['目标公司表明立场','规则 14e-2 · SEC','10 个工作日内','s13','第 3 章',false]]]
+  ];
+  const tl=document.getElementById('q10-tl'),s=document.getElementById('q10-s'),d=document.getElementById('q10-d');
+  const MO=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  let h=MO.map((m,i)=>`<span style="left:${(i+0.5)/12*100}%">${m}</span>`).join('');
+  D.forEach((x,i)=>x[3].forEach(p=>h+=`<b data-g="${i}" class="${p[2]?'hi':''}" style="left:${Math.min(p[0],350)/365*100}%">${p[1]}</b>`));
+  tl.innerHTML=h;
+  s.innerHTML=D.map((x,i)=>`<li><button type="button"><b>${i+1}</b><span>${x[0]}<em>${x[1]}</em></span></button></li>`).join('');
+  const bs=[...s.querySelectorAll('button')];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));
+    tl.querySelectorAll('b').forEach(b=>b.classList.toggle('on',+b.dataset.g===i));
+    const x=D[i];
+    d.innerHTML='<p>'+x[2]+(x[3].length?'':'（不按日历发生，时间轴上没有固定位置。）')+'</p>'+x[4].map(r=>'<div class="q10-r"><strong>'+r[0]+(r[5]?'<i>2023–2026 有变化</i>':'')+'</strong><span>'+r[1]+'</span><em>'+r[2]+'</em><a href="'+r[3]+'.html">详见'+r[4]+' →</a></div>').join('');}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(1);
+})();
+</script>
+
+<h2 id="sec-2">二、义务清单</h2>
+<div class="tablewrap"><table><thead><tr><th>义务</th><th>依据</th><th>机构</th><th>现状（截至 2026 年 11 月）</th><th>详见</th></tr></thead><tbody><tr><td>注册与持续报告</td><td>《证券交易法》第 12、13(a) 条</td><td>SEC</td><td>有效</td><td><a href="s02.html">第 2 章</a></td></tr><tr><td>报告内容</td><td>S-K 条例（1977，1982 年整合）、S-X 条例（1940）</td><td>SEC</td><td>有效；2026 年 1 月 13 日起全面复审 S-K</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>年报 10-K、季报 10-Q</td><td>规则 13a-1、13a-13</td><td>SEC</td><td>期限 60/75/90 天、40/45 天；2026 年 5 月 5 日提议可选半年报，5 月 19 日提议简化申报人类别，均未通过</td><td><a href="s02.html">第 2 章</a></td></tr><tr><td>当期报告 8-K</td><td>规则 13a-11 与 Form 8-K</td><td>SEC</td><td>一般 4 个工作日；第 7.01、8.01 项除外</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>网络安全事件与治理披露</td><td>8-K 第 1.05 项、S-K 第 106 项</td><td>SEC</td><td>2023 年 7 月 26 日通过，8-K 要求 2023 年 12 月 18 日起适用；2025 年业界请愿废除，未见规则提案</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>气候披露</td><td>S-K 第 1500 项、S-X 第 14 条（2024）</td><td>SEC</td><td>从未生效：2024 年 4 月 4 日暂缓；2026 年 5 月 29 日提议撤销，尚未最终通过</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>高管认证与内部控制</td><td>《萨班斯－奥克斯利法》第 302、404、906 条</td><td>SEC、PCAOB</td><td>有效；404(b) 不适用于非加速申报人</td><td><a href="s02.html">第 2 章</a>、<a href="s13.html">第 3 章</a></td></tr><tr><td>薪酬追回政策</td><td>规则 10D-1 与交易所上市标准</td><td>SEC、交易所</td><td>上市标准 2023 年 10 月 2 日生效，2023 年 12 月 1 日前须制定政策</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>内部人报告</td><td>第 16(a) 条，Form 3/4/5</td><td>SEC</td><td>Form 4 两个营业日；外国私人发行人董事与高管 2026 年 3 月 18 日起纳入</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>短线利润归入</td><td>第 16(b) 条</td><td>法院（股东代位诉讼）</td><td>有效</td><td><a href="s07.html">第 9 章</a></td></tr><tr><td>委托书与股东提案</td><td>第 14(a) 条，规则 14a-8、14a-19</td><td>SEC</td><td>2026 年 8 月 14 日起工作人员不再回应排除请求；9 月 16 日提议废除 14a-8，意见截至 11 月 20 日</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>受益所有权报告</td><td>第 13(d)、13(g) 条，附表 13D/13G</td><td>SEC</td><td>2023 年 10 月 10 日修订：13D 5 个工作日；13G 新期限 2024 年 9 月 30 日起适用</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>要约收购</td><td>第 14(d)、14(e) 条，规则 14e-1、14e-2</td><td>SEC</td><td>至少 20 个工作日；2026 年 4 月 16 日豁免令允许部分全现金要约 10 个工作日</td><td><a href="s13.html">第 3 章</a></td></tr><tr><td>公平披露</td><td>FD 条例</td><td>SEC</td><td>有效</td><td><a href="s02.html">第 2 章</a></td></tr></tbody></table></div>
+<h2 id="sec-3">三、2023–2026 年的变化</h2>
+<ol><li><strong>2023 年 10 月 2 日：薪酬追回上市标准生效。</strong>公司须在 12 月 1 日前制定追回政策，重述时不问过错追回前三个财年多发的激励薪酬。对券商的影响：8-K 第 4.02 项（财务报表不可依赖）此后常伴随追回，App 可以把两者关联展示。</li><li><strong>2023 年 12 月 18 日：网络安全事件披露适用。</strong>公司认定事件重大后 4 个工作日内提交 8-K 第 1.05 项。对券商的影响：公告分类要单列网络安全；券商自己若是上市公司，同样受此约束，并与 S-P 条例的客户通知（见<a href="d09.html">阶段 9</a>）分属两套期限。</li><li><strong>2024 年 2 月与 9 月：13D、13G 新期限。</strong>13D 首次申报 5 个工作日、修订 2 个工作日；13G 按季度申报。对券商的影响：持股变动数据更新更快，展示时应写明申报类型与截至日期。</li><li><strong>2024 年 3 月 6 日至今：气候规则通过、暂缓、提议撤销。</strong>2025 年 3 月 27 日 SEC 不再辩护，2025 年 9 月 12 日第八巡回法院搁置案件，2026 年 5 月 29 日 SEC 提议撤销。对券商的影响：不应把气候数据展示为法定披露的结果。</li><li><strong>2025 年 2 月至 2026 年 9 月：股东提案制度后撤。</strong>14M 公告、工作人员停止回应、行政令，到 2026 年 9 月 16 日提议废除规则 14a-8。对券商的影响：代理投票界面中的股东议案可能减少；SEC 同时提议把向经纪商查询实益股东的最短期限从 20 个工作日缩短为 5 个，券商转交委托书材料的时间会更紧。</li><li><strong>2026 年 3 月 18 日：外国私人发行人内部人纳入第 16(a) 条。</strong>对券商的影响：中概股等外国公司的董事与高管交易开始出现在 Form 4 数据中。</li><li><strong>2026 年 4 月 16 日：要约收购最短期限可缩短为 10 个工作日。</strong>对券商的影响：客户参与要约（交出股票）的决策窗口变短，公司行动通知要更早送达。</li><li><strong>2026 年 5 月至 11 月：一组精简披露的提案。</strong>可选半年报（5 月 5 日）、申报人类别简化（5 月 19 日）、薪酬披露改革（11 月 13 日）。截至 2026 年 11 月均未通过。</li></ol>
+<h2 id="sec-4">四、对 AI 产品的提示</h2>
+<ol><li><strong>AI 摘要财报与公告，要带上文件类型与状态。</strong>说明是 10-K 还是 8-K、哪一项、经审计与否、「提交」还是「提供」，并链接原文；业绩新闻稿的数字与 10-Q 不一致时，以后者为准。</li><li><strong>内部人与持股数据不等于交易信号。</strong>AI 解读 Form 4 时应区分交易代码（公开市场买卖、缴税代扣、期权行权）与是否按 10b5-1 计划执行；解读 13D、13G 时区分意图。这类解读在向零售客户推送时属于对公众沟通，受 FINRA 规则 2210 约束（见<a href="d02.html">阶段 2</a>）。</li><li><strong>区分有效规则、暂缓规则与提案。</strong>用户问「公司是否必须披露碳排放」「股东还能不能提议案」时，答案取决于日期；资料库要记录每条规则的状态与日期，AI 回答应注明截至何时。</li><li><strong>公司行动有期限。</strong>股东大会投票截止、要约收购期限（20 个或 10 个工作日）都会传导到券商；AI 助手提醒客户时，应使用券商内部更早的截止时间，而不是发行人公布的最终期限。</li></ol>
+<h2 id="sec-5">参考文献</h2>
+<ul class="refs"><li>Sarbanes-Oxley Act of 2002, Pub. L. 107-204（第 302、403、404、906 条）.</li><li>Securities Exchange Act of 1934, 15 U.S.C. § 78a et seq.（第 12、13、14、16 条）</li><li>Securities and Exchange Commission. Form 8-K General Instructions（表格有效期至 2027 年 11 月 30 日的版本）.</li><li>Securities and Exchange Commission. (2002). <i>Ownership Reports and Trading by Officers, Directors and Principal Security Holders</i> (Release No. 34-46421).</li><li>Securities and Exchange Commission. (2022). <i>Listing Standards for Recovery of Erroneously Awarded Compensation</i> (Release No. 33-11126).</li><li>Securities and Exchange Commission. (2023). <i>Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure</i> (Release No. 33-11216).</li><li>Securities and Exchange Commission. (2023). <i>Modernization of Beneficial Ownership Reporting</i> (Release No. 33-11253).</li><li>Securities and Exchange Commission. (2026). <i>Rescission of Climate-Related Disclosure Rules</i>（Release No. 33-11421，2026 年 5 月 29 日）.</li><li>Securities and Exchange Commission. (2026). Press Release 2026-89: SEC proposes rescission of shareholder proposal rule（2026 年 9 月 16 日）.</li><li>Securities and Exchange Commission, Office of Mergers and Acquisitions. (2026). <i>Exemptive Order for Tender Offers for Equity Securities</i>（2026 年 4 月 16 日）.</li><li>17 CFR 229（S-K 条例）；17 CFR 210（S-X 条例）；17 CFR 240.13d-1、13d-2、14a-8、14a-19、14e-1、14e-2、10D-1.</li></ul>
+<footer class="nav"><a href="d-preface.html">← 导读　合规全景地图</a><a href="d-part.html">经纪自营商　沿着业务的时间轴 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

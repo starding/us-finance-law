@@ -1,0 +1,7 @@
+[
+{"id":"adv-def","name":"投资顾问的定义与经纪商排除（第 202(a)(11) 条）","stage":"d05","layer":"law","year":1940,"req":"为报酬、以提供证券意见为业者为投资顾问；经纪商仅附带提供意见且不另收报酬的除外","status":"有效；2007 年法院撤销 SEC 为按资产收费的经纪账户留出排除的规则","changed":false,"g":"s09","obj":"adviser","link":"注册"},
+{"id":"adv-reg","name":"顾问注册与 Form ADV（第 203、203A 条）","stage":"d05","layer":"law","year":1940,"req":"管理资产 1 亿美元以上的顾问一般向 SEC 注册（1.1 亿美元以上必须），规模更小的向州注册；以 Form ADV 向监管机构与客户披露","status":"有效；Form ADV 第二部分 A 自 2010 年起要求叙述体披露","changed":false,"g":"s09","obj":"adviser","link":"注册"},
+{"id":"adv-custody","name":"顾问托管规则（206(4)-2）","stage":"d04","layer":"sec","year":2003,"req":"对客户资产有托管权的顾问须把资产放在合格托管人处，托管人直接向客户寄送对账单，并接受年度突击检查","status":"2023 年保护客户资产提案于 2025 年 6 月 12 日撤回；2026 年 10 月 1 日另提加密资产托管修改（IA-7023），尚未通过","changed":true,"g":"s09","obj":"adviser","link":"托管"},
+{"id":"adv-robo","name":"智能投顾指引（IM 2017-02）","stage":"d05","layer":"sec","year":2017,"req":"智能投顾同样负有受托义务：披露算法的假设与局限、以问卷收集足够信息、建立合规程序","status":"有效；2022 年 6 月嘉信因智能组合现金配置的披露和解，金额 1.87 亿美元","changed":false,"g":"s09","obj":"adviser","link":"受托义务"},
+{"id":"adv-aml","name":"投资顾问反洗钱规则（FinCEN）","stage":"d03","layer":"fincen","year":2024,"req":"注册投资顾问须建立反洗钱计划并报告可疑活动","status":"2024 年 8 月 28 日发布；2025 年 12 月 31 日的最终规则把生效日推迟到 2028 年 1 月 1 日","changed":true,"g":"s10","obj":"adviser","link":"注册"}
+]

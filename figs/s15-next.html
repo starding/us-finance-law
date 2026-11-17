@@ -1,0 +1,26 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">价格有了来源和统一的参照，新的三个问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="q7x" id="q7x"></div>
+    <p class="q7x-m" id="q7x-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q7x{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.q7x button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.q7x button b{display:block;font-size:14px}.q7x button em{font-style:normal;font-size:12px;color:var(--faint)}
+.q7x button.on{border-color:var(--accent)}
+.q7x-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.q7x{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['订单送到哪里','→ 第 8 章','NBBO 是全国最好的显示价格；经纪商是否把订单送到那里，做市商在 NBBO 之内成交并为订单付钱，客户得到的价格是否最好。'],
+    ['价格被人扭曲','→ 第 9 章','虚假挂单、对倒成交与内幕交易会扭曲报价；统一行情把扭曲后的价格同样准确地传给所有人。'],
+    ['由 AI 读行情','→ 第 17 章','AI 助手解释价格、给出建议时，读的是实时 NBBO、延迟行情还是某一家的深度数据，说法要与数据来源一致。']];
+  const g=document.getElementById('q7x'),m=document.getElementById('q7x-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

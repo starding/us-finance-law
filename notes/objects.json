@@ -1,0 +1,273 @@
+{
+ "_说明": "规则 id → [监管对象, 核心环节, 可选：改写的规则来源层]。未列出的规则：stage d01–d09 归经纪自营商、环节为阶段名；d10 归发行人。",
+ "sec-33": [
+  "issuer",
+  "发行注册"
+ ],
+ "howey": [
+  "issuer",
+  "发行注册"
+ ],
+ "blue-sky": [
+  "issuer",
+  "发行注册"
+ ],
+ "periodic": [
+  "issuer",
+  "持续披露"
+ ],
+ "reg-fd": [
+  "issuer",
+  "持续披露"
+ ],
+ "marketing-rule": [
+  "adviser",
+  "营销"
+ ],
+ "adviser-fiduciary": [
+  "adviser",
+  "受托义务"
+ ],
+ "reg-nms": [
+  "venue",
+  "交易规则"
+ ],
+ "luld": [
+  "venue",
+  "交易规则",
+  "exch"
+ ],
+ "mwcb": [
+  "venue",
+  "交易规则",
+  "exch"
+ ],
+ "round-lot": [
+  "venue",
+  "行情与 NBBO"
+ ],
+ "overnight": [
+  "venue",
+  "交易规则"
+ ],
+ "t1": [
+  "infra",
+  "清算与结算"
+ ],
+ "cat": [
+  "infra",
+  "交易报告与审计追踪"
+ ],
+ "trade-report": [
+  "infra",
+  "交易报告与审计追踪"
+ ],
+ "lost-holders": [
+  "infra",
+  "过户与持有人记录"
+ ],
+ "rule-13f2": [
+  "investor",
+  "卖空"
+ ],
+ "manipulation": [
+  "investor",
+  "操纵与内幕交易"
+ ],
+ "insider": [
+  "investor",
+  "操纵与内幕交易"
+ ],
+ "10b5": [
+  "investor",
+  "操纵与内幕交易"
+ ],
+ "reg-sk-sx": [
+  "issuer",
+  "持续披露"
+ ],
+ "cyber-disc": [
+  "issuer",
+  "持续披露"
+ ],
+ "climate-disc": [
+  "issuer",
+  "持续披露"
+ ],
+ "exec-comp": [
+  "issuer",
+  "治理与内部人"
+ ],
+ "clawback-10d1": [
+  "issuer",
+  "治理与内部人"
+ ],
+ "sox-404": [
+  "issuer",
+  "治理与内部人"
+ ],
+ "proxy-14a8": [
+  "issuer",
+  "治理与内部人"
+ ],
+ "universal-proxy": [
+  "issuer",
+  "收购与控制"
+ ],
+ "williams-tender": [
+  "issuer",
+  "收购与控制"
+ ],
+ "sched-13dg": [
+  "investor",
+  "大额持股与内部人"
+ ],
+ "sec16a": [
+  "investor",
+  "大额持股与内部人"
+ ],
+ "xb-hfiaa": [
+  "investor",
+  "大额持股与内部人"
+ ],
+ "exchange-reg": [
+  "venue",
+  "注册与自律"
+ ],
+ "reg-ats": [
+  "venue",
+  "注册与自律"
+ ],
+ "nms-11a": [
+  "venue",
+  "行情与 NBBO"
+ ],
+ "sip-plans": [
+  "venue",
+  "行情与 NBBO"
+ ],
+ "mdi": [
+  "venue",
+  "行情与 NBBO"
+ ],
+ "vendor-display": [
+  "broker",
+  "下单与执行"
+ ],
+ "xb-15a6": [
+  "broker",
+  "设立"
+ ],
+ "xb-offshore-web": [
+  "broker",
+  "获客与沟通"
+ ],
+ "xb-fpi": [
+  "issuer",
+  "跨境发行人"
+ ],
+ "xb-hfcaa": [
+  "issuer",
+  "跨境发行人"
+ ],
+ "xb-vie": [
+  "issuer",
+  "跨境发行人"
+ ],
+ "xb-morrison": [
+  "all",
+  "诉讼与仲裁"
+ ],
+ "xb-929p": [
+  "all",
+  "执法"
+ ],
+ "enf-disgorge": [
+  "all",
+  "执法"
+ ],
+ "enf-liu": [
+  "all",
+  "执法"
+ ],
+ "enf-jarkesy": [
+  "all",
+  "执法"
+ ],
+ "enf-finra-disc": [
+  "all",
+  "执法"
+ ],
+ "enf-criminal": [
+  "all",
+  "执法"
+ ],
+ "enf-wb": [
+  "all",
+  "吹哨人"
+ ],
+ "enf-21f17": [
+  "all",
+  "吹哨人"
+ ],
+ "enf-pslra": [
+  "all",
+  "诉讼与仲裁"
+ ],
+ "enf-slusa": [
+  "all",
+  "诉讼与仲裁"
+ ],
+ "finra-arb": [
+  "all",
+  "诉讼与仲裁"
+ ],
+ "mcmahon": [
+  "all",
+  "诉讼与仲裁"
+ ],
+ "ica-structure": [
+  "fund",
+  "结构与估值"
+ ],
+ "forward-pricing": [
+  "fund",
+  "结构与估值"
+ ],
+ "etf-6c11": [
+  "fund",
+  "结构与估值"
+ ],
+ "deriv-18f4": [
+  "fund",
+  "衍生品与杠杆"
+ ],
+ "li-etf-notice": [
+  "fund",
+  "披露与销售"
+ ],
+ "crypto-etp": [
+  "fund",
+  "披露与销售"
+ ],
+ "complex-products": [
+  "broker",
+  "推荐"
+ ],
+ "rule-9b1": [
+  "broker",
+  "开户"
+ ],
+ "trace": [
+  "infra",
+  "交易报告与审计追踪"
+ ],
+ "muni-15c2-12": [
+  "issuer",
+  "持续披露"
+ ],
+ "sar": [
+  "broker",
+  "持续监控"
+ ]
+}

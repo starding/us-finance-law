@@ -1,7 +1,7 @@
 # 用法：python3 gen_history.py → 读取 notes/map-*.json 的规则与本文件中的事件，生成 figs/hmap-history.html：
 # 历史时间轴地图。横轴为分段的年份（每个时期等宽，时期内按年份线性），最上一行为引发立法的事件，其下按规则来源分行；
 # 点选事件查看它引出的规则，点选规则查看要求、现状与对应章节。
-import json, pathlib
+import json, pathlib, re
 
 ROOT = pathlib.Path(__file__).parent
 
@@ -32,6 +32,12 @@ EVENTS = [  # (年份, 名称, 说明, 引出的规则 id)
 LAYERS = [("law", "国会成文法"), ("court", "判例"), ("sec", "SEC 规则"), ("fed", "美联储规则"),
           ("finra", "FINRA 规则"), ("fincen", "FinCEN · OFAC"), ("state", "州法")]
 
+
+def chno():
+    """章节 id → 显示的章号，取自 build.py 的目录"""
+    import build
+    return {f: int(re.search(r"\d+", no)[0]) for f, no, t, p in build.TOC if f.startswith("s") and re.search(r"\d+", no)}
+
 def load():
     rules, seen = [], set()
     for p in sorted((ROOT / "notes").glob("map-*.json")):
@@ -43,7 +49,7 @@ def load():
 def figure(rules):
     ids = {r["id"] for r in rules}
     ev = [dict(y=y, n=n, t=t, leads=[i for i in leads if i in ids]) for y, n, t, leads in EVENTS]
-    data = json.dumps(dict(E=ERAS, V=ev, L=LAYERS, R=rules), ensure_ascii=False)
+    data = json.dumps(dict(E=ERAS, V=ev, L=LAYERS, R=rules, C=chno()), ensure_ascii=False)
     return f'''<figure>
   <div class="card">
     <div class="figbar"><div><p class="figtitle">历史时间轴地图：事件与规则</p><p class="figsub">{len(ev)} 个事件、{len(rules)} 条规则。七个时期等宽，时期内按年份排列；实心点为 2023–2026 年有变化的规则。点选事件看它引出的规则，点选规则看要求与现状。</p></div></div>
@@ -100,9 +106,9 @@ body[data-page="h-map"] .wrap{{max-width:min(1280px,94vw)}}
   const dots=[...box.querySelectorAll('.hmp-dot')],evs=[...box.querySelectorAll('.hmp-ev')];
   function clear(){{dots.forEach(d=>d.classList.remove('on','hl'));evs.forEach(e=>e.classList.remove('on'));}}
   function showR(i){{clear();const r=R[i];box.querySelector('[data-i="'+i+'"]').classList.add('on');
-    det.innerHTML='<b>'+r.name+'</b>（'+r.year+' 年 · '+lnn[r.layer]+'）<br>'+r.req+'<em>现状：'+r.status+'</em>'+(r.g?lnk(r.g,'生成式：第 '+(+r.g.slice(1))+' 章 →'):'')+(r.d?lnk(r.d,'分解式：阶段 '+(+r.d.slice(1))+' →'):'');fix(det);}}
+    det.innerHTML='<b>'+r.name+'</b>（'+r.year+' 年 · '+lnn[r.layer]+'）<br>'+r.req+'<em>现状：'+r.status+'</em>'+(r.g?lnk(r.g,'生成式：第 '+(D.C[r.g]||'')+' 章 →'):'')+(r.d?lnk(r.d,'分解式：阶段 '+(+r.d.slice(1))+' →'):'');fix(det);}}
   function showE(i){{clear();const v=V[i];evs[i].classList.add('on');v.leads.forEach(id=>{{const k=R.findIndex(r=>r.id===id);if(k>=0)box.querySelector('[data-i="'+k+'"]').classList.add('hl');}});
-    det.innerHTML='<b>'+v.y+' · '+v.n+'</b><br>'+v.t+(v.leads.length?'<ul>'+v.leads.map(id=>{{const r=R.find(x=>x.id===id);return '<li>'+r.name+'（'+r.year+'）'+(r.g?' '+lnk(r.g,'第 '+(+r.g.slice(1))+' 章'):'')+'</li>';}}).join('')+'</ul>':'');fix(det);}}
+    det.innerHTML='<b>'+v.y+' · '+v.n+'</b><br>'+v.t+(v.leads.length?'<ul>'+v.leads.map(id=>{{const r=R.find(x=>x.id===id);return '<li>'+r.name+'（'+r.year+'）'+(r.g?' '+lnk(r.g,'第 '+(D.C[r.g]||'')+' 章'):'')+'</li>';}}).join('')+'</ul>':'');fix(det);}}
   dots.forEach(d=>d.addEventListener('click',()=>showR(+d.dataset.i)));evs.forEach(e=>e.addEventListener('click',()=>showE(+e.dataset.e)));
   showE(1);
 }})();

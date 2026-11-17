@@ -1,0 +1,40 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">买之前要过哪几道门</p><p class="figsub">选一类产品，再选客户是自己下单还是接受了推荐，看哪些规则在交易之前起作用。资料截至 2026 年 11 月。</p></div></div>
+    <div class="x18g-row"><span>产品</span><div class="x18g-b" id="x18g-p"></div></div>
+    <div class="x18g-row"><span>来源</span><div class="x18g-b" id="x18g-w"></div></div>
+    <div class="x18g-r" id="x18g-r" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.x18g-row{display:flex;gap:10px;align-items:center;margin-bottom:8px;font-size:13.5px}.x18g-row>span{color:var(--faint);width:36px;flex:none}
+.x18g-b{display:flex;flex-wrap:wrap;gap:6px}
+.x18g-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.x18g-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.x18g-r{display:grid;gap:6px;margin-top:12px}
+.x18g-o{display:grid;grid-template-columns:170px 1fr 70px;gap:10px;padding:9px 12px;border-radius:9px;background:var(--quote);font-size:13.5px;line-height:1.5;opacity:.38;transition:opacity .25s}
+.x18g-o.ok{opacity:1;background:var(--accent-soft)}.x18g-o b{font-weight:600}.x18g-o em{font-style:normal;font-size:12px;color:var(--muted);text-align:right}
+@media (max-width:640px){.x18g-o{grid-template-columns:1fr}.x18g-o em{text-align:left}}
+</style>
+<script>
+(function(){
+  const P=['股票','普通 ETF','杠杆或反向 ETF','现货加密资产 ETP','期权','公司债'],W=['客户自己下单','经纪商推荐'];
+  // [名称, 说明, 性质, 是否适用(p,w)]
+  const G=[['期权开户审批','规则 2360(b)(16)：负责人在尽职了解客户之后批准，可只批部分策略','规则',(p,w)=>p===4],
+    ['期权披露文件','规则 9b-1 与 2360(b)(11)：获准交易期权之时或之前交付','规则',(p,w)=>p===4],
+    ['最佳利益规则','有推荐才适用：须有合理依据认定符合该客户的最佳利益（第 5 章）','规则',(p,w)=>w===1],
+    ['杠杆与反向产品的提示','FINRA 09-31（2009）：通常不适合持有超过一个交易时段的零售投资者；推荐须适当、须有监督','监管指引',(p,w)=>w===1&&p===2],
+    ['复杂产品的加强监督','FINRA 12-03（2012）：建议先审核产品、考虑只推荐给已获期权权限的客户','监管指引',(p,w)=>w===1&&(p===2||p===3)],
+    ['风险说明与勾选确认','各家券商自设，规则没有要求，门槛高低不一','券商做法',(p,w)=>p===2||p===3],
+    ['成交价公开','TRACE：成交后 15 分钟内报告并公布，客户可以比较报价与最近成交价','规则',(p,w)=>p===5]];
+  const st={p:2,w:0},pe=document.getElementById('x18g-p'),we=document.getElementById('x18g-w'),r=document.getElementById('x18g-r');
+  pe.innerHTML=P.map((x,i)=>`<button type="button" data-v="${i}">${x}</button>`).join('');
+  we.innerHTML=W.map((x,i)=>`<button type="button" data-v="${i}">${x}</button>`).join('');
+  r.innerHTML=G.map(g=>`<div class="x18g-o"><b>${g[0]}</b><span>${g[1]}</span><em>${g[2]}</em></div>`).join('');
+  const rows=[...r.children];
+  function upd(){[...pe.children].forEach(b=>b.classList.toggle('on',+b.dataset.v===st.p));[...we.children].forEach(b=>b.classList.toggle('on',+b.dataset.v===st.w));
+    rows.forEach((e,i)=>e.classList.toggle('ok',G[i][3](st.p,st.w)));}
+  pe.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st.p=+b.dataset.v;upd();}));
+  we.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st.w=+b.dataset.v;upd();}));upd();
+})();
+</script>

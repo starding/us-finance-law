@@ -1,0 +1,63 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">8-K 的事项清单</p><p class="figsub">选择一节，再点选一个事项，看它什么时候必须报告、是「提交」还是「提供」。除另有规定外，期限为事件发生后 4 个工作日。</p></div></div>
+    <div class="k13i-sec" id="k13i-sec"></div>
+    <div class="k13i-it" id="k13i-it"></div>
+    <div class="k13i-d" id="k13i-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.k13i-sec{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.k13i-sec button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.k13i-sec button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.k13i-it{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px}
+.k13i-it button{font:inherit;font-size:13px;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px;line-height:1.35}
+.k13i-it button b{display:block;font-size:11.5px;color:var(--faint);font-weight:600}
+.k13i-it button.on{border-color:var(--accent)}
+.k13i-it button.new{box-shadow:inset 3px 0 0 var(--accent)}
+.k13i-d{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.6;min-height:6.5em}
+.k13i-d p{margin:0 0 6px}
+.k13i-tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;margin-right:6px;color:var(--muted)}
+.k13i-tag.a{border-color:var(--accent);color:var(--accent)}
+</style>
+<script>
+(function(){
+  // [编号, 名称, 期限, 提交/提供, 说明, App 标签, 是否 2023–2026 新增]
+  const S=[
+    ['第 1 节 经营',[
+      ['1.01','签订重大协议','4 个工作日','提交','公司在正常经营之外签订对其重大的最终协议，例如并购协议、长期供货合同。','重大协议'],
+      ['1.02','终止重大协议','4 个工作日','提交','重大协议被终止，且终止对公司重大。','重大协议'],
+      ['1.03','破产或接管','4 个工作日','提交','公司申请破产或被指定接管人。','破产'],
+      ['1.05','重大网络安全事件','认定重大后 4 个工作日','提交','2023 年 7 月 26 日新增，自 2023 年 12 月 18 日起适用（小型报告公司晚 180 天）。期限从公司认定事件重大时起算；司法部长书面认定危及国家安全或公共安全的，可推迟 30 + 30 天，特殊情况下再 60 天。','网络安全',1]]],
+    ['第 2 节 财务',[
+      ['2.01','完成并购或处置资产','4 个工作日','提交','完成重大资产的收购或出售。','并购'],
+      ['2.02','经营业绩与财务状况','公布后 4 个工作日','提供','公司公开发布业绩，例如业绩新闻稿。默认只是「提供」，不承担第 18 条对「提交」文件的责任，但仍受规则 10b-5 约束；新闻稿中的数字通常未经审计。','业绩'],
+      ['2.03','新增重大直接负债','4 个工作日','提交','发行债券、取得大额贷款等。','融资'],
+      ['2.06','重大资产减值','4 个工作日','提交','公司认定须计提重大减值。','减值']]],
+    ['第 3 节 证券与上市',[
+      ['3.01','收到退市通知','4 个工作日','提交','交易所通知公司不符合持续上市标准，或公司决定退市。','退市风险'],
+      ['3.02','未注册发行股权','4 个工作日','提交','超过一定比例的未注册股权发行，例如私募配售。','增发'],
+      ['3.03','股东权利重大变更','4 个工作日','提交','例如修改章程限制股东权利。','股东权利']]],
+    ['第 4 节 会计师',[
+      ['4.01','更换审计师','4 个工作日','提交','审计师辞任或被解聘；原审计师须出具是否同意公司说法的函件。','审计师'],
+      ['4.02','此前财务报表不可依赖','4 个工作日','提交','公司或审计师认定此前发布的财务报表不应再被依赖，通常预示重述；可能触发规则 10D-1 的薪酬追回。','财务重述']]],
+    ['第 5 节 治理',[
+      ['5.01','控制权变更','4 个工作日','提交','公司控制权发生变更。','控制权'],
+      ['5.02','董事与高管变动','4 个工作日','提交','董事离任或当选，首席执行官、首席财务官等高管离任或任命，以及高管薪酬安排的重大变化。','高管变动'],
+      ['5.03','修改章程或变更财年','4 个工作日','提交','修改公司章程或细则，或变更财年。','章程'],
+      ['5.07','股东大会表决结果','结果确定后 4 个工作日','提交','股东大会各议案的表决结果，包括董事选举、薪酬咨询投票与股东提案。','股东大会']]],
+    ['第 7、8 节 其他',[
+      ['7.01','FD 条例披露','按 FD 条例','提供','自愿使用；不受 4 个工作日期限约束。公司用它公开原本只告诉了部分人的信息，满足 FD 条例（见第 2 章）。','公告'],
+      ['8.01','其他事项','无强制期限','提交','公司自愿报告的、认为对投资者重要的其他事项。2024 年起 SEC 工作人员建议：尚未认定重大的网络安全事件用本项，不用 1.05。','公告']]]
+  ];
+  const sec=document.getElementById('k13i-sec'),it=document.getElementById('k13i-it'),d=document.getElementById('k13i-d');
+  sec.innerHTML=S.map(s=>`<button type="button">${s[0]}</button>`).join('');
+  const sb=[...sec.children];
+  function item(si,ii){const x=S[si][1][ii];[...it.children].forEach((b,j)=>b.classList.toggle('on',j===ii));
+    d.innerHTML=`<p><strong>第 ${x[0]} 项 ${x[1]}</strong></p><p><span class="k13i-tag a">${x[2]}</span><span class="k13i-tag">${x[3]}</span><span class="k13i-tag">App 标签示意：${x[5]}</span></p><p>${x[4]}</p>`;}
+  function show(si){sb.forEach((b,j)=>b.classList.toggle('on',j===si));
+    it.innerHTML=S[si][1].map(x=>`<button type="button" class="${x[6]?'new':''}"><b>第 ${x[0]} 项</b>${x[1]}</button>`).join('');
+    [...it.children].forEach((b,j)=>b.addEventListener('click',()=>item(si,j)));item(si,0);}
+  sb.forEach((b,i)=>b.addEventListener('click',()=>show(i)));show(0);
+})();
+</script>

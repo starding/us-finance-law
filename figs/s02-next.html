@@ -6,7 +6,7 @@
   </div>
 </figure>
 <style>
-.s2nx{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.s2nx{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .s2nx button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
 .s2nx button b{display:block;font-size:14px}.s2nx button em{font-style:normal;font-size:12px;color:var(--faint)}
 .s2nx button.on{border-color:var(--accent)}
@@ -15,9 +15,10 @@
 </style>
 <script>
 (function(){
-  const Q=[['什么算证券','→ 第 3 章','定期报告与规则 10b-5 都以「证券」为前提；把产品设计成不叫股票、也不叫债券的样子，能否绕开。'],
-    ['中间人说的话','→ 第 4 章','经纪商向客户推荐证券时有自己的利益；规则 10b-5 只管假话，不管推荐是否适合客户。'],
-    ['内部人与操纵','→ 第 7 章','规则 10b-5 后来成为追究内幕交易与操纵的主要依据；价格被有意扭曲，需要更具体的规则。']];
+  const Q=[['要报告什么','→ 第 3 章','定期报告与反欺诈规定了要说、不许说假话；具体要报告哪些事项、谁在控制公司，需要更细的规则。'],
+    ['什么算证券','→ 第 4 章','定期报告与规则 10b-5 都以「证券」为前提；把产品设计成不叫股票、也不叫债券的样子，能否绕开。'],
+    ['中间人说的话','→ 第 5 章','经纪商向客户推荐证券时有自己的利益；规则 10b-5 只管假话，不管推荐是否适合客户。'],
+    ['内部人与操纵','→ 第 9 章','规则 10b-5 后来成为追究内幕交易与操纵的主要依据；价格被有意扭曲，需要更具体的规则。']];
   const g=document.getElementById('s2nx'),m=document.getElementById('s2nx-m');
   g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
   const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};

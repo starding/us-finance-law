@@ -1,0 +1,46 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">两个方向：谁出门，谁的规则</p><p class="figsub">选择一个方向，再点选途中的一步，看这一步适用哪一国的规则。</p></div></div>
+    <div class="x6r-tab" id="x6r-tab"></div>
+    <div class="x6r-path" id="x6r-path"></div>
+    <div class="x6r-d" id="x6r-d" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.x6r-tab{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.x6r-tab button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px}
+.x6r-tab button.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.x6r-path{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.x6r-path button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:10px;font-size:13px;line-height:1.4;position:relative}
+.x6r-path button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint);margin-top:2px}
+.x6r-path button.on{border-color:var(--accent);background:var(--accent-soft)}
+.x6r-d{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;min-height:4.6em}
+.x6r-d b{display:block;margin-bottom:2px}
+@media (max-width:640px){.x6r-path{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const R=[
+    {n:'美国投资者 → 外国券商',s:[
+      ['美国投资者','在美国','自己在网上找到一家外国券商。若是对方在美国做广告、发邮件或通过不设防范的网站推销，就是招揽。'],
+      ['外国券商的网站','招揽的边界','SEC 1998 年解释（第 33-7516 号）：网站本身通常构成招揽；须声明不面向美国人，并采取合理措施防止向美国人销售。'],
+      ['开户与交易','规则 15a-6(a)(1)','未经招揽的交易，外国券商可以不在 SEC 注册；招揽美国散户则须注册。'],
+      ['出了问题','保护有限','SEC 工作人员问答（2013）：主动到境外找未注册券商的美国人，不能期待美国对经纪商客户的保护，例如 SIPC 保障、最佳利益规则与 FINRA 仲裁。']]},
+    {n:'外国机构 ← 外国券商经美国券商',s:[
+      ['外国券商','招揽美国机构','可以向美国机构投资者推介；人员到美国拜访须由美国券商人员陪同。'],
+      ['美国注册券商','规则 15a-6(a)(3)','执行交易、发确认书与对账单、安排融资、保存记录、保管资金与证券，并取得外国券商同意在美国接受送达。'],
+      ['大型机构','超过 1 亿美元','总资产或管理资产超过 1 亿美元的机构，还可以直接收到外国券商的研究报告（(a)(2)）。'],
+      ['SEC','可调取资料','外国券商须应 SEC 要求提供资料与证词；当地法律禁止时，SEC 可以对该国券商撤回 (a)(3) 豁免。']]},
+    {n:'外国投资者 → 美国券商',s:[
+      ['外国投资者','在境外','在一家美国注册经纪自营商的 App 上开户。'],
+      ['美国券商开户','美国规则全部适用','客户身份识别可用护照号码代替纳税人识别号；制裁筛查与持续监控（第 13 章）；以 W-8BEN 表证明非美国人身份。'],
+      ['客户所在国','对方的规则','许多国家限制外国券商向本国居民招揽。2022 年 12 月 30 日，中国证监会要求两家境外券商不得新增境内客户。'],
+      ['规则变化','随时可能收紧','2026 年 5 月 22 日，中国证监会对三家境外券商立案，两年整改期内存量内地客户只能卖出与转出。']]}];
+  const t=document.getElementById('x6r-tab'),p=document.getElementById('x6r-path'),d=document.getElementById('x6r-d');
+  t.innerHTML=R.map(r=>`<button type="button">${r.n}</button>`).join('');
+  const tb=[...t.children];let k=0;
+  const step=i=>{[...p.children].forEach((b,j)=>b.classList.toggle('on',i===j));const s=R[k].s[i];d.innerHTML=`<b>${s[0]} · ${s[1]}</b>${s[2]}`;};
+  const show=i=>{k=i;tb.forEach((b,j)=>b.classList.toggle('on',i===j));p.innerHTML=R[i].s.map((s,j)=>`<button type="button">${j+1}. ${s[0]}<em>${s[1]}</em></button>`).join('');[...p.children].forEach((b,j)=>b.addEventListener('click',()=>step(j)));step(0);};
+  tb.forEach((b,i)=>b.addEventListener('click',()=>show(i)));show(0);
+})();
+</script>
