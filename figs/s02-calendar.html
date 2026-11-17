@@ -1,0 +1,66 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一家公司一年要交哪些报告</p><p class="figsub">以财年截至 12 月 31 日的公司为例，选择申报人类别，看报告期限落在哪里。日期未计周末与节假日顺延。</p></div></div>
+    <div class="s2cal-row"><span class="s2cal-lab">申报人类别</span><div class="s2cal-b" id="s2cal-k"><button type="button" data-v="0">大型加速申报人</button><button type="button" data-v="1">加速申报人</button><button type="button" data-v="2">其他公司</button></div></div>
+    <div class="s2cal-row"><span class="s2cal-lab">报告频率</span><div class="s2cal-b" id="s2cal-f"><button type="button" data-v="0">现行：季报</button><button type="button" data-v="1">2026 年提案：可选半年报</button></div></div>
+    <div class="s2cal-axis" id="s2cal-a"></div>
+    <p class="s2cal-note" id="s2cal-n" aria-live="polite"></p>
+    <p class="s2cal-h">两次定期报告之间发生重大事件，一般须在 4 个工作日内提交 8-K。点选一项：</p>
+    <div class="s2cal-ev" id="s2cal-e"></div>
+    <p class="s2cal-m" id="s2cal-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.s2cal-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.s2cal-lab{font-size:13px;color:var(--muted);width:72px}
+.s2cal-b{display:flex;gap:6px;flex-wrap:wrap}
+.s2cal-b button,.s2cal-ev button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s2cal-b button.on,.s2cal-ev button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s2cal-axis{position:relative;height:120px;margin:22px 4px 6px;border-bottom:2px solid var(--line)}
+.s2cal-mo{position:absolute;bottom:-20px;font-size:11px;color:var(--faint);transform:translateX(-50%)}
+.s2cal-q{position:absolute;bottom:0;width:1px;height:14px;background:var(--muted)}
+.s2cal-pin{position:absolute;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;transition:left .4s}
+.s2cal-pin b{font-size:12px;font-weight:600;background:var(--accent);color:#fff;border-radius:6px;padding:2px 6px;white-space:nowrap}
+.s2cal-pin.k b{background:var(--ink);color:var(--bg)}
+.s2cal-pin span{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap}
+.s2cal-pin i{display:block;width:2px;background:var(--accent);margin-top:2px}
+.s2cal-pin.k i{background:var(--ink)}
+.s2cal-note{font-size:13.5px;margin:30px 0 14px;color:var(--muted)}
+.s2cal-h{font-size:13.5px;margin:0 0 8px}
+.s2cal-ev{display:flex;gap:6px;flex-wrap:wrap}
+.s2cal-m{font-size:14px;margin:12px 0 0;min-height:2.6em;background:var(--quote);border-radius:9px;padding:9px 12px}
+@media (max-width:640px){.s2cal-pin span{display:none}.s2cal-pin b{font-size:11px;padding:2px 4px}}
+</style>
+<script>
+(function(){
+  const MO=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],DAYS=[31,28,31,30,31,30,31,31,30,31,30,31];
+  const K10=[60,75,90],Q10=[40,40,45],NAME=['大型加速申报人','加速申报人','其他公司'];
+  const st={k:0,f:0},ax=document.getElementById('s2cal-a'),n=document.getElementById('s2cal-n');
+  function date(d){let m=0;while(d>DAYS[m]){d-=DAYS[m];m++;}return (m+1)+' 月 '+d+' 日';}
+  const cum=[0];DAYS.forEach((x,i)=>cum.push(cum[i]+x));
+  function draw(){
+    let h=MO.map((m,i)=>`<span class="s2cal-mo" style="left:${(cum[i]+15)/365*100}%">${m}</span>`).join('');
+    [90,181,273].forEach(q=>h+=`<span class="s2cal-q" style="left:${q/365*100}%"></span>`);
+    const pins=[[K10[st.k],'10-K','上一财年年报',1,80]];
+    if(st.f===0){[[90,'第一季度'],[181,'第二季度'],[273,'第三季度']].forEach(([q,l])=>pins.push([q+Q10[st.k],'10-Q',l+'季报',0,46]));}
+    else pins.push([181+Q10[st.k],'10-S','上半年半年报',0,46]);
+    pins.forEach(p=>h+=`<div class="s2cal-pin${p[3]?' k':''}" style="left:${p[0]/365*100}%"><b>${p[1]}</b><span>${date(p[0])}</span><i style="height:${p[4]}px"></i></div>`);
+    ax.innerHTML=h;
+    n.textContent=NAME[st.k]+'：10-K 在财年结束后 '+K10[st.k]+' 天内提交；'+(st.f===0?'10-Q 在第一至第三季度结束后 '+Q10[st.k]+' 天内提交，全年共四份定期报告。':'按 2026 年 5 月的提案，选择半年报的公司在上半年结束后 '+Q10[st.k]+' 天内提交 10-S，不再提交 10-Q；截至 2026 年 11 月该提案尚未通过。');
+    document.querySelectorAll('#s2cal-k button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.k));
+    document.querySelectorAll('#s2cal-f button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.f));
+  }
+  document.querySelectorAll('#s2cal-k button').forEach(b=>b.addEventListener('click',()=>{st.k=+b.dataset.v;draw();}));
+  document.querySelectorAll('#s2cal-f button').forEach(b=>b.addEventListener('click',()=>{st.f=+b.dataset.v;draw();}));
+  draw();
+  const E=[['签订重大协议','第 1.01 项：公司在正常经营之外签订对其重大的协议，例如大额并购或长期供货合同。'],
+    ['破产或接管','第 1.03 项：公司申请破产或被指定接管人。'],
+    ['发布业绩','第 2.02 项：公司公开发布经营业绩或财务状况，例如业绩新闻稿，须在公布后 4 个工作日内提交或提供。'],
+    ['高管变动','第 5.02 项：董事离任，或首席执行官、首席财务官等高管离任、任命。'],
+    ['FD 条例披露','第 7.01 项：属于自愿披露，不受 4 个工作日期限约束；公司可以用它公开原本只告诉了部分人的信息，以满足 FD 条例的公开要求。']];
+  const e=document.getElementById('s2cal-e'),m=document.getElementById('s2cal-m');
+  e.innerHTML=E.map(x=>`<button type="button">${x[0]}</button>`).join('');
+  const bs=[...e.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=E[i][1];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

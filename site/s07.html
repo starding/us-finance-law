@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>价格被人扭曲</title>
+<meta name="description" content="《美国金融业法律研究》证券篇第 7 章：市场价格要能反映信息，前提是没有人制造虚假的交易、没有人凭别人不知道的消息交易。1934 年法第 9(a)(2) 条禁止以制造交易假象的方式操纵价格；内幕交易规则由 SEC 与法院在规则 10b-5 下一案一案地确立，从「披露或放弃」到挪用理论；卖空先被限制、后被要求先找券、按时平仓，2023 年的卖空数据报告规则则被法院发回、合规日期推迟到 2028 年。今天的对应落到社交媒体上的拉高出货与线上券商的交易监控">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+</style>
+</head>
+<body data-page="s07">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
+<a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>
+<a class="" href="s01.html"><span class="n">1</span>卖的人比买的人知道得多</a>
+<a class="" href="s02.html"><span class="n">2</span>证券转手之后，谁来说真话</a>
+<a class="" href="s03.html"><span class="n">3</span>什么算证券</a>
+<a class="" href="s04.html"><span class="n">4</span>中间人有自己的利益</a>
+<a class="" href="s05.html"><span class="n">5</span>客户的钱放在经纪商那里</a>
+<a class="" href="s06.html"><span class="n">6</span>订单送到哪里成交</a>
+<a class=" cur" href="s07.html" aria-current="page"><span class="n">7</span>价格被人扭曲</a>
+<a class="" href="s08.html"><span class="n">8</span>借钱买证券</a>
+<a class="" href="s09.html"><span class="n">9</span>替人管钱的人</a>
+<a class="" href="s10.html"><span class="n">10</span>开户的人是谁</a>
+<a class="" href="s11.html"><span class="n">11</span>能说什么、不能说什么</a>
+<a class="" href="s12.html"><span class="n">12</span>重跑：当推荐来自 AI</a>
+<a class="" href="s-map.html"><span class="n">篇末</span>证券篇的规则地图</a>
+<span class="todo side-part"><span class="pn">银行篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">保险篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">衍生品篇</span>（待写）</span>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>证券篇</span></header>
+
+<div class="chapno">第 7 章</div><h1>价格被人扭曲<small>操纵、内幕交易与卖空</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>经纪商替客户找到了最好的价格，但这个价格本身可能是假的：有人自己和自己成交，制造热闹，等别人跟进时再卖出；有人提前知道公司要被收购，在消息公布前买入；有人借来股票大量卖出，把价格压下去。前两种行为让价格偏离了公开信息，第三种是否扭曲价格却有争议。法律对三者的回应不同：操纵被成文法直接禁止；内幕交易由法院一案一案地划出边界；卖空则不被禁止，只要求先找到可借的股票、按时交割，并逐步提高透明度。</p></blockquote>
+<h2 id="sec-1">一、价格应当反映什么</h2>
+<p>第 6 章讨论订单送到哪里，假定市场价格本身是可信的。这个假定有一个前提：每一笔成交都是真实的买卖意愿，买卖双方依据的是公开的信息。投资者看到成交量放大、价格上涨，会推断有人掌握了好消息；如果这些成交是有人刻意制造的，推断就错了。投资者以为对手和自己知道的一样多；如果对手提前知道了尚未公开的重大消息，交易就不是公平的。</p>
+<p>二十世纪二十年代，美国股市上常见所谓「资金池」：几名交易者联手，在彼此之间反复买卖一只股票，制造交易活跃、价格上涨的假象，同时雇人散布利好消息，等公众跟进买入后再把股票卖给他们。1932–1934 年参议院银行委员会的调查（佩科拉听证）记录了大量这样的案例，1934 年《证券交易法》的反操纵条款就是针对这类行为写的。</p>
+<h2 id="sec-2">二、操纵：制造交易的假象</h2>
+<p>1934 年法第 9(a)(2) 条禁止任何人单独或与他人一起，对一只证券进行一系列交易，制造实际或表面上的活跃交易，或抬高、压低其价格，目的是诱使他人买卖该证券。同条其他款项还禁止虚假成交（买卖双方实际是同一人）与事先约定的对敲交易，禁止散布价格将因操纵而涨跌的消息。第 2 章介绍的第 10(b) 条与规则 10b-5，则覆盖所有与证券买卖有关的欺诈，包括不在交易所上市的证券。</p>
+<p>操纵的难点在于证明目的。每一笔买入都会推高价格；法律禁止的不是推高价格，而是为了诱使他人交易而制造价格。执法中，监管机构通常从交易模式推断目的：同一组账户之间反复成交、在收盘前集中下单、一边大量挂单一边在对侧成交后迅速撤单，以及买入之后公开推荐、推荐之后立即卖出。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">禁止市场操纵</p><p class="pr-c"><span><em>领域</em>证券法 › 交易</span><span><em>类型</em>联邦成文法与 SEC 规则</span></p><p class="pr-s">不得以一系列交易制造实际或表面上的活跃交易，或抬高、压低证券价格，以诱使他人买卖；不得进行虚假成交与事先约定的对敲交易。</p><dl><div><dt>在法律体系中的位置</dt><dd>1934 年《证券交易法》第 9(a) 条，其中第 9(a)(2) 条针对以交易制造假象的操纵；第 10(b) 条与规则 10b-5 覆盖其余与证券买卖有关的欺诈</dd></div><div><dt>回应的问题</dt><dd>价格本应反映真实的买卖意愿与公开信息，制造的交易让投资者对供求和信息作出错误推断</dd></div><div><dt>适用范围</dt><dd>能够从交易模式与沟通记录中推断出诱使他人交易的目的</dd></div><div><dt>出台</dt><dd>美国国会，1934；针对二十年代的资金池操纵</dd></div><div><dt>留下的问题</dt><dd>不制造虚假交易，只是凭别人不知道的消息交易，是否同样扭曲价格</dd></div></dl></aside>
+<h2 id="sec-3">三、知道别人不知道的事</h2>
+<p>凭尚未公开的重大消息交易，交易本身是真实的，没有制造任何假象。1934 年法没有一条明文禁止内幕交易，规则 10b-5 也没有提到这个词。对它的规制，是 SEC 与法院在规则 10b-5 的反欺诈框架下一步一步确立的，每一步都在回答同一个问题：谁对谁有义务。</p>
+<ul><li><strong>披露或放弃（1961）。</strong>在卡迪·罗伯茨公司案中，SEC 认定，因职务关系掌握公司重大未公开信息的人，交易之前必须公开该信息；不能公开或不宜公开的，就不得交易。理由有两个：这种信息本应只用于公司目的，而不是个人获利；利用对方无法得到的信息与其交易，对对方不公平。</li><li><strong>德州海湾硫磺公司案（1968）。</strong>公司在勘探中发现大型矿藏，消息正式公布之前，知情的董事、员工买入了公司股票与期权。第二巡回上诉法院全庭审理认为，他们违反了规则 10b-5；内部人必须等信息公开并被市场吸收之后才能交易。</li><li><strong>奇亚雷拉诉美国案（1980）。</strong>一名财务印刷公司的员工从经手的收购文件中推断出目标公司并买入股票。联邦最高法院认为，仅仅掌握未公开的市场信息，并不产生披露义务；义务来自交易双方之间的信任关系。奇亚雷拉与目标公司的股东之间没有这种关系，有罪判决被撤销。</li><li><strong>德克斯诉 SEC 案（1983）。</strong>证券分析师德克斯从一家保险公司的前高管那里得知公司存在大规模欺诈，告诉了自己的客户，客户卖出了股票。联邦最高法院认为，接受消息的人只有在内部人违反义务泄露消息、并且自己知道这一点时才承担责任；内部人是否违反义务，要看他是否从泄露中获得了个人利益。前高管是为了揭露欺诈，没有获得个人利益，德克斯不承担责任。</li><li><strong>美国诉奥黑根案（1997）。</strong>律师奥黑根所在的律所代理一家公司对皮尔斯伯里公司发起收购，他本人并未参与，却买入了皮尔斯伯里的股票与期权。他与皮尔斯伯里的股东之间没有信任关系。联邦最高法院采纳了「挪用理论」：他违反的是对信息来源（律所与客户）的保密义务，把受托保管的信息据为己用来交易，同样构成规则 10b-5 下的欺诈。</li><li><strong>萨尔曼诉美国案（2016）。</strong>一名投资银行家把客户的并购消息告诉了自己的哥哥，哥哥又告诉了萨尔曼。联邦最高法院一致认为，内部人把机密信息作为礼物送给从事交易的亲属或朋友，本身就可以认定获得了个人利益，不必另有金钱回报。</li></ul>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">内幕交易</p><p class="pr-c"><span><em>领域</em>证券法 › 交易</span><span><em>类型</em>SEC 规则与判例法</span></p><p class="pr-s">对信息来源负有信任或保密义务的人，在掌握重大未公开信息时不得交易，或者必须先公开；违反义务泄露信息以获取个人利益的人，与明知而据此交易的人，同样承担责任。</p><dl><div><dt>在法律体系中的位置</dt><dd>规则 10b-5；SEC 在卡迪·罗伯茨公司案（1961）中确立「披露或放弃」；奇亚雷拉案（1980）把义务限定于信任关系；德克斯案（1983）确立泄密者的个人利益标准；奥黑根案（1997）采纳挪用理论；萨尔曼案（2016）认定向亲友赠送信息即构成个人利益</dd></div><div><dt>回应的问题</dt><dd>交易者凭对方无法得到的信息交易，对方无从防范，市场的公平性受损</dd></div><div><dt>适用范围</dt><dd>信息重大、尚未公开；交易者对公司股东或对信息来源负有义务</dd></div><div><dt>出台</dt><dd>SEC，1961；联邦最高法院，1980–2016</dd></div><div><dt>留下的问题</dt><dd>内部人每天都掌握未公开信息，他们如何合法地买卖自己公司的股票</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁对谁有义务</p><p class="figsub">六个案件里的交易者都掌握了别人不知道的信息，结果却不同。点选一个，看义务从哪里来。</p></div></div>
+    <div class="d7" id="d7"></div>
+    <div class="d7-d">
+      <div class="d7-chain" id="d7-c"></div>
+      <p class="d7-h" id="d7-h"></p><p id="d7-x"></p>
+    </div>
+  </div>
+</figure>
+<style>
+.d7{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:12px}
+.d7 button{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:9px 6px;text-align:center;line-height:1.35}
+.d7 button small{display:block;color:var(--faint);font-size:11.5px}
+.d7 button.on{border-color:var(--accent)}
+.d7-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.d7-chain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;font-size:12.5px}
+.d7-chain span{background:var(--card);border-radius:999px;padding:3px 10px}
+.d7-chain i{font-style:normal;color:var(--muted)}
+.d7-chain i.d7-br{color:var(--accent);font-weight:600}
+.d7-h{font-weight:600;margin:0 0 4px}.d7-d p{margin:0}
+@media (max-width:640px){.d7{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script>
+(function(){
+  const C=[['卡迪·罗伯茨','1961',['公司董事','经纪商合伙人','卖出客户股票'],[1],'违反：披露或放弃','掌握公司未公开信息的人，交易前要公开；不能公开，就不交易。SEC 的行政裁决。'],
+    ['德州海湾硫磺','1968',['公司','知情的董事与员工','买入股票与期权'],[1],'违反','矿藏发现正式公布之前买入。内部人要等信息公开并被市场吸收后才能交易。'],
+    ['奇亚雷拉','1980',['收购方','财务印刷公司','印刷工买入目标公司股票'],[],'不违反','他与目标公司的股东之间没有信任关系；仅仅掌握未公开的市场信息，不产生披露义务。'],
+    ['德克斯','1983',['公司前高管','分析师德克斯','客户卖出'],[],'不违反','前高管为揭露欺诈而告诉德克斯，没有获得个人利益，没有违反义务；接受消息的人也就不承担责任。'],
+    ['奥黑根','1997',['收购方客户','律所','律师买入目标公司股票与期权'],[1],'违反：挪用理论','他违反的是对信息来源（律所与客户）的保密义务，把受托保管的信息据为己用。'],
+    ['萨尔曼','2016',['投资银行家','他的兄弟','萨尔曼交易'],[0],'违反','把机密信息作为礼物送给从事交易的亲属，本身就构成个人利益。']];
+  const g=document.getElementById('d7'),c=document.getElementById('d7-c'),h=document.getElementById('d7-h'),x=document.getElementById('d7-x');
+  g.innerHTML=C.map(k=>`<button type="button">${k[0]}<small>${k[1]}</small></button>`).join('');
+  const bs=[...g.children];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));const k=C[i];
+    c.innerHTML=k[2].map((n,j)=>`<span>${n}</span>`+(j<k[2].length-1?`<i class="${k[3].includes(j)?'d7-br':''}">${k[3].includes(j)?'→ 违反义务 →':'→'}</i>`:'')).join('');
+    h.textContent=k[0]+'（'+k[1]+'）：'+k[4];x.textContent=k[5];}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-4">四、内部人怎样合法交易</h2>
+<p>公司高管与董事持有大量本公司股票，他们需要出售股票纳税、分散投资，但几乎随时都掌握一些未公开信息。法律给出了两种安排。</p>
+<p>第一种是机械规则。1934 年法第 16(b) 条规定，董事、高管与持股超过 10% 的股东，在不足六个月的期间内买入又卖出（或卖出又买入）本公司股票所得的利润，归公司所有；公司在股东要求后 60 天内不追讨的，股东可以代公司起诉，起诉期限为获利后两年内。这一条不问是否掌握内幕信息，只看时间，用简单的规则取消短线交易的诱因。</p>
+<p>第二种是事先写好的交易计划。SEC 在 2000 年 8 月发布规则 10b5-1，规定在不掌握重大未公开信息时，事先订立书面计划、约定交易的数量、价格与日期（或决定方式），此后按计划执行的交易，可以作为内幕交易指控的抗辩。计划被一些高管用来在掌握坏消息之前订立、随后迅速卖出，或者同时订立多份计划、择机取消。2022 年 12 月 14 日，SEC 修订规则 10b5-1，自 2023 年 2 月 27 日起生效：董事与高管订立计划后须等待 90 天，或公司披露当季财务结果后两个工作日（两者取较晚者，最长 120 天）才能开始交易；其他人须等待 30 天；单笔交易计划每 12 个月只能用一次；公司须在定期报告中披露董事与高管订立、终止计划的情况。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">短线交易：只看时间，不问知情</p><p class="figsub">一名高管以每股 20 美元买入 1 万股本公司股票，之后以每股 25 美元卖出。拖动两次交易之间相隔的天数。示意。</p></div></div>
+    <div class="h7-ctl"><label>买入后第 <b id="h7-dv"></b> 天卖出<input type="range" id="h7-d" min="10" max="300" step="5" value="120"></label></div>
+    <div class="h7-tl"><div class="h7-zone"></div><i class="h7-buy"></i><i class="h7-sell" id="h7-s"></i><span class="h7-l0">买入</span><span class="h7-l6">约六个月</span></div>
+    <p class="h7-m" id="h7-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.h7-ctl{font-size:13.5px;margin-bottom:16px}.h7-ctl input{width:100%;accent-color:var(--accent)}
+.h7-tl{position:relative;height:56px;background:var(--quote);border-radius:8px}
+.h7-zone{position:absolute;left:0;top:0;bottom:0;width:60.7%;background:var(--accent-soft);border-radius:8px 0 0 8px;border-right:2px dashed var(--accent)}
+.h7-tl i{position:absolute;top:14px;width:12px;height:12px;border-radius:50%;margin-left:-6px}
+.h7-buy{left:0;background:var(--ink);margin-left:0!important}
+.h7-sell{background:var(--accent);transition:left .3s}
+.h7-tl span{position:absolute;bottom:4px;font-size:11.5px;color:var(--muted)}
+.h7-l0{left:6px}.h7-l6{left:calc(60.7% + 8px)}
+.h7-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const D=document.getElementById('h7-d'),s=document.getElementById('h7-s'),m=document.getElementById('h7-m');
+  function run(){const d=+D.value;document.getElementById('h7-dv').textContent=d;s.style.left=(d/300*100)+'%';
+    const p=(25-20)*10000;
+    m.textContent=d<182?`两次交易相隔不足六个月，利润 ${p.toLocaleString()} 美元归公司所有。即使他卖出时并不掌握任何内幕信息，结果也一样（第 16(b) 条）。`
+      :d<=185?'接近六个月的边界：条文写的是「不足六个月」的期间，具体按日历计算，示意图不作精确判断。'
+      :'相隔超过六个月，第 16(b) 条不适用；但如果他卖出时掌握重大未公开信息，仍可能违反规则 10b-5。';}
+  D.addEventListener('input',run);run();
+})();
+</script>
+
+<h2 id="sec-5">五、卖空：借来股票卖出</h2>
+<p>卖空者认为价格会下跌，先借入股票卖出，日后再买回归还。卖空本身是合法的交易，它让悲观的看法也能进入价格，有助于发现高估与欺诈。它被指责的场景有两类：一是「裸卖空」，卖出时并没有借到股票，到期无法交割，大量卖出可以在没有真实股票的情况下压低价格；二是危机中的集中卖空，被认为会加速金融机构的倒闭。</p>
+<p>SEC 在 2004 年通过卖空条例（Regulation SHO）。它要求经纪商在接受卖空订单之前，有合理理由相信该股票可以借到并按时交割，并留存记录，这称为「找券」要求；对长期交割失败的股票，要求平仓。2008 年 9 月 18 日，金融危机中，SEC 依据紧急权力暂时禁止卖空 799 家金融公司的股票；同年秋，它以临时规则 204T 把平仓要求扩大到所有股票并缩短期限，2009 年 7 月 27 日将其定为永久的规则 204：卖空导致交割失败的，须在结算日之后的下一个结算日开盘前平仓，否则该经纪商此后卖空这只股票必须先借到股票。美国标准结算周期自 2024 年 5 月 28 日起改为 T+1，按规则 204，卖空交割失败的平仓期限相应落在 T+2 开盘前。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">卖空规则</p><p class="pr-c"><span><em>领域</em>证券法 › 交易</span><span><em>类型</em>SEC 规则</span></p><p class="pr-s">经纪商接受卖空订单前须有合理理由相信股票可以借到并按时交割；卖空导致交割失败的，须在规定期限内平仓，否则此后卖空须先借券。</p><dl><div><dt>在法律体系中的位置</dt><dd>Regulation SHO（17 CFR 242.200 及以下），SEC 2004 年通过；规则 204 由 2008 年的临时规则 204T 演变而来，2009 年 7 月 27 日成为永久规则；2023 年 10 月 13 日 SEC 通过规则 13f-2，要求达到门槛的机构投资经理按月报告卖空数据，合规日期经两次豁免推迟到 2028 年 1 月 2 日</dd></div><div><dt>回应的问题</dt><dd>没有借到股票的卖空可能无法交割，在没有真实股票的情况下压低价格</dd></div><div><dt>适用范围</dt><dd>股票借贷市场能及时提供可借数量；结算周期确定，平仓期限可以计算</dd></div><div><dt>出台</dt><dd>SEC，2004；2008–2009 年修订</dd></div><div><dt>留下的问题</dt><dd>市场与发行人看不到谁在卖空、卖空了多少</dd></div></dl></aside>
+<h2 id="sec-6">六、看不到的卖空头寸</h2>
+<p>2010 年《多德－弗兰克法》第 929X 条要求 SEC 制定规则，公开更多卖空数据。SEC 在 2023 年 10 月 13 日通过规则 13f-2：机构投资经理对一只申报公司股票的月均每日卖空头寸达到 1,000 万美元或流通股的 2.5%，或对非申报公司股票在任一结算日达到 50 万美元的，须在每月结束后 14 天内提交表格 SHO，报告月末头寸与每日净变化；SEC 汇总后公开，不公开单个经理的名称。</p>
+<p>原定合规日期是 2025 年 1 月 2 日。SEC 在 2025 年 2 月把它推迟到 2026 年 1 月 2 日。2025 年 8 月 25 日，第五巡回上诉法院在私募基金管理人协会等提起的诉讼中认为，SEC 没有充分评估这条规则与同时通过的证券借贷报告规则合在一起的经济影响，将两条规则发回 SEC 重新考虑，但没有撤销。2025 年 12 月 3 日，SEC 再次给予豁免，把规则 13f-2 的合规日期推迟到 2028 年 1 月 2 日。截至本书资料日期，SEC 尚未公布修订方案。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一笔卖空的规则节点</p><p class="figsub">T+1 结算下，一笔卖空从下单到平仓要经过的节点。点选「下一步」，或切换「按时交割」与「交割失败」。下方是卖空数据报告规则的合规日期变化。</p></div></div>
+    <div class="k7-tg"><button type="button" data-f="0" class="on">按时交割</button><button type="button" data-f="1">交割失败</button></div>
+    <ol class="k7-st" id="k7-st"></ol>
+    <button type="button" class="k7-nx" id="k7-nx">下一步</button>
+    <p class="k7-m" id="k7-m" aria-live="polite"></p>
+    <div class="k7-cd"><p>规则 13f-2 合规日期</p><div class="k7-row" id="k7-row"></div></div>
+  </div>
+</figure>
+<style>
+.k7-tg{display:flex;gap:6px;margin-bottom:12px}
+.k7-tg button,.k7-nx{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.k7-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.k7-nx{margin-top:10px;color:var(--accent);border-color:var(--accent)}
+.k7-st{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.k7-st li{background:var(--quote);border-radius:9px;padding:9px 8px;font-size:12.5px;line-height:1.4;opacity:.45;transition:opacity .3s;border:1px solid transparent}
+.k7-st li b{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.k7-st li.done{opacity:1}.k7-st li.cur{border-color:var(--accent)}
+.k7-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+.k7-cd{border-top:1px solid var(--line);margin-top:14px;padding-top:10px;font-size:12.5px}
+.k7-cd p{margin:0 0 8px;color:var(--muted)}
+.k7-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.k7-row span{padding:3px 10px;border-radius:999px;background:var(--quote)}
+.k7-row span.k7-x{text-decoration:line-through;color:var(--faint)}
+.k7-row span.k7-now{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.k7-row i{font-style:normal;color:var(--faint)}
+@media (max-width:640px){.k7-st{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const S=[[['T 日 下单前','找券：有合理理由相信可以借到'],['T 日','卖出成交'],['T+1','交付借来的股票，完成结算'],['之后','买回股票，归还出借人'],['结果','交易完成']],
+    [['T 日 下单前','找券：有合理理由相信可以借到'],['T 日','卖出成交'],['T+1','没有交付，形成交割失败'],['T+2 开盘前','清算经纪商须买入或借入股票平仓'],['未平仓','此后卖空这只股票须先借到股票']]];
+  const M=[['卖空订单进来，经纪商先确认可以借到股票并留存记录（Regulation SHO 的找券要求）。','成交后，卖空者欠买方一批股票。','借来的股票按时交付，买方拿到股票。','卖空者日后买回股票归还出借人，盈亏取决于买回价格。','这是卖空的正常过程。'],
+    ['卖空订单进来，经纪商先确认可以借到股票并留存记录（Regulation SHO 的找券要求）。','成交后，卖空者欠买方一批股票。','到结算日没有交付，买方没有拿到股票。','按规则 204，卖空导致的交割失败须在结算日之后的下一个结算日开盘前平仓，T+1 结算下即 T+2 开盘前。','没有按时平仓，该经纪商此后卖空这只股票，必须先实际借到股票，不能只凭找券。']];
+  let F=0,k=0;const st=document.getElementById('k7-st'),m=document.getElementById('k7-m');
+  function draw(){st.innerHTML=S[F].map((s,i)=>`<li class="${i<=k?'done':''} ${i===k?'cur':''}"><b>${s[0]}</b>${s[1]}</li>`).join('');m.textContent=M[F][k];}
+  document.querySelectorAll('.k7-tg button').forEach(b=>b.addEventListener('click',()=>{F=+b.dataset.f;k=0;document.querySelectorAll('.k7-tg button').forEach(x=>x.classList.toggle('on',x===b));draw();}));
+  document.getElementById('k7-nx').addEventListener('click',()=>{k=(k+1)%5;draw();});
+  document.getElementById('k7-row').innerHTML='<span class="k7-x">原定 2025-01-02</span><i>→ 2025 年 2 月改为</i><span class="k7-x">2026-01-02</span><i>→ 2025 年 12 月 3 日改为</i><span class="k7-now">2028-01-02</span>';
+  draw();
+})();
+</script>
+
+<h2 id="sec-7">七、社交媒体上的拉高出货</h2>
+<p>操纵的手法随传播方式改变。资金池时代需要雇人散布消息，今天只需要一个有大量关注者的账号。2022 年 12 月 14 日，SEC 起诉八名社交媒体上的交易「达人」：SEC 称其中七人在推特与 Discord 上积累了大量关注者，先买入股票，再向关注者推荐，发布目标价或表示自己正在买入、持有、加仓，股价或成交量上升后随即卖出，从未披露卖出的计划，获利约 1 亿美元；第八人被控协助与教唆。司法部同时提起刑事指控。2024 年 3 月，联邦地区法院以起诉书未能说明投资者的财产权如何受损为由驳回了刑事指控；2025 年 10 月 2 日，第五巡回上诉法院推翻了这一裁定，恢复了起诉。</p>
+<p><strong>今天的对应。</strong>线上券商的社区功能把「发帖推荐」与「下单」放在同一个界面里，发帖人自己的交易也在同一家券商。FINRA 要求会员建立监督制度，交易监控系统需要识别的，正是本章描述的几种模式：关联账户之间的对敲、推荐前后的反向交易、收盘前的集中下单、员工与家属账户在公司公告前的交易。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">拉高出货的五个步骤</p><p class="figsub">一只小盘股在一名有大量关注者的账号推荐前后的价格与持仓。点选步骤，看每一步发生了什么、交易监控能看到什么。示意，数字为假设。</p></div></div>
+    <div class="u7-steps" id="u7-steps"></div>
+    <svg class="u7-svg" viewBox="0 0 600 180" role="img" aria-label="价格走势示意">
+      <line x1="40" y1="160" x2="590" y2="160" class="u7-ax"/><line x1="40" y1="134.1" x2="590" y2="134.1" class="u7-gr"/><line x1="40" y1="30.4" x2="590" y2="30.4" class="u7-gr"/><text x="34" y="138.1" class="u7-t" text-anchor="end">2</text><text x="34" y="34.4" class="u7-t" text-anchor="end">4</text><text x="34" y="14" class="u7-t" text-anchor="end">美元</text><polyline id="u7-ghost" class="u7-gh" points=""/>
+      <polyline id="u7-line" class="u7-ln" points=""/>
+      <g id="u7-dots"></g>
+      <text x="40" y="176" class="u7-t">第 1 天</text><text x="590" y="176" class="u7-t" text-anchor="end">第 10 天</text>
+    </svg>
+    <div class="u7-hold"><span>账号持仓</span><div class="u7-tr"><i id="u7-h"></i></div><b id="u7-hv"></b></div>
+    <div class="u7-d"><p class="u7-dh" id="u7-dh"></p><p id="u7-dx"></p><p class="u7-mon" id="u7-mon"></p></div>
+  </div>
+</figure>
+<style>
+.u7-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px}
+.u7-steps button{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 6px}
+.u7-steps button.on{border-color:var(--accent)}
+.u7-svg{width:100%;height:auto;display:block}
+.u7-ax{stroke:var(--line);stroke-width:1}
+.u7-ln{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round}
+.u7-gr{stroke:var(--line);stroke-width:1;stroke-dasharray:3 4}.u7-gh{fill:none;stroke:var(--line);stroke-width:1.5}.u7-t{font-size:11px;fill:var(--muted)}
+.u7-dot{fill:var(--card);stroke:var(--accent);stroke-width:2}
+.u7-hold{display:grid;grid-template-columns:64px 1fr 64px;gap:10px;align-items:center;font-size:12.5px;margin:6px 0 12px}
+.u7-tr{height:12px;background:var(--quote);border-radius:6px;overflow:hidden}
+.u7-tr i{display:block;height:100%;background:var(--accent);transition:width .35s}
+.u7-hold b{text-align:right}
+.u7-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.u7-d p{margin:0}.u7-dh{font-weight:600;margin-bottom:4px!important}
+.u7-mon{margin-top:6px!important;color:var(--muted)}
+@media (max-width:640px){.u7-steps{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script>
+(function(){
+  const P=[2.0,2.0,2.1,2.1,2.6,3.4,3.9,3.6,2.4,2.0],X=i=>40+i*(550/9),Y=p=>160-(p-1.5)/2.7*140;
+  const S=[['建仓',3,0,'账号在几天里分批买入，价格基本不动。','同一账号或关联账户在低成交量时持续买入。'],
+    ['推荐',5,100,'账号发帖推荐，给出目标价，或表示自己在买入、持有、加仓。','发帖时间与发帖人自己的持仓。'],
+    ['跟进',6,100,'关注者涌入买入，成交量放大，价格上涨。','同一时段大量新开户或小额账户集中买入同一只股票。'],
+    ['出货',7,0,'账号在高位卖出全部持仓，没有告诉关注者。','推荐后短时间内的反向交易，这是 SEC 2022 年 12 月起诉中描述的模式。'],
+    ['回落',9,0,'买盘消失，价格回到原处，跟进买入的人承担损失。','事后可以把发帖、交易与价格放在同一条时间线上还原。']];
+  const steps=document.getElementById('u7-steps');steps.innerHTML=S.map((s,i)=>`<button type="button">${i+1} ${s[0]}</button>`).join('');
+  const bs=[...steps.children];document.getElementById('u7-ghost').setAttribute('points',P.map((p,j)=>X(j)+','+Y(p)).join(' '));const line=document.getElementById('u7-line'),dots=document.getElementById('u7-dots');
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));const end=S[i][1];
+    line.setAttribute('points',P.slice(0,end+1).map((p,j)=>X(j)+','+Y(p)).join(' '));
+    dots.innerHTML=`<circle class="u7-dot" cx="${X(end)}" cy="${Y(P[end])}" r="5"/>`;
+    const h=i===0?60:S[i][2];document.getElementById('u7-h').style.width=h+'%';document.getElementById('u7-hv').textContent=h?h+'%':'已清仓';
+    document.getElementById('u7-dh').textContent=(i+1)+'. '+S[i][0];document.getElementById('u7-dx').textContent=S[i][3];document.getElementById('u7-mon').textContent='监控能看到：'+S[i][4];}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-8">八、这一步留下的问题</h2>
+<p>价格有了反操纵、反内幕交易与卖空规则，新的问题随之出现：</p>
+<ol><li><strong>借钱买证券。</strong>卖空要借股票，看涨的人要借钱；保证金与融资让交易者用更少的钱影响更多的价格。</li><li><strong>开户的人是谁。</strong>操纵与内幕交易常常借用他人或境外账户；不知道账户背后是谁，就无法识别关联交易。</li><li><strong>能说什么、不能说什么。</strong>社区里的推荐、券商自己的营销与「达人」合作，都是对客户的沟通，需要另外的规则。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">市场秩序规则之外的三个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="n7" id="n7"></div>
+    <p class="n7-m" id="n7-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.n7{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.n7 button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.n7 button b{display:block;font-size:14px}.n7 button em{font-style:normal;font-size:12px;color:var(--faint)}
+.n7 button.on{border-color:var(--accent)}
+.n7-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.n7{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['借钱买证券','→ 第 8 章','卖空要借股票，看涨的人要借钱；保证金与融资让交易者用更少的钱影响更多的价格。'],
+    ['开户的人是谁','→ 第 10 章','操纵与内幕交易常常借用他人或境外账户；不知道账户背后是谁，就无法识别关联交易。'],
+    ['能说什么、不能说什么','→ 第 11 章','社区里的推荐、券商自己的营销与「达人」合作，都是对客户的沟通，需要另外的规则。']];
+  const g=document.getElementById('n7'),m=document.getElementById('n7-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-9">九、对产品的含义</h2>
+<p>本章的规则对金融产品有三条含义。第一，社区与交易在同一个 App 里时，券商同时掌握发帖内容与发帖人的交易记录，识别「推荐后卖出」在技术上可行，监管也会期待券商去做。第二，内幕交易的边界取决于信息从哪里来、谁对谁有义务；员工、合作方与数据供应商接触到的未公开信息，都需要有隔离与交易限制。第三，卖空数据的公开仍未落地，规则 13f-2 推迟到 2028 年；产品在展示卖空比例、空头头寸等指标时，要说明数据来源与口径，不能把交易所的卖空成交量当成空头头寸。当 AI 助手根据社区讨论生成摘要或荐股时，它也会成为传播链条的一环，需要同样的监控。</p>
+<h2 id="sec-10">参考文献</h2>
+<ul class="refs"><li>Chiarella v. United States, 445 U.S. 222 (1980).</li><li>Dirks v. SEC, 463 U.S. 646 (1983).</li><li>In re Cady, Roberts &amp; Co., 40 S.E.C. 907 (1961).</li><li>National Association of Private Fund Managers v. SEC, No. 23-60626 (5th Cir. Aug. 25, 2025).</li><li>Salman v. United States, 580 U.S. 39 (2016).</li><li>SEC v. Texas Gulf Sulphur Co., 401 F.2d 833 (2d Cir. 1968) (en banc).</li><li>Securities and Exchange Commission. (2000). <i>Selective Disclosure and Insider Trading</i> (Release No. 33-7881).</li><li>Securities and Exchange Commission. (2004). <i>Short Sales</i> (Regulation SHO, Release No. 34-50103).</li><li>Securities and Exchange Commission. (2008, September 19). Emergency order prohibiting short selling in financial companies (Press release 2008-211).</li><li>Securities and Exchange Commission. (2009). <i>Amendments to Regulation SHO</i> (Rule 204, Release No. 34-60388).</li><li>Securities and Exchange Commission. (2022). <i>Insider Trading Arrangements and Related Disclosures</i> (Release No. 33-11138).</li><li>Securities and Exchange Commission. (2022, December 14). <i>SEC Charges Eight Social Media Influencers in $100 Million Stock Manipulation Scheme Promoted on Discord and Twitter</i> (Press release 2022-221).</li><li>Securities and Exchange Commission. (2023). <i>Short Position and Short Activity Reporting by Institutional Investment Managers</i> (Release No. 34-98738).</li><li>Securities and Exchange Commission. (2025). <i>Order Granting Temporary Exemptive Relief from Compliance with Rule 13f-2 and Form SHO</i> (Release No. 34-104303, December 3, 2025).</li><li>Securities Exchange Act of 1934, 15 U.S.C. § 78i, § 78j(b), § 78p(b).</li><li>United States v. Constantinescu, No. 24-20143 (5th Cir. Oct. 2, 2025).</li><li>United States v. O'Hagan, 521 U.S. 642 (1997).</li></ul>
+<footer class="nav"><a href="s06.html">← 第 6 章　订单送到哪里成交</a><a href="s08.html">第 8 章　借钱买证券 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

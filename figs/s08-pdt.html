@@ -1,0 +1,46 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">同一个账户，两套日内规则</p><p class="figsub">设定账户权益、五个营业日内的日内交易次数和盘中最大持仓，切换 2001 年的形态日内交易者规则与 2026 年 6 月 4 日生效的日内保证金标准。盘中要求按多头股票 25% 的维持比例简化计算，经纪商的内部要求可能更高。示意。</p></div></div>
+    <div class="q8p-tabs" id="q8p-t"><button type="button" data-k="0">2001–2026：按次数</button><button type="button" data-k="1">2026 年 6 月起：按敞口</button></div>
+    <div class="q8p-ctl">
+      <label>账户权益 <b id="q8p-ev"></b><input type="range" id="q8p-e" min="1000" max="40000" step="500" value="8000"></label>
+      <label>五日内日内交易次数 <b id="q8p-nv"></b><input type="range" id="q8p-n" min="0" max="10" step="1" value="4"></label>
+      <label>盘中最大持仓 <b id="q8p-xv"></b><input type="range" id="q8p-x" min="0" max="160000" step="1000" value="20000"></label>
+    </div>
+    <div class="q8p-out" id="q8p-o"></div>
+  </div>
+</figure>
+<style>
+.q8p-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.q8p-tabs button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.q8p-tabs button.on{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.q8p-ctl{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;font-size:13px}.q8p-ctl input{width:100%;accent-color:var(--accent)}
+.q8p-out{margin-top:14px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.65}
+.q8p-out b{display:block;font-size:15px;margin-bottom:4px}
+.q8p-out.ok{background:var(--accent-soft)}
+@media (max-width:640px){.q8p-ctl{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),tabs=[...$('q8p-t').children],e=$('q8p-e'),n=$('q8p-n'),x=$('q8p-x');let k=1;
+  const f=v=>v.toLocaleString('en-US');
+  function run(){
+    const E=+e.value,N=+n.value,X=+x.value,o=$('q8p-o');
+    $('q8p-ev').textContent=f(E)+' 美元';$('q8p-nv').textContent=N+' 次';$('q8p-xv').textContent=f(X)+' 美元';
+    tabs.forEach(t=>t.classList.toggle('on',+t.dataset.k===k));
+    let ok,t;
+    if(k===0){
+      if(N<4){ok=true;t=`<b>不是形态日内交易者</b>五个营业日内不足 4 次日内交易，不受 25,000 美元门槛约束；即使盘中持仓达到 ${f(X)} 美元，这条规则也不过问。`;}
+      else if(E>=25000){ok=true;t=`<b>形态日内交易者，权益达标</b>${N} 次日内交易，被认定为形态日内交易者；权益 ${f(E)} 美元不低于 25,000 美元，可以继续日内交易。`;}
+      else{ok=false;t=`<b>形态日内交易者，权益不足</b>${N} 次日内交易，被认定为形态日内交易者；权益低于 25,000 美元，不得继续日内交易，直到补足。限制与盘中实际持仓多少无关。`;}
+    }else{
+      const need=0.25*X,def=need-E;
+      if(E<2000){ok=X<=E;t=`<b>低于 2,000 美元最低权益</b>可以使用保证金账户，但只能用自己的现金交易，不能借款。`+(X>E?` 盘中持仓 ${f(X)} 美元超过了现金。`:'');}
+      else if(def<=0){ok=true;t=`<b>没有日内保证金不足</b>交易次数不再计算。盘中最大持仓 ${f(X)} 美元，按 25% 计约需权益 ${f(Math.round(need))} 美元，账户权益 ${f(E)} 美元足够。`;}
+      else{ok=false;t=`<b>出现日内保证金不足约 ${f(Math.round(def))} 美元</b>须尽快补足，最长保留到第 15 个营业日收盘；习惯性地在第 5 个营业日前不补足的客户，经纪商须在 90 天内限制其新增借款与卖空。`;}
+    }
+    o.className='q8p-out'+(ok?' ok':'');o.innerHTML=t;
+  }
+  tabs.forEach(b=>b.addEventListener('click',()=>{k=+b.dataset.k;run();}));[e,n,x].forEach(i=>i.addEventListener('input',run));run();
+})();
+</script>

@@ -1,0 +1,26 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">市场秩序规则之外的三个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="n7" id="n7"></div>
+    <p class="n7-m" id="n7-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.n7{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.n7 button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.n7 button b{display:block;font-size:14px}.n7 button em{font-style:normal;font-size:12px;color:var(--faint)}
+.n7 button.on{border-color:var(--accent)}
+.n7-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.n7{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['借钱买证券','→ 第 8 章','卖空要借股票，看涨的人要借钱；保证金与融资让交易者用更少的钱影响更多的价格。'],
+    ['开户的人是谁','→ 第 10 章','操纵与内幕交易常常借用他人或境外账户；不知道账户背后是谁，就无法识别关联交易。'],
+    ['能说什么、不能说什么','→ 第 11 章','社区里的推荐、券商自己的营销与「达人」合作，都是对客户的沟通，需要另外的规则。']];
+  const g=document.getElementById('n7'),m=document.getElementById('n7-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

@@ -1,0 +1,32 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">同一只股票，在哪里成交</p><p class="figsub">切换年份，看成交分布在多少个场所。数字来自 SEC 2026 年 6 月提案（Release No. 34-105655）对 2005 年与 2026 年 1 月的描述，按成交金额计。</p></div></div>
+    <div class="o6-tg" id="o6-tg"><button type="button" class="on">2005 年</button><button type="button">2026 年 1 月</button></div>
+    <div class="o6-bar" id="o6-bar"></div>
+    <div class="o6-lg" id="o6-lg"></div>
+    <p class="o6-m" id="o6-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.o6-tg{display:flex;gap:6px;margin-bottom:14px}
+.o6-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.o6-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.o6-bar{display:flex;height:42px;border-radius:8px;overflow:hidden;gap:2px}
+.o6-bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;color:var(--card);transition:flex-basis .4s;overflow:hidden;white-space:nowrap}
+.o6-bar i.o6-a{background:var(--accent)}.o6-bar i.o6-b{background:var(--accent);opacity:.55}.o6-bar i.o6-c{background:var(--muted)}
+.o6-lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:10px}
+.o6-lg span i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.o6-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const Y=[[[80,'o6-a','一家交易所 约 80%'],[20,'o6-c','其他场所 约 20%']],'2005 年制定全国市场体系条例时，纽约证券交易所上市股票约 80% 的成交集中在一家交易所。'],
+    Z=[[[30,'o6-a','前三家交易所 30% 以上'],[20,'o6-b','其余 14 家交易所 约 20%'],[50,'o6-c','场外 约一半']],'2026 年 1 月，17 家交易所合计略高于一半，其中 10 家各自不到 1%；另一半在场外成交，包括 33 个另类交易系统与做市商。'];
+  const D=[Y,Z],bar=document.getElementById('o6-bar'),lg=document.getElementById('o6-lg'),m=document.getElementById('o6-m'),bs=[...document.getElementById('o6-tg').children];
+  function set(k){bs.forEach((b,j)=>b.classList.toggle('on',j===k));
+    bar.innerHTML=D[k][0].map(s=>`<i class="${s[1]}" style="flex:0 0 ${s[0]}%">${s[0]>=20?s[2].split(' ')[0]:''}</i>`).join('');
+    lg.innerHTML=D[k][0].map(s=>`<span><i class="${s[1]}" style="background:var(--${s[1]==='o6-c'?'muted':'accent'});opacity:${s[1]==='o6-b'?.55:1}"></i>${s[2]}</span>`).join('');
+    m.textContent=D[k][1];}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

@@ -1,0 +1,26 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">顾问规则之外的三个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="q9n" id="q9n"></div>
+    <p class="q9n-m" id="q9n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q9n{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.q9n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.q9n button b{display:block;font-size:14px}.q9n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.q9n button.on{border-color:var(--accent)}
+.q9n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.q9n{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['客户是谁','→ 第 10 章','经纪商与顾问都要先确认开户的人是谁、钱从哪里来；顾问业的反洗钱义务至今仍未生效。'],
+    ['说到什么程度','→ 第 11 章','营销规则管顾问的广告，经纪商的对客沟通另有规则；网红与社交媒体推广由谁负责。'],
+    ['意见来自 AI','→ 第 12 章','组合与建议由模型生成时，「合理了解客户」与「冲突披露」如何落实，谁对算法的偏向负责。']];
+  const g=document.getElementById('q9n'),m=document.getElementById('q9n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

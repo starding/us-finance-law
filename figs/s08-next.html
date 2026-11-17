@@ -1,0 +1,27 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">保证金规则之外的四个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="q8n" id="q8n"></div>
+    <p class="q8n-m" id="q8n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q8n{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.q8n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.q8n button b{display:block;font-size:14px}.q8n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.q8n button.on{border-color:var(--accent)}
+.q8n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.q8n{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['替人做决定的人','→ 第 9 章','客户把整个账户交给别人管理，买什么、借多少都由管理人决定，管理人对客户负有什么义务。'],
+    ['借钱的人是谁','→ 第 10 章','信贷与杠杆可能被用来转移资金；开户时要先确认客户是谁、钱从哪里来。'],
+    ['怎么介绍杠杆','→ 第 11 章','「购买力」「零门槛期权」这样的宣传，可以说到什么程度，风险要写在哪里。'],
+    ['由 AI 批准与提醒','→ 第 12 章','期权等级、追缴提醒与平仓顺序由模型决定时，尽职了解与负责人复核如何落实。']];
+  const g=document.getElementById('q8n'),m=document.getElementById('q8n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

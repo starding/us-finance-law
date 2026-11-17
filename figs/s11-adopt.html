@@ -1,0 +1,31 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">第三方的话，什么时候变成公司的话</p><p class="figsub">点选一个情形，看它是否构成公司的沟通及依据。依据 FINRA 监管通知 10-06、11-39、17-18 与 M1 Finance 案。</p></div></div>
+    <div class="k11a-g" id="k11a-g"></div>
+    <div class="k11a-d"><p class="k11a-h" id="k11a-h"></p><p id="k11a-x"></p></div>
+  </div>
+</figure>
+<style>
+.k11a-g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.k11a-g button{font:inherit;font-size:13px;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;line-height:1.45}
+.k11a-g button i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--line)}
+.k11a-g button i.y{background:var(--accent)}
+.k11a-g button.on{border-color:var(--accent)}
+.k11a-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.k11a-h{font-weight:600;margin:0 0 4px}.k11a-d p{margin:0}
+@media (max-width:640px){.k11a-g{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const D=[['客户在公司主页下自发留言称赞',0,'一般不是公司的沟通','公司没有认可也没有参与，帖子不按规则 2210 归属公司；例行删除不当言论，也不等于采纳其余留言（11-39）。'],
+    ['公司点赞或转发这条称赞',1,'采纳：成为公司的沟通','点赞、分享正面评论构成采纳，要按推荐语的要求处理，例如说明它不代表其他客户的经历（17-18）。'],
+    ['员工分享一篇第三方文章',1,'采纳：内容须符合规则','分享或链接特定第三方内容即构成采纳，内容连同原帖要符合与公司自写内容相同的标准（17-18）。'],
+    ['公司参与改写的博主文章',1,'牵连：成为公司的沟通','公司参与了内容的编写，就与内容牵连在一起，要为它负责（11-39）。'],
+    ['按开户数付费的网红帖子',1,'公司安排的推广：须审查、标明、留存','应明确标为广告（17-18）。M1 Finance 按每个开户入金账户付费，未事前批准、未留存，2024 年 3 月 18 日被罚 85 万美元。'],
+    ['链接到明知含有误导内容的网站',1,'不得链接','公司知道或有理由知道第三方网站含有虚假或误导内容的，不得链接（11-39、17-18）。']];
+  const g=document.getElementById('k11a-g'),h=document.getElementById('k11a-h'),x=document.getElementById('k11a-x');
+  g.innerHTML=D.map(d=>`<button type="button"><i class="${d[1]?'y':''}"></i>${d[0]}</button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));h.textContent=D[i][2];x.textContent=D[i][3];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

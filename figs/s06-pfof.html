@@ -1,0 +1,34 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">做市商的价差怎么分</p><p class="figsub">假设做市商与零售订单成交，每股可得的价差收益为 0.50 美分，自留 0.10 美分，其余在经纪商（订单流付费）与客户（价格改善）之间分配。拖动订单流付费，看一笔 1,000 股订单的分配。示意，数字为假设。</p></div></div>
+    <div class="f6-ctl">
+      <label>每股订单流付费 <b id="f6-pv"></b><input type="range" id="f6-p" min="0" max="40" step="2" value="10"></label>
+    </div>
+    <div class="f6-bar" id="f6-bar"><i class="f6-c"></i><i class="f6-b"></i><i class="f6-w"></i></div>
+    <div class="f6-lg"><span><i class="f6-c"></i>客户的价格改善 <b id="f6-cv"></b></span><span><i class="f6-b"></i>经纪商收到 <b id="f6-bv"></b></span><span><i class="f6-w"></i>做市商自留 <b id="f6-wv"></b></span></div>
+    <p class="f6-m" id="f6-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.f6-ctl{font-size:13.5px;margin-bottom:14px}.f6-ctl input{width:100%;accent-color:var(--accent)}
+.f6-bar{display:flex;height:24px;border-radius:6px;overflow:hidden}
+.f6-bar i{display:block;height:100%;transition:flex-basis .35s}
+.f6-c{background:var(--accent)}.f6-b{background:var(--accent);opacity:.45}.f6-w{background:var(--line)}
+.f6-lg{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:10px}
+.f6-lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.f6-lg b{color:var(--ink);font-weight:600}
+.f6-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),P=$('f6-p'),bar=$('f6-bar').children,TOT=0.50,KEEP=0.10,N=1000;
+  function run(){
+    const p=+P.value/100,ci=Math.max(0,TOT-KEEP-p),w=TOT-p-ci;
+    $('f6-pv').textContent=p.toFixed(2)+' 美分';
+    bar[0].style.flex=`0 0 ${ci/TOT*100}%`;bar[1].style.flex=`0 0 ${p/TOT*100}%`;bar[2].style.flex=`0 0 ${w/TOT*100}%`;
+    $('f6-cv').textContent=(ci*N/100).toFixed(2)+' 美元';$('f6-bv').textContent=(p*N/100).toFixed(2)+' 美元';$('f6-wv').textContent=(w*N/100).toFixed(2)+' 美元';
+    $('f6-m').textContent=p===0?'经纪商不收订单流付费，做市商可以把自留之外的价差全部让给客户。':ci<=0.0001?'订单流付费拿走了全部可分配的价差，客户得不到价格改善；客户看到的是免佣金，看不到这一部分。':'在这个假设下，经纪商每多收一分订单流付费，客户的价格改善就少一分。最佳执行审查要比较的，正是这一部分。';
+  }
+  P.addEventListener('input',run);run();
+})();
+</script>

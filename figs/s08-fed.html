@@ -1,0 +1,32 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">美联储规定的股票初始保证金，1934–2026</p><p class="figsub">点选图上的台阶，看每次调整的生效日期与比例。1934 年 10 月至 1937 年 10 月按公式计算，区间为 25%–45% 与 25%–55%，图中按上限画出。资料：美联储 2007 年年报表 8。</p></div></div>
+    <svg id="q8f-svg" viewBox="0 0 640 230" role="img" aria-label="初始保证金比例随时间变化的阶梯图"></svg>
+    <p class="q8f-msg" id="q8f-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+#q8f-svg{width:100%;height:auto;display:block;font-family:inherit}
+#q8f-svg .q8f-grid{stroke:var(--line);stroke-width:1}
+#q8f-svg .q8f-ax{fill:var(--faint);font-size:11px}
+#q8f-svg .q8f-line{fill:none;stroke:var(--accent);stroke-width:2}
+#q8f-svg .q8f-dot{fill:var(--card);stroke:var(--accent);stroke-width:2;cursor:pointer}
+#q8f-svg .q8f-dot.on{fill:var(--accent)}
+.q8f-msg{font-size:14px;margin:10px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const D=[['1934-10-01',45,'25%–45%，按公式计算'],['1936-02-01',55,'25%–55%，按公式计算'],['1936-04-01',55,''],['1937-11-01',40,''],['1945-02-05',50,''],['1945-07-05',75,''],['1946-01-21',100,'100%：不允许借钱买股票'],['1947-02-01',75,''],['1949-03-03',50,''],['1951-01-17',75,''],['1953-02-20',50,''],['1955-01-04',60,''],['1955-04-23',70,''],['1958-01-16',50,''],['1958-08-05',70,''],['1958-10-16',90,''],['1960-07-28',70,''],['1962-07-10',50,''],['1963-11-06',70,''],['1968-06-08',80,''],['1970-05-06',65,''],['1971-12-06',55,''],['1972-11-24',65,''],['1974-01-03',50,'50%：此后至今未再调整']];
+  const svg=document.getElementById('q8f-svg'),msg=document.getElementById('q8f-m'),L=40,R=625,T=12,Bt=200,y0=1934,y1=2026;
+  const yr=s=>{const [a,b,c]=s.split('-').map(Number);return a+(b-1)/12+(c-1)/365;};
+  const X=t=>L+(t-y0)/(y1-y0)*(R-L),Y=v=>Bt-(v/100)*(Bt-T);
+  let h='';[0,25,50,75,100].forEach(v=>{h+=`<line class="q8f-grid" x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="q8f-ax" x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v}%</text>`;});
+  [1934,1950,1974,2000,2026].forEach(t=>{h+=`<text class="q8f-ax" x="${X(t)}" y="${Bt+18}" text-anchor="middle">${t}</text>`;});
+  let p='';D.forEach((d,i)=>{const x=X(yr(d[0])),y=Y(d[1]);p+=(i?`L${x},${Y(D[i-1][1])}L${x},${y}`:`M${x},${y}`);});p+=`L${X(y1)},${Y(50)}`;
+  h+=`<path class="q8f-line" d="${p}"/>`;
+  D.forEach((d,i)=>{h+=`<circle class="q8f-dot" data-i="${i}" cx="${X(yr(d[0]))}" cy="${Y(d[1])}" r="5"><title>${d[0]} · ${d[1]}%</title></circle>`;});
+  svg.innerHTML=h;const dots=[...svg.querySelectorAll('.q8f-dot')];
+  const set=i=>{dots.forEach((c,j)=>c.classList.toggle('on',i===j));const d=D[i];msg.textContent=`${d[0].replace(/-/g,'.')} 起：${d[2]||d[1]+'%'}。`+(i===D.length-1?' 1934 年以来美联储共调整 23 次。':'');};
+  dots.forEach((c,i)=>c.addEventListener('click',()=>set(i)));set(D.length-1);
+})();
+</script>

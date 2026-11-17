@@ -1,0 +1,49 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">储备金：每周算一次，还是每天算一次</p><p class="figsub">客户贷方 100、客户借方 60（单位：亿美元）。周三有一笔客户入金。应存储备金 = 客户贷方 − 客户借方 ×（1 − 扣减比例）；每周计算的扣减 3%，每日计算的扣减 2%。示意。</p></div></div>
+    <div class="r5-ctl">
+      <div class="r5-tg"><button type="button" data-m="w" class="on">每周计算</button><button type="button" data-m="d">每日计算</button></div>
+      <label>周三客户入金 <b id="r5-iv">20</b><input type="range" id="r5-i" min="0" max="40" step="5" value="20"></label>
+    </div>
+    <div class="r5-ch" id="r5-ch"></div>
+    <div class="r5-lg"><span><i class="r5-need"></i>当天应有的储备</span><span><i class="r5-held"></i>账户里实际的储备</span></div>
+    <p class="r5-m" id="r5-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.r5-ctl{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;font-size:13.5px;margin-bottom:14px}
+.r5-ctl label{flex:1;min-width:200px}.r5-ctl input{width:100%;accent-color:var(--accent)}
+.r5-tg{display:flex;gap:6px}
+.r5-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.r5-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.r5-ch{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;height:170px;align-items:end}
+.r5-d{display:flex;gap:4px;align-items:flex-end;height:100%;position:relative;padding-bottom:20px}
+.r5-d i{flex:1;border-radius:4px 4px 0 0;transition:height .35s}
+.r5-d span{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:12px;color:var(--muted)}
+.r5-d.gap span{color:var(--accent);font-weight:600}
+.r5-need{background:var(--line)}.r5-held{background:var(--accent)}
+.r5-lg{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:8px}
+.r5-lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.r5-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),I=$('r5-i'),ch=$('r5-ch'),D=['周一','周二','周三','周四','周五'];
+  let M='w';
+  ch.innerHTML=D.map(d=>`<div class="r5-d"><i class="r5-need"></i><i class="r5-held"></i><span>${d}</span></div>`).join('');
+  const cols=[...ch.children];
+  function run(){
+    const inflow=+I.value;$('r5-iv').textContent=inflow;
+    const hc=M==='w'?0.03:0.02,need=D.map((d,i)=>100+(i>=2?inflow:0)-60*(1-hc));
+    const held=M==='w'?D.map(()=>100-60*(1-hc)):need.slice();
+    const top=90;let gapDays=0,maxGap=0;
+    cols.forEach((c,i)=>{c.children[0].style.height=need[i]/top*100+'%';c.children[1].style.height=held[i]/top*100+'%';
+      const g=need[i]-held[i];c.classList.toggle('gap',g>0.01);if(g>0.01){gapDays++;maxGap=Math.max(maxGap,g);}});
+    $('r5-m').textContent=M==='w'
+      ?(gapDays?`储备按上周五的数字存入，本周三入金之后，有 ${gapDays} 天账户里的储备比应有的少 ${maxGap.toFixed(0)} 亿美元，直到下一次计算。`:'本周没有新增客户现金，每周计算与应有储备一致。')
+      :`每天按当天的客户贷方重新计算，储备跟着客户现金变化；扣减比例从 3% 降为 2%，应存的储备也略高。`;
+  }
+  ch.parentNode.querySelectorAll('.r5-tg button').forEach(b=>b.addEventListener('click',()=>{M=b.dataset.m;b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));run();}));
+  I.addEventListener('input',run);run();
+})();
+</script>

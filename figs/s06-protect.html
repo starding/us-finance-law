@@ -1,0 +1,39 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">订单保护：不得无视别处的好价</p><p class="figsub">三家交易所的卖出报价如下。一张买入 600 股的订单到达交易所丙。切换订单保护规则（规则 611），看成交价格。示意。</p></div></div>
+    <div class="t6-tg"><button type="button" id="t6-b">规则 611：开</button></div>
+    <div class="t6-g" id="t6-g"></div>
+    <p class="t6-m" id="t6-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.t6-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:6px 12px;margin-bottom:14px}
+.t6-tg button.off{border-color:var(--line);background:var(--card);color:var(--muted)}
+.t6-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.t6-x{background:var(--quote);border-radius:10px;padding:12px;font-size:13px}
+.t6-x b{display:block;font-size:14px;margin-bottom:4px}
+.t6-x .t6-q{color:var(--muted)}
+.t6-x .t6-f{margin-top:8px;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.t6-x .t6-f i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.t6-x .t6-n{margin-top:6px;font-weight:600;min-height:1.4em}
+.t6-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.t6-g{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const X=[['交易所甲',10.01,100],['交易所乙',10.02,300],['交易所丙',10.03,600]],Q=600;
+  const g=document.getElementById('t6-g'),m=document.getElementById('t6-m'),b=document.getElementById('t6-b');let on=true;
+  g.innerHTML=X.map(x=>`<div class="t6-x"><b>${x[0]}</b><span class="t6-q">卖出报价 ${x[1].toFixed(2)} 美元 × ${x[2]} 股</span><div class="t6-f"><i></i></div><div class="t6-n"></div></div>`).join('');
+  const cs=[...g.children];
+  function run(){
+    b.textContent='规则 611：'+(on?'开':'关');b.classList.toggle('off',!on);
+    let fill=[0,0,0];
+    if(on){let r=Q;X.forEach((x,i)=>{const f=Math.min(r,x[2]);fill[i]=f;r-=f;});}else fill=[0,0,Q];
+    let cost=0;cs.forEach((c,i)=>{c.querySelector('i').style.width=fill[i]/X[i][2]*100+'%';c.querySelector('.t6-n').textContent=fill[i]?`成交 ${fill[i]} 股`:'';cost+=fill[i]*X[i][1];});
+    const avg=cost/Q,worst=Q*10.03-cost;
+    m.textContent=on?`交易所丙须先把订单送到甲、乙的更好报价，或自己以不劣于它们的价格成交。平均成交价 ${avg.toFixed(4)} 美元，比全部按 10.03 成交少付 ${worst.toFixed(0)} 美元。`
+      :'没有订单保护，丙可以全部按自己的 10.03 美元成交，甲、乙更好的报价被「穿过」，投资者多付了钱，挂出好价的人也没有成交。';
+  }
+  b.addEventListener('click',()=>{on=!on;run();});run();
+})();
+</script>

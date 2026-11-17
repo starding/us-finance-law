@@ -1,0 +1,36 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">买方分不清好坏时，好公司会退出</p><p class="figsub">十家公司的真实价值从 2 到 20 不等，买方只按留在市场上的公司的平均价值出价。拖动滑块，看一轮轮之后还剩下谁。示意。</p></div></div>
+    <div class="lm-ctl"><label>买方能核实的比例 <b id="lm-v">0%</b><input type="range" id="lm-s" min="0" max="100" step="10" value="0"></label></div>
+    <div class="lm-bars" id="lm-b"></div>
+    <p class="lm-msg" id="lm-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.lm-ctl{font-size:13.5px;margin-bottom:12px}.lm-ctl input{width:100%;accent-color:var(--accent)}
+.lm-bars{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;align-items:end;height:150px}
+.lm-bar{background:var(--accent);border-radius:5px 5px 0 0;position:relative;transition:opacity .4s,background .4s}
+.lm-bar.out{background:var(--line);opacity:.6}
+.lm-bar span{position:absolute;top:-18px;left:0;right:0;text-align:center;font-size:11px;color:var(--muted)}
+.lm-msg{font-size:14px;margin:12px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const V=[2,4,6,8,10,12,14,16,18,20],b=document.getElementById('lm-b'),s=document.getElementById('lm-s'),m=document.getElementById('lm-m'),v=document.getElementById('lm-v');
+  b.innerHTML=V.map(x=>`<div class="lm-bar" style="height:${x/20*100}%"><span>${x}</span></div>`).join('');
+  const bars=[...b.children];
+  function run(){
+    const k=+s.value/100;v.textContent=s.value+'%';
+    let inn=V.map(()=>true),price=0;
+    for(let r=0;r<20;r++){
+      const left=V.filter((x,i)=>inn[i]);if(!left.length)break;
+      const avg=left.reduce((a,c)=>a+c,0)/left.length;
+      inn=V.map((x,i)=>inn[i]&&(k*x+(1-k)*avg)>=x*0.95);price=avg;
+    }
+    bars.forEach((e,i)=>e.classList.toggle('out',!inn[i]));
+    const n=inn.filter(Boolean).length;
+    m.textContent=n===10?'买方能核实足够多的信息，每家公司都按接近真实价值的价格发行，没有公司退出。':`剩下 ${n} 家公司，买方出价约 ${price.toFixed(1)}；真实价值高于这个价格的公司觉得吃亏，退出了市场。`;
+  }
+  s.addEventListener('input',run);run();
+})();
+</script>

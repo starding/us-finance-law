@@ -1,0 +1,34 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一份书面沟通属于哪一类</p><p class="figsub">选择受众，拖动 30 个自然日内收到它的零售投资者人数，看分类与义务。依据 FINRA 规则 2210。</p></div></div>
+    <div class="k11c-q"><span>受众</span><div class="k11c-b" id="k11c-a"><button type="button" data-v="0">只有机构投资者</button><button type="button" data-v="1">包括零售投资者</button></div></div>
+    <div class="k11c-q" id="k11c-sw"><span>30 天内的零售收件人：<b id="k11c-n"></b> 人</span><input type="range" min="1" max="100" value="5" id="k11c-r" aria-label="零售收件人数"></div>
+    <div class="k11c-out"><p class="k11c-h" id="k11c-h"></p><div class="k11c-g" id="k11c-g"></div></div>
+  </div>
+</figure>
+<style>
+.k11c-q{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-size:14px;flex-wrap:wrap}
+.k11c-q input{flex:1;min-width:180px;max-width:360px}
+.k11c-b{display:flex;gap:6px;flex-wrap:wrap}.k11c-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.k11c-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.k11c-out{background:var(--accent-soft);border-radius:10px;padding:12px 14px}
+.k11c-h{margin:0 0 8px;font-weight:600;font-size:15px}
+.k11c-g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.k11c-g div{background:var(--card);border-radius:8px;padding:8px;font-size:12.5px;line-height:1.5}.k11c-g em{display:block;font-style:normal;color:var(--faint);font-size:12px}
+@media (max-width:640px){.k11c-g{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const st={a:1,n:5};const a=document.getElementById('k11c-a'),r=document.getElementById('k11c-r'),n=document.getElementById('k11c-n'),h=document.getElementById('k11c-h'),g=document.getElementById('k11c-g'),sw=document.getElementById('k11c-sw');
+  const C={inst:['机构沟通',['按公司书面程序审查','不需向 FINRA 报备','公平且平衡等内容标准','须留存']],
+    retail:['零售沟通',['注册负责人在使用或报备前批准','新会员首年部分须事前 10 个工作日报备；推荐特定基金等须使用后 10 个工作日内报备','公平且平衡等内容标准','须留存，记录批准人与日期']],
+    corr:['往来函件',['不需事前批准，按规则 3110 监督、抽查','不需报备','公平且平衡等内容标准','按规则 3110 与 4511 留存']]};
+  const L=['审查','报备','内容','记录'];
+  function upd(){a.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.a));n.textContent=st.n;sw.style.opacity=st.a?1:.35;r.disabled=!st.a;
+    const k=!st.a?'inst':st.n>25?'retail':'corr';const c=C[k];
+    h.textContent=c[0]+(k==='inst'?'：公司有理由相信会被转给零售投资者的，不能按此处理':k==='retail'?'：30 天内超过 25 名零售投资者':'：30 天内不超过 25 名零售投资者');
+    g.innerHTML=c[1].map((x,i)=>`<div><em>${L[i]}</em>${x}</div>`).join('');}
+  a.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st.a=+b.dataset.v;upd();}));
+  r.addEventListener('input',()=>{st.n=+r.value;upd();});upd();
+})();
+</script>

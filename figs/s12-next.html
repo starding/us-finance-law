@@ -1,0 +1,27 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">证券篇到此结束。点选一个，看它通向哪里。</p></div></div>
+    <div class="k12n" id="k12n"></div>
+    <p class="k12n-m" id="k12n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.k12n{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.k12n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.k12n button b{display:block;font-size:14px}.k12n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.k12n button.on{border-color:var(--accent)}
+.k12n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.k12n{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['规则合起来的样子','→ 篇末：证券篇的规则地图','各章的规则卡按问题与年份排在一张图上，第 12 章重新检验的规则以空心点标出。'],
+    ['存款与贷款','→ 银行篇（待写）','银行吸收存款、发放贷款，同样面对信息不对称与中间人的利益；AI 审批贷款、推荐存款产品时，问题如何重现。'],
+    ['长期的承诺','→ 保险篇（待写）','保单可能持续数十年，卖的人与买的人之间的信息差距更大，销售规则也另成一套。'],
+    ['带杠杆的合约','→ 衍生品篇（待写）','期货、期权与互换以小博大，风险集中在少数对手方，监管由另一套机构与规则承担。']];
+  const g=document.getElementById('k12n'),m=document.getElementById('k12n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

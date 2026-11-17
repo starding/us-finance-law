@@ -1,0 +1,27 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">两种回应：替人判断，还是要求说真话</p><p class="figsub">点选一个维度，对比州蓝天法的实质审查与联邦《证券法》的披露。</p></div></div>
+    <div class="tw-tabs" id="tw-t"></div>
+    <div class="tw-grid"><div class="tw-c"><b>州蓝天法 · 实质审查</b><p id="tw-a"></p></div><div class="tw-c fed"><b>联邦《证券法》 · 披露</b><p id="tw-b"></p></div></div>
+  </div>
+</figure>
+<style>
+.tw-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tw-tabs button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.tw-tabs button.on{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.tw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tw-c{background:var(--quote);border-radius:10px;padding:12px 14px}.tw-c.fed{background:var(--accent-soft)}
+.tw-c b{font-size:14px}.tw-c p{font-size:13.5px;margin:6px 0 0;line-height:1.6}
+@media (max-width:640px){.tw-grid{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[['政府做什么','判断发行是否公平、合理，可以拒绝不合格的发行','只检查信息是否按规定写全；不判断证券的价值'],
+    ['谁来判断好坏','州政府','投资者与市场'],['对有风险的发行','可能被挡在门外，即使它有价值','可以发行，只要风险写清楚'],
+    ['管得到的范围','本州之内；跨州邮寄销售难以追究','全国；凡使用州际商业手段或邮件的公开发行'],['约束假话的方式','行政处罚为主','发行人、董事、承销商与专家承担民事责任']];
+  const t=document.getElementById('tw-t'),a=document.getElementById('tw-a'),b=document.getElementById('tw-b');
+  t.innerHTML=D.map((d,i)=>`<button type="button">${d[0]}</button>`).join('');
+  const bs=[...t.children];const set=i=>{bs.forEach((x,j)=>x.classList.toggle('on',i===j));a.textContent=D[i][1];b.textContent=D[i][2];};
+  bs.forEach((x,i)=>x.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

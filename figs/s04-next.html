@@ -1,0 +1,27 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">中间人的注册与推荐标准之外的四个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="s4nx" id="s4nx"></div>
+    <p class="s4nx-m" id="s4nx-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.s4nx{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.s4nx button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.s4nx button b{display:block;font-size:14px}.s4nx button em{font-style:normal;font-size:12px;color:var(--faint)}
+.s4nx button.on{border-color:var(--accent)}
+.s4nx-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.s4nx{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['客户的钱放在哪里','→ 第 5 章','客户的现金与证券由经纪商保管，经纪商挪用或倒闭时，客户能拿回多少。'],
+    ['订单送到哪里成交','→ 第 6 章','零佣金之下，券商把订单交给谁执行、从中收到什么，会影响客户的成交价格。'],
+    ['替人管钱的人','→ 第 9 章','投资顾问对客户负有受托义务，与经纪商的最佳利益标准有何不同。'],
+    ['推荐来自 AI','→ 第 12 章','推荐由模型生成、按用户画像实时调整时，推荐、最佳利益、合理依据各自意味着什么。']];
+  const g=document.getElementById('s4nx'),m=document.getElementById('s4nx-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

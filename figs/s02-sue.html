@@ -1,0 +1,40 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁能依据规则 10b-5 起诉索赔</p><p class="figsub">一家公司在年报里虚报了利润。选择投资者的处境与公司的心理状态，看能否提起私人损害赔偿诉讼。</p></div></div>
+    <p class="s2sue-q">投资者做了什么</p>
+    <div class="s2sue-b" id="s2sue-p"><button type="button" data-v="0">看到年报后买入</button><button type="button" data-v="1">在真相公布前卖出</button><button type="button" data-v="2">原本持有，因此没卖</button><button type="button" data-v="3">原本想买，因此没买</button></div>
+    <p class="s2sue-q">公司的心理状态</p>
+    <div class="s2sue-b" id="s2sue-d"><button type="button" data-v="0">明知利润是虚报的</button><button type="button" data-v="1">严重轻率，不顾明显的危险</button><button type="button" data-v="2">一般过失，算错了</button></div>
+    <div class="s2sue-r" id="s2sue-r"><div class="s2sue-k" id="s2sue-k"></div><div class="s2sue-x"><p id="s2sue-a"></p><p id="s2sue-c"></p></div></div>
+  </div>
+</figure>
+<style>
+.s2sue-q{font-size:13px;color:var(--muted);margin:0 0 6px}
+.s2sue-b{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.s2sue-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s2sue-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s2sue-r{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:stretch}
+.s2sue-k{border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;text-align:center;padding:8px;background:var(--quote);color:var(--ink);transition:background .3s}
+.s2sue-k.ok{background:var(--accent);color:#fff}
+.s2sue-x{background:var(--quote);border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.6}
+.s2sue-x p{margin:0}.s2sue-x p+p{margin-top:6px;color:var(--muted)}
+@media (max-width:640px){.s2sue-r{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const st={p:0,d:0},k=document.getElementById('s2sue-k'),a=document.getElementById('s2sue-a'),c=document.getElementById('s2sue-c');
+  const P=['买入者是规则 10b-5 下的适格原告。','卖出者同样是适格原告：规则 10b-5 管买方与卖方两边。','只持有、没有交易的人不是买方或卖方。蓝筹邮票公司案（1975）认为，「本来会卖」只能靠口头证词证明，被告难以反驳，因此排除在外。','没有买入的人不是买方。蓝筹邮票公司案中的药店正是这种处境：它说招股说明书写得过于悲观，让它错过了认购，法院驳回了它的诉讼。'];
+  const D=['明知而为，满足故意要件。','霍克费尔德案（1976）要求故意，没有直接回答轻率是否足够；此后各巡回法院普遍认为严重的轻率可以满足。','霍克费尔德案（1976）认为一般过失不足以构成规则 10b-5 下的责任。'];
+  function upd(){
+    const ok=st.p<2&&st.d<2;
+    k.textContent=ok?'可以起诉':'不能起诉';k.classList.toggle('ok',ok);
+    a.textContent=P[st.p]+D[st.d];
+    c.textContent=ok?'还须证明：虚报的利润具有重大性，投资者依赖了它（在交易所中可推定，见第五节），并因此受到损失。':'私人诉讼的大门关上了，但 SEC 的执法不受买卖者要件的限制；一般过失的虚报还可能违反第 13(a) 条的报告义务。';
+    document.querySelectorAll('#s2sue-p button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.p));
+    document.querySelectorAll('#s2sue-d button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.d));
+  }
+  document.querySelectorAll('#s2sue-p button').forEach(b=>b.addEventListener('click',()=>{st.p=+b.dataset.v;upd();}));
+  document.querySelectorAll('#s2sue-d button').forEach(b=>b.addEventListener('click',()=>{st.d=+b.dataset.v;upd();}));
+  upd();
+})();
+</script>

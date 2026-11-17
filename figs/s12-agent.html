@@ -1,0 +1,34 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁在给建议、谁在下单</p><p class="figsub">选择行动者与行为，看现有规则是否适用。资料截至 2026 年 11 月。</p></div></div>
+    <div class="k12a-q"><span>行动者</span><div class="k12a-b" id="k12a-w"><button type="button" data-v="0">客户本人</button><button type="button" data-v="1">券商自己的 AI</button><button type="button" data-v="2">客户自带的 AI 代理</button></div></div>
+    <div class="k12a-q"><span>行为</span><div class="k12a-b" id="k12a-a"><button type="button" data-v="0">给出买卖建议</button><button type="button" data-v="1">下单</button></div></div>
+    <div class="k12a-g" id="k12a-g"></div>
+    <div class="k12a-k"><span><i class="s1"></i>适用</span><span><i class="s0"></i>不适用</span><span><i class="s2"></i>尚无明确规则</span></div>
+  </div>
+</figure>
+<style>
+.k12a-q{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;font-size:14px;flex-wrap:wrap}
+.k12a-b{display:flex;gap:6px;flex-wrap:wrap}.k12a-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.k12a-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.k12a-g{display:grid;gap:6px;margin-top:10px}
+.k12a-r{display:grid;grid-template-columns:14px 190px 1fr;gap:10px;align-items:start;padding:9px 12px;border-radius:9px;background:var(--quote);font-size:13.5px;line-height:1.5}
+.k12a-r i,.k12a-k i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-top:5px}
+.s1{background:var(--accent)}.s0{background:var(--line)}.s2{background:transparent;border:2px dashed var(--accent);box-sizing:border-box}
+.k12a-k{display:flex;gap:14px;font-size:12px;color:var(--faint);margin-top:10px}.k12a-k i{margin:0 4px 0 0;vertical-align:-1px}
+@media (max-width:640px){.k12a-r{grid-template-columns:14px 1fr}.k12a-r span:last-child{grid-column:2}}
+</style>
+<script>
+(function(){
+  const D={'0-0':[['经纪商的规则',0,'客户自己的判断，不受经纪商行为规则约束']],
+    '0-1':[['最佳执行',1,'经纪商为客户的订单寻求最有利的条件'],['保证金',1,'T 条例与规则 4210 的借款上限'],['最佳利益规则',0,'没有经纪商的推荐，不适用']],
+    '1-0':[['最佳利益规则',1,'针对零售客户、构成推荐时适用（FINRA 常见问题 B.4、D.8 脚注）'],['对公众沟通规则 2210',1,'内容须公平且平衡，不得预测收益'],['监督与留存',1,'规则 3110 监督；按 SEC 与 FINRA 记录规则留存']],
+    '1-1':[['全权委托的书面授权',1,'由券商替客户决定买卖，须事先取得客户书面授权（规则 3260）；以顾问服务提供时适用受托义务'],['最佳执行',1,'与人工下单相同'],['监督',1,'FINRA 2026 年度报告提示代理可能越权，要求公司自行监督']],
+    '2-0':[['最佳利益规则',0,'不是经纪商的推荐'],['对公众沟通规则 2210',0,'不是经纪商的沟通'],['代理提供者是否属于投资顾问',2,'SEC 尚无表述']],
+    '2-1':[['经纪商如何看待这笔订单',1,'用客户的凭证下单，视为客户本人的指令'],['全权委托的书面授权',0,'不是经纪商行使全权委托，规则 3260 不适用'],['最佳执行',1,'经纪商对收到的订单仍负有义务'],['授权范围、上限与越权责任',2,'SEC 与 FINRA 均未发布规则或解释']]};
+  const st={w:2,a:1},g=document.getElementById('k12a-g');
+  function upd(){['w','a'].forEach(k=>document.getElementById('k12a-'+k).querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st[k])));
+    g.innerHTML=D[st.w+'-'+st.a].map(r=>`<div class="k12a-r"><i class="s${r[1]}"></i><b>${r[0]}</b><span>${r[2]}</span></div>`).join('');}
+  ['w','a'].forEach(k=>document.getElementById('k12a-'+k).querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st[k]=+b.dataset.v;upd();})));upd();
+})();
+</script>

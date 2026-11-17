@@ -1,0 +1,37 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁算投资顾问，向谁注册</p><p class="figsub">回答四个问题，按《投资顾问法》第 202(a)(11) 条判断；再拖动管理规模，看向 SEC 还是向州注册。银行与专业人士的排除未列出。</p></div></div>
+    <div class="q9w-q" id="q9w-q"></div>
+    <div class="q9w-aum"><label>管理资产规模 <b id="q9w-av"></b><input type="range" id="q9w-a" min="10" max="300" step="5" value="120"></label></div>
+    <div class="q9w-r" id="q9w-r" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q9w-q>div{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;font-size:14px}.q9w-q p{margin:0}
+.q9w-q span{display:flex;gap:6px;flex:none}.q9w-q button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 14px;border-radius:999px;cursor:pointer}
+.q9w-q button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.q9w-aum{font-size:13.5px;margin:6px 0 10px}.q9w-aum input{width:100%;accent-color:var(--accent)}
+.q9w-r{background:var(--quote);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.65}.q9w-r b{display:block;font-size:15px;margin-bottom:2px}
+.q9w-r.y{background:var(--accent-soft)}
+@media (max-width:640px){.q9w-q>div{flex-direction:column;align-items:flex-start}}
+</style>
+<script>
+(function(){
+  const Q=[['c','是否为提供证券意见取得报酬？',1],['b','是否以此为业（经常、持续地提供）？',1],['p','是否为普遍定期发行的报刊或财经出版物的出版人？',0],['d','是否为经纪自营商，意见仅附带于经纪业务且不另收费？',0]];
+  const st={},q=document.getElementById('q9w-q'),r=document.getElementById('q9w-r'),a=document.getElementById('q9w-a'),av=document.getElementById('q9w-av');
+  Q.forEach(x=>st[x[0]]=x[2]);
+  q.innerHTML=Q.map(x=>`<div><p>${x[1]}</p><span data-k="${x[0]}"><button type="button" data-v="1">是</button><button type="button" data-v="0">否</button></span></div>`).join('');
+  function run(){
+    q.querySelectorAll('span').forEach(g=>g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st[g.dataset.k])));
+    const A=+a.value;av.textContent=A+' 百万美元';let t,y=false;
+    if(!st.c)t='<b>不是投资顾问</b>定义要求「为取得报酬」；免费提供意见不落入定义。';
+    else if(!st.b)t='<b>通常不是投资顾问</b>定义要求以提供证券意见为业；偶尔一次的意见一般不构成。';
+    else if(st.p)t='<b>排除（D）：出版人</b>真正的、普遍定期发行的报刊与财经出版物的出版人不属于投资顾问。';
+    else if(st.d)t='<b>排除（C）：经纪自营商</b>意见仅附带于经纪业务、不收取特别报酬，不必另行注册为顾问，但作为经纪商受最佳利益规则约束（第 4 章）。';
+    else{y=true;const where=A<100?'一般向所在州注册，不得向 SEC 注册':A<110?'可以选择向 SEC 注册，也可以留在州（1 亿至 1.1 亿美元之间）':'必须向 SEC 注册';
+      t=`<b>是投资顾问</b>受《投资顾问法》第 206 条的反欺诈条款与受托义务约束。管理规模 ${A} 百万美元：${where}。`;}
+    r.className='q9w-r'+(y?' y':'');r.innerHTML=t;
+  }
+  q.querySelectorAll('span').forEach(g=>g.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st[g.dataset.k]=+b.dataset.v;run();})));a.addEventListener('input',run);run();
+})();
+</script>

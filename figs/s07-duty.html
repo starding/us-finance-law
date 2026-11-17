@@ -1,0 +1,40 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁对谁有义务</p><p class="figsub">六个案件里的交易者都掌握了别人不知道的信息，结果却不同。点选一个，看义务从哪里来。</p></div></div>
+    <div class="d7" id="d7"></div>
+    <div class="d7-d">
+      <div class="d7-chain" id="d7-c"></div>
+      <p class="d7-h" id="d7-h"></p><p id="d7-x"></p>
+    </div>
+  </div>
+</figure>
+<style>
+.d7{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:12px}
+.d7 button{font:inherit;font-size:12.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:9px 6px;text-align:center;line-height:1.35}
+.d7 button small{display:block;color:var(--faint);font-size:11.5px}
+.d7 button.on{border-color:var(--accent)}
+.d7-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.d7-chain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;font-size:12.5px}
+.d7-chain span{background:var(--card);border-radius:999px;padding:3px 10px}
+.d7-chain i{font-style:normal;color:var(--muted)}
+.d7-chain i.d7-br{color:var(--accent);font-weight:600}
+.d7-h{font-weight:600;margin:0 0 4px}.d7-d p{margin:0}
+@media (max-width:640px){.d7{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script>
+(function(){
+  const C=[['卡迪·罗伯茨','1961',['公司董事','经纪商合伙人','卖出客户股票'],[1],'违反：披露或放弃','掌握公司未公开信息的人，交易前要公开；不能公开，就不交易。SEC 的行政裁决。'],
+    ['德州海湾硫磺','1968',['公司','知情的董事与员工','买入股票与期权'],[1],'违反','矿藏发现正式公布之前买入。内部人要等信息公开并被市场吸收后才能交易。'],
+    ['奇亚雷拉','1980',['收购方','财务印刷公司','印刷工买入目标公司股票'],[],'不违反','他与目标公司的股东之间没有信任关系；仅仅掌握未公开的市场信息，不产生披露义务。'],
+    ['德克斯','1983',['公司前高管','分析师德克斯','客户卖出'],[],'不违反','前高管为揭露欺诈而告诉德克斯，没有获得个人利益，没有违反义务；接受消息的人也就不承担责任。'],
+    ['奥黑根','1997',['收购方客户','律所','律师买入目标公司股票与期权'],[1],'违反：挪用理论','他违反的是对信息来源（律所与客户）的保密义务，把受托保管的信息据为己用。'],
+    ['萨尔曼','2016',['投资银行家','他的兄弟','萨尔曼交易'],[0],'违反','把机密信息作为礼物送给从事交易的亲属，本身就构成个人利益。']];
+  const g=document.getElementById('d7'),c=document.getElementById('d7-c'),h=document.getElementById('d7-h'),x=document.getElementById('d7-x');
+  g.innerHTML=C.map(k=>`<button type="button">${k[0]}<small>${k[1]}</small></button>`).join('');
+  const bs=[...g.children];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));const k=C[i];
+    c.innerHTML=k[2].map((n,j)=>`<span>${n}</span>`+(j<k[2].length-1?`<i class="${k[3].includes(j)?'d7-br':''}">${k[3].includes(j)?'→ 违反义务 →':'→'}</i>`:'')).join('');
+    h.textContent=k[0]+'（'+k[1]+'）：'+k[4];x.textContent=k[5];}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

@@ -1,0 +1,37 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这笔交易要不要报告</p><p class="figsub">选择金额与情形，按经纪自营商可疑活动报告规则（31 CFR 1023.320）判断。情形描述为示意。</p></div></div>
+    <label class="q10s-l">涉及金额（单笔或相关交易合计） <b id="q10s-v"></b><input type="range" id="q10s-a" min="1000" max="20000" step="500" value="7000"></label>
+    <div class="q10s-c" id="q10s-c"></div>
+    <div class="q10s-out" id="q10s-o" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q10s-l{display:block;font-size:13.5px}.q10s-l input{width:100%;accent-color:var(--accent)}
+.q10s-c{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}
+.q10s-c button{font:inherit;font-size:13px;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:9px 11px;line-height:1.5}
+.q10s-c button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.q10s-c button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10s-out{border-radius:10px;padding:12px 14px;background:var(--quote);font-size:14px;line-height:1.65}.q10s-out b{display:block;font-size:15px}
+.q10s-out.y{background:var(--accent-soft)}
+@media (max-width:640px){.q10s-c{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const C=[['入金后两天全额转出到第三方账户，几乎没有交易','没有明显合法目的、与客户正常活动不符',1],
+    ['每次存入 9,500 美元现金，连续多日','为规避现金交易报告而拆分',1],
+    ['多个新账户使用同一设备，对同一低价股反复对敲','利用经纪商从事犯罪（操纵）',1],
+    ['退休客户按月卖出基金、转回本人银行账户','与客户正常活动相符',0]];
+  const $=id=>document.getElementById(id),a=$('q10s-a'),c=$('q10s-c');let k=0;
+  c.innerHTML=C.map(x=>`<button type="button">${x[0]}<em>${x[1]}</em></button>`).join('');const bs=[...c.children];
+  function run(){
+    const A=+a.value;$('q10s-v').textContent=A.toLocaleString('en-US')+' 美元';bs.forEach((b,j)=>b.classList.toggle('on',j===k));
+    const o=$('q10s-o');let y=false,t;
+    if(!C[k][2])t='<b>一般不需报告</b>交易与客户已知的情况相符、有合理解释，不属于规则列举的情形。';
+    else if(A<5000)t='<b>低于 5,000 美元，不是强制报告</b>规则要求报告的交易须涉及至少 5,000 美元（单笔或合计）。经纪商仍可自愿报告，相关交易合计达到门槛的也须报告。';
+    else{y=true;t='<b>须提交可疑活动报告</b>最初发现后 30 天内向 FinCEN 提交，尚未查明嫌疑人的最长 60 天；不得告知客户已经报告；报告与依据材料保存五年。'+(k===1?' 拆分现金存入本身也可能违反禁止拆分交易的规定。':'');}
+    o.className='q10s-out'+(y?' y':'');o.innerHTML=t;
+  }
+  a.addEventListener('input',run);bs.forEach((b,j)=>b.addEventListener('click',()=>{k=j;run();}));run();
+})();
+</script>

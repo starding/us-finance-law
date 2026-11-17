@@ -1,0 +1,29 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">从现金账户到组合保证金：每一级多了什么</p><p class="figsub">点选一级，看它适用的规则、门槛与经纪商要做的事。期权的分级是行业做法，规则只要求逐项审批。</p></div></div>
+    <div class="q8d-steps" id="q8d-s"></div>
+    <div class="q8d-card" id="q8d-c" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q8d-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;align-items:end}
+.q8d-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.q8d-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.q8d-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q8d-card{margin-top:12px;display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.q8d-card dt{color:var(--faint)}.q8d-card dd{margin:0}
+@media (max-width:640px){.q8d-steps{grid-template-columns:1fr 1fr}.q8d-card{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['现金账户','不借钱',[['规则','全额付款买入，不涉及 T 条例的信贷'],['门槛','无'],['风险','最多亏掉投入的本金'],['经纪商要做的事','客户身份识别等开户程序（第 10 章）']]],
+    ['保证金账户','借钱买入',[['规则','T 条例：初始自付至少 50%；FINRA 规则 4210：多头维持 25%'],['门槛','以借款交易须有 2,000 美元权益'],['风险','亏损可以超过存入的资金；可能被不经通知地卖出'],['经纪商要做的事','开户前单独交付规则 2264 的风险披露，每年再交付一次；在线开户的须放在网站上']]],
+    ['日内交易','一天内进出',[['规则','2026 年 6 月 4 日起为日内保证金标准，取代形态日内交易者规则'],['门槛','不再有 25,000 美元门槛；盘中敞口须与权益相当'],['风险','盘中不足须尽快补足，习惯性不补足将被限制 90 天'],['经纪商要做的事','每天至少计算一次日内保证金不足；过渡期至 2027 年 10 月 20 日']]],
+    ['期权','分级审批',[['规则','FINRA 规则 2360(b)(16)：批准前尽职了解客户；可以只批准部分策略'],['门槛','由经纪商按经验、资产与目标设定，通常从买入期权、备兑开仓到无备兑卖出逐级升高'],['风险','卖出期权的亏损可能远超收到的权利金'],['经纪商要做的事','由期权注册负责人等审批；交付《标准化期权的特征与风险》；审批须覆盖所批准的全部策略']]],
+    ['组合保证金','按组合计算',[['规则','FINRA 规则 4210(g)；纽约证券交易所 2005 年试点，2008 年转为常设'],['门槛','由经纪商设定资格；持有场外衍生品的须有 500 万美元权益'],['风险','对冲组合的要求更低，杠杆可能更高'],['经纪商要做的事','按价格情景测算整个组合的最大亏损；监控集中持仓']]]];
+  const s=document.getElementById('q8d-s'),c=document.getElementById('q8d-c');
+  s.innerHTML=S.map((x,i)=>`<button type="button" style="min-height:${54+i*10}px">${x[0]}<em>${x[1]}</em></button>`).join('');
+  const bs=[...s.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));c.innerHTML=S[i][2].map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(1);
+})();
+</script>

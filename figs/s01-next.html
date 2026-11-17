@@ -1,0 +1,26 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">发行规则之外的三个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="nx1" id="nx1"></div>
+    <p class="nx1-m" id="nx1-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.nx1{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.nx1 button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.nx1 button b{display:block;font-size:14px}.nx1 button em{font-style:normal;font-size:12px;color:var(--faint)}
+.nx1 button.on{border-color:var(--accent)}
+.nx1-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.nx1{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['证券转手之后','→ 第 2 章','发行只发生一次，证券却不断转手；发行人此后发布的信息、交易所里的交易，需要另一部法律。'],
+    ['什么算证券','→ 第 3 章','把产品设计成不叫股票、也不叫债券的样子，能否绕开注册。'],
+    ['卖证券的中间人','→ 第 4 章','推销员与经纪商有自己的利益，他们对投资者说的话谁来约束。']];
+  const g=document.getElementById('nx1'),m=document.getElementById('nx1-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>客户的钱放在经纪商那里</title>
+<meta name="description" content="《美国金融业法律研究》证券篇第 5 章：客户把现金和证券放在经纪商那里，经纪商可以拿去自用，一旦倒闭，客户与其他债权人一起排队。1968–1970 年的文书危机让一批经纪商倒闭，国会在 1970 年设立 SIPC，SEC 随后要求经纪商把客户资产与自有资产分开（规则 15c3-3）、保持足够的流动资本（规则 15c3-1）。今天的问题转到了现金归集：客户的现金离开经纪商之后，受谁保护、赚多少利息">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+</style>
+</head>
+<body data-page="s05">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
+<a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>
+<a class="" href="s01.html"><span class="n">1</span>卖的人比买的人知道得多</a>
+<a class="" href="s02.html"><span class="n">2</span>证券转手之后，谁来说真话</a>
+<a class="" href="s03.html"><span class="n">3</span>什么算证券</a>
+<a class="" href="s04.html"><span class="n">4</span>中间人有自己的利益</a>
+<a class=" cur" href="s05.html" aria-current="page"><span class="n">5</span>客户的钱放在经纪商那里</a>
+<a class="" href="s06.html"><span class="n">6</span>订单送到哪里成交</a>
+<a class="" href="s07.html"><span class="n">7</span>价格被人扭曲</a>
+<a class="" href="s08.html"><span class="n">8</span>借钱买证券</a>
+<a class="" href="s09.html"><span class="n">9</span>替人管钱的人</a>
+<a class="" href="s10.html"><span class="n">10</span>开户的人是谁</a>
+<a class="" href="s11.html"><span class="n">11</span>能说什么、不能说什么</a>
+<a class="" href="s12.html"><span class="n">12</span>重跑：当推荐来自 AI</a>
+<a class="" href="s-map.html"><span class="n">篇末</span>证券篇的规则地图</a>
+<span class="todo side-part"><span class="pn">银行篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">保险篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">衍生品篇</span>（待写）</span>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>证券篇</span></header>
+
+<div class="chapno">第 5 章</div><h1>客户的钱放在经纪商那里<small>客户资产保护、净资本与 SIPC</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>客户开了户，把现金和证券留在经纪商那里，方便随时买卖。经纪商手里于是有一大笔不属于自己的钱。它可以拿这笔钱去放贷、去自营交易；只要不出事，客户看不出区别。一旦经纪商倒闭，客户发现自己只是普通债权人。1968–1970 年的文书危机让这件事成了现实。国会在 1970 年设立了一个基金来兜底，SEC 随后把要求前移：客户的资产要和经纪商自己的分开，经纪商自己要有足够的流动资本。兜底有上限，分开有成本，现金离开经纪商之后又是另一套规则。</p></blockquote>
+<h2 id="sec-1">一、钱放在经纪商那里</h2>
+<p>第 4 章讨论的是经纪商对客户说了什么。客户下了单之后还有一件事：买来的证券、卖出得到的现金，大多不会转回客户自己手里，而是留在经纪商的账上。客户看到的账户余额，是经纪商欠客户的一笔债，或者经纪商替客户保管的一批证券。</p>
+<p>这种安排对双方都方便。客户不必每次交易都转账、交割实物股票；经纪商则手握一笔稳定的资金。问题在于，这笔资金放在经纪商自己的资产负债表里。经纪商可以用客户的现金给其他客户做融资，可以把客户的证券借出去或拿去抵押，也可以用来支撑自营交易。只要经纪商经营正常，客户随时能取回自己的钱和股票；经纪商一旦倒闭，客户的资产与经纪商的其他资产混在一起，客户只能与银行、交易对手等债权人一起按比例受偿。</p>
+<p><strong>今天的对应。</strong>线上券商的客户在 App 里看到的「持仓」与「可用现金」，法律上大多是登记在券商（或其清算经纪商）名下、为客户持有的资产。客户名下并没有一张单独的股票凭证。</p>
+<h2 id="sec-2">二、文书危机：经纪商一家接一家倒下</h2>
+<p>二十世纪六十年代后期，美国股市交易量迅速增加，而证券的交割仍然依靠纸质凭证在经纪商之间传递、登记。后台处理跟不上前台成交，应交未交（fails to deliver）的证券越积越多，凭证遗失、记错账的情况屡见不鲜。1968 年下半年，纽约证券交易所、美国证券交易所与全国证券交易商协会商定每周三休市，其余交易日缩短交易时间，让后台处理积压的文书。</p>
+<p>1969 年至 1970 年，股价下跌、成交量回落，经纪商的收入随之下滑，此前积累的账目混乱与资本不足暴露出来。一批经纪商倒闭或被迫合并，其中包括当时美国第五大经纪商古德博迪公司，它在 1970 年秋陷入困境。客户发现，自己留在经纪商处的证券可能已经被挪用、抵押，或者根本对不上账，而当时并没有一个由法律规定的兜底制度。</p>
+<p><strong>今天的对应。</strong>2021 年 1 月 GameStop 股价剧烈波动期间，清算机构向会员追加的保证金在一天之内大幅上升，部分零售券商限制客户买入（见第 6 章）。资金与结算的压力，仍然会直接传到客户的交易能力上。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">经纪商倒闭时，客户能拿回多少</p><p class="figsub">客户留在经纪商处的资产 100，经纪商自有资本 20，另欠其他债权人 50。拖动经纪商的亏损，切换两项保护，看客户拿回的比例。示意。</p></div></div>
+    <div class="p5o-ctl">
+      <label>经纪商亏损 <b id="p5o-lv">40</b><input type="range" id="p5o-l" min="0" max="120" step="5" value="40"></label>
+      <div class="p5o-tg"><button type="button" id="p5o-seg">客户资产与经纪商财产分开</button><button type="button" id="p5o-sip">SIPC 垫付缺口</button></div>
+    </div>
+    <div class="p5o-bars">
+      <div class="p5o-row"><span>客户</span><div class="p5o-tr"><i id="p5o-c"></i><em id="p5o-s"></em></div><b id="p5o-cv"></b></div>
+      <div class="p5o-row"><span>其他债权人</span><div class="p5o-tr"><i id="p5o-o"></i></div><b id="p5o-ov"></b></div>
+    </div>
+    <p class="p5o-m" id="p5o-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.p5o-ctl{font-size:13.5px;margin-bottom:14px}.p5o-ctl input{width:100%;accent-color:var(--accent)}
+.p5o-tg{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.p5o-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.p5o-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.p5o-row{display:grid;grid-template-columns:76px 1fr 52px;gap:10px;align-items:center;font-size:13px;margin:8px 0}
+.p5o-tr{height:16px;background:var(--quote);border-radius:8px;overflow:hidden;display:flex}
+.p5o-tr i{display:block;height:100%;background:var(--accent);transition:width .35s}
+.p5o-tr em{display:block;height:100%;background:var(--accent);opacity:.45;transition:width .35s}
+.p5o-row b{font-weight:600;text-align:right}
+.p5o-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),L=$('p5o-l'),seg=$('p5o-seg'),sip=$('p5o-sip');
+  let S=false,P=false;
+  function run(){
+    const loss=+L.value;$('p5o-lv').textContent=loss;
+    seg.classList.toggle('on',S);sip.classList.toggle('on',P);
+    let cust,oth,gap;
+    if(S){
+      // 客户资产单独保管，亏损只由经纪商自有资产承担
+      const own=Math.max(0,20+50-loss);cust=100;oth=Math.min(50,own);
+    }else{
+      const pool2=Math.max(0,170-loss);const r=Math.min(1,pool2/150);cust=100*r;oth=50*r;
+    }
+    gap=P?Math.min(100-cust,100):0;
+    $('p5o-c').style.width=cust+'%';$('p5o-s').style.width=gap+'%';
+    $('p5o-o').style.width=(oth/50*100)+'%';
+    $('p5o-cv').textContent=Math.round(cust+gap)+'%';$('p5o-ov').textContent=Math.round(oth/50*100)+'%';
+    let m;
+    if(S)m=loss<=20?'亏损由经纪商自有资本吸收，客户与其他债权人都能足额受偿。':'客户资产单独保管，亏损只落在经纪商自己的财产上；客户拿回全部资产，其他债权人承担缺口。';
+    else m=loss<=20?'亏损小于自有资本，各方都能足额受偿。':`资产混在一起，客户与其他债权人按比例受偿，客户只拿回约 ${Math.round(cust)}%。`;
+    if(P&&gap>0.5)m+=' SIPC 垫付客户的缺口（浅色部分），每名客户以 50 万美元为限。';
+    $('p5o-m').textContent=m;
+  }
+  L.addEventListener('input',run);
+  seg.addEventListener('click',()=>{S=!S;run();});sip.addEventListener('click',()=>{P=!P;run();});
+  run();
+})();
+</script>
+
+<h2 id="sec-3">三、第一种回应：设一个基金兜底</h2>
+<p>国会的第一个反应是保证客户在经纪商倒闭时能拿回资产。1970 年 12 月 30 日签署的《证券投资者保护法》（SIPA）设立了证券投资者保护公司（SIPC）：一家由会员经纪商出资的非营利公司，绝大多数在 SEC 注册的经纪商必须加入。</p>
+<p>SIPC 不是存款保险。经纪商倒闭时，SIPC 向法院申请清算，由法院指定的受托人接管；受托人首先把客户的证券与现金还给客户，或者把客户账户整体转到另一家经纪商。客户资产有缺口时，SIPC 用自己的基金垫付，每名客户的上限是 50 万美元，其中现金不超过 25 万美元。这个上限是逐步提高的：1970 年为 5 万美元（现金 2 万美元），1980 年提高到 50 万美元（现金 10 万美元），2010 年《多德－弗兰克法》把现金部分提高到 25 万美元。</p>
+<p>SIPC 保护的是「经纪商弄丢了客户的资产」这一种风险。证券本身跌价、经纪商给了错误的投资建议，都不在保护范围之内；未在 SEC 注册的投资合同、不属于证券的加密资产，也不受保护。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">SIPA 与 SIPC</p><p class="pr-c"><span><em>领域</em>证券法 › 经纪商</span><span><em>类型</em>联邦成文法</span></p><p class="pr-s">经纪商倒闭时，由法院指定的受托人优先把客户资产还给客户；客户资产不足时，SIPC 以会员出资的基金垫付，每名客户以 50 万美元为限，其中现金以 25 万美元为限。</p><dl><div><dt>在法律体系中的位置</dt><dd>1970 年《证券投资者保护法》，15 U.S.C. § 78aaa 及以下；保障上限 1980 年提高到 50 万美元，现金部分由 2010 年《多德－弗兰克法》提高到 25 万美元</dd></div><div><dt>回应的问题</dt><dd>经纪商倒闭时客户资产与经纪商财产混在一起，客户与其他债权人一起受偿</dd></div><div><dt>适用范围</dt><dd>客户资产大部分仍在、账目可以对上；SIPC 只弥补缺口，不保证投资价值</dd></div><div><dt>出台</dt><dd>美国国会，1970</dd></div><div><dt>留下的问题</dt><dd>兜底基金有上限，大型经纪商倒闭时缺口可能远超基金；更好的做法是让缺口不出现</dd></div></dl></aside>
+<p><strong>今天的对应。</strong>SIPC 已处理的最大一宗清算是麦道夫投资证券公司。麦道夫在 2008 年 12 月承认经营庞氏骗局，SIPC 随即启动清算。根据受托人网站，截至 2026 年 8 月 21 日，受托人已追回或达成协议追回约 154.85 亿美元。这一案也说明了 SIPC 的边界：客户账户里显示的「收益」是虚构的，受托人按客户实际投入减去取出的净额认定债权，而不是按对账单上的金额。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">SIPC 垫付的上限</p><p class="figsub">假设经纪商倒闭后，某客户账上的证券与现金全部找不回来。拖动两项金额，看 SIPC 最多垫付多少：每名客户 50 万美元，其中现金不超过 25 万美元。示意。</p></div></div>
+    <div class="p5s-ctl">
+      <label>缺失的证券 <b id="p5s-av">30 万美元</b><input type="range" id="p5s-a" min="0" max="80" step="5" value="30"></label>
+      <label>缺失的现金 <b id="p5s-bv">30 万美元</b><input type="range" id="p5s-b" min="0" max="60" step="5" value="30"></label>
+    </div>
+    <div class="p5s-bar" id="p5s-bar"><i class="p5s-c"></i><i class="p5s-s"></i><i class="p5s-u"></i></div>
+    <div class="p5s-lg"><span><i class="p5s-c"></i>现金部分</span><span><i class="p5s-s"></i>证券部分</span><span><i class="p5s-u"></i>超出上限，作为普通债权</span></div>
+    <p class="p5s-m" id="p5s-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.p5s-ctl{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13.5px;margin-bottom:14px}.p5s-ctl input{width:100%;accent-color:var(--accent)}
+.p5s-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;background:var(--quote)}
+.p5s-bar i{display:block;height:100%;transition:width .35s}
+.p5s-c{background:var(--accent)}.p5s-s{background:var(--accent);opacity:.5}.p5s-u{background:var(--line)}
+.p5s-lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+.p5s-lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.p5s-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.p5s-ctl{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),A=$('p5s-a'),B=$('p5s-b'),bar=$('p5s-bar').children;
+  function run(){
+    const s=+A.value,c=+B.value,tot=s+c;
+    $('p5s-av').textContent=s+' 万美元';$('p5s-bv').textContent=c+' 万美元';
+    const cc=Math.min(c,25),sc=Math.min(s,50-cc),un=tot-cc-sc,W=140;
+    bar[0].style.width=cc/W*100+'%';bar[1].style.width=sc/W*100+'%';bar[2].style.width=un/W*100+'%';
+    $('p5s-m').textContent=tot===0?'没有缺失，SIPC 无须垫付。':`缺失合计 ${tot} 万美元，SIPC 垫付 ${cc+sc} 万美元（现金 ${cc}、证券 ${sc}）`+(un>0?`；其余 ${un} 万美元只能作为普通债权参与分配。`:'，缺失全部得到弥补。');
+  }
+  A.addEventListener('input',run);B.addEventListener('input',run);run();
+})();
+</script>
+
+<h2 id="sec-4">四、第二种回应：客户的资产要和经纪商的分开</h2>
+<p>兜底只能事后补救。1970 年的法律同时修改了《证券交易法》第 15(c)(3) 条，授权 SEC 制定规则保护客户资产。SEC 在 1972 年 11 月发布规则 15c3-3，即客户资产保护规则，它从两个方向把客户资产与经纪商的财产分开。</p>
+<p>对证券，经纪商必须对客户已经全额付款的证券（以及融资客户超过融资需要的证券）保持「占有或控制」：证券要放在经纪商自己的保管处，或者放在清算机构、银行等认可的地点，不得拿去为自己融资或抵押。对现金，经纪商要按一个储备金公式计算：把它欠客户的钱（客户贷方，主要是客户账上的现金）与客户欠它的钱（客户借方，主要是融资客户的借款）相减，差额为正时，必须把这笔钱存入一个专门为客户利益开设的银行账户。这样，经纪商可以用客户的现金为其他客户提供融资，但不能拿去做自己的生意。</p>
+<p>公式的计算频率决定了保护有多及时。规则 15c3-3 原来要求每周计算一次。两次计算之间，客户现金可能大幅增加，而储备账户里的钱仍停留在上周的水平。2024 年 12 月 20 日，SEC 修订这一规则，要求平均客户贷方总额不低于 5 亿美元的清算经纪商改为每日计算。合规日期原定 2025 年 12 月 31 日，2025 年 6 月 SEC 把它推迟到 2026 年 6 月 30 日，此后这一要求已经生效。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">客户资产保护规则</p><p class="pr-c"><span><em>领域</em>证券法 › 经纪商</span><span><em>类型</em>SEC 规则</span></p><p class="pr-s">经纪商对客户已付款的证券须保持占有或控制；对客户现金须按储备金公式计算，客户贷方超过客户借方的部分须存入专为客户利益开设的银行账户。</p><dl><div><dt>在法律体系中的位置</dt><dd>规则 15c3-3（17 CFR 240.15c3-3），SEC 1972 年依据经 1970 年《证券投资者保护法》修改的《证券交易法》第 15(c)(3) 条制定；2024 年 12 月 20 日修订，平均客户贷方总额不低于 5 亿美元的清算经纪商须每日计算，合规日期为 2026 年 6 月 30 日</dd></div><div><dt>回应的问题</dt><dd>客户资产与经纪商财产混在一起，经纪商倒闭时客户只是普通债权人</dd></div><div><dt>适用范围</dt><dd>经纪商如实记账、如实计算；每次计算之间存在时间差</dd></div><div><dt>出台</dt><dd>SEC，1972</dd></div><div><dt>留下的问题</dt><dd>分开的只是客户资产，经纪商自身若资本不足，仍可能拖累清算与客户转户</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">储备金：每周算一次，还是每天算一次</p><p class="figsub">客户贷方 100、客户借方 60（单位：亿美元）。周三有一笔客户入金。应存储备金 = 客户贷方 − 客户借方 ×（1 − 扣减比例）；每周计算的扣减 3%，每日计算的扣减 2%。示意。</p></div></div>
+    <div class="r5-ctl">
+      <div class="r5-tg"><button type="button" data-m="w" class="on">每周计算</button><button type="button" data-m="d">每日计算</button></div>
+      <label>周三客户入金 <b id="r5-iv">20</b><input type="range" id="r5-i" min="0" max="40" step="5" value="20"></label>
+    </div>
+    <div class="r5-ch" id="r5-ch"></div>
+    <div class="r5-lg"><span><i class="r5-need"></i>当天应有的储备</span><span><i class="r5-held"></i>账户里实际的储备</span></div>
+    <p class="r5-m" id="r5-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.r5-ctl{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;font-size:13.5px;margin-bottom:14px}
+.r5-ctl label{flex:1;min-width:200px}.r5-ctl input{width:100%;accent-color:var(--accent)}
+.r5-tg{display:flex;gap:6px}
+.r5-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.r5-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.r5-ch{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;height:170px;align-items:end}
+.r5-d{display:flex;gap:4px;align-items:flex-end;height:100%;position:relative;padding-bottom:20px}
+.r5-d i{flex:1;border-radius:4px 4px 0 0;transition:height .35s}
+.r5-d span{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:12px;color:var(--muted)}
+.r5-d.gap span{color:var(--accent);font-weight:600}
+.r5-need{background:var(--line)}.r5-held{background:var(--accent)}
+.r5-lg{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:8px}
+.r5-lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.r5-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),I=$('r5-i'),ch=$('r5-ch'),D=['周一','周二','周三','周四','周五'];
+  let M='w';
+  ch.innerHTML=D.map(d=>`<div class="r5-d"><i class="r5-need"></i><i class="r5-held"></i><span>${d}</span></div>`).join('');
+  const cols=[...ch.children];
+  function run(){
+    const inflow=+I.value;$('r5-iv').textContent=inflow;
+    const hc=M==='w'?0.03:0.02,need=D.map((d,i)=>100+(i>=2?inflow:0)-60*(1-hc));
+    const held=M==='w'?D.map(()=>100-60*(1-hc)):need.slice();
+    const top=90;let gapDays=0,maxGap=0;
+    cols.forEach((c,i)=>{c.children[0].style.height=need[i]/top*100+'%';c.children[1].style.height=held[i]/top*100+'%';
+      const g=need[i]-held[i];c.classList.toggle('gap',g>0.01);if(g>0.01){gapDays++;maxGap=Math.max(maxGap,g);}});
+    $('r5-m').textContent=M==='w'
+      ?(gapDays?`储备按上周五的数字存入，本周三入金之后，有 ${gapDays} 天账户里的储备比应有的少 ${maxGap.toFixed(0)} 亿美元，直到下一次计算。`:'本周没有新增客户现金，每周计算与应有储备一致。')
+      :`每天按当天的客户贷方重新计算，储备跟着客户现金变化；扣减比例从 3% 降为 2%，应存的储备也略高。`;
+  }
+  ch.parentNode.querySelectorAll('.r5-tg button').forEach(b=>b.addEventListener('click',()=>{M=b.dataset.m;b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));run();}));
+  I.addEventListener('input',run);run();
+})();
+</script>
+
+<h2 id="sec-5">五、第三种回应：经纪商自己要有足够的流动资本</h2>
+<p>客户资产分开之后，经纪商自身的财务状况仍然重要：资本不足的经纪商更容易在市场波动时出错，出错时也更难有序地把客户账户转出去。SEC 在 1975 年发布统一的净资本规则，即规则 15c3-1。</p>
+<p>净资本不是会计意义上的所有者权益。计算时，经纪商要从权益中扣除不易变现的资产（例如房产、无担保应收款），再对持有的证券按风险打折扣（haircut），得到的是能在短期内变现、用于偿付的资本。规则设了两类标准：一类以总负债为基础，总负债不得超过净资本的 15 倍；另一类称为替代标准，净资本不得低于 25 万美元或客户借方总额的 2% 中的较高者。此外按业务设最低额：替客户持有资金或证券的经纪商不低于 25 万美元，只把客户介绍给清算经纪商、自己不持有客户资产的，最低额低得多。</p>
+<p>两条规则相互支撑：规则 15c3-3 让客户资产在经纪商倒闭时可以识别、可以取回，规则 15c3-1 让经纪商在倒闭前有足够的缓冲，并在资本下降时提早预警，让监管机构有时间介入。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">净资本规则</p><p class="pr-c"><span><em>领域</em>证券法 › 经纪商</span><span><em>类型</em>SEC 规则</span></p><p class="pr-s">经纪商须保持按规定扣减与折扣后计算的流动资本不低于法定最低额；持有客户资产的经纪商要求更高。</p><dl><div><dt>在法律体系中的位置</dt><dd>规则 15c3-1（17 CFR 240.15c3-1），SEC 1975 年发布统一净资本规则；持有客户资金或证券的经纪商最低净资本为 25 万美元，采用替代标准的为 25 万美元与客户借方总额 2% 中的较高者</dd></div><div><dt>回应的问题</dt><dd>资本不足的经纪商在市场波动时容易倒闭，倒闭时难以有序转移客户账户</dd></div><div><dt>适用范围</dt><dd>资产可以按市场价格估值，折扣比例能反映短期变现风险</dd></div><div><dt>出台</dt><dd>SEC，1975</dd></div><div><dt>留下的问题</dt><dd>净资本按日结算，但清算机构的保证金追加可以在一天之内发生；结算周期越长，经纪商要准备的资金越多</dd></div></dl></aside>
+<h2 id="sec-6">六、清算经纪商与 T+1</h2>
+<p>今天面向客户的线上券商，很多并不自己保管客户资产，而是把客户「介绍」给一家清算经纪商，由后者持有资产、计算储备金、对接清算机构。规则 15c3-3 与规则 15c3-1 的主要负担由清算经纪商承担，介绍经纪商的最低净资本相应较低。</p>
+<p>清算经纪商与全国证券清算公司（NSCC）之间的风险，取决于交易从成交到交割要隔多久。成交后到交割前，清算机构承担买卖双方违约的风险，因此向会员收取保证金；间隔越长、波动越大，保证金越高。2021 年 1 月的 GameStop 行情中，NSCC 对部分会员收取了大额的附加保证金，SEC 工作人员在当年 10 月的报告中提到，部分券商限制交易是对这些保证金追加与资本费用的反应，并建议考虑缩短结算周期。SEC 在 2023 年 2 月通过修订，美国大多数证券交易的标准结算周期自 2024 年 5 月 28 日起由 T+2 缩短为 T+1。</p>
+<p><strong>今天的对应。</strong>结算周期缩短后，客户卖出股票得到的现金更早可用，清算经纪商需要准备的保证金也相应减少；代价是后台必须在成交当天完成确认与分配，海外客户因时差与换汇面对的时间更紧。</p>
+<h2 id="sec-7">七、现金离开经纪商之后</h2>
+<p>规则 15c3-3 管的是留在经纪商账上的客户现金。为了避免计入储备金公式、同时赚取利差，许多经纪商设立现金归集项目（sweep）：每天把客户账户里没有投资的现金自动转到合作银行的存款账户，或者转入货币市场基金。</p>
+<p>钱转出去之后，保护方式随之改变。转入银行存款的，不再是 SIPC 保护的「客户现金」，而是银行存款，由联邦存款保险公司（FDIC）按每家银行、每名存款人 25 万美元的标准，以「穿透」方式保护到客户本人；为了提高总额度，归集项目通常把现金分散到多家银行。穿透保护的前提是银行与经纪商的记录能准确对应到每一名客户。转入货币市场基金的，客户持有的是基金份额，属于证券，SIPC 保护的是份额本身被弄丢的风险，不保护基金净值下跌。</p>
+<p>利息是另一个问题。2022 年起利率快速上升，一些经纪商归集项目付给客户的利率远低于货币市场基金。2025 年 1 月 17 日，SEC 就投资顾问账户的现金归集项目与富国银行旗下两家公司及美林达成和解，三家合计支付 6,000 万美元民事罚款，SEC 认为它们没有制定并执行合理的政策与程序。民事诉讼同样增加：奥本海默在 2026 年 4 月的公告中提到，针对各金融机构现金归集项目的诉讼约有 25 起，它自己同意支付 7,000 万美元和解；美林在 2026 年 10 月同意以 3,900 万美元和解一起退休账户集体诉讼，两项和解均有待法院批准。</p>
+<p><strong>今天的对应。</strong>投资类 App 常把归集的现金展示为「可用余额」并标示利率。客户需要知道的是：这笔钱此刻在哪里（券商账上、哪几家银行、哪只基金），受 SIPC 还是 FDIC 保护，利率由谁决定。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">同样是「现金」，受谁保护</p><p class="figsub">客户账户里没有投资的现金可能留在三个地方。点选一个，看它的法律性质；选银行存款归集时，可以拖动金额与合作银行数量。</p></div></div>
+    <div class="w5-tabs" id="w5-tabs"></div>
+    <div class="w5-d">
+      <dl id="w5-dl"></dl>
+      <div class="w5-calc" id="w5-calc">
+        <label>归集金额 <b id="w5-av"></b><input type="range" id="w5-a" min="10" max="200" step="10" value="80"></label>
+        <label>合作银行数量 <b id="w5-nv"></b><input type="range" id="w5-n" min="1" max="10" step="1" value="2"></label>
+        <div class="w5-bar"><i id="w5-in"></i><i id="w5-out"></i></div>
+        <p id="w5-cm"></p>
+      </div>
+    </div>
+  </div>
+</figure>
+<style>
+.w5-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.w5-tabs button{font:inherit;font-size:13.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:10px;text-align:left}
+.w5-tabs button.on{border-color:var(--accent)}
+.w5-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.w5-d dl{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;margin:0}
+.w5-d dt{color:var(--muted)}.w5-d dd{margin:0}
+.w5-calc{margin-top:12px;border-top:1px solid var(--line);padding-top:10px;display:none}
+.w5-calc.on{display:block}
+.w5-calc label{display:block;margin-bottom:6px}.w5-calc input{width:100%;accent-color:var(--accent)}
+.w5-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--quote);margin-top:6px}
+.w5-bar i{display:block;height:100%;transition:width .35s}
+#w5-in{background:var(--accent)}#w5-out{background:var(--line)}
+.w5-calc p{margin:8px 0 0}
+@media (max-width:640px){.w5-tabs{grid-template-columns:1fr}.w5-d dl{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const T=[['留在券商账上','客户贷方余额',[['法律性质','经纪商欠客户的一笔债'],['适用规则','计入规则 15c3-3 的储备金公式'],['倒闭时的保护','SIPC，现金部分以 25 万美元为限（与证券合计 50 万美元）'],['利率','由经纪商决定，可能为零']]],
+    ['银行存款归集','转入合作银行',[['法律性质','以经纪商名义、为客户利益开在银行的存款'],['适用规则','不再是经纪商账上的客户现金，不受 SIPC 保护'],['倒闭时的保护','FDIC 穿透保护，每家银行每名存款人 25 万美元；前提是记录能对应到每名客户'],['利率','由经纪商与银行约定，2024 年以来的执法与诉讼主要针对这一点']]],
+    ['货币市场基金','转入基金份额',[['法律性质','客户持有的基金份额，属于证券'],['适用规则','按证券保管，适用占有或控制要求'],['倒闭时的保护','SIPC 保护份额被弄丢的风险，不保护基金净值下跌'],['利率','随基金收益变化']]]];
+  const tabs=$('w5-tabs');tabs.innerHTML=T.map(t=>`<button type="button"><b>${t[0]}</b><br><small>${t[1]}</small></button>`).join('');
+  const bs=[...tabs.children],A=$('w5-a'),N=$('w5-n');
+  function calc(){const a=+A.value,n=+N.value,cov=Math.min(a,25*n);
+    $('w5-av').textContent=a+' 万美元';$('w5-nv').textContent=n+' 家';
+    $('w5-in').style.width=cov/a*100+'%';$('w5-out').style.width=(a-cov)/a*100+'%';
+    $('w5-cm').textContent=`分散到 ${n} 家银行，最多 ${25*n} 万美元可获 FDIC 保护；`+(a>cov?`超出的 ${a-cov} 万美元不受保护。`:'这笔钱全部在保护范围内。')+'（示意，假设客户在这些银行没有其他存款。）';}
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));
+    $('w5-dl').innerHTML=T[i][2].map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');
+    $('w5-calc').classList.toggle('on',i===1);}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));A.addEventListener('input',calc);N.addEventListener('input',calc);calc();set(0);
+})();
+</script>
+
+<h2 id="sec-8">八、这一步留下的问题</h2>
+<p>客户资产有了保护，经纪商有了资本要求，新的问题随之出现：</p>
+<ol><li><strong>订单送到哪里成交。</strong>资产放在经纪商那里，订单也由经纪商决定送往何处；经纪商从做市商那里收钱，是否影响客户得到的价格。</li><li><strong>借钱买证券。</strong>储备金公式允许经纪商用客户现金为融资客户放贷；客户能借多少、经纪商能拿抵押的证券做什么，需要另外的规则。</li><li><strong>替人管钱的人。</strong>现金归集的处罚针对的是投资顾问账户；替客户做决定的人，要承担比经纪商更重的义务。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">客户资产保护之外的三个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="n5" id="n5"></div>
+    <p class="n5-m" id="n5-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.n5{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.n5 button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.n5 button b{display:block;font-size:14px}.n5 button em{font-style:normal;font-size:12px;color:var(--faint)}
+.n5 button.on{border-color:var(--accent)}
+.n5-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.n5{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['订单送到哪里成交','→ 第 6 章','资产放在经纪商那里，订单也由经纪商决定送往何处；经纪商从做市商那里收钱，是否影响客户得到的价格。'],
+    ['借钱买证券','→ 第 8 章','储备金公式允许经纪商用客户现金为融资客户放贷；客户能借多少、抵押的证券能被拿去做什么，需要另外的规则。'],
+    ['替人管钱的人','→ 第 9 章','现金归集的处罚针对的是投资顾问账户；替客户做决定的人，承担比经纪商更重的义务。']];
+  const g=document.getElementById('n5'),m=document.getElementById('n5-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-9">九、对产品的含义</h2>
+<p>本章的规则对金融产品有三条含义。第一，客户看到的余额是一项法律关系，不只是一个数字：同样是「现金」，留在券商账上、归集到银行、转入货币基金，受保护的方式不同，产品应当让客户知道钱在哪里。第二，保护的重点从事后兜底移到了事前隔离与持续计算；规则从每周改为每日计算，说明监管关注的是两次检查之间的空档。第三，介绍经纪商与清算经纪商分工之后，客户面对的是 App，承担资产保护义务的却是另一家公司；当 AI 助手回答「我的钱安全吗」时，回答要以实际的托管结构为准，而不是一句笼统的「受 SIPC 保护」。</p>
+<h2 id="sec-10">参考文献</h2>
+<ul class="refs"><li>Federal Deposit Insurance Corporation. <i>Financial Institution Employee's Guide to Deposit Insurance: Pass-through Deposit Insurance Coverage</i>.</li><li>Irving H. Picard, SIPA Trustee for the Liquidation of Bernard L. Madoff Investment Securities LLC. Recoveries (as of August 21, 2026). madofftrustee.com.</li><li>Oppenheimer Holdings Inc. (2026, April 24). Press release on cash sweep litigation settlement (Form 8-K, Exhibit 99.1).</li><li>Securities and Exchange Commission. (1972). <i>Customer Protection Rule</i> (Release No. 34-9856).</li><li>Securities and Exchange Commission. (1975). <i>Adoption of Uniform Net Capital Rule</i> (Release No. 34-11497).</li><li>Securities and Exchange Commission. (2021). <i>Staff Report on Equity and Options Market Structure Conditions in Early 2021</i>.</li><li>Securities and Exchange Commission. (2023). <i>Shortening the Securities Transaction Settlement Cycle</i> (Release No. 34-96930).</li><li>Securities and Exchange Commission. (2024). <i>Daily Computation of Customer and Broker-Dealer Reserve Requirements under the Broker-Dealer Customer Protection Rule</i> (Release No. 34-102022).</li><li>Securities and Exchange Commission. (2025, January 17). <i>SEC Charges Pair of Wells Fargo Advisory Firms and Merrill Lynch with Compliance Failures Relating to Cash Sweep Programs</i> (Press release 2025-16).</li><li>Securities and Exchange Commission. (2025). <i>Extension of Compliance Date for Required Daily Computation of Customer and Broker-Dealer Reserve Requirements</i> (Press release 2025-95).</li><li>Securities Investor Protection Act of 1970, Pub. L. 91-598, 15 U.S.C. § 78aaa et seq.</li><li>Securities Investor Protection Corporation. <i>What SIPC Protects</i>; <i>History</i>. sipc.org.</li><li>17 CFR 240.15c3-1; 17 CFR 240.15c3-3.</li></ul>
+<footer class="nav"><a href="s04.html">← 第 4 章　中间人有自己的利益</a><a href="s06.html">第 6 章　订单送到哪里成交 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

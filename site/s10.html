@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开户的人是谁</title>
+<meta name="description" content="《美国金融业法律研究》证券篇第 10 章：证券账户可以用来存放、转移和洗白来路不明的钱，也可能被受制裁的人使用。1970 年《银行保密法》让金融机构保存记录、报告大额现金；2001 年《爱国者法》要求经纪商建立反洗钱计划、核实客户身份；2016 年起还要识别公司账户背后的人。制裁则是严格责任。远程开户与生成式 AI 伪造证件，使「开户的人是谁」重新成为难题">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+</style>
+</head>
+<body data-page="s10">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
+<a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>
+<a class="" href="s01.html"><span class="n">1</span>卖的人比买的人知道得多</a>
+<a class="" href="s02.html"><span class="n">2</span>证券转手之后，谁来说真话</a>
+<a class="" href="s03.html"><span class="n">3</span>什么算证券</a>
+<a class="" href="s04.html"><span class="n">4</span>中间人有自己的利益</a>
+<a class="" href="s05.html"><span class="n">5</span>客户的钱放在经纪商那里</a>
+<a class="" href="s06.html"><span class="n">6</span>订单送到哪里成交</a>
+<a class="" href="s07.html"><span class="n">7</span>价格被人扭曲</a>
+<a class="" href="s08.html"><span class="n">8</span>借钱买证券</a>
+<a class="" href="s09.html"><span class="n">9</span>替人管钱的人</a>
+<a class=" cur" href="s10.html" aria-current="page"><span class="n">10</span>开户的人是谁</a>
+<a class="" href="s11.html"><span class="n">11</span>能说什么、不能说什么</a>
+<a class="" href="s12.html"><span class="n">12</span>重跑：当推荐来自 AI</a>
+<a class="" href="s-map.html"><span class="n">篇末</span>证券篇的规则地图</a>
+<span class="todo side-part"><span class="pn">银行篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">保险篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">衍生品篇</span>（待写）</span>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>证券篇</span></header>
+
+<div class="chapno">第 10 章</div><h1>开户的人是谁<small>反洗钱、客户身份识别与制裁</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>前面几章讨论的都是保护投资者：防止发行人、经纪商与顾问利用信息优势。本章的问题方向相反：开户的人本身可能有问题。犯罪所得需要一个看起来正常的去处，证券账户可以接收资金、买卖证券、再把钱转出去；受制裁的人也可能通过别人的名义进入美国市场。法律的回应是让金融机构承担一部分侦查职能：保存记录，确认客户是谁，发现可疑就报告，遇到制裁对象就拒绝。2024 年以后，生成式 AI 让伪造证件变得便宜，远程开户的身份核实又成了新问题。</p></blockquote>
+<h2 id="sec-1">一、钱从哪里来，经纪商不问</h2>
+<p>经纪商的生意是执行交易，它关心客户能否付款，不关心钱从哪里来。对想要洗钱的人来说，这正是证券账户的用处：存入来路不明的资金，买卖几次证券，再以「投资收益」的名义转出，资金的来源就被交易记录掩盖了。账户也可以用别人的名字开，或者以一家空壳公司的名义开，真正控制资金的人不出现在任何文件上。</p>
+<p>1970 年，国会通过《银行保密法》，第一次要求金融机构为执法目的保存记录并向政府报告。今天的实施细则要求银行、经纪自营商等金融机构，对超过 10,000 美元的现金交易提交现金交易报告。这部法律把金融机构变成执法信息的来源，随即受到挑战：银行与客户认为，强制保存与报告客户记录侵犯隐私与正当程序。1974 年 4 月 1 日，联邦最高法院在加利福尼亚银行家协会诉舒尔茨案中认定，记录保存要求本身合宪，由伦奎斯特大法官执笔。</p>
+<p>现金交易报告只管现金。证券业的资金大多以转账形式进出，一笔笔都在 10,000 美元以下、或者根本不涉及现金，报告就管不到。要发现问题，金融机构需要知道客户是谁，并且主动判断交易是否可疑。</p>
+<h2 id="sec-2">二、先确认客户是谁：客户身份识别</h2>
+<p>2001 年 9 月 11 日的袭击之后，国会在 10 月通过《爱国者法》，其第三编专门针对洗钱与恐怖融资。第 352 条要求所有金融机构建立反洗钱计划，第 326 条要求财政部制定规则，规定金融机构在客户开户时核实其身份的最低标准。2003 年 5 月 9 日，财政部与美国证券交易委员会（SEC）联合发布经纪自营商客户身份识别计划规则，2003 年 10 月 1 日起必须遵守，今天编号为 31 CFR 1023.220。</p>
+<p>规则要求经纪商在开户前取得四项信息：姓名、出生日期、住址，以及身份号码。美国人提供纳税人识别号；非美国人可以提供纳税人识别号、护照号码与签发国、外国人身份证号码，或其他附有照片的政府证件号码与签发国。经纪商须在开户前后的合理时间内核实这些信息，可以查验未过期的带照片政府证件，也可以用非证件方式核实，例如与消费者征信机构或公共数据库比对、联系客户、向其他金融机构查询；对没有见面就开立的账户，程序中要写明如何处理。开户后合理时间内，经纪商须把客户与政府的恐怖分子名单比对。身份资料在销户后保存五年。在一定条件下，经纪商可以依赖另一家同样受监管的金融机构已经完成的核实。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">客户身份识别计划（CIP）</p><p class="pr-c"><span><em>领域</em>金融监管 › 反洗钱</span><span><em>类型</em>联邦成文法与财政部、SEC 联合规则</span></p><p class="pr-s">经纪自营商须在开户时取得客户的姓名、出生日期、住址与身份号码，以证件或非证件方式在合理时间内核实，并与政府名单比对、保存记录。</p><dl><div><dt>在法律体系中的位置</dt><dd>《爱国者法》第 326 条（2001）；经纪自营商规则 2003 年 5 月 9 日发布、10 月 1 日起遵守，今为 31 CFR 1023.220；属于第 352 条要求的反洗钱计划的一部分</dd></div><div><dt>回应的问题</dt><dd>证券账户可以用他人或虚构的身份开立，资金来源被交易记录掩盖</dd></div><div><dt>适用范围</dt><dd>适用于开立新账户的客户；非美国人可以用护照等外国证件代替纳税人识别号</dd></div><div><dt>出台</dt><dd>美国国会，2001；财政部与 SEC，2003</dd></div><div><dt>留下的问题</dt><dd>客户是一家公司时，核实了公司，还不知道真正控制它的人是谁</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一个账户从开立到监控，要过几道关</p><p class="figsub">点选一步，看它依据的规则、要做的事与常见的失误。前三步在开户时，后两步贯穿账户存续期间。</p></div></div>
+    <div class="q10f-steps" id="q10f-s"></div>
+    <dl class="q10f-out" id="q10f-o" aria-live="polite"></dl>
+  </div>
+</figure>
+<style>
+.q10f-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;position:relative}
+.q10f-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.q10f-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.q10f-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10f-out{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.q10f-out dt{color:var(--faint)}.q10f-out dd{margin:0}
+@media (max-width:640px){.q10f-steps{grid-template-columns:1fr 1fr}.q10f-out{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['取得信息','开户前',['依据','31 CFR 1023.220（《爱国者法》第 326 条）'],['要做的事','取得姓名、出生日期、住址、身份号码；非美国人可用护照号码与签发国'],['常见失误','只收集、不核实；资料与证件不一致却放行']],
+    ['核实身份','开户前后合理时间内',['依据','31 CFR 1023.220'],['要做的事','查验带照片的政府证件，或以征信、数据库、联系客户等非证件方式核实；不见面开户须有专门程序'],['常见失误','证件照片为 AI 生成或修改；活体检测被第三方摄像头插件绕过']],
+    ['受益所有人','公司客户',['依据','客户尽职调查规则（2016 年发布，2018 年 5 月 11 日起遵守）'],['要做的事','识别并核实持股 25% 以上的每个人，以及一名控制人'],['常见失误','只核实公司，不追到背后的自然人']],
+    ['名单筛查','开户时与持续',['依据','OFAC 各制裁条例；严格责任'],['要做的事','比对特别指定国民名单与 50% 规则；以 IP、设备、转账数据判断客户所在地'],['常见失误','只在开户时筛一次；只看客户填写的地址（盈透证券案）']],
+    ['持续监控','账户存续期间',['依据','FINRA 规则 3310；31 CFR 1023.320'],['要做的事','按风险画像监控交易；发现至少 5,000 美元的可疑交易，30 天内报告，不得告知当事人'],['常见失误','预警积压未处理；向客户透露已报告']]];
+  const s=document.getElementById('q10f-s'),o=document.getElementById('q10f-o');
+  s.innerHTML=S.map((x,i)=>`<button type="button">${i+1}. ${x[0]}<em>${x[1]}</em></button>`).join('');
+  const bs=[...s.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));o.innerHTML=S[i].slice(2).map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-3">三、发现可疑就报告</h2>
+<p>《爱国者法》第 352 条的反洗钱计划要求自 2002 年 4 月 24 日起生效，全国证券交易商协会（NASD）同日施行规则 3011，今天是金融业监管局（FINRA）的规则 3310。它要求经纪商制定经高级管理层书面批准的反洗钱计划，指定负责人，培训员工，并每个日历年由独立人员测试一次；不持有客户账户的经纪商可以每两年测试一次。</p>
+<p>计划的核心是可疑活动报告。财政部于 2002 年 7 月 1 日发布经纪自营商可疑活动报告规则，适用于 2002 年 12 月 30 日以后的交易，今天编号为 31 CFR 1023.320。经纪商知道、怀疑或有理由怀疑一笔交易涉及至少 5,000 美元（单笔或合计），并属于以下情形之一，就须报告：资金来自违法活动或意在掩盖其来源；为规避《银行保密法》而设计，例如拆分交易；没有明显的合法目的、或与该客户的正常交易不符，且经核查找不到合理解释；利用经纪商从事犯罪活动。报告须在最初发现后 30 天内提交，尚未查明嫌疑人的可以延长 30 天，最长 60 天。报告本身保密：经纪商不得告知报告所涉的任何人已经报告，记录保存五年。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">可疑活动报告</p><p class="pr-c"><span><em>领域</em>金融监管 › 反洗钱</span><span><em>类型</em>联邦成文法与财政部规则</span></p><p class="pr-s">经纪自营商发现涉及至少 5,000 美元、并有理由怀疑涉及违法资金、规避报告、无合理目的或利用经纪商犯罪的交易，须在 30 天内向 FinCEN 报告，且不得告知当事人。</p><dl><div><dt>在法律体系中的位置</dt><dd>《银行保密法》经《爱国者法》扩展；31 CFR 1023.320，2002 年 7 月 1 日发布、适用于 2002 年 12 月 30 日以后的交易；反洗钱计划的要求见 FINRA 规则 3310（原 NASD 规则 3011，2002 年 4 月 24 日生效）</dd></div><div><dt>回应的问题</dt><dd>现金交易报告只管现金，证券业的资金大多以转账进出</dd></div><div><dt>适用范围</dt><dd>金额门槛为 5,000 美元；判断标准是「知道、怀疑或有理由怀疑」，不要求证实</dd></div><div><dt>出台</dt><dd>美国国会，2001；财政部金融犯罪执法网络（FinCEN），2002</dd></div><div><dt>留下的问题</dt><dd>报告依赖经纪商对客户的了解；对公司客户，不知道背后的人，就无从判断交易是否异常</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这笔交易要不要报告</p><p class="figsub">选择金额与情形，按经纪自营商可疑活动报告规则（31 CFR 1023.320）判断。情形描述为示意。</p></div></div>
+    <label class="q10s-l">涉及金额（单笔或相关交易合计） <b id="q10s-v"></b><input type="range" id="q10s-a" min="1000" max="20000" step="500" value="7000"></label>
+    <div class="q10s-c" id="q10s-c"></div>
+    <div class="q10s-out" id="q10s-o" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q10s-l{display:block;font-size:13.5px}.q10s-l input{width:100%;accent-color:var(--accent)}
+.q10s-c{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}
+.q10s-c button{font:inherit;font-size:13px;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:9px 11px;line-height:1.5}
+.q10s-c button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.q10s-c button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10s-out{border-radius:10px;padding:12px 14px;background:var(--quote);font-size:14px;line-height:1.65}.q10s-out b{display:block;font-size:15px}
+.q10s-out.y{background:var(--accent-soft)}
+@media (max-width:640px){.q10s-c{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const C=[['入金后两天全额转出到第三方账户，几乎没有交易','没有明显合法目的、与客户正常活动不符',1],
+    ['每次存入 9,500 美元现金，连续多日','为规避现金交易报告而拆分',1],
+    ['多个新账户使用同一设备，对同一低价股反复对敲','利用经纪商从事犯罪（操纵）',1],
+    ['退休客户按月卖出基金、转回本人银行账户','与客户正常活动相符',0]];
+  const $=id=>document.getElementById(id),a=$('q10s-a'),c=$('q10s-c');let k=0;
+  c.innerHTML=C.map(x=>`<button type="button">${x[0]}<em>${x[1]}</em></button>`).join('');const bs=[...c.children];
+  function run(){
+    const A=+a.value;$('q10s-v').textContent=A.toLocaleString('en-US')+' 美元';bs.forEach((b,j)=>b.classList.toggle('on',j===k));
+    const o=$('q10s-o');let y=false,t;
+    if(!C[k][2])t='<b>一般不需报告</b>交易与客户已知的情况相符、有合理解释，不属于规则列举的情形。';
+    else if(A<5000)t='<b>低于 5,000 美元，不是强制报告</b>规则要求报告的交易须涉及至少 5,000 美元（单笔或合计）。经纪商仍可自愿报告，相关交易合计达到门槛的也须报告。';
+    else{y=true;t='<b>须提交可疑活动报告</b>最初发现后 30 天内向 FinCEN 提交，尚未查明嫌疑人的最长 60 天；不得告知客户已经报告；报告与依据材料保存五年。'+(k===1?' 拆分现金存入本身也可能违反禁止拆分交易的规定。':'');}
+    o.className='q10s-out'+(y?' y':'');o.innerHTML=t;
+  }
+  a.addEventListener('input',run);bs.forEach((b,j)=>b.addEventListener('click',()=>{k=j;run();}));run();
+})();
+</script>
+
+<p><strong>今天的对应。</strong>线上券商的交易监控系统按规则筛出异常，例如入金后很快全额出金、多个账户使用同一设备或银行卡、低价股的对敲交易，交给合规人员复核后决定是否报告。客户看到的只是「账户受限」或「资料补充」的通知，规则禁止告诉他背后是否有报告。</p>
+<h2 id="sec-4">四、公司账户背后的人：受益所有人</h2>
+<p>客户身份识别核实的是开户的主体。主体是一家公司时，核实了公司的名称、地址与注册文件，仍然不知道是谁在控制它、钱最终归谁。2016 年 5 月 11 日，FinCEN 发布客户尽职调查规则，2018 年 5 月 11 日起必须遵守。它要求经纪商在公司客户开户时识别并核实两类自然人：直接或间接持有 25% 以上股权的每一个人，以及一名对公司负有重大管理控制责任的人，例如首席执行官或财务负责人。没有人持股达到 25% 时，第一类可以为空，第二类仍须有一人。规则同时要求经纪商了解客户关系的性质与目的，形成客户风险画像，并持续监控、按风险更新客户信息，这一点被写进了 FINRA 规则 3310。</p>
+<p>另一条路是让公司自己向政府报告。2021 年 1 月 1 日，《企业透明法》作为《2020 年反洗钱法》的一部分、随 2021 财年国防授权法生效，要求大量小公司向 FinCEN 申报受益所有人。实施过程几经诉讼与暂停。2025 年 3 月 21 日，FinCEN 发布临时最终规则（3 月 26 日刊登），把申报义务限于在美国登记经营的外国公司，美国本土设立的公司及其受益所有人不再申报；2026 年 8 月 11 日，FinCEN 发布最终规则，把这一豁免定为永久，并删除已经收到的美国人信息。经纪商在开户时依客户尽职调查规则识别受益所有人的义务，不受这一变化影响。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一家公司开户，要识别谁</p><p class="figsub">拖动四位股东的持股比例（合计不超过 100%），看哪些人落入 25% 的持股标准。无论持股如何，都还要识别一名控制人。示意。</p></div></div>
+    <div class="q10o-rows" id="q10o-r"></div>
+    <div class="q10o-out" id="q10o-o" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q10o-rows{display:grid;gap:8px}
+.q10o-row{display:grid;grid-template-columns:70px 1fr 60px;gap:10px;align-items:center;font-size:13.5px}
+.q10o-row input{width:100%;accent-color:var(--accent)}
+.q10o-row b{font-weight:600;text-align:right}
+.q10o-row.hit span{color:var(--accent);font-weight:600}
+.q10o-out{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.65}
+</style>
+<script>
+(function(){
+  const N=['股东甲','股东乙','股东丙','股东丁'],V=[40,24,20,16],r=document.getElementById('q10o-r'),o=document.getElementById('q10o-o');
+  r.innerHTML=N.map((n,i)=>`<div class="q10o-row"><span>${n}</span><input type="range" min="0" max="100" step="1" value="${V[i]}" data-i="${i}"><b>${V[i]}%</b></div>`).join('');
+  const rows=[...r.children],ins=rows.map(x=>x.querySelector('input'));
+  function run(ch){
+    let v=ins.map(x=>+x.value),sum=v.reduce((a,b)=>a+b,0);
+    if(sum>100&&ch!=null){v[ch]-=sum-100;ins[ch].value=v[ch];sum=100;}
+    rows.forEach((x,i)=>{x.querySelector('b').textContent=v[i]+'%';x.classList.toggle('hit',v[i]>=25);});
+    const hit=N.filter((n,i)=>v[i]>=25);
+    o.innerHTML=(hit.length?`持股 25% 以上：<b>${hit.join('、')}</b>，须逐一识别并核实。`:'没有人持股达到 25%，持股标准下无须识别任何人。')+' 另须识别一名对公司负有重大管理控制责任的人，例如首席执行官或财务负责人，即使他不持股。'+(100-sum>0?` 其余 ${100-sum}% 由其他小股东持有。`:'');
+  }
+  ins.forEach((x,i)=>x.addEventListener('input',()=>run(i)));run();
+})();
+</script>
+
+<h2 id="sec-5">五、不能做生意的对象：制裁</h2>
+<p>反洗钱规则针对的是钱的来源；制裁针对的是人。美国财政部海外资产控制办公室（OFAC）依据《国际紧急经济权力法》等法律，公布特别指定国民名单，并对伊朗、古巴等国家和地区实施全面禁运。美国人不得与名单上的人、以及名单上的人合计直接或间接持有 50% 以上的实体进行交易，相关财产须予冻结。</p>
+<p>制裁的民事责任是严格责任：受美国管辖的人即使不知道对方是制裁对象，也可能被追究。这使经纪商不能只在开户时比对一次名单，而要在名单更新、客户信息变化与每一笔转账时持续筛查。2024 年 4 月 24 日签署的《21 世纪以实力求和平法》，把违反《国际紧急经济权力法》与《与敌国贸易法》的诉讼时效从 5 年延长到 10 年，OFAC 随后相应延长了记录保存要求。</p>
+<p>2025 年 7 月 15 日，OFAC 与盈透证券达成 11,832,136 美元的和解。OFAC 认定，2016 年 7 月至 2024 年 1 月间该公司有 12,367 笔明显违规：其中 2016 年 7 月至 2021 年 7 月，它向 200 多名身处伊朗、古巴、叙利亚与克里米亚的账户持有人提供经纪服务，这些客户发生了近 12,000 笔交易。大多数客户在开户资料中填写的居住地并不在受制裁地区，是通过登录时的 IP 地址发现的；公司的 IP 地址封锁存在缺陷，包括一个技术故障，2019 年 5 月以前没有封锁克里米亚，2019 年 5 月到 2021 年 6 月仍漏掉了塞瓦斯托波尔的地址。OFAC 认定这些违规不属于恶劣情形、且为自愿披露，因而大幅减轻了罚款。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">制裁的严格责任</p><p class="pr-c"><span><em>领域</em>金融监管 › 制裁</span><span><em>类型</em>联邦成文法、总统行政令与 OFAC 条例</span></p><p class="pr-s">受美国管辖的人不得与 OFAC 制裁名单上的人及其持股合计达 50% 以上的实体交易，也不得向受全面禁运地区的人提供服务；违反时的民事责任不以知情为前提。</p><dl><div><dt>在法律体系中的位置</dt><dd>《国际紧急经济权力法》《与敌国贸易法》及 31 CFR 第五章各制裁条例；OFAC 执法指南（31 CFR 第 501 部分附录 A）；2024 年 4 月 24 日起诉讼时效由 5 年延长为 10 年</dd></div><div><dt>回应的问题</dt><dd>开户资料可以不实，受制裁的人可以通过他人或第三地进入市场</dd></div><div><dt>适用范围</dt><dd>适用于美国人与在美国的交易；是否恶劣、是否自愿披露影响罚款数额，不影响是否违规</dd></div><div><dt>出台</dt><dd>美国国会与总统，依据 1917 年《对敌贸易法》与 1977 年《国际紧急经济权力法》等授权，制裁项目随外交政策变化；OFAC 于 1950 年设立，负责执行</dd></div><div><dt>留下的问题</dt><dd>远程开户时，客户人在哪里、是不是本人，只能通过数据推断</dd></div></dl></aside>
+<h2 id="sec-6">六、尚未合拢的边界：顾问与改革</h2>
+<p>经纪商与银行早已在反洗钱规则之内，投资顾问却一直在外面。2024 年 8 月 28 日，FinCEN 发布最终规则（9 月 4 日刊登），把在 SEC 注册的投资顾问与豁免申报顾问纳入《银行保密法》的「金融机构」，要求其建立反洗钱计划、提交可疑活动报告，原定 2026 年 1 月 1 日生效。2025 年，财政部宣布推迟并重新审视这条规则；2025 年 12 月 31 日，FinCEN 发布最终规则，把生效日期推迟到 2028 年 1 月 1 日（2026 年 1 月 2 日刊登）。与之配套、由 SEC 与 FinCEN 在 2024 年 5 月 13 日联合提出的顾问客户身份识别规则，截至 2026 年 11 月仍未定稿。</p>
+<p>对已经在规则之内的机构，FinCEN 在 2026 年 4 月 7 日提出反洗钱计划的整体改革，取代 2024 年 7 月 3 日的旧提案：以统一的措辞要求包括经纪商在内的各类机构建立风险评估流程，评估产品、渠道、客户与地域的风险，并把更多资源用在风险更高的地方；反洗钱合规负责人须设在美国境内；对银行，提案规定计划设立得当的，除非存在重大或系统性失误，一般不会受到重大监管处置。FinCEN 说明，这些改动意在澄清与统一，不改变实质义务，经纪商适用的自律组织要求予以保留。征求意见截至 2026 年 6 月 9 日；截至 2026 年 11 月，最终规则尚未发布。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">2016–2026：哪些规则生效了，哪些还在路上</p><p class="figsub">截至 2026 年 11 月。点选一条，看它的时间线与现状。</p></div></div>
+    <div class="q10t-list" id="q10t-l"></div>
+    <ol class="q10t-tl" id="q10t-tl" aria-live="polite"></ol>
+  </div>
+</figure>
+<style>
+.q10t-list{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.q10t-list button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:9px 10px;font-size:13px;line-height:1.45}
+.q10t-list button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint);margin-top:2px}
+.q10t-list button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10t-tl{list-style:none;margin:14px 0 0;padding:0 0 0 14px;border-left:2px solid var(--line);font-size:13.5px;line-height:1.6}
+.q10t-tl li{position:relative;margin:0 0 8px}.q10t-tl li::before{content:"";position:absolute;left:-20px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--card);border:2px solid var(--accent)}
+.q10t-tl li.now::before{background:var(--accent)}
+.q10t-tl b{display:inline-block;min-width:96px;color:var(--muted);font-weight:500}
+@media (max-width:640px){.q10t-list{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const R=[['客户尽职调查规则','生效',[['2016.05.11','FinCEN 发布最终规则'],['2018.05.11','开始遵守：识别 25% 持股人与一名控制人'],['2026.11','仍然有效；《企业透明法》豁免不影响这一义务']]],
+    ['《企业透明法》申报','美国公司已豁免',[['2021.01.01','随 2021 财年国防授权法生效'],['2025.03.21','临时最终规则：美国本土公司与美国人免于申报（3 月 26 日刊登）'],['2026.08.11','最终规则：豁免永久化，只剩在美登记的外国公司申报外国人信息']]],
+    ['顾问反洗钱规则','推迟至 2028',[['2024.08.28','FinCEN 发布最终规则，原定 2026.01.01 生效'],['2025','财政部宣布推迟并重新审视'],['2025.12.31','最终规则：生效日推迟至 2028.01.01（2026.01.02 刊登）']]],
+    ['顾问客户身份识别','仍是提案',[['2024.05.13','SEC 与 FinCEN 联合提出'],['2024.07.22','意见征集截止'],['2026.11','未查到最终规则；FinCEN 表示将与顾问反洗钱规则的审视协调']]],
+    ['反洗钱计划改革','仍是提案',[['2024.07.03','旧提案'],['2026.04.07','新提案取代旧提案：统一要求风险评估流程'],['2026.06.09','意见征集截止；截至 2026.11 未发布最终规则']]]];
+  const l=document.getElementById('q10t-l'),tl=document.getElementById('q10t-tl');
+  l.innerHTML=R.map(r=>`<button type="button">${r[0]}<em>${r[1]}</em></button>`).join('');
+  const bs=[...l.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));const e=R[i][2];tl.innerHTML=e.map((x,j)=>`<li class="${j===e.length-1?'now':''}"><b>${x[0]}</b>${x[1]}</li>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(2);
+})();
+</script>
+
+<h2 id="sec-7">七、远程开户与深度伪造</h2>
+<p>线上券商的开户全部在手机上完成：拍证件、拍自拍、填问卷，几分钟内开通。客户身份识别规则允许不见面开户，但要求程序写明如何核实。这一安排的前提是证件与照片难以伪造。2024 年 11 月 13 日，FinCEN 发布警示（FIN-2024-Alert004）：自 2023 年起，金融机构报告的可疑活动中，涉嫌使用深度伪造媒体的明显增加，主要是用生成式 AI 修改或生成驾照、护照等证件上的照片，或把 AI 生成的照片与被盗、虚构的个人信息拼成合成身份，以通过身份核验；这些账户随后被用来接收和转移其他诈骗的资金。</p>
+<p>警示列出的预警信号包括：照片本身有修改痕迹，或与证件上的年龄等信息不符；多份证件彼此不一致；在实时核验中使用第三方网络摄像头插件，或以技术故障为由要求改用其他方式；拒绝多因素认证；反向图片搜索发现证件照与网上 AI 生成人脸图库中的图片一致；深度伪造检测软件报警；地理位置或设备数据与证件信息不符；新开账户短期内出现大量快速交易、向高风险收款方付款或大量退单。FinCEN 请金融机构在相关的可疑活动报告中注明关键词「FIN-2024-DEEPFAKEFRAUD」，并建议使用多因素认证与实时核验，同时提醒：这些手段本身也可能被伪造的音视频绕过。</p>
+<p>非美国居民开户还有额外的考虑。客户身份识别规则允许以护照号码与签发国代替纳税人识别号，经纪商需要判断能否核实外国证件的真伪；为非美国人开立、最低资产 100 万美元并配有专门客户经理的私人银行账户，经纪商还须履行加强尽职调查，查明资金来源，并识别是否为高级外国政治人物；客户所在地是否属于受制裁地区，要持续以 IP 地址、设备与转账数据判断，盈透证券案说明，开户时填写的地址并不够。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">远程开户时的深度伪造信号</p><p class="figsub">勾选在一次开户中观察到的信号，看它们落在开户流程的哪一层。信号来自 FinCEN 2024 年 11 月 13 日的警示（FIN-2024-Alert004）；单个信号不必然意味着可疑，需结合整体情况判断。</p></div></div>
+    <div class="q10k-list" id="q10k-l"></div>
+    <div class="q10k-layers" id="q10k-y"></div>
+    <p class="q10k-m" id="q10k-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q10k-list{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.q10k-list label{display:flex;gap:8px;align-items:flex-start;background:var(--quote);border-radius:9px;padding:8px 10px;font-size:13px;line-height:1.5;cursor:pointer;border:1px solid transparent}
+.q10k-list label.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10k-list input{accent-color:var(--accent);margin-top:3px}
+.q10k-layers{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.q10k-layers div{border-radius:9px;padding:8px 10px;background:var(--quote);font-size:12.5px;color:var(--muted)}
+.q10k-layers div b{display:block;font-size:18px;color:var(--ink)}
+.q10k-layers div.on{background:var(--accent);color:var(--bg)}.q10k-layers div.on b{color:var(--bg)}
+.q10k-m{font-size:14px;margin:12px 0 0;min-height:2.6em;line-height:1.65}
+@media (max-width:640px){.q10k-list{grid-template-columns:1fr}.q10k-layers{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const L=['证件审查','实时核验','设备与位置','开户后监控'];
+  const F=[['照片有修改痕迹，或与证件上的年龄不符',0],['多份证件彼此不一致',0],['反向图片搜索：证件照出现在 AI 生成人脸图库',0],['深度伪造检测软件对照片或视频报警',1],['实时核验时使用第三方摄像头插件，或借口故障要求改用其他方式',1],['拒绝多因素认证',1],['地理位置或设备数据与证件信息不符',2],['新账户短期内大量快速交易、向高风险收款方付款或大量退单',3]];
+  const l=document.getElementById('q10k-l'),y=document.getElementById('q10k-y'),m=document.getElementById('q10k-m');
+  l.innerHTML=F.map((f,i)=>`<label><input type="checkbox" data-i="${i}" ${i===4||i===6?'checked':''}><span>${f[0]}</span></label>`).join('');
+  y.innerHTML=L.map(x=>`<div><b>0</b>${x}</div>`).join('');
+  const cbs=[...l.querySelectorAll('input')],cells=[...y.children];
+  function run(){
+    const c=[0,0,0,0];let n=0;cbs.forEach(x=>{x.parentNode.classList.toggle('on',x.checked);if(x.checked){c[F[+x.dataset.i][1]]++;n++;}});
+    cells.forEach((e,i)=>{e.querySelector('b').textContent=c[i];e.classList.toggle('on',c[i]>0);});
+    m.textContent=n===0?'没有勾选信号。':n===1?'一个信号：需要结合其他信息判断，可以要求补充核验。':`${n} 个信号，分布在 ${c.filter(Boolean).length} 层。多个信号同时出现时，应考虑拒绝开户或在开户后提交可疑活动报告，并在报告中注明 FIN-2024-DEEPFAKEFRAUD。`;
+  }
+  cbs.forEach(x=>x.addEventListener('change',run));run();
+})();
+</script>
+
+<p><strong>今天的对应。</strong>线上开户由证件识别、活体检测与名单筛查组成一条自动流水线，开户后再由交易监控与定期复核接手。每一步都可以由供应商提供，但责任仍在经纪商：程序是否覆盖了深度伪造、是否在名单更新时重新筛查、是否对高风险客户提高核实强度，监管检查的都是经纪商自己的计划。</p>
+<h2 id="sec-8">八、这一步留下的问题</h2>
+<p>有了身份识别、可疑活动报告、受益所有人与制裁筛查，开户的人是谁有了一套核实的程序，但新的问题随之出现：</p>
+<ol><li><strong>对客户说什么。</strong>限制账户、要求补充资料时，能告诉客户多少；营销中说「几分钟开户」「零门槛」，又要符合什么规则。</li><li><strong>由 AI 核实与判断。</strong>证件识别、活体检测与可疑交易筛选越来越多地由模型完成，「有理由怀疑」由谁作出，误判的责任在谁；伪造的一方同样使用 AI。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">开户规则之外的两个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="q10n" id="q10n"></div>
+    <p class="q10n-m" id="q10n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q10n{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.q10n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.q10n button b{display:block;font-size:14px}.q10n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.q10n button.on{border-color:var(--accent)}
+.q10n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.q10n{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['对客户说什么','→ 第 11 章 能说什么、不能说什么','限制账户时能告诉客户多少；「几分钟开户」「零门槛」这样的宣传要符合什么规则。'],
+    ['由 AI 核实与判断','→ 第 12 章 重跑：当推荐来自 AI','证件识别、活体检测与可疑交易筛选由模型完成时，「有理由怀疑」由谁作出；伪造的一方同样使用 AI。']];
+  const g=document.getElementById('q10n'),m=document.getElementById('q10n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-9">九、对产品的含义</h2>
+<p>本章的规则对金融产品有三条含义。第一，开户流程本身是法定程序：取得哪四项信息、怎么核实、什么时候比对名单，都由规则规定，产品可以优化体验，不能省略步骤；对公司客户，还要识别 25% 以上的持股人与一名控制人。第二，制裁是严格责任，筛查不能只在开户时做一次；盈透证券案中，开户资料与登录地点不一致，是 IP 数据而不是客户填写的地址暴露了问题，产品的风控数据要能回答「客户现在在哪里」。第三，生成式 AI 同时出现在攻防两端：伪造证件的成本下降，远程核验需要多因素认证、实时检测与开户后的复核；用模型筛查可疑活动时，报告义务与保密义务都仍由经纪商承担。</p>
+<h2 id="sec-10">参考文献</h2>
+<ul class="refs"><li>Bank Secrecy Act, Pub. L. 91-508 (1970); 31 U.S.C. § 5311 et seq.</li><li>California Bankers Association v. Shultz, 416 U.S. 21 (1974).</li><li>Corporate Transparency Act, Title LXIV of the William M. (Mac) Thornberry National Defense Authorization Act for Fiscal Year 2021, Pub. L. 116-283.</li><li>FinCEN. (2002). Suspicious activity reporting by brokers or dealers in securities (final rule, July 1, 2002); 31 CFR 1023.320.</li><li>FinCEN. (2016). Customer due diligence requirements for financial institutions. <i>Federal Register</i>, 81, 29398 (May 11, 2016).</li><li>FinCEN. (2024). <i>FinCEN Alert on Fraud Schemes Involving Deepfake Media Targeting Financial Institutions</i> (FIN-2024-Alert004, November 13, 2024).</li><li>FinCEN. (2024). Anti-money laundering/countering the financing of terrorism program and suspicious activity report filing requirements for registered investment advisers and exempt reporting advisers. <i>Federal Register</i> (September 4, 2024).</li><li>FinCEN. (2025). Beneficial ownership information reporting requirement revision and deadline extension (interim final rule). <i>Federal Register</i>, 90, 13688 (March 26, 2025).</li><li>FinCEN. (2026). Delaying the effective date of the AML/CFT program and SAR filing requirements for registered investment advisers and exempt reporting advisers. <i>Federal Register</i> (January 2, 2026).</li><li>FinCEN. (2026, April 7). FinCEN proposes rule to fundamentally reform financial institution programs designed to fight illicit finance [News release].</li><li>FinCEN. (2026, August 11). FinCEN permanently ends beneficial ownership reporting requirements for millions of small business owners [News release].</li><li>FINRA Rule 3310 (Anti-Money Laundering Compliance Program).</li><li>Office of Foreign Assets Control. (2025, July 15). <i>Enforcement Release: Interactive Brokers LLC Settles with OFAC for $11,832,136</i>.</li><li>Securities and Exchange Commission &amp; Department of the Treasury. (2003). Customer identification programs for broker-dealers. <i>Federal Register</i>, 68, 25113 (May 9, 2003); 31 CFR 1023.220.</li><li>Securities and Exchange Commission &amp; FinCEN. (2024). Customer identification programs for registered investment advisers and exempt reporting advisers (proposed rule). <i>Federal Register</i>, 89, 44571 (May 21, 2024).</li><li>USA PATRIOT Act, Pub. L. 107-56 (2001), §§ 326, 352.</li></ul>
+<footer class="nav"><a href="s09.html">← 第 9 章　替人管钱的人</a><a href="s11.html">第 11 章　能说什么、不能说什么 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

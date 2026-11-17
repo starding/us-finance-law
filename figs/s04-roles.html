@@ -1,0 +1,39 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">经纪与自营：同一位推销员，两种身份</p><p class="figsub">客户要买 100 股。切换中间人的身份，看钱怎么流、中间人从哪里赚钱。价格为示意。</p></div></div>
+    <div class="s4rl-b" id="s4rl-b"><button type="button" data-v="0">经纪商：代客户买</button><button type="button" data-v="1">自营商：卖自己的存货</button></div>
+    <div class="s4rl-flow">
+      <div class="s4rl-n">客户</div>
+      <div class="s4rl-a"><span id="s4rl-a1"></span><i></i><span id="s4rl-a2"></span></div>
+      <div class="s4rl-n mid" id="s4rl-m"></div>
+      <div class="s4rl-a"><span id="s4rl-b1"></span><i></i><span id="s4rl-b2"></span></div>
+      <div class="s4rl-n" id="s4rl-c"></div>
+    </div>
+    <div class="s4rl-g"><div><b>收入来自</b><p id="s4rl-i"></p></div><div><b>利益冲突</b><p id="s4rl-x"></p></div></div>
+  </div>
+</figure>
+<style>
+.s4rl-b{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.s4rl-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s4rl-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s4rl-flow{display:grid;grid-template-columns:90px 1fr 120px 1fr 110px;align-items:center;gap:6px;margin-bottom:14px}
+.s4rl-n{background:var(--quote);border-radius:10px;padding:12px 6px;text-align:center;font-size:13.5px;font-weight:600}
+.s4rl-n.mid{background:var(--ink);color:var(--bg)}
+.s4rl-a{display:flex;flex-direction:column;align-items:center;font-size:12px;color:var(--muted);text-align:center}
+.s4rl-a i{display:block;width:100%;height:2px;background:var(--accent);margin:4px 0;position:relative}
+.s4rl-a i:after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid var(--accent);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.s4rl-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.s4rl-g>div{background:var(--quote);border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.6}
+.s4rl-g>div+div{background:var(--accent-soft)}.s4rl-g p{margin:4px 0 0}
+@media (max-width:640px){.s4rl-flow{grid-template-columns:1fr}.s4rl-a i{width:2px;height:18px}.s4rl-a i:after{display:none}.s4rl-g{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[{m:'经纪商<br><small>代理人</small>',c:'市场上的卖方',a1:'买入指令 + 佣金',a2:'',b1:'代客户下单',b2:'按市价 50.00 成交',i:'按成交收取佣金，例如每笔若干美元；零佣金券商则来自订单流付费、融资利息、现金利差等。',x:'交易越多收入越多，有动力鼓励客户频繁买卖；把订单交给谁执行，也可能取决于谁付钱更多（见第 6 章）。'},
+    {m:'自营商<br><small>交易对手</small>',c:'自营商自己的存货',a1:'按 50.40 买入',a2:'',b1:'从存货中卖出',b2:'存货成本 49.80',i:'买卖差价：按 50.40 卖给客户，存货成本 49.80，每股赚 0.60（示意）。',x:'有动力推荐自己想脱手的证券、在价格上加价；客户往往不知道对面就是推荐人自己。'}];
+  const g=id=>document.getElementById(id);let k=0;
+  function upd(){const d=D[k];g('s4rl-m').innerHTML=d.m;g('s4rl-c').textContent=d.c;g('s4rl-a1').textContent=d.a1;g('s4rl-a2').textContent=d.a2;g('s4rl-b1').textContent=d.b1;g('s4rl-b2').textContent=d.b2;g('s4rl-i').textContent=d.i;g('s4rl-x').textContent=d.x;
+    document.querySelectorAll('#s4rl-b button').forEach(b=>b.classList.toggle('on',+b.dataset.v===k));}
+  document.querySelectorAll('#s4rl-b button').forEach(b=>b.addEventListener('click',()=>{k=+b.dataset.v;upd();}));upd();
+})();
+</script>

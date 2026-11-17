@@ -1,0 +1,33 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">App 上哪些功能接近「推荐」</p><p class="figsub">点选一个功能，看它在「一般信息」到「推荐」之间的位置。位置依据 NASD 第 01-23 号通知与 Reg BI 采纳文件的标准，为示意；个案取决于内容、情境与呈现方式。</p></div></div>
+    <div class="s4rc-bar"><span>一般信息</span><div class="s4rc-tr"><i id="s4rc-dot"></i></div><span>推荐</span></div>
+    <div class="s4rc-f" id="s4rc-f"></div>
+    <div class="s4rc-d"><p class="s4rc-h" id="s4rc-h"></p><p id="s4rc-x"></p></div>
+  </div>
+</figure>
+<style>
+.s4rc-bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);margin-bottom:14px}
+.s4rc-tr{position:relative;height:10px;border-radius:5px;background:linear-gradient(90deg,var(--quote),var(--accent))}
+.s4rc-tr i{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--card);border:3px solid var(--ink);transform:translate(-50%,-50%);transition:left .4s}
+.s4rc-f{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s4rc-f button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s4rc-f button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s4rc-d{background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s4rc-d p{margin:0}.s4rc-h{font-weight:600;margin-bottom:4px!important}
+</style>
+<script>
+(function(){
+  const F=[['行情与新闻页',5,'客户自己查阅的行情、新闻与研究资料，一般不构成推荐，即使研究报告中有买卖评级。'],
+    ['自定条件的选股器',15,'客户按客观条件自行设定、结果不偏向公司自己产品的筛选工具，一般不构成推荐；如果默认条件或排序偏向公司获利更多的产品，判断会改变。'],
+    ['持仓与自选股提醒',22,'客户订阅、范围由客户决定的新闻提醒，一般不构成推荐，前提是提醒本身不暗示客户应当交易。'],
+    ['全站成交量排行榜',38,'对所有用户一样、按客观指标排序，接近一般信息；配上醒目的买入按钮、频繁推送，「行动号召」的成分就会增加。'],
+    ['按持仓推送「你可能也喜欢」',75,'分析客户的交易与浏览行为后向其推送具体证券，属于第 01-23 号通知所说的一般构成推荐的情形，不论客户是否知道背后的分析。'],
+    ['填写问卷后给出具体组合',85,'收集年龄、风险承受能力后列出具体证券的工具，一般构成推荐；只给出股债比例、不涉及具体证券的，一般不构成。'],
+    ['AI 助手回答「我该买哪只」',90,'针对个人问题给出具体证券的买卖建议，是高度个性化的行动号召；附上「不构成投资建议」的免责声明，不能免除相应义务。']];
+  const f=document.getElementById('s4rc-f'),dot=document.getElementById('s4rc-dot'),h=document.getElementById('s4rc-h'),x=document.getElementById('s4rc-x');
+  f.innerHTML=F.map(a=>`<button type="button">${a[0]}</button>`).join('');
+  const bs=[...f.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));dot.style.left=F[i][1]+'%';h.textContent=F[i][0];x.textContent=F[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(4);
+})();
+</script>

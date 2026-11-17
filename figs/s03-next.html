@@ -1,0 +1,26 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">证券的边界之外，谁来卖、放在哪里、价格是否公正。点选一个，看它通向哪一章。</p></div></div>
+    <div class="s3nx" id="s3nx"></div>
+    <p class="s3nx-m" id="s3nx-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.s3nx{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.s3nx button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.s3nx button b{display:block;font-size:14px}.s3nx button em{font-style:normal;font-size:12px;color:var(--faint)}
+.s3nx button.on{border-color:var(--accent)}
+.s3nx-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.s3nx{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['卖证券的中间人','→ 第 4 章','股票与被认定为投资合同的代币，大多通过经纪商与交易平台卖给投资者；中间人有自己的利益。'],
+    ['客户的资产放在哪里','→ 第 5 章','投资者买入的证券与代币存放在中间人那里，中间人倒闭时客户能否拿回资产。'],
+    ['价格被人扭曲','→ 第 7 章','代币与小盘股容易被少数人操纵；证券与非证券的划分决定了由谁来追究。']];
+  const g=document.getElementById('s3nx'),m=document.getElementById('s3nx-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

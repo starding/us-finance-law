@@ -1,0 +1,35 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">SIPC 垫付的上限</p><p class="figsub">假设经纪商倒闭后，某客户账上的证券与现金全部找不回来。拖动两项金额，看 SIPC 最多垫付多少：每名客户 50 万美元，其中现金不超过 25 万美元。示意。</p></div></div>
+    <div class="p5s-ctl">
+      <label>缺失的证券 <b id="p5s-av">30 万美元</b><input type="range" id="p5s-a" min="0" max="80" step="5" value="30"></label>
+      <label>缺失的现金 <b id="p5s-bv">30 万美元</b><input type="range" id="p5s-b" min="0" max="60" step="5" value="30"></label>
+    </div>
+    <div class="p5s-bar" id="p5s-bar"><i class="p5s-c"></i><i class="p5s-s"></i><i class="p5s-u"></i></div>
+    <div class="p5s-lg"><span><i class="p5s-c"></i>现金部分</span><span><i class="p5s-s"></i>证券部分</span><span><i class="p5s-u"></i>超出上限，作为普通债权</span></div>
+    <p class="p5s-m" id="p5s-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.p5s-ctl{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13.5px;margin-bottom:14px}.p5s-ctl input{width:100%;accent-color:var(--accent)}
+.p5s-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;background:var(--quote)}
+.p5s-bar i{display:block;height:100%;transition:width .35s}
+.p5s-c{background:var(--accent)}.p5s-s{background:var(--accent);opacity:.5}.p5s-u{background:var(--line)}
+.p5s-lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+.p5s-lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.p5s-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.p5s-ctl{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),A=$('p5s-a'),B=$('p5s-b'),bar=$('p5s-bar').children;
+  function run(){
+    const s=+A.value,c=+B.value,tot=s+c;
+    $('p5s-av').textContent=s+' 万美元';$('p5s-bv').textContent=c+' 万美元';
+    const cc=Math.min(c,25),sc=Math.min(s,50-cc),un=tot-cc-sc,W=140;
+    bar[0].style.width=cc/W*100+'%';bar[1].style.width=sc/W*100+'%';bar[2].style.width=un/W*100+'%';
+    $('p5s-m').textContent=tot===0?'没有缺失，SIPC 无须垫付。':`缺失合计 ${tot} 万美元，SIPC 垫付 ${cc+sc} 万美元（现金 ${cc}、证券 ${sc}）`+(un>0?`；其余 ${un} 万美元只能作为普通债权参与分配。`:'，缺失全部得到弥补。');
+  }
+  A.addEventListener('input',run);B.addEventListener('input',run);run();
+})();
+</script>

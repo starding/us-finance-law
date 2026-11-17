@@ -1,0 +1,51 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">Basic 案：三次否认与一次合并</p><p class="figsub">拖动滑块选择一位股东卖出股票的日期，看他能否推定依赖了公司的否认；再看被告可以怎样推翻这一推定。</p></div></div>
+    <div class="s2bas-tl" id="s2bas-tl"></div>
+    <label class="s2bas-s">卖出日期 <b id="s2bas-v"></b><input type="range" id="s2bas-r" min="0" max="518" step="1" value="200"></label>
+    <div class="s2bas-tg"><span>被告证明市场价格没有受到否认的影响</span><div class="s2bas-b" id="s2bas-b"><button type="button" data-v="0">没有证明</button><button type="button" data-v="1">证明了</button></div></div>
+    <div class="s2bas-o" id="s2bas-o"><b id="s2bas-h"></b><p id="s2bas-x"></p></div>
+  </div>
+</figure>
+<style>
+.s2bas-tl{position:relative;height:108px;margin:6px 8px 8px;border-bottom:2px solid var(--line)}
+.s2bas-band{position:absolute;bottom:0;height:22px;background:var(--accent-soft);border-radius:4px 4px 0 0}
+.s2bas-ev{position:absolute;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.s2bas-ev b{font-size:11.5px;font-weight:600;white-space:nowrap}.s2bas-ev span{font-size:10.5px;color:var(--faint);white-space:nowrap}
+.s2bas-ev i{display:block;width:2px;background:var(--ink);margin-top:2px}
+.s2bas-ev.end i{background:var(--accent)}.s2bas-ev.r{transform:translateX(-100%);align-items:flex-end}.s2bas-ev.r i{margin-right:-1px}
+.s2bas-me{position:absolute;bottom:-7px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--card);transform:translateX(-50%);transition:left .15s}
+.s2bas-s{display:block;font-size:13.5px;margin:16px 0 10px}.s2bas-s input{width:100%;accent-color:var(--accent)}
+.s2bas-tg{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:13.5px;margin-bottom:12px}
+.s2bas-b{display:flex;gap:6px}.s2bas-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s2bas-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s2bas-o{background:var(--quote);border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.6;transition:background .3s}
+.s2bas-o.ok{background:var(--accent-soft)}.s2bas-o p{margin:4px 0 0}
+@media (max-width:640px){.s2bas-ev span{display:none}.s2bas-ev b{font-size:10px}}
+</style>
+<script>
+(function(){
+  const T0=Date.UTC(1977,8,1),DAY=864e5,d=(y,m,dd)=>Math.round((Date.UTC(y,m-1,dd)-T0)/DAY),MAX=d(1979,2,1);
+  const E=[[d(1977,10,21),'第一次否认','1977-10-21',70,''],[d(1978,9,25),'第二次否认','1978-09-25',8,'r'],[d(1978,11,6),'第三次否认','1978-11-06',38,''],[d(1978,12,20),'宣布合并 · 46 美元','1978-12-20',72,'r end']];
+  const S=d(1977,10,21),END=d(1978,12,18),tl=document.getElementById('s2bas-tl'),r=document.getElementById('s2bas-r');
+  r.max=MAX;
+  const pct=x=>x/MAX*100;
+  tl.innerHTML=`<div class="s2bas-band" style="left:${pct(S)}%;width:${pct(END-S)}%"></div>`+E.map(e=>`<div class="s2bas-ev ${e[4]}" style="left:${pct(e[0])}%"><b>${e[1]}</b><span>${e[2]}</span><i style="height:${e[3]}px"></i></div>`).join('')+'<div class="s2bas-me" id="s2bas-me"></div>';
+  const me=document.getElementById('s2bas-me'),v=document.getElementById('s2bas-v'),o=document.getElementById('s2bas-o'),h=document.getElementById('s2bas-h'),x=document.getElementById('s2bas-x');
+  let reb=0;
+  function upd(){
+    let t=+r.value;if(t>=END&&t<d(1978,12,20))t=END-1;
+    const dt=new Date(T0+t*DAY);v.textContent=dt.getUTCFullYear()+' 年 '+(dt.getUTCMonth()+1)+' 月 '+dt.getUTCDate()+' 日';me.style.left=pct(t)+'%';
+    let ok=false;
+    if(t<S){h.textContent='不在诉讼涉及的期间之内';x.textContent='第一次否认之前卖出，卖出价格不可能受到否认的影响。';}
+    else if(t>=END){h.textContent='合并已经公布';x.textContent='停牌并宣布合并之后，真相已经进入价格，此时卖出的人没有被否认误导。';}
+    else if(reb){h.textContent='推定被推翻';x.textContent='推定依赖的前提是价格反映了这句假话。被告如果证明价格没有受到否认的影响，原告就要另行证明自己确实依赖了否认，集团诉讼通常难以继续。2014 年的哈里伯顿案允许被告在集团诉讼认证阶段就提出这类证据。';}
+    else{ok=true;h.textContent='可以推定依赖了否认';x.textContent='他在第一次否认与 1978 年 12 月 18 日停牌之间按市场价格卖出。按欺诈市场理论，公开的否认已经反映在价格里，他不必证明自己读过任何一次否认。';}
+    o.classList.toggle('ok',ok);
+    document.querySelectorAll('#s2bas-b button').forEach(b=>b.classList.toggle('on',+b.dataset.v===reb));
+  }
+  r.addEventListener('input',upd);
+  document.querySelectorAll('#s2bas-b button').forEach(b=>b.addEventListener('click',()=>{reb=+b.dataset.v;upd();}));
+  upd();
+})();
+</script>

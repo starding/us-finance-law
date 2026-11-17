@@ -1,0 +1,41 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">用四个要素检验六个案例</p><p class="figsub">点选一个案例，看 Howey 测试的四个要素是否满足。结论以法院判决、SEC 报告或 2026 年 SEC 解释为准。</p></div></div>
+    <div class="s3hw-c" id="s3hw-c"></div>
+    <div class="s3hw-g" id="s3hw-g"></div>
+    <div class="s3hw-r" id="s3hw-r"><b id="s3hw-v"></b><p id="s3hw-x"></p></div>
+  </div>
+</figure>
+<style>
+.s3hw-c{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s3hw-c button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s3hw-c button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s3hw-g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.s3hw-e{background:var(--quote);border-radius:9px;padding:10px;font-size:13px;line-height:1.5;border-top:4px solid var(--line);transition:border-color .3s}
+.s3hw-e.y{border-top-color:var(--accent)}
+.s3hw-e b{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:4px}.s3hw-e span{color:var(--muted)}
+.s3hw-r{border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.6;background:var(--quote)}
+.s3hw-r.y{background:var(--accent-soft)}.s3hw-r p{margin:4px 0 0}
+@media (max-width:640px){.s3hw-g{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const EL=['投入金钱','共同事业','期望利润','来自他人努力'];
+  const C=[['豪伊橘子园（1946）',[1,1,1,1],['买地加付管理费','各块果园统一经营、合并销售','买方关心的是收益，不是吃橘子','种植、采摘、销售都由服务公司完成'],'是证券。联邦最高法院认定土地买卖合同与服务合同合起来构成投资合同。'],
+    ['合作城住房股票（1975）',[1,null,0,0],['按房间数认购股票','法院未作单独判断','为了住，不为获利；只能按原价卖回','—'],'不是证券。福曼案认为买方是为个人使用而购买，没有获利预期。'],
+    ['The DAO 代币（2017）',[1,1,1,1],['以以太币购买，同样算投入金钱','资金汇集在同一个合约地址','持有人期望分享项目收益','依赖 Slock.it 与监管人的管理努力，投票权有限'],'是证券。SEC 2017 年的调查报告得出这一结论。'],
+    ['XRP 机构销售（2023）',[1,1,1,1],['机构依书面合同付款','资金汇入瑞波公司','合同条款与推销材料指向获利','瑞波公司承诺推动 XRP 的使用与价格'],'是投资合同。纽约南区法院 2023 年判决，约 7.28 亿美元的机构销售构成未注册发行。'],
+    ['XRP 交易所程序化销售（2023）',[1,null,0,0],['买方付了钱','法院未作单独判断','买方不知道卖方是瑞波，谈不上受其承诺引导','法院把「期望来自他人努力的利润」作为一个要件，认定不满足'],'不是投资合同。法院认为匿名的竞价成交不满足期望来自瑞波努力的利润这一要素；该判决未经上诉审查，2025 年双方撤回上诉。'],
+    ['比特币（2026 年解释，示意）',[1,0,0,0],['买方付了钱','没有一个发行人汇集资金','价格可能上涨，但没有发行人的承诺','价值来自网络的程序化运行，而非某一方的管理努力'],'本身不是证券。SEC 2026 年 3 月的解释把它归为数字商品；若有人围绕它作出管理承诺并出售，那笔交易仍可能构成投资合同。']];
+  const c=document.getElementById('s3hw-c'),g=document.getElementById('s3hw-g'),r=document.getElementById('s3hw-r'),v=document.getElementById('s3hw-v'),x=document.getElementById('s3hw-x');
+  c.innerHTML=C.map(k=>`<button type="button">${k[0]}</button>`).join('');
+  g.innerHTML=EL.map(e=>`<div class="s3hw-e"><b>${e}<em></em></b><span></span></div>`).join('');
+  const bs=[...c.children],es=[...g.children];
+  function set(i){
+    bs.forEach((b,j)=>b.classList.toggle('on',i===j));
+    es.forEach((e,j)=>{const y=C[i][1][j];e.classList.toggle('y',!!y);e.querySelector('em').textContent=y===null?'—':(y?'✓':'✕');e.querySelector('em').style.fontStyle='normal';e.querySelector('span').textContent=C[i][2][j];});
+    const all=C[i][1].every(z=>z===1);r.classList.toggle('y',all);v.textContent=all?'四个要素都满足':'至少一个要素不满足';x.textContent=C[i][3];
+  }
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

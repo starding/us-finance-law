@@ -1,0 +1,42 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">连环追缴：被迫卖出压低价格，又引发下一轮追缴</p><p class="figsub">八个账户在不同价位买入同一只股票。假设维持线是自付比例的一半（自付 50% 时正好是 25%），触线的账户补不上钱、被全部卖出，每一笔被迫卖出使价格再跌 5%。示意。</p></div></div>
+    <div class="q8s-ctl">
+      <div class="q8s-tabs" id="q8s-t"><button type="button" data-m="10">自付 10%</button><button type="button" data-m="50">自付 50%</button></div>
+      <label>初始下跌 <b id="q8s-v">8%</b><input type="range" id="q8s-s" min="0" max="35" step="1" value="8"></label>
+    </div>
+    <div class="q8s-acc" id="q8s-a"></div>
+    <div class="q8s-path" id="q8s-p"></div>
+    <p class="q8s-msg" id="q8s-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q8s-ctl{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;font-size:13.5px;margin-bottom:12px}.q8s-ctl input{width:100%;accent-color:var(--accent)}
+.q8s-tabs{display:flex;gap:6px}.q8s-tabs button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.q8s-tabs button.on{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.q8s-acc{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.q8s-acc div{background:var(--quote);border-radius:8px;padding:8px 4px;text-align:center;font-size:11.5px;color:var(--muted);transition:background .3s}
+.q8s-acc div b{display:block;font-size:13px;color:var(--ink)}.q8s-acc div.hit{background:var(--accent);color:var(--bg)}.q8s-acc div.hit b{color:var(--bg)}
+.q8s-path{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px;font-size:12.5px;color:var(--muted)}
+.q8s-path span{background:var(--quote);border-radius:6px;padding:2px 8px}.q8s-path span.q8s-f{background:var(--accent-soft);color:var(--ink)}
+.q8s-msg{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.q8s-ctl{grid-template-columns:1fr}.q8s-acc{grid-template-columns:repeat(4,1fr)}}
+</style>
+<script>
+(function(){
+  const B=[100,96,92,88,84,80,76,72],$=id=>document.getElementById(id),tabs=[...$('q8s-t').children],s=$('q8s-s');let m=10;
+  $('q8s-a').innerHTML=B.map(b=>`<div><b>${b}</b>买入价<br><span></span></div>`).join('');
+  const cells=[...$('q8s-a').children];
+  function run(){
+    $('q8s-v').textContent=s.value+'%';tabs.forEach(t=>t.classList.toggle('on',+t.dataset.m===m));
+    const k=m/100,mt=k/2,trig=B.map(b=>b*(1-k)/(1-mt));
+    let p=100*(1-s.value/100),hit=B.map(()=>false),path=[`<span>冲击后 ${p.toFixed(1)}</span>`],round=0;
+    for(;;){const now=B.map((b,i)=>!hit[i]&&p<trig[i]);const n=now.filter(Boolean).length;if(!n)break;round++;
+      now.forEach((x,i)=>{if(x)hit[i]=true;});p=p*Math.pow(0.95,n);path.push(`<span class="q8s-f">第 ${round} 轮 ${n} 户被迫卖出 → ${p.toFixed(1)}</span>`);}
+    cells.forEach((c,i)=>{c.classList.toggle('hit',hit[i]);c.querySelector('span').textContent='触线 '+trig[i].toFixed(1);});
+    $('q8s-p').innerHTML=path.join('');const n=hit.filter(Boolean).length;
+    $('q8s-m').textContent=n?`初始下跌 ${s.value}%，经过 ${round} 轮被迫卖出，价格跌到 ${p.toFixed(1)}，比初始冲击多跌了 ${(100*(1-s.value/100)-p).toFixed(1)}；${n} 个账户被清仓。`:`初始下跌 ${s.value}% 没有让任何账户触线，价格停在 ${p.toFixed(1)}。`;
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>{m=+t.dataset.m;run();}));s.addEventListener('input',run);run();
+})();
+</script>

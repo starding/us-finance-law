@@ -1,0 +1,55 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">经纪商倒闭时，客户能拿回多少</p><p class="figsub">客户留在经纪商处的资产 100，经纪商自有资本 20，另欠其他债权人 50。拖动经纪商的亏损，切换两项保护，看客户拿回的比例。示意。</p></div></div>
+    <div class="p5o-ctl">
+      <label>经纪商亏损 <b id="p5o-lv">40</b><input type="range" id="p5o-l" min="0" max="120" step="5" value="40"></label>
+      <div class="p5o-tg"><button type="button" id="p5o-seg">客户资产与经纪商财产分开</button><button type="button" id="p5o-sip">SIPC 垫付缺口</button></div>
+    </div>
+    <div class="p5o-bars">
+      <div class="p5o-row"><span>客户</span><div class="p5o-tr"><i id="p5o-c"></i><em id="p5o-s"></em></div><b id="p5o-cv"></b></div>
+      <div class="p5o-row"><span>其他债权人</span><div class="p5o-tr"><i id="p5o-o"></i></div><b id="p5o-ov"></b></div>
+    </div>
+    <p class="p5o-m" id="p5o-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.p5o-ctl{font-size:13.5px;margin-bottom:14px}.p5o-ctl input{width:100%;accent-color:var(--accent)}
+.p5o-tg{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.p5o-tg button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.p5o-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.p5o-row{display:grid;grid-template-columns:76px 1fr 52px;gap:10px;align-items:center;font-size:13px;margin:8px 0}
+.p5o-tr{height:16px;background:var(--quote);border-radius:8px;overflow:hidden;display:flex}
+.p5o-tr i{display:block;height:100%;background:var(--accent);transition:width .35s}
+.p5o-tr em{display:block;height:100%;background:var(--accent);opacity:.45;transition:width .35s}
+.p5o-row b{font-weight:600;text-align:right}
+.p5o-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),L=$('p5o-l'),seg=$('p5o-seg'),sip=$('p5o-sip');
+  let S=false,P=false;
+  function run(){
+    const loss=+L.value;$('p5o-lv').textContent=loss;
+    seg.classList.toggle('on',S);sip.classList.toggle('on',P);
+    let cust,oth,gap;
+    if(S){
+      // 客户资产单独保管，亏损只由经纪商自有资产承担
+      const own=Math.max(0,20+50-loss);cust=100;oth=Math.min(50,own);
+    }else{
+      const pool2=Math.max(0,170-loss);const r=Math.min(1,pool2/150);cust=100*r;oth=50*r;
+    }
+    gap=P?Math.min(100-cust,100):0;
+    $('p5o-c').style.width=cust+'%';$('p5o-s').style.width=gap+'%';
+    $('p5o-o').style.width=(oth/50*100)+'%';
+    $('p5o-cv').textContent=Math.round(cust+gap)+'%';$('p5o-ov').textContent=Math.round(oth/50*100)+'%';
+    let m;
+    if(S)m=loss<=20?'亏损由经纪商自有资本吸收，客户与其他债权人都能足额受偿。':'客户资产单独保管，亏损只落在经纪商自己的财产上；客户拿回全部资产，其他债权人承担缺口。';
+    else m=loss<=20?'亏损小于自有资本，各方都能足额受偿。':`资产混在一起，客户与其他债权人按比例受偿，客户只拿回约 ${Math.round(cust)}%。`;
+    if(P&&gap>0.5)m+=' SIPC 垫付客户的缺口（浅色部分），每名客户以 50 万美元为限。';
+    $('p5o-m').textContent=m;
+  }
+  L.addEventListener('input',run);
+  seg.addEventListener('click',()=>{S=!S;run();});sip.addEventListener('click',()=>{P=!P;run();});
+  run();
+})();
+</script>

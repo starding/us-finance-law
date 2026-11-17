@@ -1,0 +1,31 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一次发行可以走哪条路</p><p class="figsub">回答两个问题，看适用的途径。金额与条件以现行规则为准。</p></div></div>
+    <div class="ex-q"><p>买方是否全部为合格投资者？</p><div class="ex-b" data-k="a"><button type="button" data-v="1">是</button><button type="button" data-v="0">否</button></div></div>
+    <div class="ex-q"><p>是否需要公开宣传？</p><div class="ex-b" data-k="p"><button type="button" data-v="1">需要</button><button type="button" data-v="0">不需要</button></div></div>
+    <div class="ex-r" id="ex-r" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.ex-q{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;font-size:14px}.ex-q p{margin:0}
+.ex-b{display:flex;gap:6px}.ex-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 14px;border-radius:999px;cursor:pointer}
+.ex-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.ex-r{display:grid;gap:6px;margin-top:12px}
+.ex-o{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:9px 12px;border-radius:9px;background:var(--quote);font-size:13.5px;opacity:.4;transition:opacity .3s}
+.ex-o.ok{opacity:1;background:var(--accent-soft)}.ex-o b{font-weight:600}
+@media (max-width:640px){.ex-o{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const O=[['注册公开发行','第 5 条；提交注册声明，任何投资者，可以宣传',()=>true],
+    ['规则 506(b)','合格投资者人数不限，另可有至多 35 名有经验的非合格投资者；不得公开宣传',(a,p)=>!p],
+    ['规则 506(c)','可以公开宣传；买方须全部为合格投资者，发行人须合理核实',(a,p)=>a],
+    ['A 条例第二层级','小额公开发行，每年至多 7,500 万美元；非合格投资者有投资额上限',()=>true],
+    ['众募条例','经注册平台，每年至多 500 万美元；每位投资者有投资额上限',()=>true]];
+  const st={a:1,p:0},r=document.getElementById('ex-r');
+  r.innerHTML=O.map(o=>`<div class="ex-o"><b>${o[0]}</b><span>${o[1]}</span></div>`).join('');
+  const rows=[...r.children];
+  function upd(){document.querySelectorAll('.ex-b').forEach(g=>g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st[g.dataset.k])));rows.forEach((e,i)=>e.classList.toggle('ok',O[i][2](st.a,st.p)));}
+  document.querySelectorAll('.ex-b').forEach(g=>g.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st[g.dataset.k]=+b.dataset.v;upd();})));upd();
+})();
+</script>

@@ -1,0 +1,25 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">开户规则之外的两个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="q10n" id="q10n"></div>
+    <p class="q10n-m" id="q10n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q10n{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.q10n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.q10n button b{display:block;font-size:14px}.q10n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.q10n button.on{border-color:var(--accent)}
+.q10n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.q10n{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['对客户说什么','→ 第 11 章 能说什么、不能说什么','限制账户时能告诉客户多少；「几分钟开户」「零门槛」这样的宣传要符合什么规则。'],
+    ['由 AI 核实与判断','→ 第 12 章 重跑：当推荐来自 AI','证件识别、活体检测与可疑交易筛选由模型完成时，「有理由怀疑」由谁作出；伪造的一方同样使用 AI。']];
+  const g=document.getElementById('q10n'),m=document.getElementById('q10n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

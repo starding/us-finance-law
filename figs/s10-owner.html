@@ -1,0 +1,30 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一家公司开户，要识别谁</p><p class="figsub">拖动四位股东的持股比例（合计不超过 100%），看哪些人落入 25% 的持股标准。无论持股如何，都还要识别一名控制人。示意。</p></div></div>
+    <div class="q10o-rows" id="q10o-r"></div>
+    <div class="q10o-out" id="q10o-o" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q10o-rows{display:grid;gap:8px}
+.q10o-row{display:grid;grid-template-columns:70px 1fr 60px;gap:10px;align-items:center;font-size:13.5px}
+.q10o-row input{width:100%;accent-color:var(--accent)}
+.q10o-row b{font-weight:600;text-align:right}
+.q10o-row.hit span{color:var(--accent);font-weight:600}
+.q10o-out{margin-top:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.65}
+</style>
+<script>
+(function(){
+  const N=['股东甲','股东乙','股东丙','股东丁'],V=[40,24,20,16],r=document.getElementById('q10o-r'),o=document.getElementById('q10o-o');
+  r.innerHTML=N.map((n,i)=>`<div class="q10o-row"><span>${n}</span><input type="range" min="0" max="100" step="1" value="${V[i]}" data-i="${i}"><b>${V[i]}%</b></div>`).join('');
+  const rows=[...r.children],ins=rows.map(x=>x.querySelector('input'));
+  function run(ch){
+    let v=ins.map(x=>+x.value),sum=v.reduce((a,b)=>a+b,0);
+    if(sum>100&&ch!=null){v[ch]-=sum-100;ins[ch].value=v[ch];sum=100;}
+    rows.forEach((x,i)=>{x.querySelector('b').textContent=v[i]+'%';x.classList.toggle('hit',v[i]>=25);});
+    const hit=N.filter((n,i)=>v[i]>=25);
+    o.innerHTML=(hit.length?`持股 25% 以上：<b>${hit.join('、')}</b>，须逐一识别并核实。`:'没有人持股达到 25%，持股标准下无须识别任何人。')+' 另须识别一名对公司负有重大管理控制责任的人，例如首席执行官或财务负责人，即使他不持股。'+(100-sum>0?` 其余 ${100-sum}% 由其他小股东持有。`:'');
+  }
+  ins.forEach((x,i)=>x.addEventListener('input',()=>run(i)));run();
+})();
+</script>

@@ -1,0 +1,33 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">「预测性数据分析」提案：从提出到撤回</p><p class="figsub">SEC 曾试图专门处理写进模型的利益冲突。点选一个时间点。</p></div></div>
+    <div class="k12d-l" id="k12d-l"></div>
+    <div class="k12d-d"><p class="k12d-h" id="k12d-h"></p><p id="k12d-x"></p></div>
+  </div>
+</figure>
+<style>
+.k12d-l{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:4px 0 12px;padding-top:14px}
+.k12d-l::before{content:"";position:absolute;left:4%;right:4%;top:19px;height:2px;background:var(--line)}
+.k12d-l button{position:relative;font:inherit;font-size:12px;cursor:pointer;border:none;background:transparent;color:var(--muted);padding:16px 2px 0;text-align:center;line-height:1.35}
+.k12d-l button::before{content:"";position:absolute;top:0;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--card);border:2px solid var(--accent)}
+.k12d-l button.w::before{border-color:var(--faint)}
+.k12d-l button.on{color:var(--ink);font-weight:600}.k12d-l button.on::before{background:var(--accent)}
+.k12d-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;min-height:5em}
+.k12d-h{font-weight:600;margin:0 0 4px}.k12d-d p{margin:0}
+@media (max-width:640px){.k12d-l{grid-template-columns:repeat(4,1fr);row-gap:12px}.k12d-l::before{display:none}}
+</style>
+<script>
+(function(){
+  const D=[['2021-08-27','SEC 征求意见','就经纪商与投资顾问的「数字互动做法」征求意见（发布号 34-92766），列举游戏化、推送、聊天机器人等，询问现有规则是否够用。',0],
+    ['2023-07-26','提出规则','提出预测性数据分析利益冲突规则（发布号 34-97990）：评估与投资者互动中使用的技术是否把公司利益置于投资者之前，并消除冲突或消除其影响，同时要有书面政策与记录。',0],
+    ['2023-08-09','刊登联邦公报','提案刊登于 88 FR 53960，开始征求意见。批评集中在「所涵盖技术」定义过宽，与最佳利益规则、受托义务重叠。',0],
+    ['2024-03-18','发布更正','SEC 对提案发布更正（89 FR 19292）。提案此后未再推进。',0],
+    ['2025-03-27','AI 圆桌会','SEC 举行金融业 AI 圆桌会，讨论 AI 的风险、收益与治理。',0],
+    ['2025-06-12','决定撤回','SEC 决定撤回这项提案及另外 13 项未完成的提案（发布号 33-11377），说明今后如要在这些领域行动，将重新提出规则。',1],
+    ['2025-11-17','检查重点','2026 财年检查重点：检查算法给出的建议是否与投资者画像或所述策略一致，核实公司对自身 AI 能力的陈述是否准确。',0]];
+  const l=document.getElementById('k12d-l'),h=document.getElementById('k12d-h'),x=document.getElementById('k12d-x');
+  l.innerHTML=D.map(d=>`<button type="button" class="${d[3]?'w':''}">${d[0].slice(0,7).replace('-',' 年 ')} 月<br>${d[1]}</button>`).join('');
+  const bs=[...l.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));const p=D[i][0].split('-');h.textContent=`${p[0]} 年 ${+p[1]} 月 ${+p[2]} 日 · ${D[i][1]}`+(D[i][3]?'（6 月 17 日生效，90 FR 25531）':'');x.textContent=D[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(1);
+})();
+</script>

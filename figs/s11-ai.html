@@ -1,0 +1,32 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">聊天机器人的三种回答</p><p class="figsub">客户问：「这只股票明年能涨多少？」点选一条 AI 回答，看它碰到了哪条规则。回答为示意。</p></div></div>
+    <div class="k11i-q">这只股票明年能涨多少？</div>
+    <div class="k11i-g" id="k11i-g"></div>
+    <div class="k11i-d" id="k11i-d"></div>
+    <p class="k11i-n">无论哪一条，都是公司的沟通：按收到的人数与类型归为往来函件或零售沟通，须监督、留存（常见问题 B.4、D.8）。</p>
+  </div>
+</figure>
+<style>
+.k11i-q{justify-self:end;margin:0 0 10px auto;max-width:70%;background:var(--quote);border-radius:12px 12px 2px 12px;padding:8px 12px;font-size:13.5px;width:fit-content}
+.k11i-g{display:grid;gap:6px}
+.k11i-g button{font:inherit;font-size:13.5px;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px 12px 12px 2px;padding:9px 12px;line-height:1.55;max-width:86%}
+.k11i-g button.on{border-color:var(--accent);background:var(--accent-soft)}
+.k11i-d{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.k11i-d div{border-radius:9px;padding:9px 10px;font-size:13px;line-height:1.5;background:var(--quote)}
+.k11i-d div.bad{outline:1px solid var(--accent)}.k11i-d b{display:block;font-size:12.5px;margin-bottom:2px}
+.k11i-n{font-size:12.5px;color:var(--faint);margin:10px 0 0}
+@media (max-width:640px){.k11i-d{grid-template-columns:1fr}.k11i-g button{max-width:100%}}
+</style>
+<script>
+(function(){
+  const A=['根据我们的模型，明年有望上涨 30%。','它过去一年涨了 40%，现在买入是不错的机会。','没有人能预测明年的涨幅。影响它的主要因素有……主要风险有……可以先看公司最近的年报与公告。'];
+  const V=[[['不得预测业绩','违反：给出了具体的未来涨幅',1],['公平且平衡','违反：只有收益，没有风险',1],['推荐与最佳利益','未针对客户情况，但若被视为行动建议即适用',0]],
+    [['不得暗示过去会重现','违反：用过去一年的涨幅暗示未来',1],['公平且平衡','违反：只说一半',1],['推荐与最佳利益','「现在买入」是行动建议，向零售客户作出即适用最佳利益规则',1]],
+    [['不得预测业绩','符合：明确不作预测',0],['公平且平衡','符合：因素与风险并列',0],['推荐与最佳利益','只提供信息，不构成推荐',0]]];
+  const g=document.getElementById('k11i-g'),d=document.getElementById('k11i-d');
+  g.innerHTML=A.map(a=>`<button type="button">${a}</button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));d.innerHTML=V[i].map(v=>`<div class="${v[2]?'bad':''}"><b>${v[0]}</b>${v[1]}</div>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

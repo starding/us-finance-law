@@ -1,0 +1,30 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">注册声明写错了，谁要负责</p><p class="figsub">《证券法》第 11 条下各类被告的责任与抗辩。点选一个角色。</p></div></div>
+    <div class="s11" id="s11"></div>
+    <div class="s11-d"><p class="s11-h" id="s11-h"></p><p id="s11-x"></p></div>
+  </div>
+</figure>
+<style>
+.s11{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px}
+.s11 button{font:inherit;font-size:13px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px 6px;display:flex;flex-direction:column;gap:6px;align-items:center}
+.s11 button i{display:block;width:100%;height:8px;border-radius:4px;background:var(--line)}
+.s11 button i b{display:block;height:100%;border-radius:4px;background:var(--accent)}
+.s11 button.on{border-color:var(--accent)}
+.s11-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s11-h{font-weight:600;margin:0 0 4px}.s11-d p{margin:0}
+@media (max-width:640px){.s11{grid-template-columns:repeat(2,1fr)}}
+</style>
+<script>
+(function(){
+  const D=[['发行人',100,'几乎绝对责任','不能以已经尽力核查为由免责；只能证明买方在购买时已经知道不实之处等少数情形。'],
+    ['董事与签字人',70,'可以尽职调查抗辩','须证明经过合理调查，有合理理由相信注册声明在生效时真实、完整。'],
+    ['承销商',70,'可以尽职调查抗辩','为了能用这一抗辩，承销商会对发行人做大量调查，这正是条文希望产生的效果。'],
+    ['会计师等专家',45,'只对自己出具意见的部分负责','例如审计师只对经审计的财务报表负责；对这一部分同样可以尽职调查抗辩。'],
+    ['其他人',0,'不在第 11 条的被告之列','未签字、不是董事、承销商或专家的人，不承担第 11 条责任，但可能承担其他条款下的责任。']];
+  const g=document.getElementById('s11'),h=document.getElementById('s11-h'),x=document.getElementById('s11-x');
+  g.innerHTML=D.map(d=>`<button type="button"><span>${d[0]}</span><i><b style="width:${d[1]}%"></b></i></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));h.textContent=D[i][0]+'：'+D[i][2];x.textContent=D[i][3];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

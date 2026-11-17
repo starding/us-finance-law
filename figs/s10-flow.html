@@ -1,0 +1,29 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一个账户从开立到监控，要过几道关</p><p class="figsub">点选一步，看它依据的规则、要做的事与常见的失误。前三步在开户时，后两步贯穿账户存续期间。</p></div></div>
+    <div class="q10f-steps" id="q10f-s"></div>
+    <dl class="q10f-out" id="q10f-o" aria-live="polite"></dl>
+  </div>
+</figure>
+<style>
+.q10f-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;position:relative}
+.q10f-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.q10f-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.q10f-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10f-out{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.q10f-out dt{color:var(--faint)}.q10f-out dd{margin:0}
+@media (max-width:640px){.q10f-steps{grid-template-columns:1fr 1fr}.q10f-out{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['取得信息','开户前',['依据','31 CFR 1023.220（《爱国者法》第 326 条）'],['要做的事','取得姓名、出生日期、住址、身份号码；非美国人可用护照号码与签发国'],['常见失误','只收集、不核实；资料与证件不一致却放行']],
+    ['核实身份','开户前后合理时间内',['依据','31 CFR 1023.220'],['要做的事','查验带照片的政府证件，或以征信、数据库、联系客户等非证件方式核实；不见面开户须有专门程序'],['常见失误','证件照片为 AI 生成或修改；活体检测被第三方摄像头插件绕过']],
+    ['受益所有人','公司客户',['依据','客户尽职调查规则（2016 年发布，2018 年 5 月 11 日起遵守）'],['要做的事','识别并核实持股 25% 以上的每个人，以及一名控制人'],['常见失误','只核实公司，不追到背后的自然人']],
+    ['名单筛查','开户时与持续',['依据','OFAC 各制裁条例；严格责任'],['要做的事','比对特别指定国民名单与 50% 规则；以 IP、设备、转账数据判断客户所在地'],['常见失误','只在开户时筛一次；只看客户填写的地址（盈透证券案）']],
+    ['持续监控','账户存续期间',['依据','FINRA 规则 3310；31 CFR 1023.320'],['要做的事','按风险画像监控交易；发现至少 5,000 美元的可疑交易，30 天内报告，不得告知当事人'],['常见失误','预警积压未处理；向客户透露已报告']]];
+  const s=document.getElementById('q10f-s'),o=document.getElementById('q10f-o');
+  s.innerHTML=S.map((x,i)=>`<button type="button">${i+1}. ${x[0]}<em>${x[1]}</em></button>`).join('');
+  const bs=[...s.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));o.innerHTML=S[i].slice(2).map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

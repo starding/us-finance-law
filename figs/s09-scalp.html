@@ -1,0 +1,31 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">先买后荐：订户看到的与顾问做的</p><p class="figsub">资本收益研究局 1960 年六次重复同一做法。逐步点击，看每一步订户知道什么；再切换「是否披露」。价格为示意。</p></div></div>
+    <div class="q9c-tabs" id="q9c-t"><button type="button" data-k="0">未披露（实际发生的）</button><button type="button" data-k="1">事先披露</button></div>
+    <div class="q9c-steps" id="q9c-s"></div>
+    <p class="q9c-m" id="q9c-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q9c-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.q9c-tabs button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.q9c-tabs button.on{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.q9c-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.q9c-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:10px 12px}
+.q9c-steps button b{display:block;font-size:13.5px}.q9c-steps button em{font-style:normal;font-size:12px;color:var(--faint)}
+.q9c-steps button.on{border-color:var(--accent)}.q9c-steps button.done{background:var(--accent-soft)}
+.q9c-m{font-size:14px;margin:12px 0 0;min-height:4em;line-height:1.65}
+@media (max-width:640px){.q9c-steps{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const S=[['① 顾问先买入','价格 10',['顾问在推荐前不久买入。订户不知道。','顾问在推荐前不久买入，并在报告中写明「本公司已持有该股，将在推荐后卖出」。']],
+    ['② 寄出推荐','约 5,000 名订户',['报告推荐这只股票作长期投资，没有提到顾问自己的持仓。','报告推荐这只股票，同时写明顾问的持仓与卖出计划。订户可以据此打折看待这条推荐。']],
+    ['③ 订户买入','价格升至 12',['订户与市场跟进买入，几天内价格与成交量上升。','订户知道顾问会卖出，可以自己决定是否跟进、在什么价位跟进。']],
+    ['④ 顾问卖出','获利',['顾问卖给跟进的人，获利了结。下级法院认为没有证据证明意图损害客户，不构成欺诈。','最高法院 1963 年判决要求的正是这种充分披露：SEC 不必证明顾问有损害客户的意图，这一冲突也必须让客户知道。']]];
+  const $=id=>document.getElementById(id),tabs=[...$('q9c-t').children],g=$('q9c-s');let k=0,i=0;
+  g.innerHTML=S.map(x=>`<button type="button"><b>${x[0]}</b><em>${x[1]}</em></button>`).join('');const bs=[...g.children];
+  function run(){tabs.forEach(t=>t.classList.toggle('on',+t.dataset.k===k));bs.forEach((b,j)=>{b.classList.toggle('on',j===i);b.classList.toggle('done',j<i);});$('q9c-m').textContent=S[i][2][k];}
+  tabs.forEach(t=>t.addEventListener('click',()=>{k=+t.dataset.k;run();}));bs.forEach((b,j)=>b.addEventListener('click',()=>{i=j;run();}));run();
+})();
+</script>

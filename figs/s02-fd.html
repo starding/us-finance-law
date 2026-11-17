@@ -1,0 +1,38 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">FD 条例：同时告诉所有人</p><p class="figsub">一家上市公司的首席财务官向某人透露了下季度收入将低于预期。选择对象与情形，看公司须做什么。</p></div></div>
+    <p class="s2fd-q">告诉了谁</p>
+    <div class="s2fd-b" id="s2fd-w"><button type="button" data-v="0">一位卖方分析师</button><button type="button" data-v="1">一家基金经理</button><button type="button" data-v="2">公司的外部律师</button><button type="button" data-v="3">财经记者，用于公开报道</button></div>
+    <p class="s2fd-q">是有意还是无意</p>
+    <div class="s2fd-b" id="s2fd-i"><button type="button" data-v="0">有意透露</button><button type="button" data-v="1">说漏了嘴</button></div>
+    <div class="s2fd-o"><div class="s2fd-c" id="s2fd-c"></div><p id="s2fd-x"></p></div>
+  </div>
+</figure>
+<style>
+.s2fd-q{font-size:13px;color:var(--muted);margin:0 0 6px}
+.s2fd-b{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.s2fd-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s2fd-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s2fd-o{display:grid;grid-template-columns:150px 1fr;gap:12px;background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s2fd-o p{margin:0}
+.s2fd-c{font-weight:600;color:var(--accent)}
+@media (max-width:640px){.s2fd-o{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const st={w:0,i:0},c=document.getElementById('s2fd-c'),x=document.getElementById('s2fd-x');
+  function upd(){
+    let h,t;
+    if(st.w===2){h='不触发 FD 条例';t='对公司负有保密义务的人，例如律师、会计师、投资银行，不在 FD 条例的适用对象之内。';}
+    else if(st.w===3){h='不触发 FD 条例';t='向新闻媒体披露、用于公开报道，不在 FD 条例所列的对象之内；但信息仍应通过公开渠道同时发布，以免形成事实上的选择性披露。';}
+    else if(st.i===0){h='须同时公开';t='有意向证券市场专业人士'+(st.w===1?'（基金经理属于其中）':'')+'披露重大未公开信息，须在披露的同时公开，例如提交或提供 8-K，或用足以广泛、无差别传播的方式发布。';}
+    else{h='须尽快公开';t='无意披露的，须在高级管理人员知悉后尽快公开，最迟不晚于 24 小时后或纽约证券交易所下一个交易日开盘时，以较晚者为准。';}
+    c.textContent=h;x.textContent=t+' 违反 FD 条例由 SEC 追究，不产生私人诉权。';
+    document.querySelectorAll('#s2fd-w button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.w));
+    document.querySelectorAll('#s2fd-i button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st.i));
+  }
+  document.querySelectorAll('#s2fd-w button').forEach(b=>b.addEventListener('click',()=>{st.w=+b.dataset.v;upd();}));
+  document.querySelectorAll('#s2fd-i button').forEach(b=>b.addEventListener('click',()=>{st.i=+b.dataset.v;upd();}));
+  upd();
+})();
+</script>

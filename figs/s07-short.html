@@ -1,0 +1,43 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一笔卖空的规则节点</p><p class="figsub">T+1 结算下，一笔卖空从下单到平仓要经过的节点。点选「下一步」，或切换「按时交割」与「交割失败」。下方是卖空数据报告规则的合规日期变化。</p></div></div>
+    <div class="k7-tg"><button type="button" data-f="0" class="on">按时交割</button><button type="button" data-f="1">交割失败</button></div>
+    <ol class="k7-st" id="k7-st"></ol>
+    <button type="button" class="k7-nx" id="k7-nx">下一步</button>
+    <p class="k7-m" id="k7-m" aria-live="polite"></p>
+    <div class="k7-cd"><p>规则 13f-2 合规日期</p><div class="k7-row" id="k7-row"></div></div>
+  </div>
+</figure>
+<style>
+.k7-tg{display:flex;gap:6px;margin-bottom:12px}
+.k7-tg button,.k7-nx{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 12px}
+.k7-tg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.k7-nx{margin-top:10px;color:var(--accent);border-color:var(--accent)}
+.k7-st{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.k7-st li{background:var(--quote);border-radius:9px;padding:9px 8px;font-size:12.5px;line-height:1.4;opacity:.45;transition:opacity .3s;border:1px solid transparent}
+.k7-st li b{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.k7-st li.done{opacity:1}.k7-st li.cur{border-color:var(--accent)}
+.k7-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+.k7-cd{border-top:1px solid var(--line);margin-top:14px;padding-top:10px;font-size:12.5px}
+.k7-cd p{margin:0 0 8px;color:var(--muted)}
+.k7-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.k7-row span{padding:3px 10px;border-radius:999px;background:var(--quote)}
+.k7-row span.k7-x{text-decoration:line-through;color:var(--faint)}
+.k7-row span.k7-now{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.k7-row i{font-style:normal;color:var(--faint)}
+@media (max-width:640px){.k7-st{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const S=[[['T 日 下单前','找券：有合理理由相信可以借到'],['T 日','卖出成交'],['T+1','交付借来的股票，完成结算'],['之后','买回股票，归还出借人'],['结果','交易完成']],
+    [['T 日 下单前','找券：有合理理由相信可以借到'],['T 日','卖出成交'],['T+1','没有交付，形成交割失败'],['T+2 开盘前','清算经纪商须买入或借入股票平仓'],['未平仓','此后卖空这只股票须先借到股票']]];
+  const M=[['卖空订单进来，经纪商先确认可以借到股票并留存记录（Regulation SHO 的找券要求）。','成交后，卖空者欠买方一批股票。','借来的股票按时交付，买方拿到股票。','卖空者日后买回股票归还出借人，盈亏取决于买回价格。','这是卖空的正常过程。'],
+    ['卖空订单进来，经纪商先确认可以借到股票并留存记录（Regulation SHO 的找券要求）。','成交后，卖空者欠买方一批股票。','到结算日没有交付，买方没有拿到股票。','按规则 204，卖空导致的交割失败须在结算日之后的下一个结算日开盘前平仓，T+1 结算下即 T+2 开盘前。','没有按时平仓，该经纪商此后卖空这只股票，必须先实际借到股票，不能只凭找券。']];
+  let F=0,k=0;const st=document.getElementById('k7-st'),m=document.getElementById('k7-m');
+  function draw(){st.innerHTML=S[F].map((s,i)=>`<li class="${i<=k?'done':''} ${i===k?'cur':''}"><b>${s[0]}</b>${s[1]}</li>`).join('');m.textContent=M[F][k];}
+  document.querySelectorAll('.k7-tg button').forEach(b=>b.addEventListener('click',()=>{F=+b.dataset.f;k=0;document.querySelectorAll('.k7-tg button').forEach(x=>x.classList.toggle('on',x===b));draw();}));
+  document.getElementById('k7-nx').addEventListener('click',()=>{k=(k+1)%5;draw();});
+  document.getElementById('k7-row').innerHTML='<span class="k7-x">原定 2025-01-02</span><i>→ 2025 年 2 月改为</i><span class="k7-x">2026-01-02</span><i>→ 2025 年 12 月 3 日改为</i><span class="k7-now">2028-01-02</span>';
+  draw();
+})();
+</script>

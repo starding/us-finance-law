@@ -1,0 +1,31 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">经纪商与投资顾问：两种义务</p><p class="figsub">点选一个维度，对比向零售客户提出推荐的经纪商（最佳利益规则，第 4 章）与投资顾问（受托义务）。</p></div></div>
+    <div class="q9v-tabs" id="q9v-t"></div>
+    <div class="q9v-grid"><div class="q9v-c"><b>经纪自营商 · 最佳利益规则</b><p id="q9v-a"></p></div><div class="q9v-c ia"><b>投资顾问 · 受托义务</b><p id="q9v-b"></p></div></div>
+  </div>
+</figure>
+<style>
+.q9v-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.q9v-tabs button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.q9v-tabs button.on{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.q9v-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.q9v-c{background:var(--quote);border-radius:10px;padding:12px 14px}.q9v-c.ia{background:var(--accent-soft)}
+.q9v-c b{font-size:14px}.q9v-c p{font-size:13.5px;margin:6px 0 0;line-height:1.6}
+@media (max-width:640px){.q9v-grid{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[['法律来源','1934 年《证券交易法》；SEC 2019 年最佳利益规则，2020 年 6 月 30 日起遵守','1940 年《投资顾问法》第 206 条；资本收益研究局案（1963）；SEC 2019 年解释'],
+    ['义务何时产生','每次向零售客户提出推荐时','贯穿整个顾问关系，范围由双方约定'],
+    ['持续监控','除非另行约定，没有持续监控账户的义务','按关系提供相应频率的意见与监控'],
+    ['怎么收费','通常按交易收取佣金或差价','通常按管理资产的比例收费，也有固定费用'],
+    ['利益冲突','披露并减轻；限时推销特定证券的销售竞赛与配额须消除','消除，或充分、公平披露并取得知情同意'],
+    ['交给客户的文件','Form CRS 关系摘要','Form CRS；Form ADV 第二部分说明手册'],
+    ['自我主动交易的账户','客户自主下单、没有推荐时，最佳利益规则不适用','受托义务随顾问提供的服务而存在']];
+  const t=document.getElementById('q9v-t'),a=document.getElementById('q9v-a'),b=document.getElementById('q9v-b');
+  t.innerHTML=D.map(d=>`<button type="button">${d[0]}</button>`).join('');
+  const bs=[...t.children];const set=i=>{bs.forEach((x,j)=>x.classList.toggle('on',i===j));a.textContent=D[i][1];b.textContent=D[i][2];};
+  bs.forEach((x,i)=>x.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

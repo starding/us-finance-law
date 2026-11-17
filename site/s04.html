@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中间人有自己的利益</title>
+<meta name="description" content="《美国金融业法律研究》证券篇第 4 章：投资者很少直接向发行人买证券，中间隔着经纪商与自营商。他们靠佣金与差价赚钱，推荐什么、推荐多少都与自己的收入有关。法律先要求中间人注册并接受行业自律组织的管理，再要求推荐适合客户，2019 年起进一步要求推荐符合散户客户的最佳利益；在 App 上，什么算一次推荐，成了新的问题">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+</style>
+</head>
+<body data-page="s04">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
+<a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>
+<a class="" href="s01.html"><span class="n">1</span>卖的人比买的人知道得多</a>
+<a class="" href="s02.html"><span class="n">2</span>证券转手之后，谁来说真话</a>
+<a class="" href="s03.html"><span class="n">3</span>什么算证券</a>
+<a class=" cur" href="s04.html" aria-current="page"><span class="n">4</span>中间人有自己的利益</a>
+<a class="" href="s05.html"><span class="n">5</span>客户的钱放在经纪商那里</a>
+<a class="" href="s06.html"><span class="n">6</span>订单送到哪里成交</a>
+<a class="" href="s07.html"><span class="n">7</span>价格被人扭曲</a>
+<a class="" href="s08.html"><span class="n">8</span>借钱买证券</a>
+<a class="" href="s09.html"><span class="n">9</span>替人管钱的人</a>
+<a class="" href="s10.html"><span class="n">10</span>开户的人是谁</a>
+<a class="" href="s11.html"><span class="n">11</span>能说什么、不能说什么</a>
+<a class="" href="s12.html"><span class="n">12</span>重跑：当推荐来自 AI</a>
+<a class="" href="s-map.html"><span class="n">篇末</span>证券篇的规则地图</a>
+<span class="todo side-part"><span class="pn">银行篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">保险篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">衍生品篇</span>（待写）</span>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>证券篇</span></header>
+
+<div class="chapno">第 4 章</div><h1>中间人有自己的利益<small>经纪自营商、FINRA 与最佳利益规则</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>前三章约束的是发行人：说真话、按期报告、不能换个名字绕开。可是投资者很少直接找发行人买证券，他们找的是经纪人。经纪人按成交收佣金，自营商从买卖差价中赚钱，推荐哪只证券、推荐买卖多少次，都与他们自己的收入相关。法律对这个问题的回应分三步：先让中间人登记在册、接受同行组成的自律组织管理；再要求推荐必须适合客户；最后要求推荐必须以客户的最佳利益为先。到了 App 时代，一个更基础的问题浮了上来：屏幕上的哪一次推送，算是一次推荐。</p></blockquote>
+<h2 id="sec-1">一、推销员是谁的人</h2>
+<p>证券交易中的中间人有两种身份。《证券交易法》第 3(a)(4) 条把经纪商定义为「从事为他人账户进行证券交易之业务的任何人」，它是代理人，替客户找到对手方，收取佣金。第 3(a)(5) 条把自营商定义为「从事通过经纪商或其他方式、为自己账户买卖证券之业务的任何人」，它是交易的一方，从买卖差价中获利；只为自己投资、不以此为业的人不算自营商。多数大型券商同时具备两种身份，称为经纪自营商。</p>
+<p>两种身份带来不同的利益冲突。经纪商按成交收费，交易越多收入越多，有动力让客户频繁买卖；自营商把自己的存货卖给客户，有动力推荐自己想脱手的证券，并在价格上加价。客户看到的往往只是一位热情的推销员，分不清他此刻是哪一种身份。</p>
+<p><strong>今天的对应。</strong>零佣金券商没有消除这一结构，只是改变了收入来源：订单流付费、融资利息、现金账户的利差、证券借贷与产品分成。App 推荐什么、鼓励多频繁地交易，仍然与券商的收入相关。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">经纪与自营：同一位推销员，两种身份</p><p class="figsub">客户要买 100 股。切换中间人的身份，看钱怎么流、中间人从哪里赚钱。价格为示意。</p></div></div>
+    <div class="s4rl-b" id="s4rl-b"><button type="button" data-v="0">经纪商：代客户买</button><button type="button" data-v="1">自营商：卖自己的存货</button></div>
+    <div class="s4rl-flow">
+      <div class="s4rl-n">客户</div>
+      <div class="s4rl-a"><span id="s4rl-a1"></span><i></i><span id="s4rl-a2"></span></div>
+      <div class="s4rl-n mid" id="s4rl-m"></div>
+      <div class="s4rl-a"><span id="s4rl-b1"></span><i></i><span id="s4rl-b2"></span></div>
+      <div class="s4rl-n" id="s4rl-c"></div>
+    </div>
+    <div class="s4rl-g"><div><b>收入来自</b><p id="s4rl-i"></p></div><div><b>利益冲突</b><p id="s4rl-x"></p></div></div>
+  </div>
+</figure>
+<style>
+.s4rl-b{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.s4rl-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s4rl-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s4rl-flow{display:grid;grid-template-columns:90px 1fr 120px 1fr 110px;align-items:center;gap:6px;margin-bottom:14px}
+.s4rl-n{background:var(--quote);border-radius:10px;padding:12px 6px;text-align:center;font-size:13.5px;font-weight:600}
+.s4rl-n.mid{background:var(--ink);color:var(--bg)}
+.s4rl-a{display:flex;flex-direction:column;align-items:center;font-size:12px;color:var(--muted);text-align:center}
+.s4rl-a i{display:block;width:100%;height:2px;background:var(--accent);margin:4px 0;position:relative}
+.s4rl-a i:after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid var(--accent);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.s4rl-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.s4rl-g>div{background:var(--quote);border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.6}
+.s4rl-g>div+div{background:var(--accent-soft)}.s4rl-g p{margin:4px 0 0}
+@media (max-width:640px){.s4rl-flow{grid-template-columns:1fr}.s4rl-a i{width:2px;height:18px}.s4rl-a i:after{display:none}.s4rl-g{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[{m:'经纪商<br><small>代理人</small>',c:'市场上的卖方',a1:'买入指令 + 佣金',a2:'',b1:'代客户下单',b2:'按市价 50.00 成交',i:'按成交收取佣金，例如每笔若干美元；零佣金券商则来自订单流付费、融资利息、现金利差等。',x:'交易越多收入越多，有动力鼓励客户频繁买卖；把订单交给谁执行，也可能取决于谁付钱更多（见第 6 章）。'},
+    {m:'自营商<br><small>交易对手</small>',c:'自营商自己的存货',a1:'按 50.40 买入',a2:'',b1:'从存货中卖出',b2:'存货成本 49.80',i:'买卖差价：按 50.40 卖给客户，存货成本 49.80，每股赚 0.60（示意）。',x:'有动力推荐自己想脱手的证券、在价格上加价；客户往往不知道对面就是推荐人自己。'}];
+  const g=id=>document.getElementById(id);let k=0;
+  function upd(){const d=D[k];g('s4rl-m').innerHTML=d.m;g('s4rl-c').textContent=d.c;g('s4rl-a1').textContent=d.a1;g('s4rl-a2').textContent=d.a2;g('s4rl-b1').textContent=d.b1;g('s4rl-b2').textContent=d.b2;g('s4rl-i').textContent=d.i;g('s4rl-x').textContent=d.x;
+    document.querySelectorAll('#s4rl-b button').forEach(b=>b.classList.toggle('on',+b.dataset.v===k));}
+  document.querySelectorAll('#s4rl-b button').forEach(b=>b.addEventListener('click',()=>{k=+b.dataset.v;upd();}));upd();
+})();
+</script>
+
+<h2 id="sec-2">二、登记在册：第 15(a) 条</h2>
+<p>1934 年的《证券交易法》首先要求中间人登记。第 15(a) 条规定，经纪商或自营商使用邮件或州际商业手段进行证券交易，须向 SEC 注册，另有豁免的除外。注册不是一次性的手续：注册的经纪自营商要遵守 SEC 关于净资本、客户资产保管、账簿记录与报告的规则，并且依照 1983 年修订后的第 15(b)(8) 条，除只在其会员交易所交易等少数情形外，必须加入一个全国性证券协会。</p>
+<p>注册让监管者知道市场上有哪些中间人、它们在做什么，也让违规者可以被暂停或吊销注册，从而退出这个行业。</p>
+<h2 id="sec-3">三、行业自己管自己：从马洛尼法到 FINRA</h2>
+<p>SEC 的人手有限，逐一检查数千家经纪商与数十万名从业人员并不现实。1938 年，国会通过《马洛尼法》，在《证券交易法》中增加第 15A 条，允许场外市场的经纪自营商组成全国性证券协会，制定并执行自己的行为规则，由 SEC 监督。1939 年，全国证券交易商协会（NASD）依此注册。它制定的公平交易规则，后来成为适当性要求的来源。</p>
+<p>2007 年 7 月 30 日，NASD 与纽约证券交易所的会员监管部门合并，成立金融业监管局（FINRA）。今天，FINRA 的规则经 SEC 批准后生效，它检查会员公司、处理违规并组织仲裁。截至 2025 年末，FINRA 注册的经纪自营商为 3,184 家，注册代表为 639,723 人。</p>
+<p>从业人员也要注册。向客户推荐或执行证券交易的注册代表，须通过证券业基础考试（SIE）与相应的资格考试，例如一般证券代表的 Series 7；2018 年 10 月 1 日起，原有考试被拆分为这一结构。多数州另要求通过州法考试，例如 Series 63。注册信息、受处分记录与客户投诉，在 FINRA 的 BrokerCheck 上可以免费查询。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">自律监管（FINRA）</p><p class="pr-c"><span><em>领域</em>证券法 › 中间人</span><span><em>类型</em>联邦成文法与自律组织规则</span></p><p class="pr-s">经纪自营商须加入受 SEC 监督的全国性证券协会，由协会制定行为规则、检查会员、处罚违规并考核从业人员资格。</p><dl><div><dt>在法律体系中的位置</dt><dd>1934 年《证券交易法》第 15(a) 条要求经纪自营商注册；1938 年《马洛尼法》增设第 15A 条；NASD 1939 年注册；2007 年 7 月 30 日与纽约证券交易所会员监管部门合并为 FINRA；协会规则须经 SEC 批准</dd></div><div><dt>回应的问题</dt><dd>中间人数量多、行为分散，政府机构难以逐一监督</dd></div><div><dt>适用范围</dt><dd>行业有动力维持自身信誉；SEC 保留批准规则与监督协会的权力</dd></div><div><dt>出台</dt><dd>美国国会，1938；NASD，1939；FINRA，2007</dd></div><div><dt>留下的问题</dt><dd>注册与考试只能保证中间人懂行，不能保证他向客户推荐的东西对客户有利</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁管经纪商：四层结构</p><p class="figsub">点选一层，看它做什么、依据是什么。人数与家数为 FINRA 公布的 2025 年末数据。</p></div></div>
+    <div class="s4ly" id="s4ly"></div>
+    <div class="s4ly-d"><p class="s4ly-h" id="s4ly-h"></p><p id="s4ly-x"></p></div>
+  </div>
+</figure>
+<style>
+.s4ly{display:grid;gap:6px;margin-bottom:12px;justify-items:center}
+.s4ly button{font:inherit;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px 12px;display:flex;justify-content:space-between;gap:10px;font-size:13.5px}
+.s4ly button em{font-style:normal;font-size:12px;color:var(--faint)}
+.s4ly button.on{border-color:var(--accent);background:var(--accent-soft)}
+.s4ly-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s4ly-d p{margin:0}.s4ly-h{font-weight:600;margin-bottom:4px!important}
+</style>
+<script>
+(function(){
+  const L=[['美国国会','立法','1934 年《证券交易法》第 15(a) 条要求经纪自营商注册；1938 年《马洛尼法》增设第 15A 条，允许组成全国性证券协会实行自律。',40],
+    ['SEC','监督','批准 FINRA 的规则与修改；检查经纪自营商；制定净资本、客户资产保管与最佳利益等规则；可暂停或吊销注册。',55],
+    ['FINRA','自律组织','2007 年 7 月 30 日由 NASD 与纽约证券交易所会员监管部门合并而成；制定行为规则（如规则 2111）、检查会员、处罚违规、组织资格考试与仲裁。',70],
+    ['经纪自营商','3,184 家','须向 SEC 注册并加入 FINRA；对从业人员负有监督责任。',85],
+    ['注册代表','639,723 人','须通过 SIE 与相应资格考试（如 Series 7），多数州另要求州法考试（如 Series 63）；注册与处分记录可在 BrokerCheck 查询。',100]];
+  const g=document.getElementById('s4ly'),h=document.getElementById('s4ly-h'),x=document.getElementById('s4ly-x');
+  g.innerHTML=L.map(l=>`<button type="button" style="width:${l[3]}%"><b>${l[0]}</b><em>${l[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));h.textContent=L[i][0]+' · '+L[i][1];x.textContent=L[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(2);
+})();
+</script>
+
+<h2 id="sec-4">四、推荐要适合客户：适当性规则</h2>
+<p>规则 10b-5 管的是假话。一位经纪人如实介绍一只高风险的小盘股，却把它推荐给一位靠养老金生活的退休者，话都是真的，推荐却明显不合适。NASD 早年的公平交易规则就要求，推荐证券时须有合理理由相信它适合客户；这一要求后来编为 NASD 规则 2310，2012 年 7 月 9 日由 FINRA 规则 2111 取代。</p>
+<p>规则 2111 要求，会员或其从业人员推荐交易或投资策略时，须有合理理由相信它适合客户，这种相信要以合理调查客户的投资概况为基础：年龄、其他投资、财务状况与需求、税务状况、投资目标、投资经验、投资期限、流动性需求、风险承受能力，以及客户披露的其他信息。FINRA 的补充说明把它分为三项义务：合理依据适当性，推荐的产品至少对某些投资者合适，推荐人须了解它的风险与回报；客户特定适当性，对这位客户合适；数量适当性，一系列单看合适的交易合在一起不能过度，判断时看换手率、成本与权益之比、短进短出等指标。最后一项针对的是为赚佣金而频繁交易，业内称为炒单。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">适当性（FINRA 规则 2111）</p><p class="pr-c"><span><em>领域</em>证券法 › 中间人 › 行为标准</span><span><em>类型</em>自律组织规则</span></p><p class="pr-s">推荐证券交易或投资策略时，须有合理依据相信它适合客户；须了解产品本身、了解这位客户，并且一系列交易合在一起不能过度。</p><dl><div><dt>在法律体系中的位置</dt><dd>源自 NASD 的公平交易规则与 NASD 规则 2310；FINRA 规则 2111 自 2012 年 7 月 9 日起施行；2020 年 6 月 30 日起，受 SEC 最佳利益规则约束的推荐不再适用该规则，它继续适用于机构客户等其他推荐</dd></div><div><dt>回应的问题</dt><dd>真实的推荐也可能对客户有害；规则 10b-5 只管假话</dd></div><div><dt>适用范围</dt><dd>推荐人能取得并分析客户的投资概况；须先存在一项「推荐」</dd></div><div><dt>出台</dt><dd>NASD，1939 年起见于《公平交易规则》第三条第 2 节（后编为规则 2310）；FINRA 规则 2111 于 2012 年 7 月 9 日施行</dd></div><div><dt>留下的问题</dt><dd>「适合」只是下限，几种都适合的产品中，推荐人可以挑给自己报酬最高的一种</dd></div></dl></aside>
+<h2 id="sec-5">五、适合不等于最好：最佳利益规则</h2>
+<p>适当性规则允许这样的情形：两只指数基金几乎相同，一只的销售佣金更高，推荐人推荐佣金更高的那只，两只都「适合」客户，规则并没有被违反。投资顾问则不同，他们按 1940 年《投资顾问法》对客户负有受托义务，须以客户利益为先。普通投资者分不清两类人的区别。2010 年的《多德－弗兰克法》第 913 条要求 SEC 研究这一差异，并授权它制定规则。</p>
+<p>2019 年 6 月 5 日，SEC 通过最佳利益条例（Reg BI，第 34-86031 号），2020 年 6 月 30 日起须遵守，规则编号为《证券交易法》规则 15l-1。它要求经纪自营商及其从业人员向散户客户推荐证券交易、投资策略或账户类型时，以推荐时客户的最佳利益行事，不得把自己的财务或其他利益置于客户利益之前。散户客户指接受推荐、并将其主要用于个人、家庭或家庭生活目的的自然人。这一总义务通过四项具体义务来满足：</p>
+<ul><li><strong>披露义务</strong>：推荐之前或推荐时，以书面方式充分、公平地披露双方关系的重要事实，包括以何种身份行事、重要的费用与成本、服务的范围与限制，以及与推荐有关的重大利益冲突。</li><li><strong>注意义务</strong>：以合理的勤勉、注意与技能了解推荐的风险、回报与成本，有合理依据相信推荐符合这位客户的最佳利益；一系列交易合在一起不能过度。</li><li><strong>利益冲突义务</strong>：制定书面政策，识别并披露或消除利益冲突，缓解促使从业人员把公司利益放在前面的激励；对只能推荐有限产品的情形加以说明；在限定期间内针对特定证券的销售竞赛、销售配额、奖金与非现金报酬须予以消除。</li><li><strong>合规义务</strong>：制定并执行合理设计的书面政策与程序，以实现对整个条例的遵守。</li></ul>
+<p>同时生效的还有客户关系摘要（Form CRS）：经纪自营商与投资顾问须在建立关系之初，向散户投资者提供一份简短的摘要，说明提供什么服务、如何收费、存在哪些利益冲突、有无受处分记录；单一身份的公司不超过两页，同时提供两类服务的公司合并编写的不超过四页。2020 年 6 月 26 日，第二巡回上诉法院在 XY 计划网络诉 SEC 案中驳回了对这一条例的挑战，认定《多德－弗兰克法》第 913(f) 条授权足够。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">最佳利益规则（Reg BI）</p><p class="pr-c"><span><em>领域</em>证券法 › 中间人 › 行为标准</span><span><em>类型</em>SEC 规则</span></p><p class="pr-s">经纪自营商向散户客户推荐时，须以推荐时客户的最佳利益行事，不得把自身利益置于客户之前；通过披露、注意、利益冲突与合规四项义务来满足。</p><dl><div><dt>在法律体系中的位置</dt><dd>《证券交易法》规则 15l-1，2019 年 6 月 5 日通过（第 34-86031 号），2020 年 6 月 30 日起须遵守；依据《多德－弗兰克法》第 913(f) 条；同时通过 Form CRS（规则 17a-14）；第二巡回上诉法院 2020 年在 XY 计划网络诉 SEC 案中维持；在其适用范围内取代 FINRA 规则 2111</dd></div><div><dt>回应的问题</dt><dd>适当性只是下限，推荐人可以在合适的产品中挑对自己最有利的一种</dd></div><div><dt>适用范围</dt><dd>须存在对散户客户的推荐；条例不要求推荐成本最低的产品，也不禁止收取佣金，但成本须纳入考虑</dd></div><div><dt>出台</dt><dd>SEC，2019</dd></div><div><dt>留下的问题</dt><dd>在 App 上，算法排序、推送与选股工具中哪些构成「推荐」</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">适当性与最佳利益：同一件事，两种结论</p><p class="figsub">点选一个情形，对比 FINRA 规则 2111 与 SEC 最佳利益规则的要求。客户为散户。</p></div></div>
+    <div class="s4bi-t" id="s4bi-t"></div>
+    <div class="s4bi-g">
+      <div class="s4bi-c"><b>适当性 · FINRA 规则 2111</b><span class="s4bi-v" id="s4bi-av"></span><p id="s4bi-a"></p></div>
+      <div class="s4bi-c bi"><b>最佳利益 · Reg BI</b><span class="s4bi-v" id="s4bi-bv"></span><p id="s4bi-b"></p><em id="s4bi-o"></em></div>
+    </div>
+  </div>
+</figure>
+<style>
+.s4bi-t{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s4bi-t button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s4bi-t button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s4bi-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.s4bi-c{background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s4bi-c.bi{background:var(--accent-soft)}
+.s4bi-c b{display:block;font-size:14px}.s4bi-c p{margin:6px 0 0}
+.s4bi-v{display:inline-block;margin-top:6px;font-size:12px;border-radius:999px;padding:1px 10px;border:1px solid var(--muted);color:var(--muted)}
+.s4bi-c.bi .s4bi-v{border-color:var(--accent);color:var(--accent)}
+.s4bi-c em{display:block;font-style:normal;font-size:12px;color:var(--faint);margin-top:8px}
+@media (max-width:640px){.s4bi-g{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['两只相近的基金',
+      '不违反','两只基金都适合这位客户，推荐其中任何一只都满足适当性；规则没有要求在合适的产品之间比较成本。',
+      '需要理由','成本是注意义务中必须考虑的因素。两只基金几乎相同、只是佣金不同，推荐人须有合理依据说明为什么更贵的一只符合客户的最佳利益；条例不要求一律推荐最便宜的。','注意义务'],
+    ['限期销售竞赛',
+      '不处理','规则 2111 只看推荐是否适合客户，不处理公司的报酬安排。',
+      '须消除','在限定期间内针对特定证券或特定类型证券的销售竞赛、销售配额、奖金与非现金报酬，须予以消除。','利益冲突义务'],
+    ['推荐换成收费更高的账户',
+      '未明确涵盖','规则 2111 针对证券交易与投资策略的推荐，没有明确把账户类型列入。',
+      '明确涵盖','Reg BI 明确适用于账户类型的推荐，包括把退休计划资产转入个人退休账户；须有合理依据相信新账户符合客户的最佳利益。','注意义务'],
+    ['以自营身份卖出自己的存货',
+      '不处理','规则 2111 不处理身份披露；交易确认书须另按规则 10b-10 载明以何种身份成交。',
+      '须事先披露','推荐之前或推荐时，须书面披露以何种身份行事，以及与推荐相关的重大利益冲突。','披露义务'],
+    ['一年内反复买卖',
+      '可能违反','数量适当性：一系列单看合适的交易合在一起不能过度，看换手率、成本与权益之比等指标。',
+      '可能违反','注意义务同样要求一系列推荐的交易合在一起不能过度；Reg BI 去掉了 2111 原有的「推荐人控制账户」这一前提。','注意义务']];
+  const t=document.getElementById('s4bi-t'),g=id=>document.getElementById(id);
+  t.innerHTML=S.map(s=>`<button type="button">${s[0]}</button>`).join('');
+  const bs=[...t.children];
+  const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));const s=S[i];g('s4bi-av').textContent=s[1];g('s4bi-a').textContent=s[2];g('s4bi-bv').textContent=s[3];g('s4bi-b').textContent=s[4];g('s4bi-o').textContent='对应：'+s[5];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-6">六、什么算推荐：从电话到 App</h2>
+<p>适当性与最佳利益规则都从「推荐」开始。没有推荐，只是执行客户自己的指令，这些规则就不适用。条例没有给推荐下定义。SEC 在 Reg BI 的采纳文件中说明，是否构成推荐取决于具体事实与情境，沿用经纪商监管中既有的判断：看这次沟通能否合理地被视为一次「行动号召」，是否合理地会影响投资者交易某一证券或一组证券；沟通越是针对特定客户或特定客户群体量身定制，越可能被视为推荐。</p>
+<p>网上交易兴起时，NASD 在 2001 年的第 01-23 号会员通知中已经用这些标准分析过网络沟通。一般不构成推荐的：客户自己查阅的研究资料、新闻与行情；客户按客观条件自行设定的筛选工具，前提是工具不偏向公司自己的产品；客户订阅的、关于自己持仓或自选股的新闻提醒；只显示股债比例、不涉及具体证券的资产配置工具。一般构成推荐的：向特定客户发送、敦促其购买某只证券的邮件或弹窗；收集客户年龄与风险承受能力后列出具体买卖建议的组合工具；分析客户的交易行为后向其推送具体证券的建议，不论客户是否知道这种分析。通知还指出，免责声明不能免除适当性义务。</p>
+<p>2021 年 8 月 27 日，SEC 就经纪自营商与投资顾问的「数字互动做法」征求意见，涵盖行为提示、差异化营销、游戏化设计以及背后的分析工具，问题之一就是这些做法何时构成推荐。2023 年 7 月，SEC 提议规范使用预测性数据分析时的利益冲突；2025 年 6 月 12 日，SEC 撤回了这一提案及其他 13 项未完成的提案，以后如要规范须重新提议。截至 2026 年 11 月，SEC 没有就数字互动做法另立新规，判断仍依靠上述事实与情境的标准。</p>
+<p>执法已经触及 App 的设计。2021 年 6 月 30 日，FINRA 与罗宾汉公司达成和解，罚款 5,700 万美元，另向客户返还约 1,260 万美元及利息，理由包括向客户提供虚假或误导性信息、2020 年 3 月的系统中断，以及主要依靠被称为「期权账户审批机器人」的算法批准客户交易期权，缺乏有效监督。</p>
+<p><strong>今天的对应。</strong>同是一张「热门股票」列表，按全体用户成交量排序、对所有人一样，接近一般信息；按这位用户的持仓与浏览记录挑选、配上「现在买入」的按钮推送给他，就接近推荐。AI 助手根据用户的问题给出具体的买卖建议，是更典型的个性化沟通。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">App 上哪些功能接近「推荐」</p><p class="figsub">点选一个功能，看它在「一般信息」到「推荐」之间的位置。位置依据 NASD 第 01-23 号通知与 Reg BI 采纳文件的标准，为示意；个案取决于内容、情境与呈现方式。</p></div></div>
+    <div class="s4rc-bar"><span>一般信息</span><div class="s4rc-tr"><i id="s4rc-dot"></i></div><span>推荐</span></div>
+    <div class="s4rc-f" id="s4rc-f"></div>
+    <div class="s4rc-d"><p class="s4rc-h" id="s4rc-h"></p><p id="s4rc-x"></p></div>
+  </div>
+</figure>
+<style>
+.s4rc-bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);margin-bottom:14px}
+.s4rc-tr{position:relative;height:10px;border-radius:5px;background:linear-gradient(90deg,var(--quote),var(--accent))}
+.s4rc-tr i{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--card);border:3px solid var(--ink);transform:translate(-50%,-50%);transition:left .4s}
+.s4rc-f{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s4rc-f button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s4rc-f button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s4rc-d{background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s4rc-d p{margin:0}.s4rc-h{font-weight:600;margin-bottom:4px!important}
+</style>
+<script>
+(function(){
+  const F=[['行情与新闻页',5,'客户自己查阅的行情、新闻与研究资料，一般不构成推荐，即使研究报告中有买卖评级。'],
+    ['自定条件的选股器',15,'客户按客观条件自行设定、结果不偏向公司自己产品的筛选工具，一般不构成推荐；如果默认条件或排序偏向公司获利更多的产品，判断会改变。'],
+    ['持仓与自选股提醒',22,'客户订阅、范围由客户决定的新闻提醒，一般不构成推荐，前提是提醒本身不暗示客户应当交易。'],
+    ['全站成交量排行榜',38,'对所有用户一样、按客观指标排序，接近一般信息；配上醒目的买入按钮、频繁推送，「行动号召」的成分就会增加。'],
+    ['按持仓推送「你可能也喜欢」',75,'分析客户的交易与浏览行为后向其推送具体证券，属于第 01-23 号通知所说的一般构成推荐的情形，不论客户是否知道背后的分析。'],
+    ['填写问卷后给出具体组合',85,'收集年龄、风险承受能力后列出具体证券的工具，一般构成推荐；只给出股债比例、不涉及具体证券的，一般不构成。'],
+    ['AI 助手回答「我该买哪只」',90,'针对个人问题给出具体证券的买卖建议，是高度个性化的行动号召；附上「不构成投资建议」的免责声明，不能免除相应义务。']];
+  const f=document.getElementById('s4rc-f'),dot=document.getElementById('s4rc-dot'),h=document.getElementById('s4rc-h'),x=document.getElementById('s4rc-x');
+  f.innerHTML=F.map(a=>`<button type="button">${a[0]}</button>`).join('');
+  const bs=[...f.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));dot.style.left=F[i][1]+'%';h.textContent=F[i][0];x.textContent=F[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(4);
+})();
+</script>
+
+<h2 id="sec-7">七、这一步留下的问题</h2>
+<p>中间人有了注册、自律与推荐标准，但客户与中间人之间还有几个尚未回答的问题：</p>
+<ol><li><strong>客户的钱与证券放在哪里。</strong>客户的现金与证券由经纪商保管，经纪商挪用或倒闭时，客户能拿回多少。</li><li><strong>订单送到哪里成交。</strong>零佣金之下，券商把订单交给谁执行、从中收到什么，会影响客户的成交价格。</li><li><strong>替人管钱的人。</strong>投资顾问对客户负有受托义务，与经纪商的最佳利益标准有何不同。</li><li><strong>推荐来自 AI。</strong>当推荐由模型生成、按用户画像实时调整时，「推荐」「最佳利益」「合理依据」各自意味着什么。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">中间人的注册与推荐标准之外的四个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="s4nx" id="s4nx"></div>
+    <p class="s4nx-m" id="s4nx-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.s4nx{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.s4nx button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.s4nx button b{display:block;font-size:14px}.s4nx button em{font-style:normal;font-size:12px;color:var(--faint)}
+.s4nx button.on{border-color:var(--accent)}
+.s4nx-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.s4nx{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['客户的钱放在哪里','→ 第 5 章','客户的现金与证券由经纪商保管，经纪商挪用或倒闭时，客户能拿回多少。'],
+    ['订单送到哪里成交','→ 第 6 章','零佣金之下，券商把订单交给谁执行、从中收到什么，会影响客户的成交价格。'],
+    ['替人管钱的人','→ 第 9 章','投资顾问对客户负有受托义务，与经纪商的最佳利益标准有何不同。'],
+    ['推荐来自 AI','→ 第 12 章','推荐由模型生成、按用户画像实时调整时，推荐、最佳利益、合理依据各自意味着什么。']];
+  const g=document.getElementById('s4nx'),m=document.getElementById('s4nx-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-8">八、对产品的含义</h2>
+<p>本章的规则对金融产品有三条含义。第一，是否构成推荐取决于内容、情境与呈现方式，不取决于产品经理怎么命名：个性化排序、基于持仓的推送、AI 助手的具体建议都可能是推荐，一旦是，就要先取得客户的投资概况，并能说明为什么它符合这位客户的最佳利益；免责声明不能代替这些义务。第二，最佳利益规则把成本与利益冲突放进推荐本身：推荐算法如果把券商收入高的产品排在前面，就是需要识别、披露并缓解的冲突，算法的目标函数与特征也应当像人的报酬方案一样受到审查。第三，自律监管意味着标准会随检查与执法逐步细化；FINRA 对罗宾汉的处罚表明，算法审批与自动化流程同样要有人监督，记录下每一次推荐的依据，是将来证明合规的唯一办法。</p>
+<h2 id="sec-9">参考文献</h2>
+<ul class="refs"><li>Dodd-Frank Wall Street Reform and Consumer Protection Act, Pub. L. 111-203, § 913 (2010).</li><li>FINRA. (2021). <i>FINRA Orders Record Financial Penalties Against Robinhood Financial LLC</i>（2021 年 6 月 30 日）.</li><li>FINRA. (2026). <i>2026 FINRA Industry Snapshot</i>.</li><li>FINRA Rule 2111 (Suitability)；FINRA Regulatory Notice 11-25 (2011)；FINRA Regulatory Notice 17-30 (2017).</li><li>Maloney Act, ch. 677, 52 Stat. 1070 (1938)（《证券交易法》第 15A 条）.</li><li>NASD. (2001). <i>Notice to Members 01-23: Online Suitability</i>.</li><li>Securities and Exchange Commission. (2019). <i>Regulation Best Interest: The Broker-Dealer Standard of Conduct</i> (Release No. 34-86031), 84 Fed. Reg. 33318.</li><li>Securities and Exchange Commission. (2019). <i>Form CRS Relationship Summary; Amendments to Form ADV</i> (Release No. 34-86032).</li><li>Securities and Exchange Commission. (2021). <i>Request for Information and Comments on Broker-Dealer and Investment Adviser Digital Engagement Practices</i> (Press Release 2021-167).</li><li>Securities and Exchange Commission. (2025). <i>Withdrawal of Proposed Regulatory Actions</i>（2025 年 6 月 12 日）.</li><li>Securities Exchange Act of 1934, 15 U.S.C. § 78c(a)(4)–(5), § 78o(a), § 78o-3；17 C.F.R. § 240.15l-1.</li><li>XY Planning Network, LLC v. SEC, 963 F.3d 244 (2d Cir. 2020).</li></ul>
+<footer class="nav"><a href="s03.html">← 第 3 章　什么算证券</a><a href="s05.html">第 5 章　客户的钱放在经纪商那里 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">适当性与最佳利益：同一件事，两种结论</p><p class="figsub">点选一个情形，对比 FINRA 规则 2111 与 SEC 最佳利益规则的要求。客户为散户。</p></div></div>
+    <div class="s4bi-t" id="s4bi-t"></div>
+    <div class="s4bi-g">
+      <div class="s4bi-c"><b>适当性 · FINRA 规则 2111</b><span class="s4bi-v" id="s4bi-av"></span><p id="s4bi-a"></p></div>
+      <div class="s4bi-c bi"><b>最佳利益 · Reg BI</b><span class="s4bi-v" id="s4bi-bv"></span><p id="s4bi-b"></p><em id="s4bi-o"></em></div>
+    </div>
+  </div>
+</figure>
+<style>
+.s4bi-t{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s4bi-t button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s4bi-t button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s4bi-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.s4bi-c{background:var(--quote);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s4bi-c.bi{background:var(--accent-soft)}
+.s4bi-c b{display:block;font-size:14px}.s4bi-c p{margin:6px 0 0}
+.s4bi-v{display:inline-block;margin-top:6px;font-size:12px;border-radius:999px;padding:1px 10px;border:1px solid var(--muted);color:var(--muted)}
+.s4bi-c.bi .s4bi-v{border-color:var(--accent);color:var(--accent)}
+.s4bi-c em{display:block;font-style:normal;font-size:12px;color:var(--faint);margin-top:8px}
+@media (max-width:640px){.s4bi-g{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['两只相近的基金',
+      '不违反','两只基金都适合这位客户，推荐其中任何一只都满足适当性；规则没有要求在合适的产品之间比较成本。',
+      '需要理由','成本是注意义务中必须考虑的因素。两只基金几乎相同、只是佣金不同，推荐人须有合理依据说明为什么更贵的一只符合客户的最佳利益；条例不要求一律推荐最便宜的。','注意义务'],
+    ['限期销售竞赛',
+      '不处理','规则 2111 只看推荐是否适合客户，不处理公司的报酬安排。',
+      '须消除','在限定期间内针对特定证券或特定类型证券的销售竞赛、销售配额、奖金与非现金报酬，须予以消除。','利益冲突义务'],
+    ['推荐换成收费更高的账户',
+      '未明确涵盖','规则 2111 针对证券交易与投资策略的推荐，没有明确把账户类型列入。',
+      '明确涵盖','Reg BI 明确适用于账户类型的推荐，包括把退休计划资产转入个人退休账户；须有合理依据相信新账户符合客户的最佳利益。','注意义务'],
+    ['以自营身份卖出自己的存货',
+      '不处理','规则 2111 不处理身份披露；交易确认书须另按规则 10b-10 载明以何种身份成交。',
+      '须事先披露','推荐之前或推荐时，须书面披露以何种身份行事，以及与推荐相关的重大利益冲突。','披露义务'],
+    ['一年内反复买卖',
+      '可能违反','数量适当性：一系列单看合适的交易合在一起不能过度，看换手率、成本与权益之比等指标。',
+      '可能违反','注意义务同样要求一系列推荐的交易合在一起不能过度；Reg BI 去掉了 2111 原有的「推荐人控制账户」这一前提。','注意义务']];
+  const t=document.getElementById('s4bi-t'),g=id=>document.getElementById(id);
+  t.innerHTML=S.map(s=>`<button type="button">${s[0]}</button>`).join('');
+  const bs=[...t.children];
+  const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));const s=S[i];g('s4bi-av').textContent=s[1];g('s4bi-a').textContent=s[2];g('s4bi-bv').textContent=s[3];g('s4bi-b').textContent=s[4];g('s4bi-o').textContent='对应：'+s[5];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

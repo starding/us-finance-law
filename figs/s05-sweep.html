@@ -1,0 +1,49 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">同样是「现金」，受谁保护</p><p class="figsub">客户账户里没有投资的现金可能留在三个地方。点选一个，看它的法律性质；选银行存款归集时，可以拖动金额与合作银行数量。</p></div></div>
+    <div class="w5-tabs" id="w5-tabs"></div>
+    <div class="w5-d">
+      <dl id="w5-dl"></dl>
+      <div class="w5-calc" id="w5-calc">
+        <label>归集金额 <b id="w5-av"></b><input type="range" id="w5-a" min="10" max="200" step="10" value="80"></label>
+        <label>合作银行数量 <b id="w5-nv"></b><input type="range" id="w5-n" min="1" max="10" step="1" value="2"></label>
+        <div class="w5-bar"><i id="w5-in"></i><i id="w5-out"></i></div>
+        <p id="w5-cm"></p>
+      </div>
+    </div>
+  </div>
+</figure>
+<style>
+.w5-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.w5-tabs button{font:inherit;font-size:13.5px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:10px;text-align:left}
+.w5-tabs button.on{border-color:var(--accent)}
+.w5-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.w5-d dl{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;margin:0}
+.w5-d dt{color:var(--muted)}.w5-d dd{margin:0}
+.w5-calc{margin-top:12px;border-top:1px solid var(--line);padding-top:10px;display:none}
+.w5-calc.on{display:block}
+.w5-calc label{display:block;margin-bottom:6px}.w5-calc input{width:100%;accent-color:var(--accent)}
+.w5-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--quote);margin-top:6px}
+.w5-bar i{display:block;height:100%;transition:width .35s}
+#w5-in{background:var(--accent)}#w5-out{background:var(--line)}
+.w5-calc p{margin:8px 0 0}
+@media (max-width:640px){.w5-tabs{grid-template-columns:1fr}.w5-d dl{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const T=[['留在券商账上','客户贷方余额',[['法律性质','经纪商欠客户的一笔债'],['适用规则','计入规则 15c3-3 的储备金公式'],['倒闭时的保护','SIPC，现金部分以 25 万美元为限（与证券合计 50 万美元）'],['利率','由经纪商决定，可能为零']]],
+    ['银行存款归集','转入合作银行',[['法律性质','以经纪商名义、为客户利益开在银行的存款'],['适用规则','不再是经纪商账上的客户现金，不受 SIPC 保护'],['倒闭时的保护','FDIC 穿透保护，每家银行每名存款人 25 万美元；前提是记录能对应到每名客户'],['利率','由经纪商与银行约定，2024 年以来的执法与诉讼主要针对这一点']]],
+    ['货币市场基金','转入基金份额',[['法律性质','客户持有的基金份额，属于证券'],['适用规则','按证券保管，适用占有或控制要求'],['倒闭时的保护','SIPC 保护份额被弄丢的风险，不保护基金净值下跌'],['利率','随基金收益变化']]]];
+  const tabs=$('w5-tabs');tabs.innerHTML=T.map(t=>`<button type="button"><b>${t[0]}</b><br><small>${t[1]}</small></button>`).join('');
+  const bs=[...tabs.children],A=$('w5-a'),N=$('w5-n');
+  function calc(){const a=+A.value,n=+N.value,cov=Math.min(a,25*n);
+    $('w5-av').textContent=a+' 万美元';$('w5-nv').textContent=n+' 家';
+    $('w5-in').style.width=cov/a*100+'%';$('w5-out').style.width=(a-cov)/a*100+'%';
+    $('w5-cm').textContent=`分散到 ${n} 家银行，最多 ${25*n} 万美元可获 FDIC 保护；`+(a>cov?`超出的 ${a-cov} 万美元不受保护。`:'这笔钱全部在保护范围内。')+'（示意，假设客户在这些银行没有其他存款。）';}
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));
+    $('w5-dl').innerHTML=T[i][2].map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');
+    $('w5-calc').classList.toggle('on',i===1);}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));A.addEventListener('input',calc);N.addEventListener('input',calc);calc();set(0);
+})();
+</script>

@@ -1,0 +1,33 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">卖的人知道的，买的人看不到</p><p class="figsub">点选一项信息，看双方各自能否看到。</p></div><button class="replay" type="button" data-replay="gp1">重播</button></div>
+    <div class="gp" id="gp1" data-anim>
+      <div class="gp-col"><b>发行人</b><span>公司的人</span></div>
+      <div class="gp-list" id="gp1-l"></div>
+      <div class="gp-col"><b>买方</b><span>农民与小商人</span></div>
+    </div>
+    <p class="gp-msg" id="gp1-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.gp{display:grid;grid-template-columns:110px 1fr 110px;gap:14px;align-items:center}
+.gp-col{background:var(--ink);color:var(--bg);border-radius:10px;padding:12px 8px;text-align:center}
+.gp-col:last-child{background:var(--quote);color:var(--ink)}
+.gp-col b{display:block;font-size:15px}.gp-col span{font-size:12px;opacity:.75}
+.gp-list{display:grid;gap:6px}
+.gp-i{font:inherit;cursor:pointer;display:grid;grid-template-columns:28px 1fr 28px;align-items:center;gap:8px;background:var(--quote);border:1px solid transparent;border-radius:9px;padding:8px 10px;color:var(--ink);opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s;transition-delay:calc(var(--i)*.25s)}
+.gp.in .gp-i{opacity:1;transform:none}
+.gp-i.sel{border-color:var(--accent)}
+.gp-i span{font-size:13.5px;text-align:center}.gp-i em{font-style:normal;font-size:15px;text-align:center}
+.gp-msg{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.gp{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[['矿里是否真有矿藏','✓','✕','只有公司的人去过矿山；买方只能听推销员描述。'],['账上有多少现金与负债','✓','✕','没有法定的账目公开义务，买方查不到。'],['募集的钱用在哪里','✓','✕','钱可以流向发起人自己的其他生意。'],['推销员拿多少佣金','✓','✕','佣金越高，推销员越有动力夸大。'],['股票上印着什么','✓','✓','这是买方唯一能看到的东西。']];
+  const l=document.getElementById('gp1-l'),m=document.getElementById('gp1-m');
+  l.innerHTML=D.map((d,i)=>`<button type="button" class="gp-i" style="--i:${i}"><em>${d[1]}</em><span>${d[0]}</span><em>${d[2]}</em></button>`).join('');
+  const bs=[...l.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('sel',i===j));m.textContent=D[i][3];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

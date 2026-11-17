@@ -1,0 +1,32 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">智能投顾里的现金：谁从中获利</p><p class="figsub">10 万美元的组合，一部分配为现金并转入关联银行。拖动现金比例，看客户少赚了多少、公司多赚了多少；再切换披露方式。收益率均为示意，不是嘉信案中的数字。</p></div></div>
+    <label class="q9r-l">组合中的现金比例 <b id="q9r-v"></b><input type="range" id="q9r-s" min="0" max="30" step="1" value="12"></label>
+    <div class="q9r-nums" id="q9r-n"></div>
+    <div class="q9r-tabs" id="q9r-t"><button type="button" data-k="0">宣传：算法求最优回报，无顾问费</button><button type="button" data-k="1">披露：现金比例使公司获利</button></div>
+    <p class="q9r-m" id="q9r-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q9r-l{display:block;font-size:13.5px}.q9r-l input{width:100%;accent-color:var(--accent)}
+.q9r-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.q9r-nums div{background:var(--quote);border-radius:9px;padding:8px 10px;font-size:12px;color:var(--muted)}.q9r-nums b{display:block;font-size:15px;color:var(--ink);font-weight:600}
+.q9r-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.q9r-tabs button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.q9r-tabs button.on{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.q9r-m{font-size:14px;margin:12px 0 0;min-height:3.2em;line-height:1.65}
+@media (max-width:640px){.q9r-nums{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const P=100000,rI=0.06,rC=0.005,rL=0.035,$=id=>document.getElementById(id),s=$('q9r-s'),tabs=[...$('q9r-t').children];let k=0;
+  const f=x=>Math.round(x).toLocaleString('en-US');
+  function run(){
+    const c=+s.value/100,cash=P*c,lost=cash*(rI-rC),bank=cash*(rL-rC);
+    $('q9r-v').textContent=s.value+'%';tabs.forEach(t=>t.classList.toggle('on',+t.dataset.k===k));
+    $('q9r-n').innerHTML=`<div>配为现金<b>${f(cash)} 美元</b></div><div>客户一年少赚（示意）<b>${f(lost)} 美元</b></div><div>关联银行一年利差（示意）<b>${f(bank)} 美元</b></div>`;
+    $('q9r-m').textContent=k===0?'客户以为现金比例是算法为自己选的，不知道公司从中获利，也就谈不上同意。SEC 认定这类宣传具有误导性，违反受托义务。':'披露了冲突，客户才可能知情同意；但如果现金比例在大多数市场条件下都对客户不利，仍要回答这一配置是否符合客户的最大利益。';
+  }
+  s.addEventListener('input',run);tabs.forEach(t=>t.addEventListener('click',()=>{k=+t.dataset.k;run();}));run();
+})();
+</script>

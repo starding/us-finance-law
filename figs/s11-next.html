@@ -1,0 +1,26 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">沟通规则之外的三个新问题，都指向同一个参数的改变。点选一个。</p></div></div>
+    <div class="k11n" id="k11n"></div>
+    <p class="k11n-m" id="k11n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.k11n{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k11n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.k11n button b{display:block;font-size:14px}.k11n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.k11n button.on{border-color:var(--accent)}
+.k11n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.k11n{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['每人一份的沟通','→ 第 12 章','AI 为每位客户实时生成不同的内容，「30 天内超过 25 人」的分类与负责人的事前批准，难以照原样执行。'],
+    ['回答变成推荐','→ 第 12 章','聊天机器人的回答一旦针对某位客户、带有行动建议，就是推荐，适用最佳利益规则；算法每天作出的推荐数以百万计。'],
+    ['认知劳动的成本骤降','→ 第 12 章','推荐、解读与执行都由 AI 完成之后，前 10 章的每一个问题都要重新检验一遍。']];
+  const g=document.getElementById('k11n'),m=document.getElementById('k11n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

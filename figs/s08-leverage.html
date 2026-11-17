@@ -1,0 +1,52 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">首付比例、价格下跌与追缴</p><p class="figsub">买入 10,000 美元的股票，自付一部分，其余向经纪商借。拖动两个滑块，看账户权益何时跌破 25% 的维持要求。示意。</p></div></div>
+    <div class="q8l-ctl">
+      <label>自付比例 <b id="q8l-mv">50%</b><input type="range" id="q8l-m" min="10" max="100" step="5" value="50"></label>
+      <label>股价变动 <b id="q8l-dv">0%</b><input type="range" id="q8l-d" min="-70" max="30" step="1" value="0"></label>
+    </div>
+    <div class="q8l-pre"><button type="button" data-m="10">1929 年常见：10%</button><button type="button" data-m="50">T 条例：50%</button><button type="button" data-m="100">现金账户：100%</button></div>
+    <div class="q8l-bar" id="q8l-bar"><div class="q8l-eq" id="q8l-eq"></div><div class="q8l-ln" id="q8l-ln"></div><i id="q8l-line"></i></div>
+    <div class="q8l-leg"><span><i class="q8l-ie"></i>客户权益</span><span><i class="q8l-il"></i>借款</span><span><i class="q8l-im"></i>25% 维持线</span></div>
+    <div class="q8l-nums" id="q8l-n"></div>
+    <p class="q8l-msg" id="q8l-msg" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.q8l-ctl{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:13.5px}.q8l-ctl input{width:100%;accent-color:var(--accent)}
+.q8l-pre{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.q8l-pre button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 11px;border-radius:999px;cursor:pointer}
+.q8l-pre button.on{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.q8l-bar{position:relative;height:34px;border-radius:8px;background:var(--quote);display:flex;overflow:hidden}
+.q8l-eq{background:var(--accent);transition:width .25s}.q8l-ln{background:var(--faint);opacity:.55;transition:width .25s}
+.q8l-bar i{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);transition:left .25s}
+.q8l-leg{display:flex;gap:14px;font-size:12px;color:var(--muted);margin:6px 0 10px}.q8l-leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.q8l-leg i.q8l-ie{background:var(--accent)}.q8l-leg i.q8l-il{background:var(--faint);opacity:.55}.q8l-leg i.q8l-im{background:var(--ink);width:2px}
+.q8l-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.q8l-nums div{background:var(--quote);border-radius:9px;padding:8px 10px;font-size:12px;color:var(--muted)}.q8l-nums b{display:block;font-size:15px;color:var(--ink);font-weight:600}
+.q8l-msg{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.q8l-ctl{grid-template-columns:1fr}.q8l-nums{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const $=id=>document.getElementById(id),m=$('q8l-m'),d=$('q8l-d'),pre=[...document.querySelectorAll('.q8l-pre button')];
+  const f=x=>Math.round(x).toLocaleString('en-US');
+  function run(){
+    const mm=+m.value/100,dd=+d.value/100,P=10000,L=P*(1-mm),V=P*(1+dd),E=V-L,r=E/V;
+    $('q8l-mv').textContent=m.value+'%';$('q8l-dv').textContent=(dd>0?'+':'')+d.value+'%';
+    pre.forEach(b=>b.classList.toggle('on',+b.dataset.m===+m.value));
+    const tot=Math.max(V,L);$('q8l-eq').style.width=Math.max(E,0)/tot*100+'%';$('q8l-ln').style.width=Math.min(L,V)/tot*100+'%';
+    $('q8l-line').style.left=(V*0.25/tot*100)+'%';
+    const trig=L>0?(1-L/(0.75*P))*100:null;
+    $('q8l-n').innerHTML=`<div>持仓市值<b>${f(V)}</b></div><div>借款<b>${f(L)}</b></div><div>客户权益<b>${f(E)}</b></div><div>权益占市值<b>${V>0?(r*100).toFixed(1):'—'}%</b></div>`;
+    let t;
+    if(L===0)t='没有借款，价格下跌只减少自己的钱，不会被追缴。';
+    else if(E<=0)t=`权益已经为负：亏损 ${f(-E)} 美元超过了自付的本金，经纪商的贷款收不回来。`;
+    else if(r<0.25)t=`权益只占市值的 ${(r*100).toFixed(1)}%，低于 25%：经纪商发出追缴，需补入约 ${f(0.25*V-E)} 美元，补不上就卖出股票。`;
+    else t=trig>0?`暂不触发追缴。按这个自付比例，股价从买入价下跌约 ${trig.toFixed(1)}% 时，权益会跌破 25%。`:'这个自付比例下，买入当时权益就低于 25%，今天的规则不允许这样开仓。';
+    if(mm<0.5&&L>0)t+=' 自付低于 50% 只用于对比 1929 年，T 条例自 1974 年起不允许。';
+    $('q8l-msg').textContent=t;
+  }
+  [m,d].forEach(x=>x.addEventListener('input',run));pre.forEach(b=>b.addEventListener('click',()=>{m.value=b.dataset.m;run();}));run();
+})();
+</script>

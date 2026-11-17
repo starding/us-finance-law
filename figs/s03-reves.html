@@ -1,0 +1,44 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一张票据是不是证券：家族相似测试</p><p class="figsub">选一张票据，或自己切换四个因素。指向投资的因素越多，越不像法院列举的非证券票据。</p></div></div>
+    <div class="s3rv-p" id="s3rv-p"></div>
+    <div class="s3rv-f" id="s3rv-f"></div>
+    <div class="s3rv-o"><div class="s3rv-m"><i id="s3rv-bar"></i></div><p id="s3rv-x" aria-live="polite"></p></div>
+  </div>
+</figure>
+<style>
+.s3rv-p{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s3rv-p button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s3rv-p button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s3rv-f{display:grid;gap:6px;margin-bottom:12px}
+.s3rv-r{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--quote);border-radius:9px;padding:8px 12px;font-size:13.5px}
+.s3rv-r small{display:block;color:var(--muted);font-size:12px}
+.s3rv-t{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.s3rv-t button{font:inherit;font-size:12.5px;border:0;background:transparent;color:var(--muted);padding:4px 10px;cursor:pointer}
+.s3rv-t button.on{background:var(--accent);color:#fff}
+.s3rv-o{background:var(--accent-soft);border-radius:10px;padding:10px 14px}
+.s3rv-m{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin-bottom:8px}
+.s3rv-m i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.s3rv-o p{margin:0;font-size:13.5px;line-height:1.6}
+</style>
+<script>
+(function(){
+  const F=[['双方的动机','卖方为一般经营筹资、买方为获利','为买一件消费品或解决短期周转'],['分销方式','面向公众广泛发售','只与少数对象一对一谈判'],['公众的合理预期','会被视为一项投资','会被视为普通借贷'],['其他降低风险的监管','没有：无担保、无存款保险','有：例如受银行监管或有存款保险']];
+  const P=[['合作社的即期票据',[1,1,1,1],'里夫斯案（1990）的事实：四项都指向投资，法院认定是证券。'],['住房抵押贷款票据',[0,0,0,0],'与法院列举的「以住房抵押担保的票据」相似，不是证券。'],['商业银行的经营贷款',[0,0,0,0],'与「商业银行为经营发放的贷款」相似，不是证券；借款人受信贷关系约束，银行受银行监管。'],['向公众发售的高息短期票据（示意）',[1,1,1,0],'动机、分销与预期都指向投资；即使有部分担保，通常仍被推定为证券。']];
+  const st=[1,1,1,1],p=document.getElementById('s3rv-p'),f=document.getElementById('s3rv-f'),bar=document.getElementById('s3rv-bar'),x=document.getElementById('s3rv-x');
+  let note=P[0][2];
+  p.innerHTML=P.map(q=>`<button type="button">${q[0]}</button>`).join('');
+  f.innerHTML=F.map((q,i)=>`<div class="s3rv-r"><div>${q[0]}<small id="s3rv-s${i}"></small></div><div class="s3rv-t" data-i="${i}"><button type="button" data-v="1">指向投资</button><button type="button" data-v="0">指向借贷</button></div></div>`).join('');
+  const pb=[...p.children];
+  function upd(sel){
+    pb.forEach((b,j)=>b.classList.toggle('on',j===sel));
+    F.forEach((q,i)=>{document.getElementById('s3rv-s'+i).textContent=st[i]?q[1]:q[2];});
+    document.querySelectorAll('.s3rv-t').forEach(t=>t.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st[+t.dataset.i])));
+    const n=st.reduce((a,c)=>a+c,0);bar.style.width=(n/4*100)+'%';
+    x.textContent=(sel>=0?note+' ':'')+(n>=3?`${n} 项指向投资：推定为证券。`:n===0?'四项都指向普通借贷：与非证券票据家族相似，不是证券。':`${n} 项指向投资：需要逐项权衡，没有机械的计分规则。`);
+  }
+  pb.forEach((b,i)=>b.addEventListener('click',()=>{P[i][1].forEach((v,j)=>st[j]=v);note=P[i][2];upd(i);}));
+  document.querySelectorAll('.s3rv-t').forEach(t=>t.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st[+t.dataset.i]=+b.dataset.v;upd(-1);})));
+  upd(0);
+})();
+</script>

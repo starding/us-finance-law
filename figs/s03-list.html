@@ -1,0 +1,33 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">「证券」的定义清单</p><p class="figsub">1933 年《证券法》第 2(a)(1) 条列举的主要类别（节选）。点选一项，看它通常指什么、法院用什么标准判断。</p></div></div>
+    <div class="s3ls" id="s3ls"></div>
+    <div class="s3ls-d"><p class="s3ls-h" id="s3ls-h"></p><p id="s3ls-x"></p><p class="s3ls-t" id="s3ls-t"></p></div>
+  </div>
+</figure>
+<style>
+.s3ls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s3ls button{font:inherit;font-size:13px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:8px;padding:6px 10px}
+.s3ls button.fx{border-style:dashed;border-color:var(--accent)}
+.s3ls button.on{border-color:var(--accent);background:var(--accent-soft);border-style:solid}
+.s3ls-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s3ls-d p{margin:0}.s3ls-h{font-weight:600;margin-bottom:4px!important}.s3ls-t{margin-top:6px!important;color:var(--muted)}
+</style>
+<script>
+(function(){
+  const D=[['票据','以书面凭证表示的借款承诺，用途很广，从企业融资到住房抵押都有。','判断标准：里夫斯诉安永案（1990）的家族相似测试，推定为证券，与非证券票据清单相似的除外。'],
+    ['股票','公司的股份，通常附带分红、投票与按比例分配剩余财产的权利。','判断标准：具备股票通常特征的即为证券（兰德雷思案，1985）；只有名称、没有这些特征的不一定是（福曼案，1975）。'],
+    ['债券、信用债券','公司或政府承诺按期付息、到期还本的债务工具。','通常直接视为证券；政府债券属于证券，但在《证券法》第 3 条下豁免注册。'],
+    ['债务凭证','其他形式的借款凭证。','与票据的判断相近。'],
+    ['利润分享协议中的权益','约定分享某项经营利润的安排。','形式多样，常与投资合同的分析重叠。'],
+    ['投资合同','没有固定形式的兜底类别，用来覆盖具备证券功能、却不具备证券形式的安排。','判断标准：SEC 诉 W.J. 豪伊公司案（1946）的四要素。橘子园、油井租约份额、代币都在这一类下讨论。',1],
+    ['表决权信托凭证','股东把投票权交给受托人后取得的凭证。','通常直接视为证券。'],
+    ['油气矿产权益的部分不可分权益','把一处油井或矿区的收益切成小份出售。','1930 年代常见的推销对象，国会把它单独列出。'],
+    ['期权','买入或卖出证券、证券组合或指数的权利。','证券期权属于证券；以商品为标的的期货与期权归 CFTC 管辖。'],
+    ['一般被认为是证券的任何权益或工具','兜底条款，覆盖市场上通常称为证券的东西。','与投资合同一起，使定义能够容纳新的工具。',1]];
+  const g=document.getElementById('s3ls'),h=document.getElementById('s3ls-h'),x=document.getElementById('s3ls-x'),t=document.getElementById('s3ls-t');
+  g.innerHTML=D.map(d=>`<button type="button"${d[3]?' class="fx"':''}>${d[0]}</button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));h.textContent=D[i][0];x.textContent=D[i][1];t.textContent=D[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(5);
+})();
+</script>

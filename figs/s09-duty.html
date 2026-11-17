@@ -1,0 +1,38 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">受托义务的结构（SEC 2019 年解释）</p><p class="figsub">点选一项，看它要求什么、典型的违反是什么。资料：SEC Release IA-5248。</p></div></div>
+    <div class="q9d-tree">
+      <div class="q9d-root">以客户最大利益行事</div>
+      <div class="q9d-cols">
+        <div><p class="q9d-h">注意义务</p><div class="q9d-items" data-g="0"></div></div>
+        <div><p class="q9d-h">忠实义务</p><div class="q9d-items" data-g="1"></div></div>
+      </div>
+    </div>
+    <div class="q9d-out" id="q9d-o" aria-live="polite"></div>
+  </div>
+</figure>
+<style>
+.q9d-root{text-align:center;font-size:14px;font-weight:600;background:var(--accent-soft);border-radius:9px;padding:8px;margin-bottom:10px}
+.q9d-cols{display:grid;grid-template-columns:3fr 2fr;gap:12px}
+.q9d-h{font-size:12.5px;color:var(--faint);margin:0 0 6px}
+.q9d-items{display:grid;gap:6px}
+.q9d-items button{font:inherit;font-size:13px;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px}
+.q9d-items button.on{border-color:var(--accent)}
+.q9d-out{margin-top:12px;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.q9d-out dt{color:var(--faint)}.q9d-out dd{margin:0}
+@media (max-width:640px){.q9d-cols{grid-template-columns:1fr}.q9d-out{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[[0,'提供符合最大利益的意见','在合理了解客户投资目标、财务状况与风险承受能力的基础上提供意见，并考虑产品的成本与复杂程度','不了解客户就给出组合；推荐成本更高、却没有更多好处的同类产品'],
+    [0,'寻求最佳执行','顾问负责选择经纪商时，为客户寻求在当时条件下最有利的执行，综合考虑价格、费用与服务','因为经纪商给顾问提供好处而把订单交给它，客户的执行成本更高'],
+    [0,'适当频率的意见与监控','按与客户约定的关系，以相应的频率提供意见并监控账户','按资产收取持续管理费，却长期不复核账户'],
+    [1,'不把自己置于客户之上','不得利用客户的信任谋取不当利益','先买后荐（资本收益研究局案）；把客户现金放在使公司获利的地方（嘉信案）'],
+    [1,'充分、公平披露并取得知情同意','披露与关系有关的全部重要事实，包括利益冲突，足以让客户在知情的基础上同意；无法通过披露取得知情同意的冲突，须消除或减轻','只写「可能存在冲突」，不说明冲突是什么、对客户有什么影响']];
+  const o=document.getElementById('q9d-o'),items=[...document.querySelectorAll('.q9d-items')];
+  D.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.textContent=d[1];b.dataset.i=i;items[d[0]].appendChild(b);});
+  const bs=[...document.querySelectorAll('.q9d-items button')];
+  const set=i=>{bs.forEach(b=>b.classList.toggle('on',+b.dataset.i===i));o.innerHTML=`<dt>要求</dt><dd>${D[i][2]}</dd><dt>典型的违反</dt><dd>${D[i][3]}</dd>`;};
+  bs.forEach(b=>b.addEventListener('click',()=>set(+b.dataset.i)));set(4);
+})();
+</script>

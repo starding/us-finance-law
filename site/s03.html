@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>什么算证券</title>
+<meta name="description" content="《美国金融业法律研究》证券篇第 3 章：注册、披露与反欺诈都以「证券」为前提，发行人于是把产品设计成不叫股票也不叫债券的样子。法院的回应是看经济实质：Howey 案的投资合同四要素、Forman 案的「名为股票不一定是证券」、Reves 案的票据「家族相似」测试。加密资产把同一个问题重新提了一遍，2025–2026 年监管从逐案执法转向分类与立法">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+</style>
+</head>
+<body data-page="s03">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
+<a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>
+<a class="" href="s01.html"><span class="n">1</span>卖的人比买的人知道得多</a>
+<a class="" href="s02.html"><span class="n">2</span>证券转手之后，谁来说真话</a>
+<a class=" cur" href="s03.html" aria-current="page"><span class="n">3</span>什么算证券</a>
+<a class="" href="s04.html"><span class="n">4</span>中间人有自己的利益</a>
+<a class="" href="s05.html"><span class="n">5</span>客户的钱放在经纪商那里</a>
+<a class="" href="s06.html"><span class="n">6</span>订单送到哪里成交</a>
+<a class="" href="s07.html"><span class="n">7</span>价格被人扭曲</a>
+<a class="" href="s08.html"><span class="n">8</span>借钱买证券</a>
+<a class="" href="s09.html"><span class="n">9</span>替人管钱的人</a>
+<a class="" href="s10.html"><span class="n">10</span>开户的人是谁</a>
+<a class="" href="s11.html"><span class="n">11</span>能说什么、不能说什么</a>
+<a class="" href="s12.html"><span class="n">12</span>重跑：当推荐来自 AI</a>
+<a class="" href="s-map.html"><span class="n">篇末</span>证券篇的规则地图</a>
+<span class="todo side-part"><span class="pn">银行篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">保险篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">衍生品篇</span>（待写）</span>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>证券篇</span></header>
+
+<div class="chapno">第 3 章</div><h1>什么算证券<small>投资合同与 Howey 测试</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>前两章的规则都有一个前提：卖的东西是证券。注册要花钱，披露要担责任，一个精明的发行人自然会想：如果我卖的不叫股票，也不叫债券，而是一片橘子园加一份管理合同，是不是就不用注册了。国会预见到了这一点，在定义里放进了一个兜底的词：投资合同。什么是投资合同，留给了法院。法院的回答是看经济实质，而不是看名称。八十年后，同一个问题以代币的形式又被问了一遍。</p></blockquote>
+<h2 id="sec-1">一、换个名字卖</h2>
+<p>1933 年《证券法》第 2(a)(1) 条列出了「证券」的定义：票据、股票、库存股、债券、信用债券、债务凭证、利润分享协议中的权益、投资合同、表决权信托凭证、石油天然气或其他矿产权益中的部分不可分权益、证券期权，以及一般被认为是证券的任何权益或工具。1934 年《证券交易法》第 3(a)(10) 条的定义大体相同。</p>
+<p>清单里大多是有固定形式的金融工具，「投资合同」是例外。这个词来自州蓝天法，用来覆盖那些不具备证券形式、却具有证券功能的安排。1930 年代与 1940 年代，推销员出售的是油井租约的份额、果园的若干行、养殖场里的动物，每一笔交易单看都是买地、买物，但买方并不打算自己经营，只等着别人替他赚钱。1943 年，联邦最高法院在 SEC 诉 C.M. 乔伊纳租赁公司案中认定，附带钻探承诺出售的油气租约份额属于证券，并说明判断的依据是交易的性质与推销的方式。</p>
+<p><strong>今天的对应。</strong>投资类 App 上的产品名目繁多：碎股、份额化的收藏品、收益分成计划、代币。名称不决定法律性质，产品上线之前要先回答的问题是：这是不是证券。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">「证券」的定义清单</p><p class="figsub">1933 年《证券法》第 2(a)(1) 条列举的主要类别（节选）。点选一项，看它通常指什么、法院用什么标准判断。</p></div></div>
+    <div class="s3ls" id="s3ls"></div>
+    <div class="s3ls-d"><p class="s3ls-h" id="s3ls-h"></p><p id="s3ls-x"></p><p class="s3ls-t" id="s3ls-t"></p></div>
+  </div>
+</figure>
+<style>
+.s3ls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s3ls button{font:inherit;font-size:13px;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:8px;padding:6px 10px}
+.s3ls button.fx{border-style:dashed;border-color:var(--accent)}
+.s3ls button.on{border-color:var(--accent);background:var(--accent-soft);border-style:solid}
+.s3ls-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s3ls-d p{margin:0}.s3ls-h{font-weight:600;margin-bottom:4px!important}.s3ls-t{margin-top:6px!important;color:var(--muted)}
+</style>
+<script>
+(function(){
+  const D=[['票据','以书面凭证表示的借款承诺，用途很广，从企业融资到住房抵押都有。','判断标准：里夫斯诉安永案（1990）的家族相似测试，推定为证券，与非证券票据清单相似的除外。'],
+    ['股票','公司的股份，通常附带分红、投票与按比例分配剩余财产的权利。','判断标准：具备股票通常特征的即为证券（兰德雷思案，1985）；只有名称、没有这些特征的不一定是（福曼案，1975）。'],
+    ['债券、信用债券','公司或政府承诺按期付息、到期还本的债务工具。','通常直接视为证券；政府债券属于证券，但在《证券法》第 3 条下豁免注册。'],
+    ['债务凭证','其他形式的借款凭证。','与票据的判断相近。'],
+    ['利润分享协议中的权益','约定分享某项经营利润的安排。','形式多样，常与投资合同的分析重叠。'],
+    ['投资合同','没有固定形式的兜底类别，用来覆盖具备证券功能、却不具备证券形式的安排。','判断标准：SEC 诉 W.J. 豪伊公司案（1946）的四要素。橘子园、油井租约份额、代币都在这一类下讨论。',1],
+    ['表决权信托凭证','股东把投票权交给受托人后取得的凭证。','通常直接视为证券。'],
+    ['油气矿产权益的部分不可分权益','把一处油井或矿区的收益切成小份出售。','1930 年代常见的推销对象，国会把它单独列出。'],
+    ['期权','买入或卖出证券、证券组合或指数的权利。','证券期权属于证券；以商品为标的的期货与期权归 CFTC 管辖。'],
+    ['一般被认为是证券的任何权益或工具','兜底条款，覆盖市场上通常称为证券的东西。','与投资合同一起，使定义能够容纳新的工具。',1]];
+  const g=document.getElementById('s3ls'),h=document.getElementById('s3ls-h'),x=document.getElementById('s3ls-x'),t=document.getElementById('s3ls-t');
+  g.innerHTML=D.map(d=>`<button type="button"${d[3]?' class="fx"':''}>${d[0]}</button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));h.textContent=D[i][0];x.textContent=D[i][1];t.textContent=D[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(5);
+})();
+</script>
+
+<h2 id="sec-2">二、Howey 案：一片橘子园</h2>
+<p>W.J. 豪伊公司在佛罗里达州莱克县拥有大片柑橘园，每年种植约 500 英亩，自留一半，另一半分成条块向公众出售。买方同时会收到一份服务合同的推荐：由关联公司豪伊山服务公司负责种植、采摘与销售，合同通常为期 10 年，不能提前解除。买主大多是外州的商人与专业人士，住在公司在附近经营的度假酒店时被带去参观果园。1941 年 2 月 1 日至 1943 年 5 月 31 日，42 人购买了果园，其中 31 人买的不到 5 英亩。几英亩果园单独无法经营，买方能得到的只是豪伊公司统一经营后分给他的收益。</p>
+<p>SEC 起诉豪伊公司未经注册出售证券。1946 年 5 月 27 日，联邦最高法院在 SEC 诉 W.J. 豪伊公司案中支持了 SEC，墨菲大法官执笔。判决给出的标准是：一项合同、交易或计划，如果一个人把钱投入一个共同事业，并被引导期望仅从发起人或第三方的努力中获得利润，就是投资合同；企业的股份是以正式凭证表示，还是以对实物资产的名义权益表示，都无关紧要。判决说，这是一个「灵活而非静止的原则」，能够适应那些为了获取他人资金而设计出来的、层出不穷的方案。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">投资合同（Howey 测试）</p><p class="pr-c"><span><em>领域</em>证券法 › 证券的定义</span><span><em>类型</em>联邦判例</span></p><p class="pr-s">一项安排同时具备四个要素即为投资合同，属于证券：投入金钱、投入共同事业、期望获得利润、利润来自他人的努力。</p><dl><div><dt>在法律体系中的位置</dt><dd>SEC 诉 W.J. 豪伊公司案（1946）确立，解释 1933 年《证券法》第 2(a)(1) 条与 1934 年《证券交易法》第 3(a)(10) 条中的「投资合同」；联邦最高法院在 SEC 诉埃德华兹案（2004）中认定承诺固定回报的安排同样可以构成投资合同</dd></div><div><dt>回应的问题</dt><dd>发行人可以把证券设计成不具备股票、债券形式的安排，绕开注册与披露</dd></div><div><dt>适用范围</dt><dd>判断看经济实质而非名称；「仅」字在后来的判例中被放宽为来自他人「不可或缺的管理努力」</dd></div><div><dt>出台</dt><dd>联邦最高法院，1946；墨菲大法官执笔</dd></div><div><dt>留下的问题</dt><dd>反过来，名为「股票」的东西是否一定是证券；不属于投资合同的票据、借据如何判断</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">用四个要素检验六个案例</p><p class="figsub">点选一个案例，看 Howey 测试的四个要素是否满足。结论以法院判决、SEC 报告或 2026 年 SEC 解释为准。</p></div></div>
+    <div class="s3hw-c" id="s3hw-c"></div>
+    <div class="s3hw-g" id="s3hw-g"></div>
+    <div class="s3hw-r" id="s3hw-r"><b id="s3hw-v"></b><p id="s3hw-x"></p></div>
+  </div>
+</figure>
+<style>
+.s3hw-c{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s3hw-c button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s3hw-c button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s3hw-g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.s3hw-e{background:var(--quote);border-radius:9px;padding:10px;font-size:13px;line-height:1.5;border-top:4px solid var(--line);transition:border-color .3s}
+.s3hw-e.y{border-top-color:var(--accent)}
+.s3hw-e b{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:4px}.s3hw-e span{color:var(--muted)}
+.s3hw-r{border-radius:10px;padding:10px 14px;font-size:13.5px;line-height:1.6;background:var(--quote)}
+.s3hw-r.y{background:var(--accent-soft)}.s3hw-r p{margin:4px 0 0}
+@media (max-width:640px){.s3hw-g{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const EL=['投入金钱','共同事业','期望利润','来自他人努力'];
+  const C=[['豪伊橘子园（1946）',[1,1,1,1],['买地加付管理费','各块果园统一经营、合并销售','买方关心的是收益，不是吃橘子','种植、采摘、销售都由服务公司完成'],'是证券。联邦最高法院认定土地买卖合同与服务合同合起来构成投资合同。'],
+    ['合作城住房股票（1975）',[1,null,0,0],['按房间数认购股票','法院未作单独判断','为了住，不为获利；只能按原价卖回','—'],'不是证券。福曼案认为买方是为个人使用而购买，没有获利预期。'],
+    ['The DAO 代币（2017）',[1,1,1,1],['以以太币购买，同样算投入金钱','资金汇集在同一个合约地址','持有人期望分享项目收益','依赖 Slock.it 与监管人的管理努力，投票权有限'],'是证券。SEC 2017 年的调查报告得出这一结论。'],
+    ['XRP 机构销售（2023）',[1,1,1,1],['机构依书面合同付款','资金汇入瑞波公司','合同条款与推销材料指向获利','瑞波公司承诺推动 XRP 的使用与价格'],'是投资合同。纽约南区法院 2023 年判决，约 7.28 亿美元的机构销售构成未注册发行。'],
+    ['XRP 交易所程序化销售（2023）',[1,null,0,0],['买方付了钱','法院未作单独判断','买方不知道卖方是瑞波，谈不上受其承诺引导','法院把「期望来自他人努力的利润」作为一个要件，认定不满足'],'不是投资合同。法院认为匿名的竞价成交不满足期望来自瑞波努力的利润这一要素；该判决未经上诉审查，2025 年双方撤回上诉。'],
+    ['比特币（2026 年解释，示意）',[1,0,0,0],['买方付了钱','没有一个发行人汇集资金','价格可能上涨，但没有发行人的承诺','价值来自网络的程序化运行，而非某一方的管理努力'],'本身不是证券。SEC 2026 年 3 月的解释把它归为数字商品；若有人围绕它作出管理承诺并出售，那笔交易仍可能构成投资合同。']];
+  const c=document.getElementById('s3hw-c'),g=document.getElementById('s3hw-g'),r=document.getElementById('s3hw-r'),v=document.getElementById('s3hw-v'),x=document.getElementById('s3hw-x');
+  c.innerHTML=C.map(k=>`<button type="button">${k[0]}</button>`).join('');
+  g.innerHTML=EL.map(e=>`<div class="s3hw-e"><b>${e}<em></em></b><span></span></div>`).join('');
+  const bs=[...c.children],es=[...g.children];
+  function set(i){
+    bs.forEach((b,j)=>b.classList.toggle('on',i===j));
+    es.forEach((e,j)=>{const y=C[i][1][j];e.classList.toggle('y',!!y);e.querySelector('em').textContent=y===null?'—':(y?'✓':'✕');e.querySelector('em').style.fontStyle='normal';e.querySelector('span').textContent=C[i][2][j];});
+    const all=C[i][1].every(z=>z===1);r.classList.toggle('y',all);v.textContent=all?'四个要素都满足':'至少一个要素不满足';x.textContent=C[i][3];
+  }
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-3">三、名为股票的，不一定是证券</h2>
+<p>经济实质原则也可以反过来用。纽约的合作城是 1965 年至 1971 年间兴建的大型住房合作社，住户要按每个房间认购 18 股里弗贝公司的「股票」，每股 25 美元。股票与住房绑定，不能转让给非住户，搬出时只能按原价卖回。后来建设成本上升，月费从最初估计的每房间 23.02 美元涨到 1974 年 7 月的 39.68 美元，住户以证券欺诈为由起诉。</p>
+<p>1975 年 6 月 16 日，联邦最高法院在联合住房基金会诉福曼案中认定这些股票不是证券。判决说，应当「不拘形式、重视实质，着眼于经济实质」；住户付钱是为了得到一个住处，是为了个人使用而购买，并没有期望从他人的努力中获取利润。</p>
+<p>这一推理也有边界。1985 年，联邦最高法院在兰德雷思木材公司诉兰德雷思案中认为，具备股票通常特征的普通股，就是证券，不必再作 Howey 分析；Forman 案只说明名称不能决定结论，不能用来把真正的股票排除在外。</p>
+<p><strong>今天的对应。</strong>会员积分、游戏内道具、预付消费卡通常为了使用而购买，不是证券；一旦发行方宣传它们会升值、可以在二级市场交易、团队会努力推高价格，这些宣传本身就可能把一个消费品变成投资合同。</p>
+<h2 id="sec-4">四、票据：家族相似</h2>
+<p>票据是第 2(a)(1) 条清单里的第一项，但并不是所有票据都是证券：买房的抵押贷款、消费分期、银行的商业贷款，都以票据为凭证，显然不需要按证券法注册。</p>
+<p>阿肯色州与俄克拉何马州农民合作社为筹措经营资金，向成员与公众出售无担保、无保险、可随时要求兑付的票据，以「投资计划」名义推销，利率浮动并保持高于当地银行。1984 年合作社破产，1,600 多名持有人手里约有 1,000 万美元票据。他们起诉合作社的审计师安永会计师事务所的前身亚瑟·扬会计师事务所。</p>
+<p>1990 年 2 月 21 日，联邦最高法院在里夫斯诉安永会计师事务所案中采用了「家族相似」测试：票据推定为证券，除非它与一份已知不属于证券的票据清单（如消费融资票据、以住房抵押担保的票据、以营业资产担保的短期票据、商业银行的经营贷款）足够相似。判断是否相似，看四个因素：双方的动机，卖方是否为一般经营筹资、买方是否为了获利；分销方式，是否面向公众广泛发售；公众的合理预期，是否会把它视为投资；是否存在另一套监管制度显著降低了风险。合作社的票据在四项上都指向投资，法院认定它们是证券。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">票据的家族相似测试</p><p class="pr-c"><span><em>领域</em>证券法 › 证券的定义</span><span><em>类型</em>联邦判例</span></p><p class="pr-s">票据推定为证券；与法院列举的非证券票据足够相似的除外，相似与否看动机、分销方式、公众的合理预期与是否有其他降低风险的监管。</p><dl><div><dt>在法律体系中的位置</dt><dd>里夫斯诉安永会计师事务所案（1990）确立，采纳了第二巡回法院列举的非证券票据清单；适用于第 2(a)(1) 条中的「票据」，投资合同仍适用 Howey 测试</dd></div><div><dt>回应的问题</dt><dd>票据既用于投资也用于普通借贷，一律视为证券或一律排除都不合理</dd></div><div><dt>适用范围</dt><dd>存在一份公认的非证券票据清单，新的票据可以与之比较</dd></div><div><dt>出台</dt><dd>联邦最高法院，1990；马歇尔大法官执笔</dd></div><div><dt>留下的问题</dt><dd>完全数字化、没有发行公司、在全球匿名交易的代币，是否还能套用这些标准</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一张票据是不是证券：家族相似测试</p><p class="figsub">选一张票据，或自己切换四个因素。指向投资的因素越多，越不像法院列举的非证券票据。</p></div></div>
+    <div class="s3rv-p" id="s3rv-p"></div>
+    <div class="s3rv-f" id="s3rv-f"></div>
+    <div class="s3rv-o"><div class="s3rv-m"><i id="s3rv-bar"></i></div><p id="s3rv-x" aria-live="polite"></p></div>
+  </div>
+</figure>
+<style>
+.s3rv-p{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.s3rv-p button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s3rv-p button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s3rv-f{display:grid;gap:6px;margin-bottom:12px}
+.s3rv-r{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--quote);border-radius:9px;padding:8px 12px;font-size:13.5px}
+.s3rv-r small{display:block;color:var(--muted);font-size:12px}
+.s3rv-t{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.s3rv-t button{font:inherit;font-size:12.5px;border:0;background:transparent;color:var(--muted);padding:4px 10px;cursor:pointer}
+.s3rv-t button.on{background:var(--accent);color:#fff}
+.s3rv-o{background:var(--accent-soft);border-radius:10px;padding:10px 14px}
+.s3rv-m{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin-bottom:8px}
+.s3rv-m i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.s3rv-o p{margin:0;font-size:13.5px;line-height:1.6}
+</style>
+<script>
+(function(){
+  const F=[['双方的动机','卖方为一般经营筹资、买方为获利','为买一件消费品或解决短期周转'],['分销方式','面向公众广泛发售','只与少数对象一对一谈判'],['公众的合理预期','会被视为一项投资','会被视为普通借贷'],['其他降低风险的监管','没有：无担保、无存款保险','有：例如受银行监管或有存款保险']];
+  const P=[['合作社的即期票据',[1,1,1,1],'里夫斯案（1990）的事实：四项都指向投资，法院认定是证券。'],['住房抵押贷款票据',[0,0,0,0],'与法院列举的「以住房抵押担保的票据」相似，不是证券。'],['商业银行的经营贷款',[0,0,0,0],'与「商业银行为经营发放的贷款」相似，不是证券；借款人受信贷关系约束，银行受银行监管。'],['向公众发售的高息短期票据（示意）',[1,1,1,0],'动机、分销与预期都指向投资；即使有部分担保，通常仍被推定为证券。']];
+  const st=[1,1,1,1],p=document.getElementById('s3rv-p'),f=document.getElementById('s3rv-f'),bar=document.getElementById('s3rv-bar'),x=document.getElementById('s3rv-x');
+  let note=P[0][2];
+  p.innerHTML=P.map(q=>`<button type="button">${q[0]}</button>`).join('');
+  f.innerHTML=F.map((q,i)=>`<div class="s3rv-r"><div>${q[0]}<small id="s3rv-s${i}"></small></div><div class="s3rv-t" data-i="${i}"><button type="button" data-v="1">指向投资</button><button type="button" data-v="0">指向借贷</button></div></div>`).join('');
+  const pb=[...p.children];
+  function upd(sel){
+    pb.forEach((b,j)=>b.classList.toggle('on',j===sel));
+    F.forEach((q,i)=>{document.getElementById('s3rv-s'+i).textContent=st[i]?q[1]:q[2];});
+    document.querySelectorAll('.s3rv-t').forEach(t=>t.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st[+t.dataset.i])));
+    const n=st.reduce((a,c)=>a+c,0);bar.style.width=(n/4*100)+'%';
+    x.textContent=(sel>=0?note+' ':'')+(n>=3?`${n} 项指向投资：推定为证券。`:n===0?'四项都指向普通借贷：与非证券票据家族相似，不是证券。':`${n} 项指向投资：需要逐项权衡，没有机械的计分规则。`);
+  }
+  pb.forEach((b,i)=>b.addEventListener('click',()=>{P[i][1].forEach((v,j)=>st[j]=v);note=P[i][2];upd(i);}));
+  document.querySelectorAll('.s3rv-t').forEach(t=>t.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st[+t.dataset.i]=+b.dataset.v;upd(-1);})));
+  upd(0);
+})();
+</script>
+
+<h2 id="sec-5">五、代币：同一个问题换了载体</h2>
+<p>2016 年 4 月 30 日至 5 月 28 日，一个名为 The DAO 的去中心化组织在以太坊区块链上出售约 11.5 亿枚 DAO 代币，换取约 1,200 万枚以太币，按发售结束时的价格约合 1.5 亿美元。持有人可以就投资项目投票并分享收益。发售结束后不久，有人利用代码漏洞转走了约三分之一的资金。</p>
+<p>2017 年 7 月 25 日，SEC 发布关于 The DAO 的调查报告，没有提起执法，但给出了结论：DAO 代币是证券。理由仍是 Howey 测试：用以太币购买同样是投入金钱；投资者期望获利；项目能否成功依赖创办团队 Slock.it 及其挑选的「监管人」的管理努力，代币持有人的投票权有限，无法替代这些努力。报告说，联邦证券法适用于以分布式账本技术发行证券的人，不论发行主体是传统公司还是去中心化的组织。</p>
+<p>此后几年，SEC 对未注册的代币发行提起了大量执法。其中影响最大的是 SEC 诉瑞波实验室案：SEC 于 2020 年 12 月 22 日起诉瑞波公司及其两名高管，指其出售 XRP 是未注册的证券发行。2023 年 7 月 13 日，纽约南区联邦地区法院的托雷斯法官按销售方式分别判断：瑞波公司依书面合同直接卖给对冲基金等机构的 XRP，约 7.28 亿美元，属于投资合同；在交易所通过算法匿名卖出的部分不是，因为买方不知道卖方是谁，也就谈不上被瑞波公司的承诺引导而期望获利。2024 年 8 月 7 日，法院对机构销售部分判处 125,035,150 美元民事罚款并发布禁令。2025 年，双方曾请求把罚款减为 5,000 万美元，被法院拒绝；8 月 7 日，双方撤回各自的上诉，原判决生效。</p>
+<p><strong>今天的对应。</strong>同一种代币，直接向机构配售与在交易所里匿名卖出，可能得出不同结论。判断的单位不是代币本身，而是每一笔交易背后的承诺与预期。</p>
+<h2 id="sec-6">六、2025–2026：从逐案执法到分类</h2>
+<p>2025 年起，SEC 的做法明显转向。2025 年 1 月 21 日，代理主席尤耶达宣布成立加密工作组，由皮尔斯委员领导，目标是建立一个清楚的监管框架，而不是以执法代替规则。2 月 27 日，SEC 与 Coinbase 共同申请撤销对其提起的诉讼，SEC 说明撤诉出于政策考虑，不代表对案件是非的判断；5 月 29 日，对币安的诉讼也以同样方式撤销。工作人员在 2025 年陆续发表声明，认为迷因币、符合条件的美元稳定币与特定的协议质押活动不涉及证券的发售。这些声明是工作人员的意见，对委员会没有约束力。</p>
+<p>国会先处理了稳定币。2025 年 7 月 18 日，《指导与建立美国稳定币国家创新法》（GENIUS 法，公法 119-27）签署成为法律：只有获准的发行人才能在美国发行支付型稳定币，储备至少按 1:1 持有美元与短期国债等资产，不得向持有人支付利息。该法第 17 条修改了证券法上的定义，由获准发行人发行的支付型稳定币不属于证券。法律在颁布满 18 个月或主要监管机构发布最终实施规则后 120 天两者中较早的日期生效；货币监理署已于 2026 年 10 月 21 日发布其最终实施规则，生效日为 2027 年 1 月 18 日。截至 2026 年 11 月，这一排除条款尚未生效。</p>
+<p>对其他代币，SEC 用解释而不是逐案执法回答。2026 年 3 月 17 日，SEC 发布解释（第 33-11412 号），商品期货交易委员会（CFTC）同时表示将按这一解释执行《商品交易法》。解释把加密资产分为五类：数字商品、数字收藏品、数字工具、稳定币与数字证券，只有最后一类本身是证券。比特币、以太币等与一个运转中的网络内在相连、价值来自网络程序化运行的原生代币，被归为数字商品。解释还回答了一个 Howey 案没有直接回答的问题：一项非证券的资产可以因为发行人的承诺而进入投资合同，也可以在发行人兑现或公开放弃这些承诺之后退出投资合同，此后的转手不再受证券法管辖。</p>
+<p>2026 年 8 月 18 日，SEC 提议「加密资产条例」：一项四年内最多募集 500 万美元的初创豁免，一项每 12 个月最多 7,500 万美元的募资豁免，以及一个安全港，发行人证明已完成或永久停止所承诺的关键管理努力后，代币不再被视为投资合同的标的。征求意见期已于 2026 年 10 月结束，截至 2026 年 11 月尚未通过最终规则。</p>
+<p>市场结构立法仍未完成。众议院于 2025 年 7 月 17 日以 294 票对 134 票通过《数字资产市场清晰法》（CLARITY 法），为数字商品的现货市场建立以 CFTC 为主的监管框架。参议院农业委员会与银行委员会分别于 2026 年 1 月 29 日与 5 月 14 日通过各自的版本。2026 年 9 月 15 日，参议院就是否开始审议进行程序性表决，以 49 票对 50 票未达到所需的 60 票。截至 2026 年 11 月中旬，法案仍搁置在参议院；第 119 届国会于 2027 年 1 月 3 日结束，届时未通过的法案须在下一届国会重新提出。</p>
+<aside class="principle"><p class="pr-k">推演至此，得到一条规则</p><p class="pr-n">投资合同的进入与退出（2026 年解释）</p><p class="pr-c"><span><em>领域</em>证券法 › 证券的定义</span><span><em>类型</em>SEC 解释</span></p><p class="pr-s">一项本身不是证券的加密资产，因发行人关于关键管理努力的承诺而成为投资合同的标的；发行人兑现或公开放弃这些承诺后，它不再受投资合同约束，此后的交易不受证券法管辖。</p><dl><div><dt>在法律体系中的位置</dt><dd>SEC 第 33-11412 号解释（2026 年 3 月 17 日），CFTC 表示将据此执行《商品交易法》；以 Howey 测试为基础，不改变成文法定义；《GENIUS 法》第 17 条另以成文法把获准发行人的支付型稳定币排除在证券之外，2027 年 1 月 18 日前后生效；2026 年 8 月提议的「加密资产条例」拟设相应安全港，尚未通过</dd></div><div><dt>回应的问题</dt><dd>同一种代币在发行初期依赖团队、成熟后依赖网络，一次性的「是或不是」无法描述</dd></div><div><dt>适用范围</dt><dd>发行人的承诺可以识别，兑现或放弃可以验证；解释可由以后的委员会修改，法院不受其约束</dd></div><div><dt>出台</dt><dd>SEC，2026；CFTC 同时加入</dd></div><div><dt>留下的问题</dt><dd>代币不是证券之后，交易它的平台、托管它的机构、推荐它的经纪商受谁监管；市场结构立法尚未通过</dd></div></dl></aside>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">加密资产与证券法：2017–2026</p><p class="figsub">按来源筛选，点选一个节点看内容与截至 2026 年 11 月的状态。</p></div></div>
+    <div class="s3cr-f" id="s3cr-f"><button type="button" data-v="all">全部</button><button type="button" data-v="sec">SEC</button><button type="button" data-v="court">法院</button><button type="button" data-v="cong">国会</button></div>
+    <div class="s3cr-tl" id="s3cr-tl"></div>
+    <div class="s3cr-d"><p class="s3cr-h"><b id="s3cr-t"></b><span id="s3cr-s"></span></p><p id="s3cr-x"></p></div>
+  </div>
+</figure>
+<style>
+.s3cr-f{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.s3cr-f button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.s3cr-f button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.s3cr-tl{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px;margin-bottom:12px}
+.s3cr-n{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px;transition:opacity .3s}
+.s3cr-n em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}.s3cr-n b{font-size:13px;font-weight:600}
+.s3cr-n.dim{opacity:.25}.s3cr-n.on{border-color:var(--accent)}
+.s3cr-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s3cr-d p{margin:0}.s3cr-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:4px!important}
+.s3cr-h span{font-size:12px;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:1px 9px}
+</style>
+<script>
+(function(){
+  const D=[['2017-07-25','sec','DAO 报告','SEC 调查报告认定 DAO 代币是证券，未提起执法。','已发布'],
+    ['2020-12-22','sec','起诉瑞波','SEC 起诉瑞波公司及两名高管，指出售 XRP 为未注册发行。','2025 年结案'],
+    ['2023-07-13','court','瑞波案判决','纽约南区法院：机构销售约 7.28 亿美元是投资合同，交易所程序化销售不是。','未经上诉审查'],
+    ['2024-08-07','court','瑞波案终局判决','对机构销售部分判处 125,035,150 美元民事罚款并发布禁令。','有效'],
+    ['2025-01-21','sec','成立加密工作组','代理主席尤耶达宣布成立，由皮尔斯委员领导，目标是以规则代替逐案执法。','运作中'],
+    ['2025-02-27','sec','撤销 Coinbase 案','SEC 与 Coinbase 共同申请撤诉，SEC 说明不代表对是非的判断；5 月 29 日币安案同样撤销。','已撤诉'],
+    ['2025-07-18','cong','GENIUS 法','获准发行人发行的支付型稳定币不属于证券；储备 1:1，不得付息。','2027 年 1 月 18 日前后生效'],
+    ['2025-07-17','cong','众议院通过 CLARITY 法','294 票对 134 票通过市场结构法案。','送交参议院'],
+    ['2025-08-07','court','瑞波案上诉撤回','双方撤回上诉；此前把罚款减为 5,000 万美元的请求被法院拒绝。','原判决生效'],
+    ['2026-03-17','sec','代币分类解释','五类：数字商品、数字收藏品、数字工具、稳定币、数字证券；投资合同可以结束。CFTC 同时加入。','有效'],
+    ['2026-08-18','sec','加密资产条例（提案）','500 万美元初创豁免、7,500 万美元募资豁免与安全港。','征求意见已结束，未通过'],
+    ['2026-09-15','cong','参议院程序表决','开始审议 CLARITY 法的动议以 49 票对 50 票未获通过，需要 60 票。','搁置；2027 年 1 月 3 日本届国会结束']];
+  D.sort((a,b)=>a[0]<b[0]?-1:1);
+  const tl=document.getElementById('s3cr-tl'),t=document.getElementById('s3cr-t'),s=document.getElementById('s3cr-s'),x=document.getElementById('s3cr-x');
+  tl.innerHTML=D.map(d=>`<button type="button" class="s3cr-n" data-k="${d[1]}"><em>${d[0]}</em><b>${d[2]}</b></button>`).join('');
+  const ns=[...tl.children];
+  const set=i=>{ns.forEach((n,j)=>n.classList.toggle('on',i===j));t.textContent=D[i][0]+' · '+D[i][2];s.textContent=D[i][4];x.textContent=D[i][3];};
+  ns.forEach((n,i)=>n.addEventListener('click',()=>set(i)));
+  const fb=[...document.querySelectorAll('#s3cr-f button')];
+  const filt=k=>{fb.forEach(b=>b.classList.toggle('on',b.dataset.v===k));ns.forEach(n=>n.classList.toggle('dim',k!=='all'&&n.dataset.k!==k));};
+  fb.forEach(b=>b.addEventListener('click',()=>filt(b.dataset.v)));filt('all');set(D.length-3);
+})();
+</script>
+
+<h2 id="sec-7">七、这一步留下的问题</h2>
+<p>证券的边界划清了一部分，但谁来卖、卖给谁的问题随之出现：</p>
+<ol><li><strong>卖证券的中间人。</strong>不论是股票还是被认定为投资合同的代币，大多通过经纪商与交易平台卖给投资者，中间人有自己的利益。</li><li><strong>客户的资产放在哪里。</strong>投资者买入的证券与代币存放在中间人那里，中间人倒闭时客户的资产能否拿回来。</li><li><strong>价格被人扭曲。</strong>代币与小盘股都容易被少数人操纵，证券与非证券的划分决定了由谁来追究。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">证券的边界之外，谁来卖、放在哪里、价格是否公正。点选一个，看它通向哪一章。</p></div></div>
+    <div class="s3nx" id="s3nx"></div>
+    <p class="s3nx-m" id="s3nx-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.s3nx{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.s3nx button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.s3nx button b{display:block;font-size:14px}.s3nx button em{font-style:normal;font-size:12px;color:var(--faint)}
+.s3nx button.on{border-color:var(--accent)}
+.s3nx-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.s3nx{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['卖证券的中间人','→ 第 4 章','股票与被认定为投资合同的代币，大多通过经纪商与交易平台卖给投资者；中间人有自己的利益。'],
+    ['客户的资产放在哪里','→ 第 5 章','投资者买入的证券与代币存放在中间人那里，中间人倒闭时客户能否拿回资产。'],
+    ['价格被人扭曲','→ 第 7 章','代币与小盘股容易被少数人操纵；证券与非证券的划分决定了由谁来追究。']];
+  const g=document.getElementById('s3nx'),m=document.getElementById('s3nx-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-8">八、对产品的含义</h2>
+<p>本章的规则对金融产品有三条含义。第一，产品是不是证券，由经济实质决定，营销文案是证据的一部分：「团队会持续推动价格」「上线后可交易获利」这类话，可能把一个本不是证券的东西变成投资合同；AI 生成的产品介绍与推送同样是这种证据。第二，分类会随时间变化，2026 年的解释承认投资合同可以开始也可以结束，上架加密资产的券商要记录每个资产被归类的依据与日期，并在发行人承诺状态变化时复核。第三，2025–2026 年的变化大多来自 SEC 的解释、工作人员声明与撤诉，而不是成文法；市场结构立法尚未通过，产品在设计上应当能够承受监管立场再次改变。</p>
+<h2 id="sec-9">参考文献</h2>
+<ul class="refs"><li>Guiding and Establishing National Innovation for U.S. Stablecoins Act (GENIUS Act), Pub. L. 119-27 (2025)（第 17 条）.</li><li>Landreth Timber Co. v. Landreth, 471 U.S. 681 (1985).</li><li>Reves v. Ernst &amp; Young, 494 U.S. 56 (1990).</li><li>SEC v. C.M. Joiner Leasing Corp., 320 U.S. 344 (1943).</li><li>SEC v. Edwards, 540 U.S. 389 (2004).</li><li>SEC v. Ripple Labs, Inc., No. 20 Civ. 10832 (AT) (S.D.N.Y. July 13, 2023)；Final Judgment (S.D.N.Y. Aug. 7, 2024)；SEC Litigation Release No. 26369 (Aug. 7, 2025).</li><li>SEC v. W.J. Howey Co., 328 U.S. 293 (1946).</li><li>Securities Act of 1933, 15 U.S.C. § 77b(a)(1)；Securities Exchange Act of 1934, 15 U.S.C. § 78c(a)(10).</li><li>Securities and Exchange Commission. (2017). <i>Report of Investigation Pursuant to Section 21(a): The DAO</i> (Release No. 34-81207).</li><li>Securities and Exchange Commission. (2025). <i>SEC Crypto 2.0: Acting Chairman Uyeda Announces Formation of New Crypto Task Force</i> (Press Release 2025-30)；<i>SEC Announces Dismissal of Civil Enforcement Action Against Coinbase</i> (Press Release 2025-47).</li><li>Securities and Exchange Commission. (2026). <i>Application of the Federal Securities Laws to Certain Types of Crypto Assets and Certain Transactions Involving Crypto Assets</i> (Release No. 33-11412).</li><li>Securities and Exchange Commission. (2026). <i>Regulation Crypto Assets</i>（拟议规则，Press Release 2026-76，2026 年 8 月 18 日）.</li><li>United Housing Foundation, Inc. v. Forman, 421 U.S. 837 (1975).</li><li>H.R. 3633, Digital Asset Market Clarity Act of 2025, 119th Cong.（众议院 2025 年 7 月 17 日通过）.</li></ul>
+<footer class="nav"><a href="s02.html">← 第 2 章　证券转手之后，谁来说真话</a><a href="s04.html">第 4 章　中间人有自己的利益 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

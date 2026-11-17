@@ -1,0 +1,26 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">订单路由与披露之外的三个新问题。点选一个，看它通向哪一章。</p></div></div>
+    <div class="n6" id="n6"></div>
+    <p class="n6-m" id="n6-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.n6{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.n6 button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.n6 button b{display:block;font-size:14px}.n6 button em{font-style:normal;font-size:12px;color:var(--faint)}
+.n6 button.on{border-color:var(--accent)}
+.n6-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.n6{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['价格本身被扭曲','→ 第 7 章','最佳执行保证的是在当时的市场上拿到好价格；如果价格被人操纵，或有人凭内幕消息交易，好的执行也无济于事。'],
+    ['借钱买证券','→ 第 8 章','融资与保证金把价格波动放大为券商的资金压力；客户能借多少，需要另外的规则。'],
+    ['路由由算法决定','→ 第 12 章','订单、推荐乃至下单时机都由 AI 生成时，最佳执行审查要审查什么。']];
+  const g=document.getElementById('n6'),m=document.getElementById('n6-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

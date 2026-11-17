@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>重跑：当推荐来自 AI</title>
+<meta name="description" content="《美国金融业法律研究》证券篇第 12 章：前 11 章的规则都默认推荐、解读与执行由人完成，每一份都有成本、可以逐份审查。把这个参数改掉，让 AI 完成这些认知劳动，逐章重跑：多数规则的内容是技术中立的，仍然适用；失效的多是执行它们的手段，如事前批准、抽查与核对证件；冲突写进模型目标、客户自带 AI 代理下单等问题，截至 2026 年 11 月尚无明确规则">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+</style>
+</head>
+<body data-page="s12">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
+<a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>
+<a class="" href="s01.html"><span class="n">1</span>卖的人比买的人知道得多</a>
+<a class="" href="s02.html"><span class="n">2</span>证券转手之后，谁来说真话</a>
+<a class="" href="s03.html"><span class="n">3</span>什么算证券</a>
+<a class="" href="s04.html"><span class="n">4</span>中间人有自己的利益</a>
+<a class="" href="s05.html"><span class="n">5</span>客户的钱放在经纪商那里</a>
+<a class="" href="s06.html"><span class="n">6</span>订单送到哪里成交</a>
+<a class="" href="s07.html"><span class="n">7</span>价格被人扭曲</a>
+<a class="" href="s08.html"><span class="n">8</span>借钱买证券</a>
+<a class="" href="s09.html"><span class="n">9</span>替人管钱的人</a>
+<a class="" href="s10.html"><span class="n">10</span>开户的人是谁</a>
+<a class="" href="s11.html"><span class="n">11</span>能说什么、不能说什么</a>
+<a class=" cur" href="s12.html" aria-current="page"><span class="n">12</span>重跑：当推荐来自 AI</a>
+<a class="" href="s-map.html"><span class="n">篇末</span>证券篇的规则地图</a>
+<span class="todo side-part"><span class="pn">银行篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">保险篇</span>（待写）</span>
+<span class="todo side-part"><span class="pn">衍生品篇</span>（待写）</span>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>证券篇</span></header>
+
+<div class="chapno">第 12 章</div><h1>重跑：当推荐来自 AI<small>认知劳动的成本骤降之后</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>前 11 章的规则都默认一件事：读材料、理解客户、形成推荐、写解读、下单，这些认知劳动由人完成。人的时间有限，每一份推荐、每一封信都有成本，监管也就可以一份一份地审。本章只改变这一个参数：让 AI 来做这些事，每一份的成本降到接近零。同样的问题随之以新的形式出现：推荐从每天几十份变成几百万份，每份都不一样；利益冲突不再写在佣金表上，而写在模型优化的目标里；开户的「本人」可能是合成的影像；下单的可能是客户自己带来的 AI 代理。逐章重跑的结论是：多数规则的内容是技术中立的，仍然适用；失效的多是执行这些内容的手段；少数地方，截至 2026 年 11 月尚无明确规则。</p></blockquote>
+<h2 id="sec-1">一、改变一个参数</h2>
+<p>证券篇的每一条规则背后，都有一个关于「谁在做事」的前提。招股说明书由发行人的律师写，读它的是投资者自己；推荐由经纪商的注册代表作出，一个代表一天能接触的客户有限；对客沟通由公司的人写，负责人在发出前逐份批准；开户时，柜台或审核人员核对证件与本人。这些前提让监管可以用逐份审查、抽查、留痕的办法执行。</p>
+<p>AI 把这些认知劳动的成本压到接近零，带来四个变化。第一是数量：同一家公司对同一批客户发出的解读与推荐，可以多出几个数量级。第二是个性化：每位客户收到的内容都不一样，事前审查失去了固定的对象。第三是一致性：同一个模型的缺陷会同时出现在所有客户身上，错误不再是个别代表的个别行为。第四是归属：一段回答是公司说的还是客户自己的工具说的，一笔订单是谁的决定，变得难以分辨。</p>
+<p><strong>今天的对应。</strong>投资 App 里由 AI 写的个股解读、按持仓自动生成的周报、回答「这只股票能不能买」的聊天助手、可以按条件自动下单的智能交易，分别对应解读、推荐与执行三个环节。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">把哪些认知劳动交给 AI</p><p class="figsub">打开一个或几个环节，看前 11 章中哪些问题的前提随之改变。点选一章看改变的是什么。</p></div></div>
+    <div class="k12p-t" id="k12p-t"></div>
+    <div class="k12p-g" id="k12p-g"></div>
+    <p class="k12p-m" id="k12p-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.k12p-t{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.k12p-t button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:5px 12px;border-radius:999px;cursor:pointer}
+.k12p-t button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.k12p-g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.k12p-g button{font:inherit;font-size:13px;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--faint);border-radius:9px;padding:8px 10px;line-height:1.4;transition:background .2s,color .2s}
+.k12p-g button span{display:block;font-size:11.5px}
+.k12p-g button.hit{background:var(--accent-soft);color:var(--ink)}
+.k12p-g button.on{border-color:var(--accent)}
+.k12p-m{font-size:14px;margin:12px 0 0;min-height:3.2em;line-height:1.6}
+@media (max-width:640px){.k12p-g{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const S=['生成内容（文字、影像）','解读材料','作出推荐','执行交易'];
+  const C=[['第 1 章','发行时的信息',[1],'招股说明书由平台的 AI 压成摘要，投资者读的不再是发行人写的原文。'],
+    ['第 2 章','持续披露与反欺诈',[0,1],'上市公司对 AI 能力的陈述成为新的不实陈述来源；AI 生成的文字也可能误导。'],
+    ['第 3 章','什么算证券',[3],'以「AI 交易」为卖点汇集资金、承诺收益的计划，形式新，实质仍是投资合同。'],
+    ['第 4 章','中间人的利益',[2],'推荐由算法作出，数量大、因人而异；冲突可以写进模型的优化目标。'],
+    ['第 5 章','客户资产',[3],'代理持有登录凭证与交易接口，未经授权的交易从入口发生。'],
+    ['第 6 章','订单执行',[3],'客户的代理替客户选择经纪商、订单类型与时机。'],
+    ['第 7 章','价格被扭曲',[0,3],'假新闻与深度伪造更便宜；相似模型可能同时作出同向交易。'],
+    ['第 8 章','借钱买证券',[3],'代理一天之内可以大量交易、快速加杠杆，每天一次的计算追不上实时敞口。'],
+    ['第 9 章','替人管钱',[2],'机器人顾问与客户自用的通用 AI，都在给出个性化的投资建议。'],
+    ['第 10 章','开户的人是谁',[0],'证件、自拍与视频可以用生成式 AI 伪造，核对证件的前提不再成立。'],
+    ['第 11 章','能说什么',[0,1,2],'每位客户收到的解读与回答都不同、实时生成，事前逐份批准做不到。']];
+  const st=new Set([2]);let sel=3;
+  const t=document.getElementById('k12p-t'),g=document.getElementById('k12p-g'),m=document.getElementById('k12p-m');
+  t.innerHTML=S.map(s=>`<button type="button">${s}</button>`).join('');
+  g.innerHTML=C.map(c=>`<button type="button"><span>${c[0]}</span>${c[1]}</button>`).join('');
+  const tb=[...t.children],gb=[...g.children];
+  function upd(){tb.forEach((b,i)=>b.classList.toggle('on',st.has(i)));let n=0;
+    gb.forEach((b,i)=>{const h=C[i][2].some(k=>st.has(k));b.classList.toggle('hit',h);b.classList.toggle('on',i===sel);if(h)n++;});
+    const c=C[sel],h=c[2].some(k=>st.has(k));
+    m.textContent=`受影响的问题：${n} / 11。${c[0]}：`+(h?c[3]:`当前打开的环节不改变这一章的前提；打开「${c[2].map(k=>S[k]).join('」或「')}」试试。`);}
+  tb.forEach((b,i)=>b.addEventListener('click',()=>{st.has(i)?st.delete(i):st.add(i);upd();}));
+  gb.forEach((b,i)=>b.addEventListener('click',()=>{sel=i;upd();}));upd();
+})();
+</script>
+
+<h2 id="sec-2">二、逐章重跑：一张总表</h2>
+<p>下表把前 11 章的问题逐一重跑，列出 AI 带来的新形式、现有规则的回应，以及没有覆盖到的地方。覆盖程度分两档：「大体覆盖」指规则的内容与执行手段都还适用；「部分覆盖」指规则的内容适用，但执行手段失效，或有一部分新情形不在任何规则之内。11 个问题中，3 个大体覆盖，8 个部分覆盖；没有一个问题因为 AI 而完全落到规则之外，也没有一条规则因为 AI 而被明确修改。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">逐章重跑：AI 带来的变化与现有规则的覆盖</p><p class="figsub">按覆盖程度筛选；点选一行看没有覆盖到的地方。资料截至 2026 年 11 月。</p></div></div>
+    <div class="k12m-f" id="k12m-f"></div>
+    <div class="k12m-t" id="k12m-t" role="table"></div>
+  </div>
+</figure>
+<style>
+.k12m-f{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.k12m-f button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.k12m-f button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.k12m-h,.k12m-r{display:grid;grid-template-columns:118px 1fr 1fr 82px;gap:10px;padding:8px 6px;font-size:13px;line-height:1.5;border-bottom:1px solid var(--line)}
+.k12m-h{color:var(--faint);font-size:12px}
+.k12m-r{cursor:pointer}.k12m-r:hover{background:var(--quote)}
+.k12m-r b{font-weight:600;display:block}.k12m-r small{color:var(--faint);font-size:11.5px}
+.k12m-c{font-size:12px;border-radius:999px;padding:2px 8px;height:fit-content;text-align:center;white-space:nowrap}
+.k12m-c.c1{background:var(--accent);color:var(--bg)}.k12m-c.c2{background:var(--accent-soft);color:var(--ink)}
+.k12m-x{grid-column:1/-1;background:var(--accent-soft);border-radius:8px;padding:8px 10px;display:none}
+.k12m-r.open .k12m-x{display:block}
+@media (max-width:640px){.k12m-h{display:none}.k12m-r{grid-template-columns:1fr auto}.k12m-r>span:nth-child(2),.k12m-r>span:nth-child(3){grid-column:1/-1}}
+</style>
+<script>
+(function(){
+  const R=[['第 1 章','发行时的信息','平台用 AI 把招股说明书压成摘要','第 11 条只约束发行人等；经纪商发出的摘要受规则 2210 约束',2,'摘要的提供者不是经纪商时（例如客户自用的通用 AI），没有对应的责任'],
+    ['第 2 章','持续披露与反欺诈','上市公司夸大 AI 能力；AI 生成的误导陈述','规则 10b-5 与报告义务不问陈述由谁写成（Presto 案，2025 年 1 月）',1,'没有专门的 AI 披露要求；投资者咨询委员会 2025 年 12 月 4 日的建议尚未变成规则'],
+    ['第 3 章','什么算证券','以「AI 交易」为卖点汇集资金、承诺收益','投资合同标准看交易实质，不看技术',1,'未见新的空白'],
+    ['第 4 章','中间人的利益','算法推荐、聊天回答构成推荐；冲突写进优化目标','最佳利益规则适用于 AI 作出的推荐（FINRA 常见问题，2024 年 5 月）',2,'专门针对模型冲突的 2023 年提案已于 2025 年 6 月 12 日撤回'],
+    ['第 5 章','客户资产','代理持有登录凭证与交易接口','资产隔离与净资本不受影响；S-P 条例 2024 年修订管数据泄露',2,'客户授权代理之后的越权交易，没有专门规则'],
+    ['第 6 章','订单执行','代理替客户选择经纪商、订单类型与时机','经纪商的最佳执行义务适用于任何来源的订单',2,'客户一侧代理的选择不属于任何经纪商的义务；最佳执行条例提案已撤回'],
+    ['第 7 章','价格被扭曲','AI 生成假新闻与深度伪造；相似模型同向交易','反欺诈与反操纵规则适用于有意的行为；SEC 2025 年 2 月设网络与新兴技术执法组',2,'没有任何人有故意的同向交易，不在反操纵规则之内'],
+    ['第 8 章','借钱买证券','代理在一天之内大量交易、快速加杠杆','T 条例与规则 4210 的数量上限不因下单者而改变',1,'日内敞口每天计算一次，实时状况可能更差'],
+    ['第 9 章','替人管钱','机器人顾问；客户用通用 AI 获取个性化建议','受托义务适用于自动化顾问（SEC，2019 年）；互联网顾问豁免 2024 年修订',2,'通用 AI 的提供者是否属于投资顾问，尚无表述'],
+    ['第 10 章','开户的人是谁','深度伪造的证件、自拍与视频','客户身份识别的要求不变；FinCEN 警示（2024 年 11 月 13 日）',2,'义务不变，可靠的核实手段要重新选择'],
+    ['第 11 章','能说什么','每人一份、实时生成的解读与回答','内容标准适用于 AI 生成的沟通（FINRA，2024 年）',2,'按人数分类与事前逐份批准难以执行']];
+  const L={1:'大体覆盖',2:'部分覆盖'};let f=0;
+  const fe=document.getElementById('k12m-f'),te=document.getElementById('k12m-t');
+  const F=[[0,'全部'],[1,'大体覆盖'],[2,'部分覆盖']];
+  fe.innerHTML=F.map(x=>`<button type="button" data-v="${x[0]}">${x[1]}（${x[0]?R.filter(r=>r[4]===x[0]).length:R.length}）</button>`).join('');
+  function upd(){fe.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.v===f));
+    te.innerHTML='<div class="k12m-h"><span>章与问题</span><span>AI 带来的新形式</span><span>现有规则</span><span>覆盖</span></div>'+R.filter(r=>!f||r[4]===f).map(r=>`<div class="k12m-r" role="row"><span><b>${r[1]}</b><small>${r[0]}</small></span><span>${r[2]}</span><span>${r[3]}</span><span class="k12m-c c${r[4]}">${L[r[4]]}</span><div class="k12m-x">没有覆盖到：${r[5]}</div></div>`).join('');
+    te.querySelectorAll('.k12m-r').forEach(e=>e.addEventListener('click',()=>e.classList.toggle('open')));}
+  fe.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{f=+b.dataset.v;upd();}));upd();
+})();
+</script>
+
+<p>下面几节按章分组，展开表中几处最重要的变化，并用四张重跑卡重新检验四条已有规则。</p>
+<h2 id="sec-3">三、信息：披露、反欺诈与什么算证券（第 1–3 章）</h2>
+<p>第 1 章的披露规则约束发行人。AI 把一份几百页的招股说明书压成三行摘要，摘要由交易平台作出，不是发行人的陈述，不在《证券法》第 11 条的责任之内；但经纪商以自己的名义把摘要发给客户，它就是第 11 章所说的对客沟通，漏掉风险因素就是只说一半。规则的内容覆盖到了，责任落在摘要的发出者身上。</p>
+<p>第 2 章的规则 10b-5 管证券买卖中的不实陈述，不问陈述由谁、用什么工具写成。上市公司夸大自己的 AI 能力，本身就是一种新的不实陈述：2025 年 1 月 14 日，SEC 与 Presto Automation 达成和解，指其在提交给 SEC 的文件中对自家语音 AI 的说法有误导。陈述是否误导，仍按重大性与整体印象判断。2025 年 12 月 4 日，SEC 投资者咨询委员会建议 SEC 要求上市公司定义「人工智能」、披露董事会对 AI 部署的监督，并在重大时说明 AI 对经营与面向消费者事务的影响；这是建议，不是规则，截至本书资料日期未见 SEC 据此提出规则。</p>
+<p>第 3 章的投资合同标准看的是交易的实质：投入资金、共同事业、依赖他人努力获取收益。以「AI 交易机器人」为卖点、汇集投资者资金并承诺收益的计划，技术不同，实质相同，标准照样适用。</p>
+<h2 id="sec-4">四、中间人：推荐由算法作出（第 4、9 章）</h2>
+<p>第 4 章的最佳利益规则（Reg BI）适用于经纪商向零售客户作出的推荐。规则没有区分推荐来自人还是来自程序，FINRA 在 2024 年 5 月 10 日发布的规则 2210 常见问题答复的脚注中写明：经纪商用 AI 技术向零售客户推荐证券交易，适用最佳利益规则。SEC 检查部门在 2025 年 11 月 17 日发布的 2026 财年检查重点中写明，将检查提供自动化投资建议与推荐的公司，看算法给出的建议是否与投资者的画像或所述策略一致，以及公司是否有控制确保自动化工具的建议符合对零售与老年投资者的义务。</p>
+<p>变化在三处。第一，推荐的边界移动了。FINRA 判断一段沟通是否构成推荐，看它能否合理地被视为「行动建议」，以及针对个人的程度（NASD 2001 年 4 月的会员通知 01-23）；AI 聊天默认就是针对个人的，一句「以你的持仓，可以考虑……」很容易构成推荐。第二，错误的单位变了。一位代表的不当推荐影响他的客户，一个模型的缺陷影响所有客户；注意义务仍按每一份推荐评价，监督却要落到模型上。第三，冲突的位置变了。佣金与产品带来的冲突写在费率表上，可以列举、披露；模型若被优化为提高交易频率或推高自营产品的点击，冲突不出现在任何一份推荐里，只体现在优化目标上。</p>
+<aside class="principle"><p class="pr-k">重跑至此，重新检验一条原理</p><p class="pr-n">最佳利益规则（Reg BI）</p><p class="pr-c"><span><em>领域</em>证券法 › 经纪商行为</span><span><em>类型</em>SEC 规则</span></p><p class="pr-s">经纪自营商向零售客户推荐证券交易或投资策略时，须以客户的最佳利益行事，不得把自身利益置于客户利益之前；推荐由 AI 作出，同样适用。</p><dl><div><dt>在法律体系中的位置</dt><dd>《证券交易法》规则 15l-1，2019 年 6 月 5 日通过，2020 年 6 月 30 日起合规；FINRA 规则 2210 常见问题 B.4、D.8 的脚注写明，经纪商用 AI 向零售客户推荐证券交易时适用</dd></div><div><dt>回应的问题</dt><dd>经纪商的推荐带有自身利益</dd></div><div><dt>适用范围</dt><dd>推荐由人作出，数量有限，可以逐份留痕；利益冲突来自佣金与产品，可以列举、披露与缓解</dd></div><div><dt>出台</dt><dd>SEC，2019</dd></div><div><dt>留下的问题</dt><dd>冲突写进模型的优化目标时，靠什么识别；SEC 针对这一问题的 2023 年提案已于 2025 年撤回</dd></div><div><dt>重跑之后</dt><dd>推荐的数量与个性化程度大幅上升，聊天中的回答更容易构成推荐；一个模型的缺陷同时出现在所有推荐中；冲突可以不出现在任何一份推荐里，而体现在模型的优化目标上</dd></div></dl></aside>
+<p>SEC 曾试图专门处理第三个变化。2023 年 7 月 26 日，SEC 提出「预测性数据分析」利益冲突规则（发布号 34-97990），要求经纪商与投资顾问评估自己在与投资者互动中使用的、用于「优化、预测、引导、预报或指挥」投资行为的技术是否造成利益冲突，并消除冲突或消除其影响，同时要有书面政策与记录。提案刊登于 2023 年 8 月 9 日的联邦公报。批评者认为「所涵盖技术」的定义过宽，几乎包括所有分析工具，且与最佳利益规则和受托义务重叠。2025 年 6 月 12 日，SEC 决定撤回这项提案及另外 13 项未完成的提案（发布号 33-11377），撤回自 6 月 17 日起生效，并说明今后如要在这些领域行动，将重新提出规则。撤回之后，模型中的冲突回到既有规则处理：经纪商依最佳利益规则识别、披露并缓解冲突，投资顾问依受托义务充分、公平地披露冲突。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">「预测性数据分析」提案：从提出到撤回</p><p class="figsub">SEC 曾试图专门处理写进模型的利益冲突。点选一个时间点。</p></div></div>
+    <div class="k12d-l" id="k12d-l"></div>
+    <div class="k12d-d"><p class="k12d-h" id="k12d-h"></p><p id="k12d-x"></p></div>
+  </div>
+</figure>
+<style>
+.k12d-l{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:4px 0 12px;padding-top:14px}
+.k12d-l::before{content:"";position:absolute;left:4%;right:4%;top:19px;height:2px;background:var(--line)}
+.k12d-l button{position:relative;font:inherit;font-size:12px;cursor:pointer;border:none;background:transparent;color:var(--muted);padding:16px 2px 0;text-align:center;line-height:1.35}
+.k12d-l button::before{content:"";position:absolute;top:0;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--card);border:2px solid var(--accent)}
+.k12d-l button.w::before{border-color:var(--faint)}
+.k12d-l button.on{color:var(--ink);font-weight:600}.k12d-l button.on::before{background:var(--accent)}
+.k12d-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;min-height:5em}
+.k12d-h{font-weight:600;margin:0 0 4px}.k12d-d p{margin:0}
+@media (max-width:640px){.k12d-l{grid-template-columns:repeat(4,1fr);row-gap:12px}.k12d-l::before{display:none}}
+</style>
+<script>
+(function(){
+  const D=[['2021-08-27','SEC 征求意见','就经纪商与投资顾问的「数字互动做法」征求意见（发布号 34-92766），列举游戏化、推送、聊天机器人等，询问现有规则是否够用。',0],
+    ['2023-07-26','提出规则','提出预测性数据分析利益冲突规则（发布号 34-97990）：评估与投资者互动中使用的技术是否把公司利益置于投资者之前，并消除冲突或消除其影响，同时要有书面政策与记录。',0],
+    ['2023-08-09','刊登联邦公报','提案刊登于 88 FR 53960，开始征求意见。批评集中在「所涵盖技术」定义过宽，与最佳利益规则、受托义务重叠。',0],
+    ['2024-03-18','发布更正','SEC 对提案发布更正（89 FR 19292）。提案此后未再推进。',0],
+    ['2025-03-27','AI 圆桌会','SEC 举行金融业 AI 圆桌会，讨论 AI 的风险、收益与治理。',0],
+    ['2025-06-12','决定撤回','SEC 决定撤回这项提案及另外 13 项未完成的提案（发布号 33-11377），说明今后如要在这些领域行动，将重新提出规则。',1],
+    ['2025-11-17','检查重点','2026 财年检查重点：检查算法给出的建议是否与投资者画像或所述策略一致，核实公司对自身 AI 能力的陈述是否准确。',0]];
+  const l=document.getElementById('k12d-l'),h=document.getElementById('k12d-h'),x=document.getElementById('k12d-x');
+  l.innerHTML=D.map(d=>`<button type="button" class="${d[3]?'w':''}">${d[0].slice(0,7).replace('-',' 年 ')} 月<br>${d[1]}</button>`).join('');
+  const bs=[...l.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));const p=D[i][0].split('-');h.textContent=`${p[0]} 年 ${+p[1]} 月 ${+p[2]} 日 · ${D[i][1]}`+(D[i][3]?'（6 月 17 日生效，90 FR 25531）':'');x.textContent=D[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(1);
+})();
+</script>
+
+<p>第 9 章的投资顾问受托义务同样不区分人与程序。SEC 在 2019 年 6 月 5 日关于投资顾问行为标准的解释中写明，它同样适用于自动化顾问，也就是通常所说的「机器人顾问」；SEC 投资管理部 2017 年 2 月的指引列出了自动化顾问在披露、适当性与合规程序上的考虑。2024 年 3 月 27 日，SEC 修订互联网顾问豁免，要求依此注册的顾问始终通过可运行的互动网站提供建议，2025 年 3 月 31 日起合规。没有覆盖到的，是客户自己使用的通用 AI：它回答「我该不该卖掉这只基金」时，提供者是否属于投资顾问，SEC 尚无明确表述。</p>
+<aside class="principle"><p class="pr-k">重跑至此，重新检验一条原理</p><p class="pr-n">投资顾问的受托义务</p><p class="pr-c"><span><em>领域</em>证券法 › 投资顾问</span><span><em>类型</em>联邦成文法、判例与 SEC 解释</span></p><p class="pr-s">投资顾问对客户负有注意义务与忠实义务，须提供符合客户最佳利益的建议，并充分、公平地披露利益冲突；自动化顾问同样适用。</p><dl><div><dt>在法律体系中的位置</dt><dd>《投资顾问法》第 206 条；SEC 诉资本收益研究局案（1963）确认顾问的受托性质；SEC 2019 年解释（IA-5248）写明适用于自动化顾问</dd></div><div><dt>回应的问题</dt><dd>替人管钱、给人建议的人有自己的利益</dd></div><div><dt>适用范围</dt><dd>顾问知道自己为什么给出某条建议，能够向客户解释；冲突可以通过披露取得客户的知情同意</dd></div><div><dt>出台</dt><dd>美国国会，1940；联邦最高法院，1963；SEC，2019</dd></div><div><dt>留下的问题</dt><dd>建议的理由由模型给出时，什么样的披露才算充分、公平</dd></div><div><dt>重跑之后</dt><dd>模型给出建议的理由难以逐条解释，披露要说清模型做什么、不做什么、何时由人复核；客户自带的通用 AI 给出个性化建议，其提供者是否是投资顾问，尚无明确表述</dd></div></dl></aside>
+<h2 id="sec-5">五、资产、执行与市场（第 5–8 章）</h2>
+<p>第 5 章的客户资产保护规则与净资本规则，管的是钱与证券放在哪里、经纪商有没有足够的资本，与谁下单无关，大体不受影响。新的风险在账户的入口：客户把登录凭证或交易接口交给 AI 代理，代理被攻破或越权，造成的是未经授权的交易。SEC 2024 年 5 月 16 日修订 S-P 条例，要求经纪商建立事件响应程序，在客户敏感信息被未经授权访问时通知客户，大型机构 2025 年 12 月 3 日、小型机构 2026 年 6 月 3 日起合规；它处理的是数据泄露，不是客户主动授权给代理之后的越权。</p>
+<p>第 6 章的最佳执行义务由经纪商承担，订单来自人还是来自 AI，经纪商都要为它寻求最有利的条件。没有覆盖到的是客户一侧：客户自带的代理替客户选择经纪商、订单类型与时机，这些选择不属于任何经纪商的义务。SEC 2023 年 1 月公布的最佳执行条例提案，也在 2025 年 6 月 12 日一并撤回。</p>
+<p>第 7 章的反操纵与反欺诈规则，管的是有意制造虚假价格或散布虚假信息。用 AI 生成假新闻、伪造高管讲话视频来拉抬股价，手段更便宜，性质不变；SEC 2025 年 2 月设立的网络与新兴技术执法组，把利用 AI 实施的欺诈列为重点。没有覆盖到的是另一种情形：许多投资者用相似的模型，读到同一条信息，同时作出同向交易，价格被推动却没有任何人有操纵的故意。</p>
+<p>第 8 章的保证金规则规定借款的数量上限，T 条例的初始要求与 FINRA 的维持要求不因下单者是谁而改变。2026 年 6 月起施行的日内保证金标准，允许经纪商每天计算一次日内敞口；AI 代理一天之内可以完成人难以完成的大量交易，经纪商在计算之前看到的敞口，可能已经远离实时的状况。</p>
+<p>客户自带的 AI 代理代为下单，是贯穿这几章的问题。FINRA 2025 年 12 月 9 日发布的 2026 年度监管监督报告，首次讨论 AI 代理，指出代理可能在没有人工确认的情况下行动、超出用户授权的范围；2026 年 1 月 27 日的 FINRA 博客进一步列举了交易执行类代理。两者讨论的都是会员公司自己使用的代理，并声明不创设新的要求。现有规则中最接近的是 FINRA 规则 3260：经纪商行使全权委托，须事先取得客户对指定个人的书面授权；客户用自己的凭证让代理下单，在经纪商看来仍是客户本人的指令，不属于经纪商的全权委托。截至 2026 年 11 月，SEC 与 FINRA 都没有就客户自带 AI 代理下单发布规则或解释。2026 年 6 月，众议院金融服务委员会的几位民主党议员致信 SEC 主席阿特金斯，询问相关的监管安排；这是议员的询问，不是监管表态。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁在给建议、谁在下单</p><p class="figsub">选择行动者与行为，看现有规则是否适用。资料截至 2026 年 11 月。</p></div></div>
+    <div class="k12a-q"><span>行动者</span><div class="k12a-b" id="k12a-w"><button type="button" data-v="0">客户本人</button><button type="button" data-v="1">券商自己的 AI</button><button type="button" data-v="2">客户自带的 AI 代理</button></div></div>
+    <div class="k12a-q"><span>行为</span><div class="k12a-b" id="k12a-a"><button type="button" data-v="0">给出买卖建议</button><button type="button" data-v="1">下单</button></div></div>
+    <div class="k12a-g" id="k12a-g"></div>
+    <div class="k12a-k"><span><i class="s1"></i>适用</span><span><i class="s0"></i>不适用</span><span><i class="s2"></i>尚无明确规则</span></div>
+  </div>
+</figure>
+<style>
+.k12a-q{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;font-size:14px;flex-wrap:wrap}
+.k12a-b{display:flex;gap:6px;flex-wrap:wrap}.k12a-b button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;border-radius:999px;cursor:pointer}
+.k12a-b button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.k12a-g{display:grid;gap:6px;margin-top:10px}
+.k12a-r{display:grid;grid-template-columns:14px 190px 1fr;gap:10px;align-items:start;padding:9px 12px;border-radius:9px;background:var(--quote);font-size:13.5px;line-height:1.5}
+.k12a-r i,.k12a-k i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-top:5px}
+.s1{background:var(--accent)}.s0{background:var(--line)}.s2{background:transparent;border:2px dashed var(--accent);box-sizing:border-box}
+.k12a-k{display:flex;gap:14px;font-size:12px;color:var(--faint);margin-top:10px}.k12a-k i{margin:0 4px 0 0;vertical-align:-1px}
+@media (max-width:640px){.k12a-r{grid-template-columns:14px 1fr}.k12a-r span:last-child{grid-column:2}}
+</style>
+<script>
+(function(){
+  const D={'0-0':[['经纪商的规则',0,'客户自己的判断，不受经纪商行为规则约束']],
+    '0-1':[['最佳执行',1,'经纪商为客户的订单寻求最有利的条件'],['保证金',1,'T 条例与规则 4210 的借款上限'],['最佳利益规则',0,'没有经纪商的推荐，不适用']],
+    '1-0':[['最佳利益规则',1,'针对零售客户、构成推荐时适用（FINRA 常见问题 B.4、D.8 脚注）'],['对公众沟通规则 2210',1,'内容须公平且平衡，不得预测收益'],['监督与留存',1,'规则 3110 监督；按 SEC 与 FINRA 记录规则留存']],
+    '1-1':[['全权委托的书面授权',1,'由券商替客户决定买卖，须事先取得客户书面授权（规则 3260）；以顾问服务提供时适用受托义务'],['最佳执行',1,'与人工下单相同'],['监督',1,'FINRA 2026 年度报告提示代理可能越权，要求公司自行监督']],
+    '2-0':[['最佳利益规则',0,'不是经纪商的推荐'],['对公众沟通规则 2210',0,'不是经纪商的沟通'],['代理提供者是否属于投资顾问',2,'SEC 尚无表述']],
+    '2-1':[['经纪商如何看待这笔订单',1,'用客户的凭证下单，视为客户本人的指令'],['全权委托的书面授权',0,'不是经纪商行使全权委托，规则 3260 不适用'],['最佳执行',1,'经纪商对收到的订单仍负有义务'],['授权范围、上限与越权责任',2,'SEC 与 FINRA 均未发布规则或解释']]};
+  const st={w:2,a:1},g=document.getElementById('k12a-g');
+  function upd(){['w','a'].forEach(k=>document.getElementById('k12a-'+k).querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.v===st[k])));
+    g.innerHTML=D[st.w+'-'+st.a].map(r=>`<div class="k12a-r"><i class="s${r[1]}"></i><b>${r[0]}</b><span>${r[2]}</span></div>`).join('');}
+  ['w','a'].forEach(k=>document.getElementById('k12a-'+k).querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{st[k]=+b.dataset.v;upd();})));upd();
+})();
+</script>
+
+<h2 id="sec-6">六、开户与反洗钱（第 10 章）</h2>
+<p>第 10 章的客户身份识别计划，要求经纪商在开户时以合理可行的程序核实客户身份。要求本身没有变，变的是核实所依赖的证据。证件照片、自拍与视频验证，前提是伪造它们的成本高于收益；生成式 AI 让这一成本骤降。2024 年 11 月 13 日，FinCEN 发布警示（FIN-2024-Alert004），称自 2023 年以来，描述疑似使用深度伪造的可疑活动报告增多，犯罪者用生成式 AI 篡改或制作身份证件与照片，以绕过身份核验；警示列出了识别信号，例如证件与客户其他资料不一致、在视频核验中使用第三方摄像头插件，并要求在可疑活动报告中标注关键词「FIN-2024-DEEPFAKEFRAUD」。</p>
+<aside class="principle"><p class="pr-k">重跑至此，重新检验一条原理</p><p class="pr-n">客户身份识别计划（CIP）</p><p class="pr-c"><span><em>领域</em>金融监管 › 反洗钱</span><span><em>类型</em>联邦成文法与联合规则</span></p><p class="pr-s">经纪商开户时须按风险采取合理可行的程序核实客户身份，并核对政府提供的恐怖分子名单。</p><dl><div><dt>在法律体系中的位置</dt><dd>《美国爱国者法》第 326 条；SEC 与财政部 2003 年联合发布的经纪商客户身份识别规则（今 31 CFR 1023.220），2003 年 10 月 1 日起全面合规</dd></div><div><dt>回应的问题</dt><dd>不知道开户的人是谁，账户就可能被用于洗钱与诈骗</dd></div><div><dt>适用范围</dt><dd>证件、照片与视频能够证明本人，伪造它们的成本高于收益</dd></div><div><dt>出台</dt><dd>美国国会，2001；SEC 与财政部，2003</dd></div><div><dt>留下的问题</dt><dd>哪些核实手段在深度伪造之下仍然可靠</dd></div><div><dt>重跑之后</dt><dd>生成式 AI 让伪造证件、自拍与视频的成本骤降，FinCEN 2024 年 11 月 13 日的警示确认这类案件自 2023 年起增多；核实的义务不变，可靠的证据要换成更难伪造的组合，如多因素认证、跨渠道比对与持续的交易监控</dd></div></dl></aside>
+<h2 id="sec-7">七、沟通（第 11 章）</h2>
+<p>第 11 章的对客沟通规则，内容标准覆盖到了 AI：FINRA 的常见问题答复与监管通知 24-09 都写明，公司对 AI 生成的沟通负责。失效的是执行手段。规则 2210 的分类以「30 天内超过 25 名零售投资者」为界，假设一份沟通有固定的文本；AI 给每位客户的回答都不同，单看每一条，它只发给一个人；看生成它的系统，它面向全部用户。负责人逐份事前批准，在每天几百万条实时生成的回答面前做不到。监管通知 24-09 要求公司在监督程序中处理模型风险、数据与模型的可靠性和准确性，指向的是另一种执行方式：把审查对象从每一条输出，移到生成输出的系统上，再对输出抽样检查、全部留存。</p>
+<aside class="principle"><p class="pr-k">重跑至此，重新检验一条原理</p><p class="pr-n">对公众沟通的分类与内容标准</p><p class="pr-c"><span><em>领域</em>证券法 › 经纪商行为</span><span><em>类型</em>自律组织规则（经 SEC 批准）</span></p><p class="pr-s">经纪商的书面沟通按受众分为机构沟通、零售沟通与往来函件，受众越广，事前审查与报备的义务越重；三类沟通都须公平且平衡。</p><dl><div><dt>在法律体系中的位置</dt><dd>FINRA 规则 2210，2013 年 2 月 4 日起施行；常见问题答复 D.8（2024 年 5 月 10 日）写明公司对 AI 生成的沟通负责，监管通知 24-09（2024 年 6 月 27 日）重申规则技术中立</dd></div><div><dt>回应的问题</dt><dd>只说一半的推销不必撒谎也能误导客户</dd></div><div><dt>适用范围</dt><dd>沟通由人写成，有固定文本，可以在发出前逐份批准；按收件人数可以区分大众传播与一对一的交流</dd></div><div><dt>出台</dt><dd>NASD 与 FINRA，2013</dd></div><div><dt>留下的问题</dt><dd>审查对象从每一条输出移到生成系统之后，怎样证明系统产出的内容整体上公平且平衡</dd></div><div><dt>重跑之后</dt><dd>每条回答只发给一个人，生成它的系统却面向全部用户，按人数分类失去意义；事前逐份批准无法执行，监督要转向模型、提示与护栏，并对输出抽样检查、全部留存</dd></div></dl></aside>
+<h2 id="sec-8">八、规则覆盖到了哪里</h2>
+<p>把 11 章的重跑放在一起，可以分出三种情形。第一种，规则的内容是技术中立的，仍然适用：不实陈述就是不实陈述，推荐就要符合客户的最佳利益，借款就有上限，资产就要隔离。SEC 与 FINRA 在 2024 至 2026 年的表态，几乎都属于这一种：现有规则适用于 AI，公司对 AI 的输出负责。第二种，规则的内容适用，执行它的手段失效：负责人的逐份批准、注册代表的个人判断、对证件的人工核对、每天一次的保证金计算，都假设事情以人的速度发生。第三种，尚无规则：模型优化目标中的利益冲突，在 2023 年的提案撤回之后没有专门规则；客户自带的 AI 代理下单，以及通用 AI 的提供者是否算投资顾问，没有监管表述；许多相似模型的同向交易，不在反操纵规则的范围之内。</p>
+<p>第一种情形的结论，监管者已经说清楚了；第二种情形，需要公司自己找到新的执行手段，并向监管者证明它有效；第三种情形，是今后规则最可能出现的地方。</p>
+<h2 id="sec-9">九、这一步留下的问题</h2>
+<p>证券篇从一个没有证券法的市场出发，推演到推荐由 AI 作出。留下的问题指向篇末与后面三篇：</p>
+<ol><li><strong>证券篇的规则合起来是什么样。</strong>各章的规则卡按问题与年份排在一张图上，第 12 章重跑的规则以空心点标出。</li><li><strong>存款与贷款。</strong>银行吸收存款、发放贷款，同样面对信息不对称与中间人的利益；AI 审批贷款、AI 客服推荐存款产品，问题如何重现。</li><li><strong>保险与衍生品。</strong>保单是长达数十年的承诺，衍生品是带杠杆的合约，卖的人与买的人之间的差距更大，规则也更复杂。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">这一步留下的问题</p><p class="figsub">证券篇到此结束。点选一个，看它通向哪里。</p></div></div>
+    <div class="k12n" id="k12n"></div>
+    <p class="k12n-m" id="k12n-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.k12n{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.k12n button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:10px;padding:12px}
+.k12n button b{display:block;font-size:14px}.k12n button em{font-style:normal;font-size:12px;color:var(--faint)}
+.k12n button.on{border-color:var(--accent)}
+.k12n-m{font-size:14px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.k12n{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const Q=[['规则合起来的样子','→ 篇末：证券篇的规则地图','各章的规则卡按问题与年份排在一张图上，第 12 章重新检验的规则以空心点标出。'],
+    ['存款与贷款','→ 银行篇（待写）','银行吸收存款、发放贷款，同样面对信息不对称与中间人的利益；AI 审批贷款、推荐存款产品时，问题如何重现。'],
+    ['长期的承诺','→ 保险篇（待写）','保单可能持续数十年，卖的人与买的人之间的信息差距更大，销售规则也另成一套。'],
+    ['带杠杆的合约','→ 衍生品篇（待写）','期货、期权与互换以小博大，风险集中在少数对手方，监管由另一套机构与规则承担。']];
+  const g=document.getElementById('k12n'),m=document.getElementById('k12n-m');
+  g.innerHTML=Q.map(q=>`<button type="button"><b>${q[0]}</b><em>${q[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));m.textContent=Q[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-10">十、对产品的含义</h2>
+<p>本章对做 AI 投资产品的人有三条含义。第一，规则的内容不会因为「这是 AI 说的」而放松：AI 写的解读要公平且平衡，AI 给的建议一旦针对个人、带有行动建议，就是推荐，要符合客户的最佳利益；产品设计要先判断每一个 AI 输出是信息、沟通还是推荐，再决定它受哪条规则约束。第二，执行手段要由产品自己补上：逐份审查做不到，就要能说明生成系统如何约束输出、如何抽样检验、如何全部留存，并能回放任何一位客户在任何时点看到了什么；模型的优化目标本身要经得起利益冲突的审视，不能以交易频率或自营产品的点击为目标。第三，在尚无规则的地方，产品的选择会成为日后规则的样本：接入客户自带的 AI 代理时，授权的范围、可撤销性、交易上限与日志，现在没有统一标准，先做清楚的公司，也是将来最容易证明自己合规的公司。</p>
+<h2 id="sec-11">参考文献</h2>
+<ul class="refs"><li>FinCEN. (2024). <i>FinCEN Alert on Fraud Schemes Involving Deepfake Media Targeting Financial Institutions</i> (FIN-2024-Alert004, November 13, 2024).</li><li>FINRA. (2001). <i>Notice to Members 01-23: Online Suitability</i>.</li><li>FINRA. (2024). <i>Regulatory Notice 24-09: FINRA Reminds Members of Regulatory Obligations When Using Generative Artificial Intelligence and Large Language Models</i>.</li><li>FINRA. (2025). <i>2026 Annual Regulatory Oversight Report</i> (December 9, 2025).</li><li>FINRA. (2026). <i>Emerging Trend in GenAI: Observations on AI Agents</i> (blog, January 27, 2026).</li><li>FINRA. <i>Advertising Regulation FAQs</i>（规则 2210 常见问题答复，B.4、D.8）; FINRA Rule 3260 (Discretionary Accounts).</li><li>SEC v. Capital Gains Research Bureau, Inc., 375 U.S. 180 (1963).</li><li>Securities and Exchange Commission. (2003). <i>Customer Identification Programs for Broker-Dealers</i> (Release No. 34-47752); 31 CFR 1023.220.</li><li>Securities and Exchange Commission. (2017). <i>Robo-Advisers</i> (IM Guidance Update No. 2017-02).</li><li>Securities and Exchange Commission. (2019). <i>Regulation Best Interest: The Broker-Dealer Standard of Conduct</i> (Release No. 34-86031).</li><li>Securities and Exchange Commission. (2019). <i>Commission Interpretation Regarding Standard of Conduct for Investment Advisers</i> (Release No. IA-5248).</li><li>Securities and Exchange Commission. (2023). <i>Conflicts of Interest Associated with the Use of Predictive Data Analytics by Broker-Dealers and Investment Advisers</i> (Release No. 34-97990), 88 FR 53960.</li><li>Securities and Exchange Commission. (2024). <i>Regulation S-P: Privacy of Consumer Financial Information and Safeguarding Customer Information</i> (Release No. 34-100155).</li><li>Securities and Exchange Commission. (2024). <i>Exemption for Certain Investment Advisers Operating Through the Internet</i> (Release No. IA-6578).</li><li>Securities and Exchange Commission. (2025). <i>In the Matter of Presto Automation Inc.</i> (Release No. 33-11352).</li><li>Securities and Exchange Commission. (2025). <i>Withdrawal of Proposed Regulatory Actions</i> (Release No. 33-11377), 90 FR 25531.</li><li>Securities and Exchange Commission, Division of Examinations. (2025). <i>Fiscal Year 2026 Examination Priorities</i>.</li><li>SEC Investor Advisory Committee. (2025). <i>Recommendation Regarding the Disclosure of Artificial Intelligence's Impact on Operations</i> (approved December 4, 2025).</li></ul>
+<footer class="nav"><a href="s11.html">← 第 11 章　能说什么、不能说什么</a><a href="s-map.html">篇末　证券篇的规则地图 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁管经纪商：四层结构</p><p class="figsub">点选一层，看它做什么、依据是什么。人数与家数为 FINRA 公布的 2025 年末数据。</p></div></div>
+    <div class="s4ly" id="s4ly"></div>
+    <div class="s4ly-d"><p class="s4ly-h" id="s4ly-h"></p><p id="s4ly-x"></p></div>
+  </div>
+</figure>
+<style>
+.s4ly{display:grid;gap:6px;margin-bottom:12px;justify-items:center}
+.s4ly button{font:inherit;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px 12px;display:flex;justify-content:space-between;gap:10px;font-size:13.5px}
+.s4ly button em{font-style:normal;font-size:12px;color:var(--faint)}
+.s4ly button.on{border-color:var(--accent);background:var(--accent-soft)}
+.s4ly-d{background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6}
+.s4ly-d p{margin:0}.s4ly-h{font-weight:600;margin-bottom:4px!important}
+</style>
+<script>
+(function(){
+  const L=[['美国国会','立法','1934 年《证券交易法》第 15(a) 条要求经纪自营商注册；1938 年《马洛尼法》增设第 15A 条，允许组成全国性证券协会实行自律。',40],
+    ['SEC','监督','批准 FINRA 的规则与修改；检查经纪自营商；制定净资本、客户资产保管与最佳利益等规则；可暂停或吊销注册。',55],
+    ['FINRA','自律组织','2007 年 7 月 30 日由 NASD 与纽约证券交易所会员监管部门合并而成；制定行为规则（如规则 2111）、检查会员、处罚违规、组织资格考试与仲裁。',70],
+    ['经纪自营商','3,184 家','须向 SEC 注册并加入 FINRA；对从业人员负有监督责任。',85],
+    ['注册代表','639,723 人','须通过 SIE 与相应资格考试（如 Series 7），多数州另要求州法考试（如 Series 63）；注册与处分记录可在 BrokerCheck 查询。',100]];
+  const g=document.getElementById('s4ly'),h=document.getElementById('s4ly-h'),x=document.getElementById('s4ly-x');
+  g.innerHTML=L.map(l=>`<button type="button" style="width:${l[3]}%"><b>${l[0]}</b><em>${l[1]}</em></button>`).join('');
+  const bs=[...g.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));h.textContent=L[i][0]+' · '+L[i][1];x.textContent=L[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(2);
+})();
+</script>

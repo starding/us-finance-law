@@ -1,0 +1,31 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">2016–2026：哪些规则生效了，哪些还在路上</p><p class="figsub">截至 2026 年 11 月。点选一条，看它的时间线与现状。</p></div></div>
+    <div class="q10t-list" id="q10t-l"></div>
+    <ol class="q10t-tl" id="q10t-tl" aria-live="polite"></ol>
+  </div>
+</figure>
+<style>
+.q10t-list{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.q10t-list button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:9px 10px;font-size:13px;line-height:1.45}
+.q10t-list button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint);margin-top:2px}
+.q10t-list button.on{border-color:var(--accent);background:var(--accent-soft)}
+.q10t-tl{list-style:none;margin:14px 0 0;padding:0 0 0 14px;border-left:2px solid var(--line);font-size:13.5px;line-height:1.6}
+.q10t-tl li{position:relative;margin:0 0 8px}.q10t-tl li::before{content:"";position:absolute;left:-20px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--card);border:2px solid var(--accent)}
+.q10t-tl li.now::before{background:var(--accent)}
+.q10t-tl b{display:inline-block;min-width:96px;color:var(--muted);font-weight:500}
+@media (max-width:640px){.q10t-list{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const R=[['客户尽职调查规则','生效',[['2016.05.11','FinCEN 发布最终规则'],['2018.05.11','开始遵守：识别 25% 持股人与一名控制人'],['2026.11','仍然有效；《企业透明法》豁免不影响这一义务']]],
+    ['《企业透明法》申报','美国公司已豁免',[['2021.01.01','随 2021 财年国防授权法生效'],['2025.03.21','临时最终规则：美国本土公司与美国人免于申报（3 月 26 日刊登）'],['2026.08.11','最终规则：豁免永久化，只剩在美登记的外国公司申报外国人信息']]],
+    ['顾问反洗钱规则','推迟至 2028',[['2024.08.28','FinCEN 发布最终规则，原定 2026.01.01 生效'],['2025','财政部宣布推迟并重新审视'],['2025.12.31','最终规则：生效日推迟至 2028.01.01（2026.01.02 刊登）']]],
+    ['顾问客户身份识别','仍是提案',[['2024.05.13','SEC 与 FinCEN 联合提出'],['2024.07.22','意见征集截止'],['2026.11','未查到最终规则；FinCEN 表示将与顾问反洗钱规则的审视协调']]],
+    ['反洗钱计划改革','仍是提案',[['2024.07.03','旧提案'],['2026.04.07','新提案取代旧提案：统一要求风险评估流程'],['2026.06.09','意见征集截止；截至 2026.11 未发布最终规则']]]];
+  const l=document.getElementById('q10t-l'),tl=document.getElementById('q10t-tl');
+  l.innerHTML=R.map(r=>`<button type="button">${r[0]}<em>${r[1]}</em></button>`).join('');
+  const bs=[...l.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));const e=R[i][2];tl.innerHTML=e.map((x,j)=>`<li class="${j===e.length-1?'now':''}"><b>${x[0]}</b>${x[1]}</li>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(2);
+})();
+</script>

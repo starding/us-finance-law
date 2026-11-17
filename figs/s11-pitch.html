@@ -1,0 +1,33 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">同一条广告，只说一半与公平且平衡</p><p class="figsub">勾选要补上的信息，看广告的整体印象如何变化。产品与数字均为示意。</p></div></div>
+    <div class="k11p-wrap">
+      <div class="k11p-ad"><p class="k11p-h">某高收益债券基金</p><p class="k11p-big">过去一年回报 12%</p><ul id="k11p-l"></ul></div>
+      <div class="k11p-opt" id="k11p-o"></div>
+    </div>
+    <div class="k11p-bar"><i id="k11p-f"></i></div>
+    <p class="k11p-m" id="k11p-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.k11p-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:12px}
+.k11p-ad{background:var(--accent-soft);border-radius:10px;padding:14px}
+.k11p-h{margin:0;font-size:13px;color:var(--muted)}.k11p-big{margin:4px 0 8px;font-size:22px;font-weight:600}
+.k11p-ad ul{margin:0;padding-left:18px;font-size:13px;line-height:1.6}
+.k11p-opt{display:grid;gap:6px;align-content:start}
+.k11p-opt label{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;background:var(--quote);border-radius:9px;padding:8px 10px;cursor:pointer}
+.k11p-bar{height:8px;border-radius:4px;background:var(--line);margin:14px 0 6px}.k11p-bar i{display:block;height:100%;border-radius:4px;background:var(--accent);transition:width .3s}
+.k11p-m{font-size:14px;margin:0;min-height:2.6em}
+@media (max-width:640px){.k11p-wrap{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[['同期最大跌幅','期间最大跌幅 −9%'],['费用','年费用率 1.1%，回报已扣除费用'],['业绩不代表未来','过去的业绩不代表未来的结果'],['主要风险','主要投资低评级债券，可能违约，价格波动较大']];
+  const o=document.getElementById('k11p-o'),l=document.getElementById('k11p-l'),f=document.getElementById('k11p-f'),m=document.getElementById('k11p-m');
+  o.innerHTML=D.map((d,i)=>`<label><input type="checkbox" data-i="${i}"><span>补上：${d[0]}</span></label>`).join('');
+  const bs=[...o.querySelectorAll('input')];
+  function upd(){const on=bs.filter(b=>b.checked).map(b=>+b.dataset.i);l.innerHTML=on.map(i=>`<li>${D[i][1]}</li>`).join('');f.style.width=(on.length/D.length*100)+'%';
+    m.textContent=on.length===0?'只有收益，没有风险、费用与条件：每个字都属实，整体印象却是错的。':on.length<D.length?'补上了一部分，但仍缺少评估这只基金所需的重大事实。':'收益、风险、费用与条件写在同一处，读者可以自己权衡，这就是「公平且平衡」要求的样子。';}
+  bs.forEach(b=>b.addEventListener('change',upd));upd();
+})();
+</script>
