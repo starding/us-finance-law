@@ -1,0 +1,37 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">成交之后的七件事</p><p class="figsub">点选一个步骤，看时限、依据与现状。日期与数字与正文一致。</p></div></div>
+    <div class="f7" id="f7">
+      <ol class="f7-s" id="f7-s"></ol>
+      <div class="f7-d" id="f7-d" aria-live="polite"></div>
+    </div>
+  </div>
+</figure>
+<style>
+.f7{display:grid;grid-template-columns:minmax(200px,38%) 1fr;gap:16px;align-items:start}
+.f7-s{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:f7n}
+.f7-s button{font:inherit;font-size:13.5px;width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px}
+.f7-s button b{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--card);color:var(--muted);font-size:12px;font-weight:600}
+.f7-s button.on{border-color:var(--accent);background:var(--accent-soft)}
+.f7-s button.on b{background:var(--accent);color:var(--card)}
+.f7-d{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:14em}
+.f7-d>p{margin:0 0 10px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.f7-r{border-top:1px solid var(--line);padding:8px 0;display:grid;gap:2px}
+.f7-r strong{font-size:14px}
+.f7-r span{font-size:12.5px;color:var(--muted)}
+.f7-r em{font-style:normal;font-size:13px}
+.f7-r i{font-style:normal;font-size:11.5px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.f7-r a{color:var(--accent);font-size:12.5px}
+@media (max-width:640px){.f7{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[["成交即时回报", "App 推送成交价格与数量；这一通知不能替代法定的成交确认。", [["成交确认的法定内容", "规则 10b-10 · SEC", "见第 4 步", "", false]]], ["交易报告", "场外成交由执行方在 10 秒内向 FINRA 交易报告设施报告，进入公开行情；交易所成交由交易所报告。", [["10 秒报告时限", "FINRA 规则 6380A 等 · FINRA", "2013 年 11 月 4 日起适用", "", false], ["零碎股成交报告", "FINRA 交易报告规则 · FINRA", "NMS 股票 2026 年 2 月 23 日起按新字段报告", "", true], ["交易报告设施 23×5 运行", "SR-FINRA-2026-015 · FINRA", "计划 2026 年 12 月 6 日实施", "", true]]], ["CAT 报告", "订单的接收、路由、修改、撤销、成交、分配事件，在次一交易日美东时间早 8 点前报给合并审计追踪。", [["订单生命周期报告", "规则 613 与 CAT 计划 · SEC", "规则 2012 年 7 月 18 日通过；计划 2016 年 11 月 15 日获批", "", false], ["不再报告客户姓名、地址、出生年份", "CAIS 修订 · SEC", "2026 年 1 月 13 日批准，并删除此前报告的信息", "", true], ["CAT 费用模式", "SEC 批准令", "2023 年模式 2025 年 7 月 25 日被第十一巡回法院撤销；2026 年 3 月 16 日批准两年临时模式", "", true]]], ["成交确认", "交易完成时或之前书面通知客户：时间、证券、价格、数量、身份、报酬与订单流付费说明。", [["成交确认", "规则 10b-10 · SEC", "1977 年 5 月通过；有效", "s06", false], ["默认电子交付（提案）", "拟议电子交付条例 · SEC", "2026 年 7 月 16 日提出，尚未通过", "", true]]], ["结算", "多数证券在成交后一个营业日交收；机构交易的分配、确认与核对在成交当天完成。", [["T+1 结算", "规则 15c6-1 · SEC", "2024 年 5 月 28 日起", "s05", true], ["当日分配、确认与核对", "规则 15c6-2 · SEC", "2024 年 5 月 28 日起须遵守", "s05", true]]], ["对账单", "账户有持仓、余额或交易的，至少每个日历季度寄送一次。", [["客户对账单", "FINRA 规则 2231 · FINRA", "有效；首页须写明清算经纪商、SIPC 会员身份与期初期末余额", "", false]]], ["税务报表", "按美国国税局规定发送年度税表，属于税法事项。", [["年度税表", "《国内税收法典》· 国税局", "本书不展开", "", false]]]];
+  const s=document.getElementById('f7-s'),d=document.getElementById('f7-d');
+  s.innerHTML=D.map((x,i)=>`<li><button type="button"><b>${i+1}</b><span>${x[0]}</span></button></li>`).join('');
+  const bs=[...s.querySelectorAll('button')];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));const x=D[i];
+    d.innerHTML='<p>'+x[1]+'</p>'+x[2].map(r=>'<div class="f7-r"><strong>'+r[0]+(r[4]?'<i>2023–2026 有变化</i>':'')+'</strong><span>'+r[1]+'</span><em>'+r[2]+'</em>'+(r[3]?'<a href="'+r[3]+'.html">详见'+(r[3][0]==='s'?'第 '+(+r[3].slice(1))+' 章':'阶段 '+(+r[3].slice(1)))+' →</a>':'')+'</div>').join('');}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

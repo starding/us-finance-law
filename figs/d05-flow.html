@@ -1,0 +1,43 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一次推荐要过的八个关口</p><p class="figsub">点选一步，看依据与要做的事。用上方开关切换推荐的来源：客服、推送或 AI 助手；第七步只在客户把决定权交给券商时出现。</p></div></div>
+    <div class="d5f-seg" id="d5f-v"><button type="button" data-v="0" class="on">客服</button><button type="button" data-v="1">个性化推送</button><button type="button" data-v="2">AI 助手</button><button type="button" data-v="3">AI 代理代下单</button></div>
+    <div class="d5f-steps" id="d5f-s"></div>
+    <dl class="d5f-out" id="d5f-o" aria-live="polite"></dl>
+  </div>
+</figure>
+<style>
+.d5f-seg{margin-bottom:10px}
+.d5f-seg button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 12px;cursor:pointer;margin:0 -1px 4px 0}
+.d5f-seg button:first-child{border-radius:999px 0 0 999px}.d5f-seg button:last-child{border-radius:0 999px 999px 0}
+.d5f-seg button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.d5f-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.d5f-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.d5f-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.d5f-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.d5f-steps button.d5f-off{opacity:.35;cursor:default}
+.d5f-out{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.d5f-out dt{color:var(--faint)}.d5f-out dd{margin:0}
+@media (max-width:640px){.d5f-steps{grid-template-columns:1fr 1fr}.d5f-out{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['是否推荐','认定',['依据','Reg BI 采纳文件；NASD 第 01-23 号通知'],['标准','行动号召；合理地会影响交易；越个性化越可能是推荐；免责声明不改变结论']],
+    ['了解客户与产品','注意义务',['依据','规则 15l-1(a)(2)(ii)'],['要做的事','理解风险、回报与成本；核对投资概况；一系列交易合起来不过度']],
+    ['比较替代方案','注意义务',['依据','SEC 工作人员公告（2023-04-20）'],['要做的事','早期考虑合理可得的替代方案与成本；不要求最便宜；记录有助于证明']],
+    ['书面披露','披露义务',['依据','规则 15l-1(a)(2)(i)'],['要做的事','推荐前或推荐时说明身份、费用、服务限制与重大冲突；Form CRS 不能替代']],
+    ['管理冲突','利益冲突义务',['依据','规则 15l-1(a)(2)(iii)；工作人员公告（2022-08-03）'],['要做的事','识别并披露或消除；缓解激励；消除限期销售竞赛与配额；持续进行']],
+    ['账户与转存','账户推荐',['依据','工作人员公告（2022-03-30）；ERISA；PTE 2020-02'],['要做的事','比较账户类型与成本；转存适用 1975 年测试与 PTE 2020-02 的 2020 年文本']],
+    ['全权委托','客户交出决定权',['依据','FINRA 规则 3260'],['要做的事','事先书面授权给指明的人，公司书面接受；负责人及时批准每笔交易并经常审查'],['例外','只定时间与价格：当日营业日结束前有效']],
+    ['留存与监督','合规义务',['依据','规则 15l-1(a)(2)(iv)；FINRA 规则 3110'],['要做的事','书面政策与程序；留存投资概况、比较过的方案与披露，供事后调取']]];
+  const N=[['客服','注册代表口头或书面建议；须持证并受监督。'],['个性化推送','按持仓与浏览记录挑选证券并配下单按钮，接近推荐；推送内容同时是零售沟通。'],['AI 助手','对「该不该买」给出具体建议，是典型的个性化沟通；公司对输出负责。'],['AI 代理代下单','代理自行决定买卖什么与多少，即行使全权；须先满足规则 3260。']];
+  const v=document.getElementById('d5f-v'),s=document.getElementById('d5f-s'),o=document.getElementById('d5f-o');let src=0,cur=0;
+  s.innerHTML=S.map((x,i)=>`<button type="button">${i+1}. ${x[0]}<em>${x[1]}</em></button>`).join('');
+  const bs=[...s.children];
+  const set=i=>{if(i===6&&src!==3)i=0;cur=i;bs.forEach((b,j)=>{b.classList.toggle('on',i===j);b.classList.toggle('d5f-off',j===6&&src!==3);});
+    o.innerHTML=`<dt>来源</dt><dd>${N[src][1]}</dd>`+S[i].slice(2).map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>{if(i===6&&src!==3)return;set(i);}));
+  [...v.children].forEach(b=>b.addEventListener('click',()=>{[...v.children].forEach(x=>x.classList.toggle('on',x===b));src=+b.dataset.v;set(src===3?6:cur);}));
+  set(0);
+})();
+</script>

@@ -204,13 +204,16 @@ header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
 .hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
 html[lang=en] body{line-height:1.7}
 html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+
+/* 分解式义务清单：「详见」列不折行 */
+table td:last-child a{white-space:nowrap}
 </style>
 </head>
 <body data-page="s04">
 <script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
 <nav class="side" id="sidenav" aria-label="全书目录">
 <div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
-<div class="side-view" role="group" aria-label="阅读方式"></div>
+<div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html">分解式</a><a href="preface.html" class="on" aria-current="true">生成式</a></div>
 <a class="side-about" href="index.html#about">关于本书</a>
 <a class="" href="preface.html"><span class="n">序</span>规则从何而来</a>
 <a class="side-part" href="sec-part.html"><span class="pn">证券篇</span>从一个没有证券法的市场出发</a>

@@ -1,0 +1,35 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">客户信息泄露之后的时钟</p><p class="figsub">S-P 条例 2024 年修订的时限。拖动滑块模拟一起外包商的安全事件（日期为示意），看每个节点是否已到期。</p></div></div>
+    <div class="d3b-ctl">
+      <label>服务商发现事件后第 <b id="d3b-a">1</b> 天通知券商<input type="range" id="d3b-ra" min="0" max="10" value="2"></label>
+      <label>券商知悉后第 <b id="d3b-b">20</b> 天通知客户<input type="range" id="d3b-rb" min="1" max="45" value="20"></label>
+    </div>
+    <div class="d3b-line" id="d3b-l"></div>
+    <p class="d3b-m" id="d3b-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.d3b-ctl{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;color:var(--muted)}
+.d3b-ctl input{display:block;width:100%;margin-top:4px}
+.d3b-ctl b{color:var(--ink)}
+.d3b-line{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
+.d3b-line div{background:var(--quote);border-radius:9px;padding:10px;font-size:12.5px;border:1px solid transparent}
+.d3b-line div b{display:block;font-size:13.5px;margin-bottom:2px}
+.d3b-line div.d3b-bad{border-color:var(--accent)}
+.d3b-line div.d3b-ok b::after{content:" ✓";color:var(--muted)}
+.d3b-line div.d3b-bad b::after{content:" 超时";color:var(--accent);font-weight:400;font-size:12px}
+.d3b-m{font-size:13.5px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.d3b-ctl{grid-template-columns:1fr}.d3b-line{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const ra=document.getElementById('d3b-ra'),rb=document.getElementById('d3b-rb'),l=document.getElementById('d3b-l'),m=document.getElementById('d3b-m');
+  const upd=()=>{const a=+ra.value,b=+rb.value;document.getElementById('d3b-a').textContent=a;document.getElementById('d3b-b').textContent=b;
+    const N=[['事件发生','服务商的系统遭未授权访问',true],['服务商通知券商','最迟 72 小时（3 天）内；第 '+a+' 天',a<=3],['券商评估','判断敏感客户信息是否遭到或合理可能遭到访问、使用',true],['通知客户','尽快，最迟知悉后 30 天；第 '+b+' 天',b<=30]];
+    l.innerHTML=N.map(n=>`<div class="${n[2]?'d3b-ok':'d3b-bad'}"><b>${n[0]}</b>${n[1]}</div>`).join('');
+    const bad=[];if(a>3)bad.push('服务商通知超过 72 小时：券商的服务商监督制度没有满足要求');if(b>30)bad.push('客户通知超过 30 天：除非司法部长书面要求推迟，否则违反通知时限');
+    m.textContent=bad.length?bad.join('；')+'。':'两个时限都满足。客户通知要写明事件经过、涉及的信息类型与客户可以采取的保护措施。';};
+  ra.addEventListener('input',upd);rb.addEventListener('input',upd);upd();
+})();
+</script>

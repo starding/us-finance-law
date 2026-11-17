@@ -1,0 +1,37 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">监督是一层贯穿始终的工作</p><p class="figsub">点选一个环节，看依据与现状。日期与数字与正文一致。</p></div></div>
+    <div class="f8" id="f8">
+      <ol class="f8-s" id="f8-s"></ol>
+      <div class="f8-d" id="f8-d" aria-live="polite"></div>
+    </div>
+  </div>
+</figure>
+<style>
+.f8{display:grid;grid-template-columns:minmax(200px,38%) 1fr;gap:16px;align-items:start}
+.f8-s{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:f8n}
+.f8-s button{font:inherit;font-size:13.5px;width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px}
+.f8-s button b{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--card);color:var(--muted);font-size:12px;font-weight:600}
+.f8-s button.on{border-color:var(--accent);background:var(--accent-soft)}
+.f8-s button.on b{background:var(--accent);color:var(--card)}
+.f8-d{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:14em}
+.f8-d>p{margin:0 0 10px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.f8-r{border-top:1px solid var(--line);padding:8px 0;display:grid;gap:2px}
+.f8-r strong{font-size:14px}
+.f8-r span{font-size:12.5px;color:var(--muted)}
+.f8-r em{font-style:normal;font-size:13px}
+.f8-r i{font-style:normal;font-size:11.5px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.f8-r a{color:var(--accent);font-size:12.5px}
+@media (max-width:640px){.f8{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[["书面监督制度", "指定每类业务的负责人与审查频率，写成书面程序；按规定检查营业地点。", [["监督制度", "FINRA 规则 3110 · FINRA", "2014 年 12 月 1 日起取代 NASD 规则 3010", "s04", false], ["住宅监督地点", "规则 3110.19 · FINRA", "2024 年 6 月 1 日生效，检查周期推定至少每三年一次", "", true], ["远程检查", "规则 3110.18 · FINRA", "试点 2024 年 7 月 1 日至 2027 年 6 月 30 日；2026 年 6 月理事会批准改为常设的提案", "", true]]], ["交易审查与监控", "每天审查交易，筛查过度交易、操纵、内幕交易与可疑资金往来。", [["禁止操纵与反欺诈", "第 9(a)(2) 条、规则 10b-5 · SEC", "有效", "s07", false], ["可疑活动报告", "《银行保密法》· FinCEN", "有效", "s10", false]]], ["沟通审查与留存", "零售沟通事前批准，往来函件抽查；业务往来的短信与即时通讯须在公司系统中留存。", [["沟通的批准与审查", "FINRA 规则 2210、3110(b) · FINRA", "有效", "s11", false], ["离线通讯执法", "规则 17a-4 · SEC", "自 2022 财年起 95 起案件、罚款 23 亿美元（SEC 2026 年 4 月口径）；最后一批 2025 年 1 月 13 日", "", false]]], ["保护老年与易受害客户", "取得可信联系人；怀疑财务剥削时暂停支付或交易并通知相关人员。", [["暂停支付或交易", "FINRA 规则 2165 · FINRA", "现行最长 55 个营业日；2026 年 8 月 20 日提交延长到 145 个营业日的修订，待 SEC 决定", "", false], ["疑似欺诈的短期延迟（拟议）", "拟议规则 2166 · FINRA", "最多 10 个营业日，适用于任何年龄的客户；待 SEC 决定", "", false]]], ["投诉登记与报告", "书面投诉登记留存；每季度报告投诉统计；规定事项 30 天内报告。", [["投诉与特定事项报告", "FINRA 规则 4530 · FINRA", "2011 年 7 月 1 日起；季度统计在季末后第 15 日前", "", false]]], ["年度测试与报告", "每年测试监督制度，向高级管理层报告。", [["监督控制", "FINRA 规则 3120 · FINRA", "2014 年 12 月 1 日起；总收入 2 亿美元以上的报告须含额外内容", "", false]]], ["记录保存", "交易记录等至少 6 年、业务往来通讯等至少 3 年，最初 2 年便于取用；电子记录防篡改或保留修改轨迹。", [["记录制作", "规则 17a-3 · SEC", "1939 年通过；有效", "", false], ["电子记录", "规则 17a-4(f) · SEC", "2022 年 10 月 12 日修订，2023 年 5 月 3 日起须遵守", "", true]]]];
+  const s=document.getElementById('f8-s'),d=document.getElementById('f8-d');
+  s.innerHTML=D.map((x,i)=>`<li><button type="button"><b>${i+1}</b><span>${x[0]}</span></button></li>`).join('');
+  const bs=[...s.querySelectorAll('button')];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));const x=D[i];
+    d.innerHTML='<p>'+x[1]+'</p>'+x[2].map(r=>'<div class="f8-r"><strong>'+r[0]+(r[4]?'<i>2023–2026 有变化</i>':'')+'</strong><span>'+r[1]+'</span><em>'+r[2]+'</em>'+(r[3]?'<a href="'+r[3]+'.html">详见'+(r[3][0]==='s'?'第 '+(+r[3].slice(1))+' 章':'阶段 '+(+r[3].slice(1)))+' →</a>':'')+'</div>').join('');}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

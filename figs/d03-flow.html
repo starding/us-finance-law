@@ -1,0 +1,30 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">开户当天的六道工序</p><p class="figsub">点选一步，看依据、要做的事与时限。前两步回答「这个人是谁」，中间两步回答「他是什么样的投资者」，后两步回答「他的信息与权限」。</p></div></div>
+    <div class="d3f-steps" id="d3f-s"></div>
+    <dl class="d3f-out" id="d3f-o" aria-live="polite"></dl>
+  </div>
+</figure>
+<style>
+.d3f-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.d3f-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.d3f-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.d3f-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.d3f-out{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.d3f-out dt{color:var(--faint)}.d3f-out dd{margin:0}
+@media (max-width:760px){.d3f-steps{grid-template-columns:1fr 1fr}.d3f-out{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['身份信息','是谁',['依据','31 C.F.R. § 1023.220'],['要做的事','取得姓名、出生日期、住址、身份号码；以证件或非证件方式核实'],['非美国人','可用护照号码与签发国；另交 W-8BEN（税务，不替代核实）']],
+    ['名单与所有人','是谁',['依据','OFAC 制裁条例；31 C.F.R. § 1010.230'],['要做的事','比对制裁名单并持续判断所在地；公司客户识别 25% 以上持股人与一名控制人'],['留存','OFAC 相关记录 10 年']],
+    ['账户记录','什么样的投资者',['依据','FINRA 规则 2090；规则 17a-3(a)(17)'],['要做的事','记录职业、年收入、净资产（不含自住房）、投资目标等'],['时限','开户后 30 天内寄给客户核对，此后至少每 36 个月一次']],
+    ['可信联系人','什么样的投资者',['依据','FINRA 规则 4512、2165'],['要做的事','以合理努力取得一位年满 18 岁的可信联系人；书面告知何时联系'],['现状','暂停付款最长 55 个营业日；延长到 145 个营业日并新增规则 2166 的提案待 SEC 批准']],
+    ['隐私与信息安全','信息',['依据','S-P 条例（2024 年修订）；S-ID 条例'],['要做的事','交付隐私通知；向无关联第三方分享前给予选择退出；书面信息安全与事件响应制度；身份盗用防范计划'],['合规日','较大机构 2025-12-03；较小机构 2026-06-03']],
+    ['期权审批','权限',['依据','FINRA 规则 2360(b)(16)'],['要做的事','接受第一笔期权订单前专门批准或拒绝；可只批部分策略；提供期权披露文件'],['谁批准','分支机构经理、注册期权负责人或一般证券销售主管'],['时限','资料不在协议中的，批准后 15 天内寄客户核对']]];
+  const s=document.getElementById('d3f-s'),o=document.getElementById('d3f-o');
+  s.innerHTML=S.map((x,i)=>`<button type="button">${i+1}. ${x[0]}<em>${x[1]}</em></button>`).join('');
+  const bs=[...s.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));o.innerHTML=S[i].slice(2).map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

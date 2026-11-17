@@ -1,0 +1,47 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">一位潜在客户从看到广告到开户</p><p class="figsub">点选一个触点，看适用的规则与要做的事。最后一格是 Form CRS 的交付时点：拖动滑块，看哪一个事件最先发生。</p></div></div>
+    <div class="d2f-steps" id="d2f-s"></div>
+    <dl class="d2f-out" id="d2f-o" aria-live="polite"></dl>
+    <div class="d2f-crs" id="d2f-c" hidden>
+      <div class="d2f-row" id="d2f-r"></div>
+      <p class="d2f-m" id="d2f-m"></p>
+    </div>
+  </div>
+</figure>
+<style>
+.d2f-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.d2f-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.d2f-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.d2f-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.d2f-out{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.d2f-out dt{color:var(--faint)}.d2f-out dd{margin:0}
+.d2f-crs{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+.d2f-row{display:grid;grid-template-columns:150px 1fr 40px;gap:6px 10px;align-items:center;font-size:13px}
+.d2f-row input{width:100%}
+.d2f-row b{font-weight:400;color:var(--muted);text-align:right}
+.d2f-row .d2f-first{color:var(--accent);font-weight:600}
+.d2f-m{font-size:13.5px;margin:10px 0 0;min-height:2.6em}
+@media (max-width:640px){.d2f-steps{grid-template-columns:1fr 1fr}.d2f-out{grid-template-columns:1fr}.d2f-row{grid-template-columns:1fr 40px}.d2f-row span{grid-column:1/-1}}
+</style>
+<script>
+(function(){
+  const S=[['广告与官网','零售沟通',['依据','FINRA 规则 2210(b)、(c)、(d)'],['要做的事','注册负责人事前批准；留存批准人与日期；内容公平且平衡，原则上不预测收益'],['新会员','加入 FINRA 后第一年，电子或公共媒体上的零售沟通首次使用前至少 10 个工作日报备']],
+    ['网红与推荐奖励','第三方替公司说话',['依据','FINRA 第 11-39、17-18 号通知；规则 2040'],['要做的事','付费或参与编写的帖子按公司沟通批准、留存；不得向本应注册而未注册的人付费'],['案例','M1 Finance，2024 年 3 月 18 日，罚款 85 万美元']],
+    ['电话与短信','电话营销',['依据','FINRA 规则 3230'],['要做的事','被叫方当地时间 8:00–21:00；30 天内执行内部拒呼请求；比对 31 天内取得的全国拒呼名单；显示来电号码']],
+    ['AI 客服答疑','开户前对话',['依据','FINRA 规则 2210 常见问题答复（2024 年 5 月 10 日）；第 24-09 号通知'],['要做的事','按收件人数量与类型归入往来函件、零售或机构沟通并监督；答案与 Form CRS 一致'],['注意','涉及具体证券的个性化回答可能构成推荐']],
+    ['交付 Form CRS','规则 17a-14(c)',['依据','规则 17a-14；Form CRS'],['要做的事','在推荐、下单、开户三者中最早一个之前或当时交付；网站显著位置发布'],['更新','重大不准确 30 天内修订，60 天内告知已有客户；索取时 30 天内提供']]];
+  const E=[['开立经纪账户',3],['第一次替客户下单',5],['第一次推荐',8]];
+  const s=document.getElementById('d2f-s'),o=document.getElementById('d2f-o'),c=document.getElementById('d2f-c'),r=document.getElementById('d2f-r'),m=document.getElementById('d2f-m');
+  s.innerHTML=S.map((x,i)=>`<button type="button">${i+1}. ${x[0]}<em>${x[1]}</em></button>`).join('');
+  r.innerHTML=E.map((e,i)=>`<span id="d2f-n${i}">${e[0]}</span><input type="range" min="1" max="10" value="${e[1]}" aria-label="${e[0]}（第几天，示意）"><b id="d2f-v${i}"></b>`).join('');
+  const ins=[...r.querySelectorAll('input')];
+  const upd=()=>{const v=ins.map(x=>+x.value);const mn=Math.min(...v);
+    v.forEach((x,i)=>{document.getElementById('d2f-v'+i).textContent='第 '+x+' 天';document.getElementById('d2f-n'+i).className=x===mn?'d2f-first':'';});
+    const f=E.filter((e,i)=>v[i]===mn).map(e=>e[0]).join('、');
+    m.textContent='最早发生的是「'+f+'」（第 '+mn+' 天，示意）：Form CRS 最迟要在这一天、这件事发生之前或当时交到客户手里。';};
+  ins.forEach(x=>x.addEventListener('input',upd));upd();
+  const bs=[...s.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));o.innerHTML=S[i].slice(2).map(x=>`<dt>${x[0]}</dt><dd>${x[1]}</dd>`).join('');c.hidden=i!==4;};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

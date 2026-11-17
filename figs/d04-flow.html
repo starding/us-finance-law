@@ -1,0 +1,50 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">钱进来之后的五个决定</p><p class="figsub">点选一步，看依据与要做的事。第一步附一个小计算：客户用未到账的钱买入，第几个营业日付清、付清前是否卖出，结果不同（日期为示意）。</p></div></div>
+    <div class="d4f-steps" id="d4f-s"></div>
+    <dl class="d4f-out" id="d4f-o" aria-live="polite"></dl>
+    <div class="d4f-sim" id="d4f-sim">
+      <label>资金在成交后第 <b id="d4f-dv">2</b> 个营业日到账<input type="range" id="d4f-d" min="0" max="6" value="2"></label>
+      <label class="d4f-ck"><input type="checkbox" id="d4f-x"> 到账之前已把这只股票卖出</label>
+      <div class="d4f-bar" id="d4f-bar"></div>
+      <p class="d4f-m" id="d4f-m"></p>
+    </div>
+  </div>
+</figure>
+<style>
+.d4f-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.d4f-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.d4f-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.d4f-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.d4f-out{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.d4f-out dt{color:var(--faint)}.d4f-out dd{margin:0}
+.d4f-sim{margin-top:12px;border-top:1px solid var(--line);padding-top:12px;font-size:13px;color:var(--muted)}
+.d4f-sim label{display:block}.d4f-sim input[type=range]{display:block;width:100%;margin:4px 0 8px}
+.d4f-sim b{color:var(--ink)}
+.d4f-bar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px}
+.d4f-bar span{text-align:center;padding:6px 0;border-radius:6px;background:var(--quote);font-size:12px;color:var(--muted)}
+.d4f-bar span.d4f-in{background:var(--accent-soft);color:var(--ink)}
+.d4f-bar span.d4f-pay{outline:2px solid var(--accent)}
+.d4f-m{font-size:13.5px;color:var(--ink);margin:10px 0 0;min-height:2.6em}
+@media (max-width:640px){.d4f-steps{grid-template-columns:1fr 1fr}.d4f-out{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['付款期','未到账就买入',['依据','T 条例 12 C.F.R. § 220.2、220.8'],['要做的事','一个付款期内收齐款项，否则及时取消或平仓'],['数字','付款期 = 结算周期营业日数 + 2；T+1 下为成交后 3 个营业日；未付款即卖出，冻结 90 个日历日']],
+    ['现金留在账上','自由贷方余额',['依据','规则 15c3-3(e)、(j)(1)'],['要做的事','计入储备金公式；至少每季度书面告知客户余额并说明可随时提取'],['2026 年','大型清算经纪商自 6 月 30 日起每日计算']],
+    ['现金归集','银行存款或货币基金',['依据','规则 15c3-3(a)(17)、(j)(2)'],['要做的事','新账户事先取得书面肯定同意；对账单说明可变现；变更至少提前 30 个日历日书面通知'],['保护','银行存款由 FDIC 按每家银行、每名存款人 25 万美元保护；基金份额是证券']],
+    ['证券保管','占有或控制',['依据','规则 15c3-3(b)(1)；SIPA'],['要做的事','全额付款证券与超过借方 140% 的保证金证券须实际占有或控制'],['保障','SIPC 每名客户 50 万美元，其中现金 25 万美元']],
+    ['开通保证金','借钱给客户',['依据','规则 10b-16；FINRA 规则 2264、4210；T 条例'],['要做的事','开户时书面说明信用条款；交付保证金风险披露并每年一次；网站显示'],['时限','对账单至少每季度；利率上调至少提前 30 天书面通知']]];
+  const s=document.getElementById('d4f-s'),o=document.getElementById('d4f-o'),sim=document.getElementById('d4f-sim');
+  const d=document.getElementById('d4f-d'),x=document.getElementById('d4f-x'),bar=document.getElementById('d4f-bar'),m=document.getElementById('d4f-m');
+  const upd=()=>{const v=+d.value;document.getElementById('d4f-dv').textContent=v;
+    bar.innerHTML=[0,1,2,3,4,5,6].map(i=>`<span class="${i<=3?'d4f-in':''} ${i===v?'d4f-pay':''}">T+${i}</span>`).join('');
+    let t;if(v>3)t='超过付款期（T+3）仍未付清：券商须及时取消交易或平仓。';else t='在付款期（T+3）内付清，交易有效。';
+    if(x.checked)t+=v===0?'当天到账再卖出，不受影响。':(v<=3?' 付清之前已经卖出，但在付款期内付清：按 220.8(c)(2) 可以免于冻结（前提是付清之前没有提走卖出所得）。':' 且付清之前已经卖出：账户在 90 个日历日内被冻结，买入须先有足额资金。');
+    m.textContent=t;};
+  d.addEventListener('input',upd);x.addEventListener('change',upd);upd();
+  s.innerHTML=S.map((q,i)=>`<button type="button">${i+1}. ${q[0]}<em>${q[1]}</em></button>`).join('');
+  const bs=[...s.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));o.innerHTML=S[i].slice(2).map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');sim.hidden=i!==0;};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

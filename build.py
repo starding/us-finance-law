@@ -111,8 +111,8 @@ WRITTEN = [t for t in TOC if t[0] in DONE]
 HOME, HOME_TITLE, HOME_SUB = "index.html", "美国金融业法律研究", "规则从何而来"
 ABOUT = ("index.html#about", "关于本书")
 OTHER = None
-VIEW = "d"  # 当前视图：d 分解式，g 生成式；目录顶部可切换
-VIEWS = []
+VIEW = "g"  # 当前视图：d 分解式，g 生成式；目录顶部可切换
+VIEWS = [("d", "分解式", "d-preface.html"), ("g", "生成式", "preface.html")]
 
 # 回报等式的各项：(键, 名称, 符号, 该篇第一章)
 TERMS = [("time", "时间补偿", "＋", "ch02"), ("risk", "风险补偿", "＋", "ch03"), ("info", "信息优势", "＋", "ch07"),
@@ -282,7 +282,7 @@ def sidebar(current, heads=()):
         elif part == "app":
             lab, cls = f'<span class="n">{ui("附录")}</span>{html.escape(title)}', "side-app"
         else:
-            lab, cls = f'<span class="n">{no.replace("第 ", "").replace(" 章", "").replace("Chapter ", "")}</span>{html.escape(title)}', ""
+            lab, cls = f'<span class="n">{no.replace("第 ", "").replace(" 章", "").replace("阶段 ", "").replace("Chapter ", "")}</span>{html.escape(title)}', ""
         out.append(link(f, lab, cls) if f in DONE else f'<span class="todo {cls}">{lab}</span>')
     if OTHER:
         out.append(f'<a class="side-other" href="{OTHER[0]}">{OTHER[1]} →</a>')
@@ -373,7 +373,7 @@ def set_lang(lang):
     TOC = TOC_EN if lang == "en" else TOC_ZH
     BOOK = "US Financial Law: Where the Rules Come From" if lang == "en" else "美国金融业法律研究：规则从何而来"
     HOME_TITLE, HOME_SUB = ("US Financial Law", "Where the Rules Come From") if lang == "en" else ("美国金融业法律研究", "规则从何而来")
-    VIEW = "d"
+    VIEW = "g"
     pages = sorted((SRC / "chapters").glob("*.md"))
     DONE = {parse(p)[0]["file"] for p in pages}
     if lang == "en":
@@ -384,12 +384,15 @@ def set_lang(lang):
 def build_all(lang):
     pages = set_lang(lang)
     for old in OUT.glob("*.html"):
-        if not old.name.startswith("g-"):
-            old.unlink()
+        old.unlink()
     built = [build_page(p) for p in pages]
     if (SRC / "cover.md").exists():
         build_cover()
     print(f"[{lang}] 已生成：", ", ".join(built + ["index"]))
+    if (SRC / "dec").exists():
+        import build_dec, sys
+        build_dec.build = sys.modules[__name__]
+        build_dec.main()
 
 
 if __name__ == "__main__":

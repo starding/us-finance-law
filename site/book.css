@@ -193,3 +193,6 @@ header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
 .hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
 html[lang=en] body{line-height:1.7}
 html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+
+/* 分解式义务清单：「详见」列不折行 */
+table td:last-child a{white-space:nowrap}

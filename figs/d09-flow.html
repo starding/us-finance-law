@@ -1,0 +1,37 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">客户关系结束的五种方式</p><p class="figsub">点选一种情形，看券商要在多长时间内做什么。日期与数字与正文一致。</p></div></div>
+    <div class="f9" id="f9">
+      <ol class="f9-s" id="f9-s"></ol>
+      <div class="f9-d" id="f9-d" aria-live="polite"></div>
+    </div>
+  </div>
+</figure>
+<style>
+.f9{display:grid;grid-template-columns:minmax(200px,38%) 1fr;gap:16px;align-items:start}
+.f9-s{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:f9n}
+.f9-s button{font:inherit;font-size:13.5px;width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px}
+.f9-s button b{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--card);color:var(--muted);font-size:12px;font-weight:600}
+.f9-s button.on{border-color:var(--accent);background:var(--accent-soft)}
+.f9-s button.on b{background:var(--accent);color:var(--card)}
+.f9-d{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:14em}
+.f9-d>p{margin:0 0 10px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.f9-r{border-top:1px solid var(--line);padding:8px 0;display:grid;gap:2px}
+.f9-r strong{font-size:14px}
+.f9-r span{font-size:12.5px;color:var(--muted)}
+.f9-r em{font-style:normal;font-size:13px}
+.f9-r i{font-style:normal;font-size:11.5px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.f9-r a{color:var(--accent);font-size:12.5px}
+@media (max-width:640px){.f9{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[["转户到别家券商", "接收方经 ACATS 发出指令；持有方 1 个营业日内验证或提出异议，验证后 3 个营业日内完成。", [["账户转移", "FINRA 规则 11870 · FINRA", "有效；规则本身未改", "", false], ["取消结算准备日", "NSCC 规则 50 · NSCC", "2025 年 10 月 17 日起", "", true], ["欺诈转户", "FINRA 第 22-21、23-06 号通知", "不创设新要求；2026 年 8 月 20 日参议员致信要求写成规则", "s10", false]]], ["账户长期无活动", "失联后两次免费数据库检索；按州法达到无活动期限的，资产上交州政府。", [["失联证券持有人检索", "规则 17Ad-17 · SEC", "2013 年扩展到经纪商；2026 年 9 月 1 日提议增加对无活动持有人的通知，尚未通过", "", false], ["无主财产", "各州无主财产法 · 各州", "多数州证券的无活动期限为 3 年", "", false]]], ["客户信息泄露", "按事件响应程序处置；尽快、最迟 30 天内通知受影响的客户；服务商 72 小时内通知券商。", [["事件响应与客户通知", "S-P 条例（2024 年修订）· SEC", "大型机构 2025 年 12 月 3 日、小型机构 2026 年 6 月 3 日起须遵守", "s12", true]]], ["发生争议", "有仲裁条款或客户要求时进入 FINRA 仲裁；超过 6 年不能提交；5 万美元以下适用简易程序。", [["客户争议仲裁", "FINRA 规则 12200、12206 · FINRA", "2007 年 4 月 16 日起施行；2026 年 3 月 2 日就现代化征求意见", "", false], ["简易仲裁", "FINRA 规则 12800 · FINRA", "上限 2012 年 7 月 23 日起为 5 万美元", "", false], ["仲裁条款可执行", "麦克马洪案（1987）· 联邦最高法院", "有效", "s02", false]]], ["券商倒闭", "SIPC 申请清算，受托人优先转移或返还客户资产；缺口由 SIPC 垫付。", [["SIPC 清算", "SIPA · SIPC", "每名客户 50 万美元，其中现金 25 万美元", "s05", false]]]];
+  const s=document.getElementById('f9-s'),d=document.getElementById('f9-d');
+  s.innerHTML=D.map((x,i)=>`<li><button type="button"><b>${i+1}</b><span>${x[0]}</span></button></li>`).join('');
+  const bs=[...s.querySelectorAll('button')];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));const x=D[i];
+    d.innerHTML='<p>'+x[1]+'</p>'+x[2].map(r=>'<div class="f9-r"><strong>'+r[0]+(r[4]?'<i>2023–2026 有变化</i>':'')+'</strong><span>'+r[1]+'</span><em>'+r[2]+'</em>'+(r[3]?'<a href="'+r[3]+'.html">详见'+(r[3][0]==='s'?'第 '+(+r[3].slice(1))+' 章':'阶段 '+(+r[3].slice(1)))+' →</a>':'')+'</div>').join('');}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

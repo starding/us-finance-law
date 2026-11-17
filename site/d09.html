@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>退出与事件处置</title>
+<meta name="description" content="《美国金融业法律研究》分解式阶段 9：客户关系的结束有五种常见方式：转户到别家券商、账户长期无人问津、客户信息泄露、与券商发生争议、券商自身倒闭。每一种都有专门的时限与程序：账户转移由 FINRA 规则 11870 规定，失联与无主财产由 SEC 规则与州法规定，数据泄露的客户通知由 2024 年修订的 S-P 条例规定，争议多数进入 FINRA 仲裁，倒闭由 SIPC 清算">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+
+/* 分解式义务清单：「详见」列不折行 */
+table td:last-child a{white-space:nowrap}
+</style>
+</head>
+<body data-page="d09">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html" class="on" aria-current="true">分解式</a><a href="preface.html">生成式</a></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="d-preface.html"><span class="n">导读</span>合规全景地图</a>
+<a class="side-part" href="d-part.html"><span class="pn">分解式</span>沿着业务的时间轴</a>
+<a class="" href="d01.html"><span class="n">1</span>设立：成为一家经纪自营商</a>
+<a class="" href="d02.html"><span class="n">2</span>获客与沟通</a>
+<a class="" href="d03.html"><span class="n">3</span>开户</a>
+<a class="" href="d04.html"><span class="n">4</span>入金与托管</a>
+<a class="" href="d05.html"><span class="n">5</span>推荐</a>
+<a class="" href="d06.html"><span class="n">6</span>下单与执行</a>
+<a class="" href="d07.html"><span class="n">7</span>成交之后：结算、确认与报告</a>
+<a class="" href="d08.html"><span class="n">8</span>持续监控与监督</a>
+<a class=" cur" href="d09.html" aria-current="page"><span class="n">9</span>退出与事件处置</a>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>分解式</span></header>
+
+<div class="chapno">阶段 9</div><h1>退出与事件处置<small>客户离开、联系不上、信息泄露、发生争议、券商倒闭</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>客户与券商的关系总会结束，结束的方式不总是客户自己选的。客户可以把账户转到另一家券商；可以多年不登录、不回信，直到州政府把他的股票收走；可以因为券商被入侵而收到一封泄露通知；可以与券商因亏损发生争议；也可以碰上券商自己倒闭。合规要回答的问题是：每一种情形下，券商在多长时间内必须做什么，客户能得到什么保护，以及这些规则在 2023–2026 年有什么变化。</p></blockquote>
+<h2 id="sec-1">一、这一阶段的业务步骤</h2>
+<ol><li><strong>转户。</strong>客户在新券商（接收方）填写转户指令，经全国证券清算公司的自动账户转移系统（ACATS）发给原券商（持有方）。持有方须在 1 个营业日内验证指令或提出异议，验证后 3 个营业日内完成转移。2025 年 10 月 17 日起，ACATS 取消了「结算准备日」，多数转户可以更快完成。</li><li><strong>防范欺诈转户。</strong>冒用客户身份在新券商开户，再把原账户的资产经 ACATS「拉走」，是 2022 年以来 FINRA 多次提示的欺诈手法。持有方在验证时要识别新开户即发起转户、联系方式近期变更等迹象。</li><li><strong>账户长期无活动。</strong>邮件被退回的客户被视为失联，券商须在规定期限内免费做两次数据库检索：第一次在失联后 3 至 12 个月，第二次在第一次之后 6 至 12 个月。仍然联系不上、或按州法达到无活动期限的，券商要把资产作为无主财产上交州政府。多数州对证券的无活动期限为 3 年，计算起点各州不同。</li><li><strong>客户信息泄露。</strong>发现客户信息可能被未经授权访问或使用的，按事件响应程序评估、控制与恢复；客户敏感信息被访问或可能被访问的，尽快、最迟在知悉后 30 天内通知受影响的客户。服务商发现入侵的，须在 72 小时内通知券商。</li><li><strong>争议与仲裁。</strong>客户与券商的争议，若开户协议中有仲裁条款，或客户主动要求，进入 FINRA 仲裁。事件发生超过 6 年的不能提交仲裁；索赔不超过 5 万美元的适用简易程序，一般只凭书面材料裁决。</li><li><strong>券商倒闭。</strong>由 SIPC 申请清算，法院指定受托人接管，优先把客户账户转给另一家券商或返还；缺口部分由 SIPC 垫付，每名客户以 50 万美元为限，其中现金 25 万美元（见<a href="s05.html">第 5 章</a>）。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">客户关系结束的五种方式</p><p class="figsub">点选一种情形，看券商要在多长时间内做什么。日期与数字与正文一致。</p></div></div>
+    <div class="f9" id="f9">
+      <ol class="f9-s" id="f9-s"></ol>
+      <div class="f9-d" id="f9-d" aria-live="polite"></div>
+    </div>
+  </div>
+</figure>
+<style>
+.f9{display:grid;grid-template-columns:minmax(200px,38%) 1fr;gap:16px;align-items:start}
+.f9-s{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:f9n}
+.f9-s button{font:inherit;font-size:13.5px;width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:8px 10px}
+.f9-s button b{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--card);color:var(--muted);font-size:12px;font-weight:600}
+.f9-s button.on{border-color:var(--accent);background:var(--accent-soft)}
+.f9-s button.on b{background:var(--accent);color:var(--card)}
+.f9-d{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:14em}
+.f9-d>p{margin:0 0 10px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.f9-r{border-top:1px solid var(--line);padding:8px 0;display:grid;gap:2px}
+.f9-r strong{font-size:14px}
+.f9-r span{font-size:12.5px;color:var(--muted)}
+.f9-r em{font-style:normal;font-size:13px}
+.f9-r i{font-style:normal;font-size:11.5px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:1px}
+.f9-r a{color:var(--accent);font-size:12.5px}
+@media (max-width:640px){.f9{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const D=[["转户到别家券商", "接收方经 ACATS 发出指令；持有方 1 个营业日内验证或提出异议，验证后 3 个营业日内完成。", [["账户转移", "FINRA 规则 11870 · FINRA", "有效；规则本身未改", "", false], ["取消结算准备日", "NSCC 规则 50 · NSCC", "2025 年 10 月 17 日起", "", true], ["欺诈转户", "FINRA 第 22-21、23-06 号通知", "不创设新要求；2026 年 8 月 20 日参议员致信要求写成规则", "s10", false]]], ["账户长期无活动", "失联后两次免费数据库检索；按州法达到无活动期限的，资产上交州政府。", [["失联证券持有人检索", "规则 17Ad-17 · SEC", "2013 年扩展到经纪商；2026 年 9 月 1 日提议增加对无活动持有人的通知，尚未通过", "", false], ["无主财产", "各州无主财产法 · 各州", "多数州证券的无活动期限为 3 年", "", false]]], ["客户信息泄露", "按事件响应程序处置；尽快、最迟 30 天内通知受影响的客户；服务商 72 小时内通知券商。", [["事件响应与客户通知", "S-P 条例（2024 年修订）· SEC", "大型机构 2025 年 12 月 3 日、小型机构 2026 年 6 月 3 日起须遵守", "s12", true]]], ["发生争议", "有仲裁条款或客户要求时进入 FINRA 仲裁；超过 6 年不能提交；5 万美元以下适用简易程序。", [["客户争议仲裁", "FINRA 规则 12200、12206 · FINRA", "2007 年 4 月 16 日起施行；2026 年 3 月 2 日就现代化征求意见", "", false], ["简易仲裁", "FINRA 规则 12800 · FINRA", "上限 2012 年 7 月 23 日起为 5 万美元", "", false], ["仲裁条款可执行", "麦克马洪案（1987）· 联邦最高法院", "有效", "s02", false]]], ["券商倒闭", "SIPC 申请清算，受托人优先转移或返还客户资产；缺口由 SIPC 垫付。", [["SIPC 清算", "SIPA · SIPC", "每名客户 50 万美元，其中现金 25 万美元", "s05", false]]]];
+  const s=document.getElementById('f9-s'),d=document.getElementById('f9-d');
+  s.innerHTML=D.map((x,i)=>`<li><button type="button"><b>${i+1}</b><span>${x[0]}</span></button></li>`).join('');
+  const bs=[...s.querySelectorAll('button')];
+  function set(i){bs.forEach((b,j)=>b.classList.toggle('on',i===j));const x=D[i];
+    d.innerHTML='<p>'+x[1]+'</p>'+x[2].map(r=>'<div class="f9-r"><strong>'+r[0]+(r[4]?'<i>2023–2026 有变化</i>':'')+'</strong><span>'+r[1]+'</span><em>'+r[2]+'</em>'+(r[3]?'<a href="'+r[3]+'.html">详见'+(r[3][0]==='s'?'第 '+(+r[3].slice(1))+' 章':'阶段 '+(+r[3].slice(1)))+' →</a>':'')+'</div>').join('');}
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-2">二、义务清单</h2>
+<div class="tablewrap"><table><thead><tr><th>义务</th><th>依据</th><th>机构</th><th>现状（截至 2026 年 11 月）</th><th>详见</th></tr></thead><tbody><tr><td>经 ACATS 转户：1 个营业日内验证，验证后 3 个营业日内完成</td><td>FINRA 规则 11870；NSCC 规则 50</td><td>FINRA、NSCC</td><td>有效；NSCC 2025 年 10 月 17 日取消结算准备日；FINRA 规则本身未改</td><td>—</td></tr><tr><td>识别欺诈转户</td><td>客户身份识别、身份盗用预警规则；FINRA 第 22-21、23-06 号通知</td><td>FinCEN、SEC、FINRA</td><td>两份通知不创设新要求；2026 年 8 月 20 日两位参议员致信 FINRA，要求把转户通知、客户自设转户锁写成规则</td><td><a href="s10.html">第 10 章</a></td></tr><tr><td>失联证券持有人检索</td><td>规则 17Ad-17</td><td>SEC</td><td>1997 年适用于过户代理，2013 年扩展到经纪商；2026 年 9 月 1 日 SEC 提议增加对「无活动证券持有人」的通知义务，尚未通过</td><td>—</td></tr><tr><td>无主财产上交</td><td>各州无主财产法</td><td>各州</td><td>有效；多数州证券的无活动期限为 3 年</td><td>—</td></tr><tr><td>事件响应程序与 30 天内通知客户</td><td>S-P 条例（2024 年 5 月 16 日修订）</td><td>SEC</td><td>大型机构 2025 年 12 月 3 日、小型机构 2026 年 6 月 3 日起须遵守</td><td><a href="s12.html">第 12 章</a></td></tr><tr><td>客户可要求仲裁；6 年资格期限</td><td>FINRA 规则 12200、12206</td><td>FINRA</td><td>客户争议仲裁规则 2007 年 4 月 16 日起施行；2026 年 3 月 2 日第 26-06 号通知就仲裁规则现代化征求意见，6 年期限在讨论之列</td><td>—</td></tr><tr><td>简易仲裁（5 万美元以下）</td><td>FINRA 规则 12800</td><td>FINRA</td><td>上限 2012 年 7 月 23 日起由 2.5 万美元提高到 5 万美元</td><td>—</td></tr><tr><td>仲裁条款的可执行性</td><td>希尔森/美国运通公司诉麦克马洪案（1987）</td><td>联邦最高法院</td><td>有效；《证券交易法》第 10(b) 条的请求可以依事前仲裁协议提交仲裁</td><td><a href="s02.html">第 2 章</a></td></tr><tr><td>券商倒闭的客户保护</td><td>《证券投资者保护法》（SIPA）</td><td>SIPC</td><td>有效；每名客户 50 万美元，其中现金 25 万美元</td><td><a href="s05.html">第 5 章</a></td></tr></tbody></table></div>
+<h2 id="sec-3">三、2023–2026 年的变化</h2>
+<ol><li><strong>2023 年 10 月 16 日：经纪人记录抹除程序收紧。</strong>FINRA 修订仲裁规则，经纪人在客户仲裁之外单独申请从公开记录（BrokerCheck）中删除客户争议信息的，由三名经过专门培训的公众仲裁员随机组成的庭审理。对客户的影响：争议记录更难被删除，后来的客户查询经纪人时能看到更完整的历史。</li><li><strong>2024 年 5 月 16 日：S-P 条例修订。</strong>要求券商建立事件响应程序、监督服务商，客户敏感信息泄露时 30 天内通知客户，服务商 72 小时内通知券商；大型机构 2025 年 12 月 3 日、小型机构 2026 年 6 月 3 日起须遵守；行业协会 2025 年 7 月曾要求再推迟一年，截至本书资料日期未见 SEC 推迟的公告。对券商的影响：在各州的数据泄露通知法之外，券商又有了一项时限统一的联邦义务。</li><li><strong>2025 年 10 月 17 日：ACATS 提速。</strong>NSCC 修订规则 50，取消转户流程中的结算准备日；基金转移的第二天确认也一并取消。转户更快，留给持有方识别欺诈的时间也更短。</li><li><strong>2026 年 3 月 2 日：仲裁规则现代化。</strong>FINRA 第 26-06 号通知就仲裁的几乎全部环节征求意见，包括 6 年资格期限是否保留、驳回动议、证据开示与仲裁员资格，意见截至 5 月 1 日；截至本书资料日期尚未提出具体规则修订。</li><li><strong>2026 年 8 月 20 日：欺诈转户与「减速带」。</strong>同一天，FINRA 向 SEC 提交拟议的规则 2166，允许在合理相信存在欺诈时把一笔交易或支付延迟最多 10 个营业日（见<a href="d08.html">阶段 8</a>）；参议员怀登与沃伦致信 FINRA，要求把转户通知与客户自设转户锁写成规则，并推广防钓鱼的多因素认证。</li><li><strong>2026 年 9 月 1 日：无活动证券持有人通知。</strong>SEC 在过户代理规则现代化提案中提议修订规则 17Ad-17，要求过户代理与经纪商向「无活动证券持有人」发出通知，并允许以电子方式通讯与付款，意见期为联邦公报刊登后 60 天。提案针对的是一些州以「无活动」而不是「邮件退回」为标准上交证券的做法。</li></ol>
+<h2 id="sec-4">四、对 AI 产品的提示</h2>
+<ol><li><strong>转户挽留不能变成转户阻碍。</strong>AI 客服可以在客户发起转出时介绍留下的理由，但持有方验证转户的时限是 1 个营业日，异议只能基于规则允许的理由。让 AI 拖延回复、反复要求客户确认，可能构成对转户的不当阻碍。</li><li><strong>用 AI 识别欺诈转户，同时给客户留出口。</strong>新开户即转户、近期改过邮箱或手机号、登录设备与地点异常，都是 FINRA 列举的迹象。模型发现可疑时，应当触发人工复核与对客户已登记联系方式的通知；拟议的规则 2166 一旦生效，延迟的依据与通知同样要能记录在案。</li><li><strong>泄露通知要准确，不能由 AI 自由发挥。</strong>S-P 条例规定了通知的内容（发生了什么、涉及哪些信息、客户可以采取的措施与联系方式）。AI 客服回答泄露相关问题时，应当以正式通知为准，不推测范围，不承诺「没有影响」。若 AI 服务商本身是数据处理方，它的入侵也要在 72 小时内通知券商，合同里要写明。</li><li><strong>休眠账户的唤醒提醒有法律意义。</strong>各州对什么算「有活动」规定不同，有的看邮件是否退回，有的只看客户是否有交易或主动联系。AI 生成的唤醒推送若得到客户的回复、登录或确认，要可靠记录，作为客户仍在联系的证据；单向推送本身不能当作客户有活动，也不能据此认定账户不会被上交。</li></ol>
+<h2 id="sec-5">参考文献</h2>
+<ul class="refs"><li>Shearson/American Express Inc. v. McMahon, 482 U.S. 220 (1987).</li><li>FINRA. (2022). <i>FINRA Alerts Firms to Recent Trend in Fraudulent Transfers of Accounts Through ACATS</i> (Regulatory Notice 22-21).</li><li>FINRA. (2023, March 28). Regulatory Notice 23-06 (indicators of ACATS fraud and firm practices).</li><li>FINRA. (2023). <i>FINRA Adopts Amendments to Modify the Process Relating to the Expungement of Customer Dispute Information</i> (Regulatory Notice 23-12).</li><li>FINRA. (2025, October 21). Information Notice (removal of the ACATS Settle Prep Day under NSCC Rule 50).</li><li>FINRA. (2026, March 2). Regulatory Notice 26-06 (request for comment on modernizing the arbitration forum).</li><li>FINRA Rules 11870, 12200, 12206, 12800.</li><li>Securities and Exchange Commission. (2012). <i>Order Approving Proposed Rule Change to Increase the Simplified Arbitration Threshold</i> (Release No. 34-66913).</li><li>Securities and Exchange Commission. (2013). <i>Lost Securityholders and Unresponsive Payees</i> (78 FR 4784).</li><li>Securities and Exchange Commission. (2024). <i>Regulation S-P: Privacy of Consumer Financial Information and Safeguarding Customer Information</i> (Release No. 34-100155).</li><li>Securities and Exchange Commission. (2026, September 1). <i>Proposed Transfer Agent Rule Modernization</i> (Release No. 34-106246, fact sheet).</li><li>Cooley LLP. (2026, August 24). <i>Senators Press FINRA on ACATS Fraud: What Broker-Dealers Should Do Now</i>.</li><li>17 CFR 240.17Ad-17; Securities Investor Protection Act of 1970, 15 U.S.C. § 78aaa et seq.</li></ul>
+<footer class="nav"><a href="d08.html">← 阶段 8　持续监控与监督</a><a href="method.html">附录　本书的写法 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

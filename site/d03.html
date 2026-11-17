@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开户</title>
+<meta name="description" content="《美国金融业法律研究》分解式阶段 3：客户在 App 里填资料、上传证件、勾选协议，券商核实身份、筛查名单、建立账户记录、告知隐私政策，并决定是否批准期权等高风险功能。本页列出客户身份识别、账户记录、S-P 条例及其 2024 年修订、期权开户审批与可信联系人等要求，以及截至 2026 年 11 月的状态">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --card:#fafaf9; --ink:#1f1f1e; --muted:#5d5d5a; --faint:#8f8f8b; --line:#ebebe7;
+  --accent:#1f6f5c; --accent-soft:rgba(31,111,92,.14); --warm:#c0531c; --warm-soft:rgba(192,83,28,.12);
+  --blue:#2f5f9e; --gold:#a07818;
+  --gray-mark:#9b9b97; --quote:#f1f1ee;
+  --sans:"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; --serif:var(--sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+    --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+    --blue:#7ea8e0; --gold:#d6b04e;
+    --gray-mark:#8a8a86; --quote:#232427;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121314; --surface:#1a1b1d; --card:#17181a; --ink:#ececea; --muted:#b2b2ae; --faint:#85857f; --line:#2c2d30;
+  --accent:#5fbf9f; --accent-soft:rgba(95,191,159,.2); --warm:#f08a52; --warm-soft:rgba(240,138,82,.18);
+  --blue:#7ea8e0; --gold:#d6b04e;
+  --gray-mark:#8a8a86; --quote:#232427;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 96px}
+header.book{font-family:var(--sans);font-size:13px;color:var(--faint);padding:28px 0 0;letter-spacing:.04em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.book a{color:inherit;text-decoration:none}
+.chapno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:64px 0 8px;letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:0 0 24px;font-weight:600;letter-spacing:-.01em}
+h1 small{display:block;font-size:20px;font-weight:400;color:var(--muted);margin-top:8px}
+h2{font-size:22px;margin:64px 0 16px;line-height:1.5;font-weight:600}
+h3{font-size:18px;margin:40px 0 12px;font-weight:600}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+blockquote{border-left:2px solid var(--ink);background:none;padding:2px 0 2px 18px;margin:32px 0 40px;font-size:16.5px;color:var(--muted)}
+blockquote p:last-child{margin:0}
+.formula{font-family:var(--sans);text-align:center;background:var(--card);border:none;border-radius:10px;padding:18px 12px;margin:24px 0;font-size:16px;line-height:1.7}
+.formula .den{color:var(--accent)}
+.formula .bar{display:block;width:min(420px,90%);height:1px;background:var(--ink);margin:6px auto}
+ol,ul{padding-left:1.4em;margin:0 0 1.2em}
+li{margin:.35em 0}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;line-height:1.6;margin:20px 0 28px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+figure{margin:40px 0;font-family:var(--sans)}
+figure .card{background:var(--card);border:none;border-radius:14px;padding:20px}
+figcaption{font-size:13px;color:var(--faint);line-height:1.7;margin-top:10px}
+.figtitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.figsub{font-size:13px;color:var(--muted);margin:0 0 16px}
+.notes{font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.8}
+.refs{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7;padding-left:1.2em}
+.refs li{margin:.4em 0;word-break:break-word}
+footer.nav{font-family:var(--sans);font-size:14px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--faint)}
+footer.nav a{color:var(--muted);text-decoration:none}
+footer.nav a:hover{color:var(--accent)}
+.stamp{font-family:var(--sans);font-size:12px;color:var(--faint)}
+/* 部分页 */
+.partno{font-family:var(--sans);font-size:14px;color:var(--accent);margin:96px 0 8px;letter-spacing:.16em}
+/* 目录页 */
+.toc{font-family:var(--sans);font-size:15px;line-height:1.7}
+.toc h2{font-family:var(--sans);font-size:20px;margin:48px 0 8px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{display:grid;grid-template-columns:72px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.toc li .no{color:var(--faint)}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--accent)}
+.toc li.todo span:last-child{color:var(--faint)}
+.toc li .tag{font-size:12px;color:var(--accent);margin-left:8px}
+/* 通用交互控件 */
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.presets button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sl{margin-bottom:16px}
+.sl label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.sl label b{font-variant-numeric:tabular-nums}
+.sl .hint{font-size:12px;color:var(--faint);line-height:1.5;margin-top:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:28px} h2{font-size:21px;margin-top:48px}
+  figure .card{padding:16px 14px}
+  .toc li{grid-template-columns:60px 1fr}
+}
+/* 侧边栏目录：宽屏常驻，窄屏收为抽屉 */
+.sidetoggle{position:fixed;top:22px;left:16px;z-index:30;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:left .25s ease,color .2s,border-color .2s,background .2s}
+.sidetoggle:hover{color:var(--ink);border-color:var(--faint)}
+.sidetoggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sidetoggle .chev{transition:transform .25s ease;transform-origin:12px 10px}
+.sidetoggle.is-open .chev{transform:scaleX(-1)}
+.side-head{padding-right:44px;position:sticky;top:-24px;margin-top:-24px;padding-top:24px;background:var(--bg);z-index:2}
+@media (max-width:831px){header.book{padding-left:44px}}
+header.book{align-items:center}
+header.book .booklink{flex:1}
+@media (max-width:759px){header.book{flex-wrap:nowrap}header.book>span{display:none}header.book .booklink{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.side{position:fixed;top:0;left:0;bottom:0;width:280px;overflow-y:auto;background:var(--bg);border-right:1px solid var(--line);padding:24px 14px 64px;font-family:var(--sans);font-size:14px;line-height:1.5;z-index:20;transform:translateX(-100%);transition:transform .25s ease;overscroll-behavior:contain;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+body.nav-open .side{transform:none;box-shadow:0 0 40px rgba(0,0,0,.18)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:15}
+body.nav-open .scrim{display:block}
+.side a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px}
+.side a:hover{background:var(--quote);color:var(--ink)}
+.side a.cur{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.side .n{display:inline-block;min-width:28px;color:var(--faint);font-variant-numeric:tabular-nums}
+.side a.cur .n{color:var(--accent)}
+.side a:has(> .n){display:flex}
+.side a > .n{flex:none}
+.side a.side-part{margin-top:18px;color:var(--ink);font-weight:600;font-size:13.5px}
+.side a.side-part .pn{display:block;font-size:11.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-bottom:1px}
+.side a.side-part.cur{font-weight:600}
+.side a.side-app{margin-top:18px}
+.side a.side-app .n{min-width:40px}
+.side .todo{display:flex;color:var(--faint);opacity:.75;padding:6px 10px}
+.side .todo.side-part{display:block;margin-top:18px;font-size:13.5px;font-weight:600}
+.side .todo .n{flex:none}
+.side a.side-other{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);border-radius:0;font-size:13px;color:var(--accent)}
+.side .sidetitle{font-family:var(--sans);font-size:17px;font-weight:600;color:var(--ink);padding:4px 10px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);border-radius:0}
+.side .sidetitle small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:2px}
+.side .sidetitle:hover,.side .sidetitle.cur{background:none;color:var(--ink)}
+/* 侧边栏顶部与收起按钮 */
+.side-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.side-head .sidetitle{border-bottom:none;margin-bottom:0;flex:1}
+@media (min-width:760px){
+  body{padding-left:280px;transition:padding-left .25s ease}
+  .side{transform:none;transition:transform .25s ease}
+  .scrim,body.nav-open .scrim{display:none}
+  header.book .booklink{visibility:hidden}
+  body.side-collapsed{padding-left:0}
+  body.side-collapsed .side{transform:translateX(-100%)}
+  body.side-collapsed header.book .booklink{visibility:visible}
+}
+/* 侧栏打开时，切换按钮移到侧栏顶部右侧 */
+body.nav-open .sidetoggle{left:232px;border-color:transparent;background:transparent}
+@media (min-width:760px){body:not(.side-collapsed) .sidetoggle{left:232px;border-color:transparent;background:transparent}}
+.side a.side-about{margin-top:4px}
+.side-view{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;margin:4px 0 10px;background:var(--quote);border-radius:9px}
+.side .side-view a{text-align:center;padding:5px 8px;font-size:13px;border-radius:7px;color:var(--muted)}
+.side .side-view a.on{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+/* 封面下方「关于本书」 */
+.about{padding-top:8px}
+.startbtn{display:inline-block;font-family:var(--sans);font-size:15px;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 22px;border-radius:999px;margin-top:8px}
+.startbtn:hover{background:var(--accent);color:#fff}
+/* 动画与可视化公共样式 */
+.figbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.replay{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.replay:hover{color:var(--accent);border-color:var(--accent)}
+.seg-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.seg-btns button{font:inherit;font-size:13px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg-btns button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+svg text{font-family:var(--sans)}
+.t-ink{fill:var(--ink)} .t-muted{fill:var(--muted)} .t-faint{fill:var(--faint)} .t-accent{fill:var(--accent)} .t-warm{fill:var(--warm)}
+.s-line{stroke:var(--line)} .s-faint{stroke:var(--faint)}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+/* 侧边栏中的篇名 */
+/* 章首：本章在回报等式中的位置 */
+.eqstrip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;margin:-8px 0 20px;padding:10px 12px;background:var(--quote);border-radius:10px}
+.eqstrip .lbl{color:var(--faint);margin-right:2px}
+.eqstrip a,.eqstrip span:not(.lbl):not(.keep){color:var(--muted);text-decoration:none;padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.eqstrip a:hover{border-color:var(--accent);color:var(--accent)}
+.eqstrip .cur{background:var(--ink)!important;color:var(--bg)!important;border-color:var(--ink)!important;font-weight:500}
+.eqstrip .keep{flex-basis:100%;font-size:12px}
+.eqstrip .keep a,.eqstrip .keep span{border-style:dashed}
+
+/* 文明模拟器公共样式 */
+.cs-rules{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.cs-rules span{font-size:12px;padding:3px 10px;border-radius:999px}
+.cs-rules .on{background:var(--accent-soft);color:var(--accent)}
+.cs-rules .lock{border:1px dashed var(--line);color:var(--faint)}
+.cs-sw{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.cs-sw input{accent-color:var(--accent);margin-right:5px;vertical-align:-1px}
+
+/* 原理卡：推演走完时宣告一条原理 */
+.principle{margin:28px 0;padding:16px 18px 14px;border-radius:12px;background:var(--accent-soft);border-left:4px solid var(--accent);font-family:var(--sans)}
+.principle .pr-k{margin:0;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.principle .pr-n{margin:2px 0 6px;font-size:19px;font-weight:600;line-height:1.4}
+.principle .pr-c{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px}
+.principle .pr-c span{font-size:12.5px;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.principle .pr-c em{font-style:normal;color:var(--faint);margin-right:6px}
+.principle .pr-s{margin:0 0 10px;font-size:16px;line-height:1.75}
+.principle dl{margin:0;display:grid;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.principle dl div{display:grid;grid-template-columns:7.4em 1fr;gap:10px;font-size:14px;line-height:1.6}
+.principle dt{color:var(--muted)} .principle dd{margin:0}
+@media (max-width:640px){.principle dl div{grid-template-columns:1fr;gap:0}.principle dt{font-size:12px}}
+/* 中英切换：页眉右侧与封面顶部各一个链接；英文页行距略收 */
+header.book .langlink{flex:none;border:1px solid var(--line);border-radius:999px;padding:1px 10px;font-size:12px;letter-spacing:0;color:var(--muted);white-space:nowrap}
+header.book .langlink:hover{color:var(--ink);border-color:var(--ink)}
+.hero-lang{margin-left:auto;color:rgba(241,239,230,.82);text-decoration:none;border:1px solid rgba(241,239,230,.3);border-radius:999px;padding:4px 12px;letter-spacing:.02em;font-size:12.5px}
+.hero-lang:hover{border-color:#f1efe6;color:#f1efe6}
+html[lang=en] body{line-height:1.7}
+html[lang=en] .chapno,html[lang=en] .partno{letter-spacing:.04em}
+
+/* 分解式义务清单：「详见」列不折行 */
+table td:last-child a{white-space:nowrap}
+</style>
+</head>
+<body data-page="d03">
+<script>try{if(document.body.dataset.page==='index'||localStorage.getItem('book-side')==='c')document.body.classList.add('side-collapsed');}catch(e){}</script>
+<nav class="side" id="sidenav" aria-label="全书目录">
+<div class="side-head"><a class="sidetitle" href="index.html">美国金融业法律研究<small>规则从何而来</small></a></div>
+<div class="side-view" role="group" aria-label="阅读方式"><a href="d-preface.html" class="on" aria-current="true">分解式</a><a href="preface.html">生成式</a></div>
+<a class="side-about" href="index.html#about">关于本书</a>
+<a class="" href="d-preface.html"><span class="n">导读</span>合规全景地图</a>
+<a class="side-part" href="d-part.html"><span class="pn">分解式</span>沿着业务的时间轴</a>
+<a class="" href="d01.html"><span class="n">1</span>设立：成为一家经纪自营商</a>
+<a class="" href="d02.html"><span class="n">2</span>获客与沟通</a>
+<a class=" cur" href="d03.html" aria-current="page"><span class="n">3</span>开户</a>
+<a class="" href="d04.html"><span class="n">4</span>入金与托管</a>
+<a class="" href="d05.html"><span class="n">5</span>推荐</a>
+<a class="" href="d06.html"><span class="n">6</span>下单与执行</a>
+<a class="" href="d07.html"><span class="n">7</span>成交之后：结算、确认与报告</a>
+<a class="" href="d08.html"><span class="n">8</span>持续监控与监督</a>
+<a class="" href="d09.html"><span class="n">9</span>退出与事件处置</a>
+<a class="side-app" href="method.html"><span class="n">附录</span>本书的写法</a>
+</nav>
+<button class="sidetoggle" type="button" aria-controls="sidenav" aria-expanded="false" aria-label="展开目录" title="目录"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2.5"/><line x1="7.5" y1="3.5" x2="7.5" y2="16.5"/><path class="chev" d="M11 7.5 L13.5 10 L11 12.5"/></svg></button>
+<div class="scrim" data-close></div>
+<div class="wrap">
+<header class="book"><a class="booklink" href="index.html">美国金融业法律研究：规则从何而来</a><span>分解式</span></header>
+
+<div class="chapno">阶段 3</div><h1>开户<small>认识客户、记录客户、保护客户的信息</small></h1>
+<div class="stamp">资料截至 2026-11</div>
+<blockquote><p>客户在这一阶段交出姓名、证件、收入、投资经验与风险偏好，券商据此回答四个问题：这个人是谁，能不能为他开户；他是什么样的投资者，账户记录里要写什么；他交出的信息由谁看、怎么保管，泄露了怎么办；他能使用哪些功能，尤其是期权与保证金。身份识别与反洗钱的来由见<a href="s10.html">第 10 章</a>，本页把开户当天要完成的事按顺序排开。</p></blockquote>
+<h2 id="sec-1">一、这一阶段的业务步骤</h2>
+<ol><li><strong>取得并核实身份信息。</strong>开户前取得姓名、出生日期、住址与身份号码；美国人提供纳税人识别号，非美国人可以提供护照号码与签发国等。开户前后合理时间内以证件或非证件方式核实，不见面开户须有专门程序（31 C.F.R. § 1023.220）。非美国居民还要提交 W-8BEN 表证明外国身份，这属于税务预扣，不替代身份核实。</li><li><strong>筛查名单、识别受益所有人。</strong>比对 OFAC 制裁名单，并持续以 IP、设备、转账数据判断客户所在地；公司客户须识别持股 25% 以上的每个人与一名控制人（<a href="s10.html">第 10 章</a>）。</li><li><strong>建立账户记录、了解客户。</strong>FINRA 规则 2090 要求在开立与维护每个账户时以合理勤勉了解客户的基本事实。规则 17a-3(a)(17) 要求为自然人客户建立账户记录，包括姓名、纳税人识别号、住址、电话、出生日期、职业与雇主、是否受雇于经纪商、年收入、净资产（不含自住房）与投资目标；开户后 30 天内把记录寄给客户核对，此后至少每 36 个月一次，投资目标变化时 30 天内寄送更新。</li><li><strong>请客户指定可信联系人。</strong>FINRA 规则 4512 自 2018 年 2 月 5 日起要求，为非机构客户开户时，以合理努力取得一位可信联系人（年满 18 岁）的姓名与联系方式，并书面告知公司可以在怀疑金融剥削等情形下联系此人。客户可以拒绝指定。规则 2165 允许公司在合理怀疑老年或特定成年客户遭到金融剥削时暂停付款或交易，目前最长 55 个营业日。</li><li><strong>告知隐私政策、建立信息保护制度。</strong>S-P 条例（2000 年依 1999 年《格雷姆－里奇－比利雷法》制定）要求在建立客户关系时提供隐私通知，说明收集与分享哪些信息；向无关联的第三方分享非公开个人信息前，须给客户选择退出的机会。公司须有书面的信息安全政策与程序。2024 年修订增加了事件响应、客户通知与服务商监督的要求（见第三节与下图）。S-ID 条例（2013 年 4 月与商品期货交易委员会联合通过）另要求制定书面的身份盗用防范计划，识别并应对冒名开户等预警信号。</li><li><strong>审批期权等功能。</strong>客户申请期权交易时，公司须在接受其第一笔期权订单之前专门批准或拒绝，不论账户是否自主交易。依规则 2360(b)(16)，公司要以尽职调查了解客户的投资知识、经验、年龄、财务状况与投资目标，可以只批准部分策略（例如只买入看涨看跌、备兑开仓、无备兑卖出、价差中的某几类）；批准须由分支机构经理、注册期权负责人或有限负责人（一般证券销售主管）作出；资料不在账户协议中的，须在批准后 15 天内寄给客户核对；还须向客户提供期权披露文件《标准化期权的特征与风险》。保证金账户在<a href="d04.html">阶段 4</a> 开通。</li></ol>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">开户当天的六道工序</p><p class="figsub">点选一步，看依据、要做的事与时限。前两步回答「这个人是谁」，中间两步回答「他是什么样的投资者」，后两步回答「他的信息与权限」。</p></div></div>
+    <div class="d3f-steps" id="d3f-s"></div>
+    <dl class="d3f-out" id="d3f-o" aria-live="polite"></dl>
+  </div>
+</figure>
+<style>
+.d3f-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.d3f-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.d3f-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.d3f-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.d3f-out{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.d3f-out dt{color:var(--faint)}.d3f-out dd{margin:0}
+@media (max-width:760px){.d3f-steps{grid-template-columns:1fr 1fr}.d3f-out{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['身份信息','是谁',['依据','31 C.F.R. § 1023.220'],['要做的事','取得姓名、出生日期、住址、身份号码；以证件或非证件方式核实'],['非美国人','可用护照号码与签发国；另交 W-8BEN（税务，不替代核实）']],
+    ['名单与所有人','是谁',['依据','OFAC 制裁条例；31 C.F.R. § 1010.230'],['要做的事','比对制裁名单并持续判断所在地；公司客户识别 25% 以上持股人与一名控制人'],['留存','OFAC 相关记录 10 年']],
+    ['账户记录','什么样的投资者',['依据','FINRA 规则 2090；规则 17a-3(a)(17)'],['要做的事','记录职业、年收入、净资产（不含自住房）、投资目标等'],['时限','开户后 30 天内寄给客户核对，此后至少每 36 个月一次']],
+    ['可信联系人','什么样的投资者',['依据','FINRA 规则 4512、2165'],['要做的事','以合理努力取得一位年满 18 岁的可信联系人；书面告知何时联系'],['现状','暂停付款最长 55 个营业日；延长到 145 个营业日并新增规则 2166 的提案待 SEC 批准']],
+    ['隐私与信息安全','信息',['依据','S-P 条例（2024 年修订）；S-ID 条例'],['要做的事','交付隐私通知；向无关联第三方分享前给予选择退出；书面信息安全与事件响应制度；身份盗用防范计划'],['合规日','较大机构 2025-12-03；较小机构 2026-06-03']],
+    ['期权审批','权限',['依据','FINRA 规则 2360(b)(16)'],['要做的事','接受第一笔期权订单前专门批准或拒绝；可只批部分策略；提供期权披露文件'],['谁批准','分支机构经理、注册期权负责人或一般证券销售主管'],['时限','资料不在协议中的，批准后 15 天内寄客户核对']]];
+  const s=document.getElementById('d3f-s'),o=document.getElementById('d3f-o');
+  s.innerHTML=S.map((x,i)=>`<button type="button">${i+1}. ${x[0]}<em>${x[1]}</em></button>`).join('');
+  const bs=[...s.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));o.innerHTML=S[i].slice(2).map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
+
+<h2 id="sec-2">二、义务清单</h2>
+<div class="tablewrap"><table><thead><tr><th>义务</th><th>依据</th><th>机构</th><th>现状（截至 2026 年 11 月）</th><th>详见</th></tr></thead><tbody><tr><td>客户身份识别计划</td><td>《爱国者法》第 326 条；31 C.F.R. § 1023.220</td><td>FinCEN、SEC</td><td>有效；FinCEN 2026 年 4 月 7 日提议改革反洗钱计划规则，未见最终规则</td><td><a href="s10.html">第 10 章</a></td></tr><tr><td>客户尽职调查与受益所有人</td><td>31 C.F.R. § 1010.230</td><td>FinCEN</td><td>有效；《企业透明法》对美国公司的申报义务 2026 年 8 月永久取消，不影响经纪商的识别义务</td><td><a href="s10.html">第 10 章</a></td></tr><tr><td>制裁筛查</td><td>OFAC 各制裁条例</td><td>OFAC</td><td>有效；违规追诉时效 2024 年起延长为 10 年</td><td><a href="s10.html">第 10 章</a></td></tr><tr><td>了解客户</td><td>FINRA 规则 2090</td><td>FINRA</td><td>有效（2012 年 7 月 9 日施行）</td><td><a href="s04.html">第 4 章</a></td></tr><tr><td>账户记录与定期核对</td><td>规则 17a-3(a)(17)</td><td>SEC</td><td>有效</td><td>—</td></tr><tr><td>可信联系人与暂停付款</td><td>FINRA 规则 4512、2165</td><td>FINRA</td><td>有效；扩大暂停期限并新增规则 2166 的提案 2026 年 8 月 20 日提交 SEC，尚未批准</td><td>—</td></tr><tr><td>隐私通知与信息保护</td><td>S-P 条例（17 C.F.R. Part 248）</td><td>SEC</td><td>2024 年修订已全部进入合规期：较大机构 2025 年 12 月 3 日，较小机构 2026 年 6 月 3 日</td><td>—</td></tr><tr><td>身份盗用防范</td><td>S-ID 条例</td><td>SEC</td><td>有效（2013 年通过）</td><td>—</td></tr><tr><td>期权开户审批</td><td>FINRA 规则 2360(b)(16)</td><td>FINRA</td><td>有效；第 21-15 号通知（2021 年 4 月 9 日）重申要求</td><td><a href="s08.html">第 8 章</a></td></tr></tbody></table></div>
+<p>S-P 条例的 2024 年修订把「信息泄露之后」的步骤写成了时限。下图按时间顺序排开这些步骤。</p>
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">客户信息泄露之后的时钟</p><p class="figsub">S-P 条例 2024 年修订的时限。拖动滑块模拟一起外包商的安全事件（日期为示意），看每个节点是否已到期。</p></div></div>
+    <div class="d3b-ctl">
+      <label>服务商发现事件后第 <b id="d3b-a">1</b> 天通知券商<input type="range" id="d3b-ra" min="0" max="10" value="2"></label>
+      <label>券商知悉后第 <b id="d3b-b">20</b> 天通知客户<input type="range" id="d3b-rb" min="1" max="45" value="20"></label>
+    </div>
+    <div class="d3b-line" id="d3b-l"></div>
+    <p class="d3b-m" id="d3b-m" aria-live="polite"></p>
+  </div>
+</figure>
+<style>
+.d3b-ctl{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;color:var(--muted)}
+.d3b-ctl input{display:block;width:100%;margin-top:4px}
+.d3b-ctl b{color:var(--ink)}
+.d3b-line{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
+.d3b-line div{background:var(--quote);border-radius:9px;padding:10px;font-size:12.5px;border:1px solid transparent}
+.d3b-line div b{display:block;font-size:13.5px;margin-bottom:2px}
+.d3b-line div.d3b-bad{border-color:var(--accent)}
+.d3b-line div.d3b-ok b::after{content:" ✓";color:var(--muted)}
+.d3b-line div.d3b-bad b::after{content:" 超时";color:var(--accent);font-weight:400;font-size:12px}
+.d3b-m{font-size:13.5px;margin:12px 0 0;min-height:2.6em}
+@media (max-width:640px){.d3b-ctl{grid-template-columns:1fr}.d3b-line{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+(function(){
+  const ra=document.getElementById('d3b-ra'),rb=document.getElementById('d3b-rb'),l=document.getElementById('d3b-l'),m=document.getElementById('d3b-m');
+  const upd=()=>{const a=+ra.value,b=+rb.value;document.getElementById('d3b-a').textContent=a;document.getElementById('d3b-b').textContent=b;
+    const N=[['事件发生','服务商的系统遭未授权访问',true],['服务商通知券商','最迟 72 小时（3 天）内；第 '+a+' 天',a<=3],['券商评估','判断敏感客户信息是否遭到或合理可能遭到访问、使用',true],['通知客户','尽快，最迟知悉后 30 天；第 '+b+' 天',b<=30]];
+    l.innerHTML=N.map(n=>`<div class="${n[2]?'d3b-ok':'d3b-bad'}"><b>${n[0]}</b>${n[1]}</div>`).join('');
+    const bad=[];if(a>3)bad.push('服务商通知超过 72 小时：券商的服务商监督制度没有满足要求');if(b>30)bad.push('客户通知超过 30 天：除非司法部长书面要求推迟，否则违反通知时限');
+    m.textContent=bad.length?bad.join('；')+'。':'两个时限都满足。客户通知要写明事件经过、涉及的信息类型与客户可以采取的保护措施。';};
+  ra.addEventListener('input',upd);rb.addEventListener('input',upd);upd();
+})();
+</script>
+
+<h2 id="sec-3">三、2023–2026 年的变化</h2>
+<ol><li><strong>2024 年 5 月 16 日，SEC 修订 S-P 条例。</strong>修订要求经纪自营商等机构建立书面的事件响应计划，用于发现、应对并恢复客户信息遭未授权访问或使用的事件；敏感客户信息遭到或合理可能遭到未授权访问的，须尽快、最迟在知悉后 30 天内通知受影响的个人，说明事件、涉及的信息与客户可以采取的措施；公司的政策须要求服务商在发生影响客户信息系统的安全事件后尽快、最迟 72 小时内通知公司；美国司法部长认为通知会危及国家安全或公共安全并书面告知 SEC 的，可以推迟。修订刊登于 2024 年 6 月 3 日的《联邦公报》，较大机构（不属于小型实体的经纪自营商；小型经纪自营商的标准之一是上一财年审计日的总资本低于 50 万美元）的合规日为 2025 年 12 月 3 日，较小机构为 2026 年 6 月 3 日。截至 2026 年 11 月，未查到推迟。对券商的影响：开户时收集的证件照片、生物特征与账户号码都属于敏感客户信息，存放与处理这些数据的外包商都要纳入监督。</li><li><strong>2025–2026 年，受益所有人申报与反洗钱计划的变化。</strong>FinCEN 在 2025 年 3 月以临时最终规则豁免美国公司的受益所有人申报，2026 年 8 月 11 日使豁免永久化；2026 年 4 月 7 日提议改革各类金融机构的反洗钱计划规则（<a href="s10.html">第 10 章</a>）。对券商的影响：公司客户开户时，经纪商不能再从企业申报数据库里查到美国公司的受益所有人，仍须自己识别与核实。</li><li><strong>2026 年 8 月 20 日，FINRA 提交保护客户免受欺诈的规则修订。</strong>提案（SR-FINRA-2026-018，SEC 第 34-106275 号公告，2026 年 9 月 9 日刊登）新增规则 2166：公司合理相信客户因欺诈而发出付款或交易指令时，可以对任何客户的账户暂停最长 10 个营业日；规则 2165 的最长暂停期由 55 个营业日分三次、每次 30 个营业日延长到 145 个营业日；规则 4512 允许以「紧急联系人」称呼可信联系人，并放宽指定方式。截至 2026 年 11 月，SEC 尚未批准。</li><li><strong>2024–2025 年，OFAC 记录保存延长为 10 年。</strong>2024 年 4 月的法律把制裁违规的追诉时效由 5 年延长为 10 年，OFAC 随后把记录保存要求延长为 10 年（<a href="s10.html">第 10 章</a>）。对券商的影响：开户时的筛查记录、IP 与设备日志要按 10 年留存。</li></ol>
+<h2 id="sec-4">四、对 AI 产品的提示</h2>
+<ol><li><strong>AI 开户助手不能替客户「优化」答案。</strong>投资经验、收入与风险承受能力决定期权与保证金的审批；助手可以解释问题的意思，不能引导客户为了获批而改高答案。2021 年罗宾汉案中，FINRA 批评的正是主要依靠算法批准期权账户、缺乏有效监督（<a href="s04.html">第 4 章</a>）。审批逻辑与每次审批的依据都要留存，并由有资格的负责人负责。</li><li><strong>证件识别与活体检测要防深度伪造。</strong>FinCEN 2024 年 11 月的警示把 AI 生成或篡改的证件照片列为开户欺诈的手法（<a href="s10.html">第 10 章</a>）。模型判断「真实」之后，仍要有对不一致信号的人工复核与开户后的复查。</li><li><strong>把客户资料交给外部模型，就是把它交给服务商。</strong>用第三方大模型读取证件、总结开户资料，服务商接触的是敏感客户信息：合同与监督要满足 S-P 条例的服务商要求，包括 72 小时内通知安全事件；与无关联第三方分享非公开个人信息，还要先给客户选择退出的机会。</li><li><strong>可信联系人可以在对话里收集。</strong>对话式开户可以在恰当时机询问可信联系人，并用一句话说明公司在什么情况下会联系此人；客户拒绝时记录拒绝即可。</li></ol>
+<h2 id="sec-5">参考文献</h2>
+<ul class="refs"><li>31 C.F.R. § 1023.220（经纪自营商客户身份识别计划）；31 C.F.R. § 1010.230（受益所有人）.</li><li>17 C.F.R. § 240.17a-3(a)(17)；17 C.F.R. Part 248, Subparts A（S-P 条例）与 C（S-ID 条例）.</li><li>Securities and Exchange Commission. (2024). <i>Regulation S-P: Privacy of Consumer Financial Information and Safeguarding Customer Information</i> (Release No. 34-100155)；Press Release 2024-58（2024 年 5 月 16 日）.</li><li>Securities and Exchange Commission &amp; Commodity Futures Trading Commission. (2013). <i>Identity Theft Red Flags Rules</i>, 78 Fed. Reg. 23638.</li><li>FINRA Rules 2090, 2165, 2360(b)(16), 4512.</li><li>FINRA. (2017). <i>Regulatory Notice 17-11</i>（可信联系人与暂停付款）.</li><li>FINRA. (2021). <i>Regulatory Notice 21-15: Options Account Approval, Supervision and Margin Requirements</i>（2021 年 4 月 9 日）.</li><li>Securities and Exchange Commission. (2026). <i>Notice of Filing of SR-FINRA-2026-018</i> (Release No. 34-106275).</li><li>FinCEN. (2024). <i>FIN-2024-Alert004</i>（深度伪造与身份欺诈）.</li></ul>
+<footer class="nav"><a href="d02.html">← 阶段 2　获客与沟通</a><a href="d04.html">阶段 4　入金与托管 →</a></footer>
+</div>
+<script>
+(function(){
+  // 目录：宽度 ≥760px 时与正文同层并排，展开时把正文推向右侧，可收起与重新固定，状态记在本机；手机宽度时为抽屉
+  const b=document.body, tg=document.querySelector('.sidetoggle'), wide=matchMedia('(min-width:760px)');
+  const save=v=>{try{localStorage.setItem('book-side',v)}catch(e){}};
+  const isOpen=()=>wide.matches?!b.classList.contains('side-collapsed'):b.classList.contains('nav-open');
+  const sync=()=>{const o=isOpen();tg.setAttribute('aria-expanded',String(o));tg.setAttribute('aria-label',o?(document.documentElement.lang==='en'?'Close contents':'收起目录'):(document.documentElement.lang==='en'?'Open contents':'展开目录'));tg.classList.toggle('is-open',o);};
+  const setOpen=o=>{b.classList.toggle('nav-open',o);sync();};
+  const setCollapsed=c=>{b.classList.toggle('side-collapsed',c);save(c?'c':'o');sync();};
+  tg.addEventListener('click',()=>{if(wide.matches)setCollapsed(isOpen());else setOpen(!isOpen());});
+  document.querySelectorAll('[data-close], .side a').forEach(el=>el.addEventListener('click',()=>{if(!wide.matches)setOpen(false);}));
+  wide.addEventListener('change',sync);sync();
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!wide.matches)setOpen(false);});
+  // 动画：带 data-anim 的元素进入视野时加上 in 并派发 anim-in；data-replay 按钮重播
+  const fire=t=>{t.classList.remove('in');void t.offsetWidth;t.classList.add('in');t.dispatchEvent(new Event('anim-in'));};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fire(e.target);io.unobserve(e.target);}}),{threshold:.3});
+    document.querySelectorAll('[data-anim]').forEach(el=>io.observe(el));
+  } else document.querySelectorAll('[data-anim]').forEach(fire);
+  document.querySelectorAll('[data-replay]').forEach(x=>x.addEventListener('click',()=>fire(document.getElementById(x.dataset.replay))));
+  const side=document.querySelector('.side'), cur=side.querySelector('a.cur:not(.sidetitle)'); if(cur) side.scrollTop=cur.offsetTop-side.clientHeight/3;
+})();
+</script>
+</body>
+</html>

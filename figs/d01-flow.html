@@ -1,0 +1,30 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">从创办到接待第一位客户</p><p class="figsub">点选一步，看它依据的规则、要做的事与时限。前五步针对公司，第六步针对每一位从业人员。</p></div></div>
+    <div class="d1f-steps" id="d1f-s"></div>
+    <dl class="d1f-out" id="d1f-o" aria-live="polite"></dl>
+  </div>
+</figure>
+<style>
+.d1f-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.d1f-steps button{font:inherit;text-align:left;cursor:pointer;border:1px solid transparent;background:var(--quote);color:var(--ink);border-radius:9px;padding:10px;font-size:13px}
+.d1f-steps button em{display:block;font-style:normal;font-size:11.5px;color:var(--faint)}
+.d1f-steps button.on{border-color:var(--accent);background:var(--accent-soft)}
+.d1f-out{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:13.5px;line-height:1.6}
+.d1f-out dt{color:var(--faint)}.d1f-out dd{margin:0}
+@media (max-width:760px){.d1f-steps{grid-template-columns:1fr 1fr}.d1f-out{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  const S=[['业务模式','公司',['依据','规则 15c3-1(a)(2)'],['要做的事','决定是否持有客户资产、是否自行清算'],['数字','净资本最低额：持有客户账户 25 万美元；接收不持有 5 万美元；不接收 5,000 美元']],
+    ['Form BD','SEC',['依据','《证券交易法》第 15(a)、15(b)(1) 条；规则 15b1-1'],['要做的事','经 CRD 电子提交 Form BD'],['时限','SEC 在提交后 45 天内批准，或启动是否拒绝的程序']],
+    ['FINRA 会员','FINRA',['依据','第 15(b)(8) 条；FINRA 规则 1013、1014'],['要做的事','提交 Form NMA、Form BD 原件、业务计划、人员名单与制度文件；面谈'],['时限','30 天内首次补件要求，申请人一般 60 天内答复；180 天未决可请求理事会督促'],['2026 年','4 月 15 日起使用新版 Form NMA，审查标准不变']],
+    ['SIPC','SIPC',['依据','SIPA'],['要做的事','注册经纪自营商除少数例外自动成为会员，缴纳会费'],['数字','保障上限每名客户 50 万美元，其中现金 25 万美元']],
+    ['州注册','各州',['依据','各州证券法；第 15(i) 条'],['要做的事','在展业的每个州注册公司与代理人；代理人多须通过 Series 63'],['边界','州不得在资本、托管、保证金、账簿记录等方面另加要求']],
+    ['人员登记','每一位从业人员',['依据','FINRA 规则 1210、1220、1240；章程第五条；规则 17f-2'],['要做的事','通过 SIE 与专项考试；提交 Form U4 与指纹；每年完成继续教育'],['时限','U4 变更 30 天内修改，法定取消资格 10 天内；离职 30 天内提交 U5']]];
+  const s=document.getElementById('d1f-s'),o=document.getElementById('d1f-o');
+  s.innerHTML=S.map((x,i)=>`<button type="button">${i+1}. ${x[0]}<em>${x[1]}</em></button>`).join('');
+  const bs=[...s.children];const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));o.innerHTML=S[i].slice(2).map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('');};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>

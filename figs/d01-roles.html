@@ -1,0 +1,34 @@
+<figure>
+  <div class="card">
+    <div class="figbar"><div><p class="figtitle">谁要考什么</p><p class="figsub">点选一个岗位，看规则 1220 的注册类别与考试。所有代表级与负责人级注册都以 SIE 为基础；SIE 年满 18 岁即可报考，不需要公司担保，成绩保留 4 年。</p></div></div>
+    <div class="d1r-g" id="d1r-g"></div>
+    <div class="d1r-path" id="d1r-p" aria-live="polite"></div>
+    <p class="d1r-m" id="d1r-m"></p>
+  </div>
+</figure>
+<style>
+.d1r-g{display:flex;flex-wrap:wrap;gap:6px}
+.d1r-g button{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:5px 12px}
+.d1r-g button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.d1r-path{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:14px 0 6px}
+.d1r-path span{background:var(--quote);border-radius:8px;padding:8px 12px;font-size:13.5px}
+.d1r-path span.d1r-k{background:var(--accent-soft);border:1px solid var(--accent)}
+.d1r-path i{font-style:normal;color:var(--faint)}
+.d1r-m{font-size:13.5px;color:var(--muted);margin:6px 0 0;min-height:2.6em}
+</style>
+<script>
+(function(){
+  const R=[['客服与销售代表',['SIE','一般证券代表（Series 7）','州法考试（Series 63）'],'规则 1220(b)(2)：向客户推荐或执行证券交易的代表。多数州另要求 Series 63 才能在本州注册为代理人。'],
+    ['一般证券负责人',['SIE','Series 7','一般证券负责人（Series 24）'],'规则 1220(a)(2)：监督证券业务的负责人，须先注册为一般证券代表。审批零售沟通的「注册负责人」通常持这一资格。'],
+    ['合规负责人',['SIE','Series 7','Series 24'],'规则 1220(a)(3)：Form BD 附表 A 上列明的首席合规官，须通过合规负责人考试（Series 14），或注册为一般证券代表并通过一般证券负责人考试。'],
+    ['财务运营负责人',['财务运营负责人考试（Series 27）'],'规则 1220(a)(4)：按规则 15c3-1 特定条款（如持有客户账户）计算净资本的会员须指定；其他会员可改为指定介绍经纪商财务运营负责人（Series 28）。'],
+    ['期权负责人',['SIE','Series 7','期权负责人考试（Series 4）'],'规则 1220(a)(8)：与公众做期权业务的会员至少要有一名注册期权负责人；期权开户审批也可由分支机构经理或一般证券销售主管完成（见阶段 3）。'],
+    ['算法策略设计者',['SIE','证券交易员（Series 57）'],'规则 1220(b)(4)：主要负责设计或重大修改算法交易策略的人、负责其日常监督的人，须注册为证券交易员。']];
+  const g=document.getElementById('d1r-g'),p=document.getElementById('d1r-p'),m=document.getElementById('d1r-m');
+  g.innerHTML=R.map(r=>`<button type="button">${r[0]}</button>`).join('');
+  const bs=[...g.children];
+  const set=i=>{bs.forEach((b,j)=>b.classList.toggle('on',i===j));const a=R[i][1];
+    p.innerHTML=a.map((x,j)=>`<span class="${j===a.length-1?'d1r-k':''}">${x}</span>`).join('<i>→</i>');m.textContent=R[i][2];};
+  bs.forEach((b,i)=>b.addEventListener('click',()=>set(i)));set(0);
+})();
+</script>
